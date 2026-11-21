@@ -16,6 +16,13 @@ if ( ! defined( 'CARTIVA_COMMERCE_LANDING' ) ) {
 	define( 'CARTIVA_COMMERCE_LANDING', 'cartiva_landing' );
 }
 
+if ( ! defined( 'CARTIVA_COMMERCE_FUNNEL' ) ) {
+	/**
+	 * Funnel post type name.
+	 */
+	define( 'CARTIVA_COMMERCE_FUNNEL', 'cartiva_funnel' );
+}
+
 /**
  * Plugin settings with defaults.
  *
@@ -28,6 +35,7 @@ function cartiva_commerce_settings() {
 		'main_preset'    => 'default',
 		'main_fields'    => array(),
 		'main_bd_phone'  => false,
+		'main_coupon'    => true,
 	);
 	$saved    = get_option( 'cartiva_commerce_settings', array() );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -69,6 +77,10 @@ function cartiva_commerce_landing_config( $landing_id ) {
 		'thankyou'     => 0,
 		'show_coupon'  => false,
 		'bd_phone'     => true,
+		'offer_mode'   => 'single',
+		'offers'       => array(),
+		'bumps'        => array(),
+		'layout'       => 'one',
 	);
 	$saved    = get_post_meta( (int) $landing_id, '_cartiva_landing', true );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -143,4 +155,127 @@ function cartiva_commerce_base_country() {
 function cartiva_commerce_is_bd_mobile( $phone ) {
 	$digits = preg_replace( '/[\s\-()]/', '', (string) $phone );
 	return (bool) preg_match( '/^(?:\+?88)?01[3-9]\d{8}$/', $digits );
+}
+
+/**
+ * Product options of a landing page.
+ *
+ * Landing pages saved before options existed keep working: their single
+ * product becomes the only option.
+ *
+ * @param array $config Landing settings.
+ * @return array[] Each: product_id, variation_id, qty, label, discount, badge, default.
+ */
+function cartiva_commerce_landing_offers( $config ) {
+	$defaults = array(
+		'product_id'   => 0,
+		'variation_id' => 0,
+		'qty'          => 1,
+		'label'        => '',
+		'discount'     => 0,
+		'badge'        => '',
+		'default'      => false,
+	);
+	$offers   = array();
+	foreach ( (array) $config['offers'] as $row ) {
+		if ( is_array( $row ) && ! empty( $row['product_id'] ) ) {
+			$offers[] = wp_parse_args( $row, $defaults );
+		}
+	}
+	if ( empty( $offers ) && ! empty( $config['product_id'] ) ) {
+		$offers[] = wp_parse_args(
+			array(
+				'product_id'   => (int) $config['product_id'],
+				'variation_id' => (int) $config['variation_id'],
+				'qty'          => (int) $config['quantity'],
+				'default'      => true,
+			),
+			$defaults
+		);
+	}
+	if ( 'single' === $config['offer_mode'] ) {
+		$offers = array_slice( $offers, 0, 1 );
+	}
+	return $offers;
+}
+
+/**
+ * Options picked when the landing page opens.
+ *
+ * @param array $config Landing settings.
+ * @return int[] Option indexes.
+ */
+function cartiva_commerce_default_offer_indexes( $config ) {
+	$offers   = cartiva_commerce_landing_offers( $config );
+	$selected = array();
+	foreach ( $offers as $i => $row ) {
+		if ( ! empty( $row['default'] ) ) {
+			$selected[] = (int) $i;
+		}
+	}
+	if ( empty( $selected ) && ! empty( $offers ) ) {
+		$selected = array( 0 );
+	}
+	if ( 'many' !== $config['offer_mode'] ) {
+		$selected = array_slice( $selected, 0, 1 );
+	}
+	return $selected;
+}
+
+/**
+ * Price after a percentage discount, rounded to the store's decimals.
+ *
+ * @param float $price    Price.
+ * @param float $discount Discount in percent (0-90).
+ * @return float
+ */
+function cartiva_commerce_discounted( $price, $discount ) {
+	$discount = max( 0, min( 90, (float) $discount ) );
+	$decimals = function_exists( 'wc_get_price_decimals' ) ? wc_get_price_decimals() : 2;
+	return round( (float) $price * ( 100 - $discount ) / 100, $decimals );
+}
+
+/**
+ * Funnel a landing page belongs to, or 0.
+ *
+ * @param int $landing_id Landing page ID.
+ * @return int
+ */
+function cartiva_commerce_funnel_of( $landing_id ) {
+	return (int) get_post_meta( (int) $landing_id, '_cartiva_funnel', true );
+}
+
+/**
+ * Steps of a funnel, in order.
+ *
+ * @param int $funnel_id Funnel ID.
+ * @return array[] Each: id, type (landing, checkout or thankyou).
+ */
+function cartiva_commerce_funnel_steps( $funnel_id ) {
+	$steps = get_post_meta( (int) $funnel_id, '_cartiva_funnel_steps', true );
+	return is_array( $steps ) ? array_values( $steps ) : array();
+}
+
+/**
+ * The published step after a landing page in its funnel, or 0.
+ *
+ * @param int         $landing_id Landing page ID.
+ * @param string|null $type       Only a step of this type (any later one), or null for the next step.
+ * @return int
+ */
+function cartiva_commerce_next_step( $landing_id, $type = null ) {
+	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	if ( ! $funnel ) {
+		return 0;
+	}
+	$found = false;
+	foreach ( cartiva_commerce_funnel_steps( $funnel ) as $step ) {
+		if ( $found && 'publish' === get_post_status( (int) $step['id'] ) && ( null === $type || $type === $step['type'] ) ) {
+			return (int) $step['id'];
+		}
+		if ( (int) $step['id'] === (int) $landing_id ) {
+			$found = true;
+		}
+	}
+	return 0;
 }

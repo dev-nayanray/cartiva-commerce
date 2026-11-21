@@ -140,6 +140,10 @@ class Cartiva_Commerce_Stats {
 			$landing_id = (int) $order->get_meta( '_cartiva_landing_id' );
 			if ( $landing_id ) {
 				delete_transient( 'cartiva_landing_stats_' . $landing_id );
+				$funnel_id = cartiva_commerce_funnel_of( $landing_id );
+				if ( $funnel_id ) {
+					delete_transient( 'cartiva_funnel_stats_' . $funnel_id );
+				}
 			}
 		}
 	}

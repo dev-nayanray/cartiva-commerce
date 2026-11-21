@@ -101,6 +101,7 @@ class Cartiva_Commerce_Settings {
 			$output['main_preset'] = isset( $presets[ $preset ] ) ? $preset : 'default';
 			$output['main_fields'] = Cartiva_Commerce_Fields::sanitize_config( isset( $input['main']['fields'] ) ? $input['main']['fields'] : array() );
 			$output['main_bd_phone'] = ! empty( $input['main_bd_phone'] );
+			$output['main_coupon']   = ! empty( $input['main_coupon'] );
 		} else {
 			$output['buy_now']       = ! empty( $input['buy_now'] );
 			$output['buy_now_label'] = isset( $input['buy_now_label'] ) ? sanitize_text_field( $input['buy_now_label'] ) : '';
@@ -116,7 +117,7 @@ class Cartiva_Commerce_Settings {
 	public static function assets( $hook ) {
 		$screen  = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 		$ours    = false !== strpos( (string) $hook, self::PAGE );
-		$landing = $screen && CARTIVA_COMMERCE_LANDING === $screen->post_type;
+		$landing = $screen && in_array( $screen->post_type, array( CARTIVA_COMMERCE_LANDING, CARTIVA_COMMERCE_FUNNEL ), true );
 		if ( ! $ours && ! $landing ) {
 			return;
 		}
@@ -172,7 +173,7 @@ class Cartiva_Commerce_Settings {
 			<nav class="nav-tab-wrapper">
 				<a href="<?php echo esc_url( self::url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'General', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'fields' ) ); ?>" class="nav-tab<?php echo 'fields' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main checkout fields', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>" class="nav-tab"><?php esc_html_e( 'Landing pages', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>" class="nav-tab"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
 			</nav>
 			<?php settings_errors(); ?>
 			<?php
@@ -219,9 +220,12 @@ class Cartiva_Commerce_Settings {
 				</td>
 			</tr>
 		</table>
-		<h2><?php esc_html_e( 'Landing pages', 'cartiva-commerce' ); ?></h2>
-		<p><?php esc_html_e( 'Create a sales page for one product with its own short order form. Each landing page has its own fields, payment methods and thank-you page.', 'cartiva-commerce' ); ?></p>
-		<p><a class="button button-primary" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a></p>
+		<h2><?php esc_html_e( 'Funnels and landing pages', 'cartiva-commerce' ); ?></h2>
+		<p><?php esc_html_e( 'A funnel leads shoppers through steps: a sales page, a checkout and a thank-you page. A single landing page can also sell on its own, with the order form on the same page.', 'cartiva-commerce' ); ?></p>
+		<p>
+			<a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Funnels::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
+			<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a>
+		</p>
 		<?php
 	}
 
@@ -245,6 +249,10 @@ class Cartiva_Commerce_Settings {
 		<?php self::fields_editor( 'cartiva_commerce_settings[main]', (string) $settings['main_preset'], (array) $settings['main_fields'], Cartiva_Commerce_Fields::presets() ); ?>
 		<p>
 			<label><input type="checkbox" name="cartiva_commerce_settings[main_bd_phone]" value="1" <?php checked( ! empty( $settings['main_bd_phone'] ) ); ?> /> <?php esc_html_e( 'Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)', 'cartiva-commerce' ); ?></label>
+		</p>
+		<p>
+			<input type="hidden" name="cartiva_commerce_settings[main_coupon]" value="0" />
+			<label><input type="checkbox" name="cartiva_commerce_settings[main_coupon]" value="1" <?php checked( ! empty( $settings['main_coupon'] ) ); ?> /> <?php esc_html_e( 'Show the "Have a coupon?" link on the main checkout', 'cartiva-commerce' ); ?></label>
 		</p>
 		<?php
 	}

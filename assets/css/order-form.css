@@ -137,3 +137,144 @@
 
 /* Thank-you page summary */
 .cartiva-commerce-thankyou { margin-bottom: 2rem; }
+
+/* Product options */
+.cartiva-offers { display: grid; gap: .6rem; margin: 0 0 1.25rem; padding: 0; border: 0; }
+.cartiva-offers.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-offers__legend { margin-bottom: .6rem; padding: 0; font-weight: 700; }
+.cartiva-offer {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto 3.25rem 1fr auto;
+	align-items: center;
+	gap: .75rem;
+	padding: .8rem .9rem;
+	border: 2px solid var(--cof-border);
+	border-radius: 12px;
+	background: var(--wp--preset--color--base, #fff);
+	cursor: pointer;
+	transition: border-color .15s, box-shadow .15s;
+}
+.cartiva-offer:hover { border-color: var(--cof-muted); }
+.cartiva-offer.is-selected { border-color: var(--cof-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--cof-accent) 15%, transparent); }
+.cartiva-offer:has(.cartiva-offer__input:focus-visible) { outline: 2px solid var(--cof-text); outline-offset: 2px; }
+.cartiva-offer__input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--cof-accent); }
+.cartiva-offer__image img { display: block; width: 3.25rem; height: 3.25rem; border-radius: 8px; object-fit: cover; }
+.cartiva-offer__info { display: grid; gap: .15rem; min-width: 0; }
+.cartiva-offer__name { font-weight: 700; line-height: 1.3; }
+.cartiva-offer__qty { color: var(--cof-muted); font-weight: 600; }
+.cartiva-offer__save { color: #0a7a33; font-size: .85rem; font-weight: 700; }
+.cartiva-offer__price { display: grid; justify-items: end; font-weight: 800; text-align: right; }
+.cartiva-offer__price del { color: var(--cof-muted); font-size: .85rem; font-weight: 400; }
+.cartiva-offer__price ins { text-decoration: none; }
+.cartiva-offer__badge {
+	position: absolute;
+	top: -.65rem;
+	right: .9rem;
+	padding: .15rem .6rem;
+	border-radius: 999px;
+	background: var(--cof-accent);
+	color: #fff;
+	font-size: .75rem;
+	font-weight: 800;
+	letter-spacing: .02em;
+}
+
+/* Order bumps */
+.cartiva-bumps { display: grid; gap: .75rem; margin: 1rem 0; }
+.cartiva-bump {
+	border: 2px dashed var(--cof-accent);
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--cof-accent) 6%, var(--wp--preset--color--base, #fff));
+	overflow: hidden;
+}
+.cartiva-bump.is-added { border-style: solid; }
+.cartiva-bump.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-bump__head {
+	display: flex;
+	align-items: center;
+	gap: .6rem;
+	margin: 0 !important;
+	padding: .7rem .9rem;
+	background: color-mix(in srgb, var(--cof-accent) 14%, transparent);
+	font-weight: 800 !important;
+	cursor: pointer;
+}
+.cartiva-bump__check { width: 1.2rem; height: 1.2rem; margin: 0; accent-color: var(--cof-accent); }
+.cartiva-bump__body { display: flex; gap: .75rem; align-items: flex-start; padding: .75rem .9rem; }
+.cartiva-bump__image img { display: block; width: 3.5rem; height: 3.5rem; border-radius: 8px; object-fit: cover; }
+.cartiva-bump__body p { margin: 0 0 .3rem; font-size: .92rem; }
+.cartiva-bump__price { font-weight: 800; }
+.cartiva-bump__price del { margin-right: .3rem; color: var(--cof-muted); font-weight: 400; }
+
+/* Coupon */
+.cartiva-coupon { display: flex; gap: .5rem; margin: 0 0 1rem; }
+.cartiva-coupon.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-coupon .cartiva-coupon__code { flex: 1; min-height: 2.75rem; }
+.cartiva-coupon__apply { min-height: 2.75rem; padding: 0 1.1rem; border-radius: 10px; cursor: pointer; }
+
+/* Two columns */
+.cartiva-order-form--two { max-width: 1100px; }
+@media (min-width: 900px) {
+	.cartiva-order-form--two form.checkout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+		column-gap: 2rem;
+		align-items: start;
+	}
+	.cartiva-order-form--two form.checkout > * { grid-column: 1; }
+	.cartiva-order-form--two #order_review_heading,
+	.cartiva-order-form--two #order_review { grid-column: 2; }
+	.cartiva-order-form--two #order_review_heading { grid-row: 1; margin-top: 0; }
+	.cartiva-order-form--two #order_review { grid-row: 2 / span 20; position: sticky; top: 1.5rem; }
+	.cartiva-order-form--two #customer_details { grid-row: 1 / span 2; }
+}
+
+/* Two steps */
+.cartiva-steps-nav { display: flex; gap: .5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; counter-reset: none; }
+.cartiva-steps-nav li {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	padding-bottom: .5rem;
+	border-bottom: 3px solid var(--cof-border);
+	color: var(--cof-muted);
+	font-weight: 700;
+}
+.cartiva-steps-nav li span {
+	display: inline-grid;
+	place-items: center;
+	width: 1.6rem;
+	height: 1.6rem;
+	border-radius: 50%;
+	background: var(--cof-border);
+	color: var(--cof-text);
+	font-size: .85rem;
+}
+.cartiva-steps-nav li.is-active { border-color: var(--cof-accent); color: var(--cof-text); }
+.cartiva-steps-nav li.is-active span { background: var(--cof-accent); color: #fff; }
+.cartiva-steps.is-step-1 #order_review_heading,
+.cartiva-steps.is-step-1 #order_review,
+.cartiva-steps.is-step-1 .cartiva-steps-back,
+.cartiva-steps.is-step-2 #customer_details,
+.cartiva-steps.is-step-2 #customer_details ~ .cartiva-bumps,
+.cartiva-steps.is-step-2 .cartiva-steps-next { display: none; }
+.cartiva-steps-continue {
+	width: 100%;
+	min-height: 3.2rem;
+	border: 0;
+	border-radius: 12px;
+	background: var(--cof-text);
+	color: var(--wp--preset--color--base, #fff);
+	font: inherit;
+	font-weight: 800;
+	cursor: pointer;
+}
+.cartiva-steps-previous { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+
+@media (max-width: 480px) {
+	.cartiva-offer { grid-template-columns: auto 2.75rem 1fr; }
+	.cartiva-offer__image img { width: 2.75rem; height: 2.75rem; }
+	.cartiva-offer__price { grid-column: 3; justify-items: start; text-align: left; }
+}

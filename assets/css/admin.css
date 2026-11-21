@@ -18,3 +18,16 @@
 .cartiva-landing-box h3:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .column-cartiva_product { width: 18%; }
 .column-cartiva_visits, .column-cartiva_orders, .column-cartiva_revenue, .column-cartiva_conversion { width: 9%; }
+
+/* Landing page and funnel boxes */
+.cartiva-landing-box .cartiva-rows { margin-top: .5rem; }
+.cartiva-landing-box .cartiva-rows td,
+.cartiva-steps td { vertical-align: top; }
+.cartiva-rows .button-link { font-size: 1.25rem; line-height: 1; text-decoration: none; }
+.cartiva-step-tools { white-space: nowrap; }
+.cartiva-step-tools .button-link { padding: 0 .25rem; }
+.cartiva-step-number { font-weight: 700; }
+.cartiva-inline { display: inline-block; margin-left: 12px; }
+.cartiva-block-label { display: block; margin-bottom: 6px; }
+.cartiva-funnel-results { margin: 0; }
+.cartiva-funnel-results li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f1; }

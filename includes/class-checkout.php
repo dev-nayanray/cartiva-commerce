@@ -132,17 +132,19 @@ class Cartiva_Commerce_Checkout {
 	}
 
 	/**
-	 * Hide the coupon and login prompts above landing page forms unless allowed.
+	 * Coupon and login prompts: hidden above landing forms (they have an inline
+	 * coupon field), and on the main checkout when switched off.
 	 */
 	public static function landing_form_extras() {
-		$landing_id = cartiva_commerce_current_landing_id();
-		if ( ! $landing_id ) {
+		if ( ! cartiva_commerce_current_landing_id() ) {
+			if ( ! cartiva_commerce_setting( 'main_coupon' ) ) {
+				remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+			}
 			return;
 		}
+		// Landing forms show their own inline coupon field (when allowed).
 		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
-		if ( ! cartiva_commerce_landing_config( $landing_id )['show_coupon'] ) {
-			remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
-		}
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
 	}
 
 	/**
@@ -173,8 +175,8 @@ class Cartiva_Commerce_Checkout {
 		if ( ! $landing_id ) {
 			return $url;
 		}
-		$page = (int) cartiva_commerce_landing_config( $landing_id )['thankyou'];
-		if ( ! $page || 'publish' !== get_post_status( $page ) ) {
+		$page = self::thankyou_target( $landing_id );
+		if ( ! $page ) {
 			return $url;
 		}
 		return add_query_arg(
@@ -187,6 +189,21 @@ class Cartiva_Commerce_Checkout {
 	}
 
 	/**
+	 * Where a landing page sends buyers: its chosen thank-you page, else the
+	 * next thank-you step of its funnel, else 0 (WooCommerce's page).
+	 *
+	 * @param int $landing_id Landing page ID.
+	 * @return int
+	 */
+	public static function thankyou_target( $landing_id ) {
+		$page = (int) cartiva_commerce_landing_config( $landing_id )['thankyou'];
+		if ( $page && 'publish' === get_post_status( $page ) ) {
+			return $page;
+		}
+		return cartiva_commerce_next_step( $landing_id, 'thankyou' );
+	}
+
+	/**
 	 * Show the order summary at the top of a landing thank-you page.
 	 *
 	 * @param string $content Page content.
@@ -194,7 +211,7 @@ class Cartiva_Commerce_Checkout {
 	 */
 	public static function thankyou_content( $content ) {
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Read-only; the order key proves the visitor placed the order.
-		if ( ! isset( $_GET['cartiva_order'], $_GET['key'] ) || ! in_the_loop() || ! is_main_query() || ! is_page() ) {
+		if ( ! isset( $_GET['cartiva_order'], $_GET['key'] ) || ! ( is_page() || is_singular( CARTIVA_COMMERCE_LANDING ) ) || (int) get_the_ID() !== (int) get_queried_object_id() ) {
 			return $content;
 		}
 		$order = wc_get_order( absint( wp_unslash( $_GET['cartiva_order'] ) ) );
@@ -204,7 +221,7 @@ class Cartiva_Commerce_Checkout {
 			return $content;
 		}
 		$landing_id = (int) $order->get_meta( '_cartiva_landing_id' );
-		if ( ! $landing_id || (int) cartiva_commerce_landing_config( $landing_id )['thankyou'] !== (int) get_the_ID() ) {
+		if ( ! $landing_id || self::thankyou_target( $landing_id ) !== (int) get_the_ID() ) {
 			return $content;
 		}
 		ob_start();
