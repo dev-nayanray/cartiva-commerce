@@ -56,6 +56,14 @@ function cartiva_commerce_settings() {
 		'coupon_percent' => 10,
 		'coupon_days'    => 3,
 		'whatsapp_text'  => '',
+		'side_cart'      => true,
+		'side_cart_open' => true,
+		'side_cart_btn'  => false,
+		'side_cart_link' => false,
+		'ship_bar'       => true,
+		'ship_min'       => 0,
+		'cart_recs'      => true,
+		'deals'          => array(),
 	);
 	$saved    = get_option( 'cartiva_commerce_settings', array() );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );

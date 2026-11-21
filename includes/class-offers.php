@@ -49,6 +49,9 @@ class Cartiva_Commerce_Offers {
 			return $lines;
 		}
 		foreach ( WC()->cart->get_cart() as $key => $item ) {
+			if ( ! empty( $item['cartiva_gift'] ) ) {
+				continue; // Free gifts follow the products they come with.
+			}
 			if ( isset( $item['cartiva_offer']['landing'] ) && (int) $item['cartiva_offer']['landing'] === (int) $landing_id ) {
 				$lines['offers'][ (int) $item['cartiva_offer']['index'] ] = (string) $key;
 			} elseif ( isset( $item['cartiva_bump']['landing'] ) && (int) $item['cartiva_bump']['landing'] === (int) $landing_id ) {

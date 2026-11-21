@@ -5,11 +5,11 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sales funnels with one-click upsells, order bumps, abandoned checkout recovery, A/B tests, analytics and pixel tracking for WooCommerce. All free.
+Sales funnels, one-click upsells, order bumps, abandoned checkout recovery, a slide-out cart, BOGO deals, A/B tests and analytics for WooCommerce. All free.
 
 == Description ==
 
@@ -42,6 +42,14 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 * An order from the same shopper (same session, phone or email) marks the checkout **Recovered**; see abandoned, recovered, recovery rate and recovered revenue for the last 30 days.
 * Privacy: a notice on the form, a "Stop these reminders" link in every email, automatic deletion after 30 days, and WordPress personal data export and erase.
 * Developers can send an SMS with the `cartiva_commerce_checkout_abandoned` action.
+
+= Slide-out cart, free shipping bar and deals =
+
+* **Slide-out cart** that opens when a product is added: change quantities, remove products and check out without leaving the page. Optional floating cart button, or open it from your header's cart link.
+* **"You may also like"** in the cart, from each product's cross-sells, with one-click Add.
+* **Free shipping bar**: "Add ৳250 more for free shipping", using your Free shipping method's minimum amount (or your own amount), in the cart drawer and on the cart and checkout pages.
+* **Buy X, get Y deals** (BOGO): the gift is added by itself when the cart qualifies, free or at a discount, and removed if the shopper buys less. Works for "Buy 1, get 1 free" on the same product, and repeats for every set.
+* **Coupons that apply themselves**: tick "Apply automatically" on any WooCommerce coupon, and it is added as soon as the cart meets its conditions (such as a minimum spend).
 
 = Analytics and A/B tests =
 
@@ -137,6 +145,14 @@ Yes. Most order forms ask for a mobile number, and every abandoned checkout with
 
 They use WordPress's scheduled tasks, which run when your site has visitors. On low-traffic sites, set up a real cron job for wp-cron.php (most hosts have this in their control panel) so reminders go out on time.
 
+= My theme already has a mini cart. Will there be two? =
+
+The Cartiva Commerce drawer opens after adding to cart, or from its own floating button. It only replaces your header cart when you tick "Open it from the cart links and mini cart in your header". You can switch the drawer off in WooCommerce > Cartiva Commerce > Cart & deals.
+
+= Do BOGO gifts work on landing pages? =
+
+Yes. Gifts are added to landing page order forms too, and keep their own price.
+
 = Is the A/B test result reliable? =
 
 Wait until each version has about 30 orders or more. With fewer orders, differences are often luck. The page shows visits, orders, conversion and revenue for both versions since the test started.
@@ -178,8 +194,15 @@ Yes. Every feature is in this plugin. There is no pro version.
 5. Funnel analytics with revenue per day.
 6. An A/B test with results for both versions.
 7. Abandoned checkouts with Call and WhatsApp buttons.
+8. The slide-out cart with the free shipping bar and suggestions.
 
 == Changelog ==
+
+= 1.5.0 =
+* New: Slide-out cart with quantity changes, remove, cross-sell suggestions, optional floating button and header link takeover.
+* New: Free shipping progress bar (drawer, cart and checkout).
+* New: Buy X, get Y deals with free or discounted gifts that add and remove themselves.
+* New: "Apply automatically" option on WooCommerce coupons.
 
 = 1.4.0 =
 * New: Abandoned checkout recovery: saved details with a notice on the form, list with Call and WhatsApp buttons, up to three reminder emails with a cart-restoring link, optional one-time coupon, recovered revenue.
@@ -209,6 +232,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.5.0 =
+Adds a slide-out cart, free shipping bar, BOGO deals and coupons that apply themselves.
 
 = 1.4.0 =
 Adds abandoned checkout recovery with reminder emails, coupons and WhatsApp follow-up.

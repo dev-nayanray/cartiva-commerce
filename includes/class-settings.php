@@ -102,6 +102,34 @@ class Cartiva_Commerce_Settings {
 			$output['main_fields'] = Cartiva_Commerce_Fields::sanitize_config( isset( $input['main']['fields'] ) ? $input['main']['fields'] : array() );
 			$output['main_bd_phone'] = ! empty( $input['main_bd_phone'] );
 			$output['main_coupon']   = ! empty( $input['main_coupon'] );
+		} elseif ( 'cart' === $tab ) {
+			$output['side_cart']      = ! empty( $input['side_cart'] );
+			$output['side_cart_open'] = ! empty( $input['side_cart_open'] );
+			$output['side_cart_btn']  = ! empty( $input['side_cart_btn'] );
+			$output['side_cart_link'] = ! empty( $input['side_cart_link'] );
+			$output['ship_bar']       = ! empty( $input['ship_bar'] );
+			$output['ship_min']       = isset( $input['ship_min'] ) ? max( 0, round( (float) $input['ship_min'], 2 ) ) : 0;
+			$output['cart_recs']      = ! empty( $input['cart_recs'] );
+			$deals                    = array();
+			foreach ( isset( $input['deals'] ) && is_array( $input['deals'] ) ? $input['deals'] : array() as $row ) {
+				$buy  = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
+				$gift = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['gift'] ) ? $row['gift'] : 0 ) : null;
+				if ( ! $buy || ! $gift || count( $deals ) >= 20 ) {
+					continue;
+				}
+				$deals[] = array(
+					'active'            => ! empty( $row['active'] ),
+					'product_id'        => $buy['product_id'],
+					'variation_id'      => $buy['variation_id'],
+					'buy_qty'           => isset( $row['buy_qty'] ) ? max( 1, min( 99, absint( $row['buy_qty'] ) ) ) : 1,
+					'gift_product_id'   => $gift['product_id'],
+					'gift_variation_id' => $gift['variation_id'],
+					'gift_qty'          => isset( $row['gift_qty'] ) ? max( 1, min( 99, absint( $row['gift_qty'] ) ) ) : 1,
+					'discount'          => isset( $row['discount'] ) ? (float) max( 1, min( 100, round( (float) $row['discount'], 1 ) ) ) : 100.0,
+					'repeat'            => ! empty( $row['repeat'] ),
+				);
+			}
+			$output['deals'] = $deals;
 		} elseif ( 'recovery' === $tab ) {
 			$output['recovery']       = ! empty( $input['recovery'] );
 			$output['recovery_main']  = ! empty( $input['recovery_main'] );
@@ -158,6 +186,11 @@ class Cartiva_Commerce_Settings {
 		}
 		wp_enqueue_style( 'cartiva-commerce-admin', CARTIVA_COMMERCE_URL . 'assets/css/admin.css', array(), CARTIVA_COMMERCE_VERSION );
 		wp_enqueue_script( 'cartiva-commerce-fields', CARTIVA_COMMERCE_URL . 'assets/js/admin-fields.js', array(), CARTIVA_COMMERCE_VERSION, true );
+		if ( $ours ) {
+			wp_enqueue_script( 'wc-enhanced-select' );
+			wp_enqueue_style( 'woocommerce_admin_styles' );
+			wp_enqueue_script( 'cartiva-commerce-admin-landing', CARTIVA_COMMERCE_URL . 'assets/js/admin-landing.js', array( 'jquery', 'wc-enhanced-select' ), CARTIVA_COMMERCE_VERSION, true );
+		}
 	}
 
 	/**
@@ -201,7 +234,7 @@ class Cartiva_Commerce_Settings {
 		}
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab switch only.
 		$tab      = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
-		$tab      = in_array( $tab, array( 'general', 'fields', 'tracking', 'recovery' ), true ) ? $tab : 'general';
+		$tab      = in_array( $tab, array( 'general', 'fields', 'cart', 'recovery', 'tracking' ), true ) ? $tab : 'general';
 		$settings = cartiva_commerce_settings();
 		?>
 		<div class="wrap cartiva-commerce-admin">
@@ -209,6 +242,7 @@ class Cartiva_Commerce_Settings {
 			<nav class="nav-tab-wrapper">
 				<a href="<?php echo esc_url( self::url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'General', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'fields' ) ); ?>" class="nav-tab<?php echo 'fields' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main checkout fields', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( self::url( 'cart' ) ); ?>" class="nav-tab<?php echo 'cart' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Cart & deals', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'recovery' ) ); ?>" class="nav-tab<?php echo 'recovery' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Recovery', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'tracking' ) ); ?>" class="nav-tab<?php echo 'tracking' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Tracking', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>" class="nav-tab"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
@@ -226,7 +260,35 @@ class Cartiva_Commerce_Settings {
 				<?php
 				if ( 'fields' === $tab ) {
 					self::render_fields_tab( $settings );
-				} elseif ( 'recovery' === $tab ) {
+				} elseif ( 'cart' === $tab ) {
+			$output['side_cart']      = ! empty( $input['side_cart'] );
+			$output['side_cart_open'] = ! empty( $input['side_cart_open'] );
+			$output['side_cart_btn']  = ! empty( $input['side_cart_btn'] );
+			$output['side_cart_link'] = ! empty( $input['side_cart_link'] );
+			$output['ship_bar']       = ! empty( $input['ship_bar'] );
+			$output['ship_min']       = isset( $input['ship_min'] ) ? max( 0, round( (float) $input['ship_min'], 2 ) ) : 0;
+			$output['cart_recs']      = ! empty( $input['cart_recs'] );
+			$deals                    = array();
+			foreach ( isset( $input['deals'] ) && is_array( $input['deals'] ) ? $input['deals'] : array() as $row ) {
+				$buy  = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
+				$gift = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['gift'] ) ? $row['gift'] : 0 ) : null;
+				if ( ! $buy || ! $gift || count( $deals ) >= 20 ) {
+					continue;
+				}
+				$deals[] = array(
+					'active'            => ! empty( $row['active'] ),
+					'product_id'        => $buy['product_id'],
+					'variation_id'      => $buy['variation_id'],
+					'buy_qty'           => isset( $row['buy_qty'] ) ? max( 1, min( 99, absint( $row['buy_qty'] ) ) ) : 1,
+					'gift_product_id'   => $gift['product_id'],
+					'gift_variation_id' => $gift['variation_id'],
+					'gift_qty'          => isset( $row['gift_qty'] ) ? max( 1, min( 99, absint( $row['gift_qty'] ) ) ) : 1,
+					'discount'          => isset( $row['discount'] ) ? (float) max( 1, min( 100, round( (float) $row['discount'], 1 ) ) ) : 100.0,
+					'repeat'            => ! empty( $row['repeat'] ),
+				);
+			}
+			$output['deals'] = $deals;
+		} elseif ( 'recovery' === $tab ) {
 			$output['recovery']       = ! empty( $input['recovery'] );
 			$output['recovery_main']  = ! empty( $input['recovery_main'] );
 			$output['recovery_after'] = isset( $input['recovery_after'] ) ? max( 10, min( 1440, absint( $input['recovery_after'] ) ) ) : 30;
@@ -287,6 +349,130 @@ class Cartiva_Commerce_Settings {
 			<a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Funnels::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
 			<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a>
 		</p>
+		<?php
+	}
+
+	/**
+	 * One deal row.
+	 *
+	 * @param string $i    Row index or __i__.
+	 * @param array  $deal Deal.
+	 */
+	public static function deal_row( $i, $deal ) {
+		$deal = wp_parse_args(
+			$deal,
+			array(
+				'active'            => true,
+				'product_id'        => 0,
+				'variation_id'      => 0,
+				'buy_qty'           => 1,
+				'gift_product_id'   => 0,
+				'gift_variation_id' => 0,
+				'gift_qty'          => 1,
+				'discount'          => 100,
+				'repeat'            => true,
+			)
+		);
+		$base = 'cartiva_commerce_settings[deals][' . $i . ']';
+		?>
+		<tr>
+			<td><input type="checkbox" name="<?php echo esc_attr( $base . '[active]' ); ?>" value="1" <?php checked( ! empty( $deal['active'] ) ); ?> aria-label="<?php esc_attr_e( 'Active', 'cartiva-commerce' ); ?>" /></td>
+			<td>
+				<input type="number" min="1" max="99" class="small-text" name="<?php echo esc_attr( $base . '[buy_qty]' ); ?>" value="<?php echo esc_attr( (string) $deal['buy_qty'] ); ?>" aria-label="<?php esc_attr_e( 'Buy quantity', 'cartiva-commerce' ); ?>" /> &times;
+				<?php Cartiva_Commerce_Landing::product_select( $base . '[item]', $deal, __( 'Product to buy', 'cartiva-commerce' ) ); ?>
+			</td>
+			<td>
+				<input type="number" min="1" max="99" class="small-text" name="<?php echo esc_attr( $base . '[gift_qty]' ); ?>" value="<?php echo esc_attr( (string) $deal['gift_qty'] ); ?>" aria-label="<?php esc_attr_e( 'Gift quantity', 'cartiva-commerce' ); ?>" /> &times;
+				<?php
+				Cartiva_Commerce_Landing::product_select(
+					$base . '[gift]',
+					array(
+						'product_id'   => $deal['gift_product_id'],
+						'variation_id' => $deal['gift_variation_id'],
+					),
+					__( 'Gift product', 'cartiva-commerce' )
+				);
+				?>
+			</td>
+			<td><input type="number" min="1" max="100" step="0.5" class="small-text" name="<?php echo esc_attr( $base . '[discount]' ); ?>" value="<?php echo esc_attr( (string) $deal['discount'] ); ?>" aria-label="<?php esc_attr_e( 'Gift discount %', 'cartiva-commerce' ); ?>" /> %</td>
+			<td><input type="checkbox" name="<?php echo esc_attr( $base . '[repeat]' ); ?>" value="1" <?php checked( ! empty( $deal['repeat'] ) ); ?> aria-label="<?php esc_attr_e( 'Repeat for every set', 'cartiva-commerce' ); ?>" /></td>
+			<td><button type="button" class="button-link cartiva-remove-row" aria-label="<?php esc_attr_e( 'Remove', 'cartiva-commerce' ); ?>">&times;</button></td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Cart & deals tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_cart_tab( $settings ) {
+		?>
+		<h2><?php esc_html_e( 'Slide-out cart', 'cartiva-commerce' ); ?></h2>
+		<table class="form-table" role="presentation">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Cart drawer', 'cartiva-commerce' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="cartiva_commerce_settings[side_cart]" value="1" <?php checked( ! empty( $settings['side_cart'] ) ); ?> /> <?php esc_html_e( 'Use the slide-out cart', 'cartiva-commerce' ); ?></label><br>
+					<label><input type="checkbox" name="cartiva_commerce_settings[side_cart_open]" value="1" <?php checked( ! empty( $settings['side_cart_open'] ) ); ?> /> <?php esc_html_e( 'Open it when a product is added to the cart', 'cartiva-commerce' ); ?></label><br>
+					<label><input type="checkbox" name="cartiva_commerce_settings[side_cart_btn]" value="1" <?php checked( ! empty( $settings['side_cart_btn'] ) ); ?> /> <?php esc_html_e( 'Show a floating cart button in the corner', 'cartiva-commerce' ); ?></label><br>
+					<label><input type="checkbox" name="cartiva_commerce_settings[side_cart_link]" value="1" <?php checked( ! empty( $settings['side_cart_link'] ) ); ?> /> <?php esc_html_e( 'Open it from the cart links and mini cart in your header', 'cartiva-commerce' ); ?></label>
+					<p class="description"><?php esc_html_e( 'Shoppers change quantities, remove products and see suggestions without leaving the page. The drawer is not shown on the cart, checkout and landing pages.', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Suggestions', 'cartiva-commerce' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="cartiva_commerce_settings[cart_recs]" value="1" <?php checked( ! empty( $settings['cart_recs'] ) ); ?> /> <?php esc_html_e( 'Show "You may also like" in the drawer', 'cartiva-commerce' ); ?></label>
+					<p class="description"><?php esc_html_e( 'Uses the Cross-sells you set on each product (Product data > Linked Products).', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+		</table>
+
+		<h2><?php esc_html_e( 'Free shipping bar', 'cartiva-commerce' ); ?></h2>
+		<table class="form-table" role="presentation">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Progress bar', 'cartiva-commerce' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="cartiva_commerce_settings[ship_bar]" value="1" <?php checked( ! empty( $settings['ship_bar'] ) ); ?> /> <?php esc_html_e( 'Show "Add X more for free shipping" in the drawer and on the cart and checkout pages', 'cartiva-commerce' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="cartiva-ship-min"><?php esc_html_e( 'Free shipping from', 'cartiva-commerce' ); ?></label></th>
+				<td>
+					<input id="cartiva-ship-min" type="number" min="0" step="any" class="small-text" name="cartiva_commerce_settings[ship_min]" value="<?php echo esc_attr( (string) $settings['ship_min'] ); ?>" /> <?php echo esc_html( get_woocommerce_currency_symbol() ); ?>
+					<p class="description"><?php esc_html_e( 'Leave 0 to use the minimum order amount of the Free shipping method in the shopper\'s shipping zone (WooCommerce > Settings > Shipping). If you enter an amount, make sure a Free shipping method with the same minimum exists, so the promise matches the checkout.', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+		</table>
+
+		<h2><?php esc_html_e( 'Buy X, get Y deals', 'cartiva-commerce' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'When the cart has enough of a product, the gift product is added by itself at the discount you set (100% = free), and removed again if the shopper buys less. For "Buy 1, get 1 free" pick the same product on both sides. With "Repeat", every full set earns a gift (buy 2 get 1: 4 bought = 2 gifts).', 'cartiva-commerce' ); ?></p>
+		<div class="cartiva-repeater" data-cartiva-repeater="deals">
+			<table class="widefat cartiva-rows">
+				<thead><tr>
+					<th><?php esc_html_e( 'On', 'cartiva-commerce' ); ?></th>
+					<th><?php esc_html_e( 'Buy', 'cartiva-commerce' ); ?></th>
+					<th><?php esc_html_e( 'Get', 'cartiva-commerce' ); ?></th>
+					<th><?php esc_html_e( 'Gift discount', 'cartiva-commerce' ); ?></th>
+					<th><?php esc_html_e( 'Repeat', 'cartiva-commerce' ); ?></th>
+					<th><span class="screen-reader-text"><?php esc_html_e( 'Remove', 'cartiva-commerce' ); ?></span></th>
+				</tr></thead>
+				<tbody>
+					<?php
+					foreach ( (array) $settings['deals'] as $i => $deal ) {
+						self::deal_row( (string) $i, (array) $deal );
+					}
+					?>
+				</tbody>
+			</table>
+			<template><?php self::deal_row( '__i__', array() ); ?></template>
+			<p><button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add deal', 'cartiva-commerce' ); ?></button></p>
+		</div>
+
+		<h2><?php esc_html_e( 'Coupons that apply themselves', 'cartiva-commerce' ); ?></h2>
+		<p><?php esc_html_e( 'Open a coupon under Marketing > Coupons and tick "Apply automatically". It is then added to the cart as soon as the cart meets the coupon\'s usage restrictions, for example "10% off orders over 2000" with a minimum spend. Shoppers who remove it do not get it again in that visit.', 'cartiva-commerce' ); ?></p>
+		<p><a class="button" href="<?php echo esc_url( admin_url( 'edit.php?post_type=shop_coupon' ) ); ?>"><?php esc_html_e( 'Go to coupons', 'cartiva-commerce' ); ?></a></p>
 		<?php
 	}
 

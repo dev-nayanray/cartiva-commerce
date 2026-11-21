@@ -67,3 +67,4 @@
 .cartiva-wa { border-color: #1a7f45 !important; color: #1a7f45 !important; }
 .cartiva-email-box { margin: 0 0 16px; padding: 12px 16px; border: 1px solid #dcdcde; border-radius: 8px; background: #fff; max-width: 800px; }
 .cartiva-email-box legend { padding: 0 6px; font-weight: 600; }
+.cartiva-rows .select2-container { min-width: 200px; vertical-align: middle; }

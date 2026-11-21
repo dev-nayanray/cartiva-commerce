@@ -1,0 +1,117 @@
+/**
+ * Cartiva Commerce: slide-out cart and free shipping bar.
+ * Uses theme colors when the theme provides them (Cartiva does).
+ */
+.cartiva-sc,
+.cartiva-ship,
+.cartiva-sc-toggle {
+	--csc-base: var(--wp--preset--color--base, #fff);
+	--csc-text: var(--wp--preset--color--contrast, #111);
+	--csc-muted: var(--wp--preset--color--muted, #6b6b6b);
+	--csc-border: var(--wp--preset--color--border, #e3e3e3);
+	--csc-surface: var(--wp--preset--color--surface, #f6f6f4);
+	--csc-accent: var(--wp--preset--color--accent, #de291b);
+}
+.cartiva-sc[hidden] { display: none; }
+.cartiva-sc { position: fixed; inset: 0; z-index: 100000; }
+.cartiva-sc__overlay { position: absolute; inset: 0; background: rgb(0 0 0 / .45); opacity: 0; transition: opacity .25s; }
+.cartiva-sc__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(420px, 100%);
+	background: var(--csc-base);
+	color: var(--csc-text);
+	box-shadow: -20px 0 50px -20px rgb(0 0 0 / .35);
+	transform: translateX(100%);
+	transition: transform .25s ease;
+	outline: none;
+}
+.cartiva-sc.is-open .cartiva-sc__overlay { opacity: 1; }
+.cartiva-sc.is-open .cartiva-sc__panel { transform: none; }
+html.cartiva-sc-open { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+	.cartiva-sc__overlay,
+	.cartiva-sc__panel { transition: none; }
+}
+.cartiva-sc__head { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--csc-border); }
+.cartiva-sc__title { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1.15rem; }
+.cartiva-sc__title .cartiva-sc-count { display: inline-grid; place-items: center; min-width: 1.5rem; height: 1.5rem; padding: 0 .4rem; border-radius: 999px; background: var(--csc-surface); font-size: .8rem; }
+.cartiva-sc__close { width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: none; color: inherit; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+.cartiva-sc__close:hover { background: var(--csc-surface); }
+.cartiva-sc__body { display: flex; flex: 1; flex-direction: column; min-height: 0; overflow-y: auto; }
+.cartiva-sc__body.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-sc__empty { margin: auto; padding: 2rem; text-align: center; }
+
+.cartiva-sc__items { margin: 0; padding: .5rem 1.25rem; list-style: none; }
+.cartiva-sc__item,
+.cartiva-sc__recs li { display: grid; grid-template-columns: 4rem 1fr auto auto; gap: .75rem; align-items: center; padding: .85rem 0; border-bottom: 1px solid var(--csc-border); }
+.cartiva-sc__item.is-gift { grid-template-columns: 4rem 1fr auto; }
+.cartiva-sc__thumb img { display: block; width: 4rem; height: 4rem; border-radius: 10px; object-fit: cover; }
+.cartiva-sc__info { display: grid; gap: .15rem; min-width: 0; }
+.cartiva-sc__name { color: inherit; font-weight: 700; line-height: 1.3; text-decoration: none; }
+.cartiva-sc__name:hover { text-decoration: underline; }
+.cartiva-sc__meta { color: var(--csc-muted); font-size: .8rem; white-space: pre-line; }
+.cartiva-sc__gift { justify-self: start; padding: .1rem .5rem; border-radius: 999px; background: #e7f5ea; color: #00691c; font-size: .75rem; font-weight: 700; }
+.cartiva-sc__price { font-size: .92rem; font-weight: 600; }
+.cartiva-sc__qty { display: inline-flex; align-items: center; border: 1px solid var(--csc-border); border-radius: 999px; }
+.cartiva-sc__step { width: 2rem; height: 2rem; border: 0; background: none; color: inherit; font-size: 1rem; cursor: pointer; }
+.cartiva-sc__step:disabled { opacity: .35; cursor: default; }
+.cartiva-sc__num { min-width: 1.5rem; font-weight: 700; text-align: center; }
+.cartiva-sc__fixed { color: var(--csc-muted); font-weight: 700; }
+.cartiva-sc__remove { width: 2rem; height: 2rem; border: 0; border-radius: 50%; background: none; color: var(--csc-muted); font-size: 1.25rem; cursor: pointer; }
+.cartiva-sc__remove:hover { background: var(--csc-surface); color: var(--csc-text); }
+
+.cartiva-sc__recs { margin: .5rem 1.25rem; padding: .75rem 1rem; border-radius: 12px; background: var(--csc-surface); }
+.cartiva-sc__recs-title { margin: 0 0 .25rem; font-weight: 800; }
+.cartiva-sc__recs ul { margin: 0; padding: 0; list-style: none; }
+.cartiva-sc__recs li { grid-template-columns: 3rem 1fr auto; border-color: transparent; padding: .5rem 0; }
+.cartiva-sc__recs .cartiva-sc__thumb img { width: 3rem; height: 3rem; }
+.cartiva-sc__add { padding: .45rem .9rem; border: 1px solid var(--csc-text); border-radius: 999px; background: none; color: var(--csc-text); font: inherit; font-size: .85rem; font-weight: 700; text-decoration: none; cursor: pointer; }
+.cartiva-sc__add:hover { background: var(--csc-text); color: var(--csc-base); }
+
+.cartiva-sc__foot { margin-top: auto; padding: 1rem 1.25rem 1.25rem; border-top: 1px solid var(--csc-border); background: var(--csc-base); position: sticky; bottom: 0; }
+.cartiva-sc__row { display: flex; justify-content: space-between; margin: 0 0 .4rem; font-size: .92rem; }
+.cartiva-sc__subtotal { margin-bottom: .9rem; font-size: 1.05rem; font-weight: 800; }
+.cartiva-sc__button { display: block; padding: .95rem 1rem; border-radius: 12px; background: var(--csc-accent); color: #fff; font-weight: 800; text-align: center; text-decoration: none; }
+.cartiva-sc__button:hover { background: var(--csc-text); color: var(--csc-base); }
+.cartiva-sc__link { display: block; margin-top: .6rem; color: inherit; text-align: center; }
+
+/* Free shipping bar */
+.cartiva-ship { margin: .75rem 1.25rem; padding: .75rem 1rem; border-radius: 12px; background: var(--csc-surface); }
+.woocommerce-cart .cartiva-ship,
+.woocommerce-checkout .cartiva-ship { margin: 0 0 1.5rem; }
+.cartiva-ship__text { margin: 0 0 .5rem; font-size: .92rem; }
+.cartiva-ship__track { height: .5rem; overflow: hidden; border-radius: 999px; background: var(--csc-border); }
+.cartiva-ship__track span { display: block; height: 100%; border-radius: 999px; background: var(--csc-accent); transition: width .3s; }
+.cartiva-ship.is-done .cartiva-ship__track span { background: #1a7f45; }
+
+/* Floating button */
+.cartiva-sc-toggle {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	z-index: 99990;
+	display: grid;
+	place-items: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border: 0;
+	border-radius: 50%;
+	background: var(--csc-text);
+	color: var(--csc-base);
+	box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
+	cursor: pointer;
+}
+.cartiva-sc-toggle .cartiva-sc-count { position: absolute; top: -.2rem; right: -.2rem; display: grid; place-items: center; min-width: 1.4rem; height: 1.4rem; padding: 0 .3rem; border-radius: 999px; background: var(--csc-accent); color: #fff; font-size: .75rem; font-weight: 800; }
+.cartiva-sc-toggle .cartiva-sc-count[data-count="0"] { display: none; }
+/* Room for the Cartiva theme's mobile bar. */
+@media (max-width: 781px) {
+	body.cartiva-has-mobile-bar .cartiva-sc-toggle { bottom: 5rem; }
+}
+
+/* Gift lines on the classic cart page */
+.cartiva-gift-badge { display: inline-block; margin-left: .4rem; padding: .05rem .5rem; border-radius: 999px; background: #e7f5ea; color: #00691c; font-size: .75rem; font-weight: 700; vertical-align: middle; }
