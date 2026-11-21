@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cartiva-commerce/order-details",
+	"version": "1.2.0",
+	"title": "Order details",
+	"category": "woocommerce",
+	"icon": "list-view",
+	"description": "Shows the buyer's order on a Cartiva Commerce thank-you step: order number, items, total, payment and delivery details.",
+	"keywords": [
+		"thank you",
+		"order",
+		"receipt"
+	],
+	"textdomain": "cartiva-commerce",
+	"supports": {
+		"html": false,
+		"multiple": false,
+		"reusable": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}

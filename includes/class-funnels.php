@@ -42,6 +42,8 @@ class Cartiva_Commerce_Funnels {
 		return array(
 			'landing'  => __( 'Sales page', 'cartiva-commerce' ),
 			'checkout' => __( 'Checkout', 'cartiva-commerce' ),
+			'upsell'   => __( 'Upsell', 'cartiva-commerce' ),
+			'downsell' => __( 'Downsell', 'cartiva-commerce' ),
 			'thankyou' => __( 'Thank you', 'cartiva-commerce' ),
 		);
 	}
@@ -89,6 +91,15 @@ class Cartiva_Commerce_Funnels {
 	}
 
 	/**
+	 * Link that creates a funnel with an upsell and a downsell.
+	 *
+	 * @return string
+	 */
+	public static function template_upsell_url() {
+		return add_query_arg( 'with_offers', '1', self::template_url() );
+	}
+
+	/**
 	 * Admin script for the steps table.
 	 *
 	 * @param string $hook Screen hook.
@@ -112,7 +123,10 @@ class Cartiva_Commerce_Funnels {
 		<div class="notice notice-info cartiva-commerce-callout">
 			<p><strong><?php esc_html_e( 'Start with the ready-made funnel', 'cartiva-commerce' ); ?></strong></p>
 			<p><?php esc_html_e( 'It adds three draft steps: a sales page, a checkout with the order form, and a thank-you page. Pick the product on the checkout step, check the text, then publish the steps.', 'cartiva-commerce' ); ?></p>
-			<p><a class="button button-primary" href="<?php echo esc_url( self::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a></p>
+			<p>
+				<a class="button button-primary" href="<?php echo esc_url( self::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
+				<a class="button" href="<?php echo esc_url( self::template_upsell_url() ); ?>"><?php esc_html_e( 'Template with upsell and downsell', 'cartiva-commerce' ); ?></a>
+			</p>
 		</div>
 		<?php
 	}
@@ -212,7 +226,7 @@ class Cartiva_Commerce_Funnels {
 		$steps   = cartiva_commerce_funnel_steps( $post->ID );
 		wp_nonce_field( 'cartiva_funnel_save', 'cartiva_funnel_nonce' );
 		?>
-		<p class="description"><?php esc_html_e( 'Shoppers go through the steps from top to bottom. On a sales page, buttons that link to #order (or #cartiva-next) open the next step. After an order, buyers see the next Thank you step with their order details.', 'cartiva-commerce' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Shoppers go through the steps from top to bottom. On a sales page, buttons that link to #order (or #cartiva-next) open the next step. After an order, buyers see the Upsell steps that follow the checkout: "Yes" moves on to the next upsell, "No" shows the Downsell placed right after it. The flow ends on the Thank you step with the order details.', 'cartiva-commerce' ); ?></p>
 		<div class="cartiva-repeater" data-cartiva-repeater="steps">
 			<table class="widefat cartiva-rows cartiva-steps">
 				<thead><tr>
@@ -398,9 +412,18 @@ class Cartiva_Commerce_Funnels {
 			$parts[] = $heading( __( 'Complete your order', 'cartiva-commerce' ), 1 );
 			$parts[] = $para( __( 'Fill in your details. Pay when the parcel arrives.', 'cartiva-commerce' ) );
 			$parts[] = '<!-- wp:cartiva-commerce/order-form /-->';
+		} elseif ( 'upsell' === $type ) {
+			$parts[] = $heading( __( 'Wait! Your order is not complete yet', 'cartiva-commerce' ), 1 );
+			$parts[] = $para( __( 'Add this to your order now at a special price. This offer is only on this page.', 'cartiva-commerce' ) );
+			$parts[] = '<!-- wp:cartiva-commerce/offer /-->';
+		} elseif ( 'downsell' === $type ) {
+			$parts[] = $heading( __( 'How about this instead?', 'cartiva-commerce' ), 1 );
+			$parts[] = $para( __( 'A smaller offer at an even better price, added to the same order.', 'cartiva-commerce' ) );
+			$parts[] = '<!-- wp:cartiva-commerce/offer /-->';
 		} else {
 			$parts[] = $heading( __( 'Thank you for your order!', 'cartiva-commerce' ), 1 );
-			$parts[] = $para( __( 'We will call you soon to confirm your order. Your order details are above.', 'cartiva-commerce' ) );
+			$parts[] = $para( __( 'We will call you soon to confirm your order.', 'cartiva-commerce' ) );
+			$parts[] = '<!-- wp:cartiva-commerce/order-details /-->';
 		}
 		return implode( "\n\n", $parts );
 	}
@@ -427,8 +450,13 @@ class Cartiva_Commerce_Funnels {
 		$titles = array(
 			'landing'  => __( 'Sales page', 'cartiva-commerce' ),
 			'checkout' => __( 'Checkout', 'cartiva-commerce' ),
-			'thankyou' => __( 'Thank you', 'cartiva-commerce' ),
 		);
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Checked by check_admin_referer() above.
+		if ( ! empty( $_GET['with_offers'] ) ) {
+			$titles['upsell']   = __( 'Upsell', 'cartiva-commerce' );
+			$titles['downsell'] = __( 'Downsell', 'cartiva-commerce' );
+		}
+		$titles['thankyou'] = __( 'Thank you', 'cartiva-commerce' );
 		$steps  = array();
 		foreach ( $titles as $type => $title ) {
 			$step_id = wp_insert_post(

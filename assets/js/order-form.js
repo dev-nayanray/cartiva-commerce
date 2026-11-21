@@ -221,6 +221,17 @@
 
 	$( setupSteps );
 
+	/* Offer buttons: send once. */
+
+	$( document ).on( 'submit', '.cartiva-offer-box__form', function ( event ) {
+		var form = $( this );
+		if ( form.hasClass( 'is-sending' ) ) {
+			event.preventDefault();
+			return;
+		}
+		form.addClass( 'is-sending' );
+	} );
+
 	/* "Order now" links on the page scroll smoothly to the form. */
 
 	$( document ).on( 'click', 'a[href="#order"]', function ( event ) {

@@ -81,6 +81,7 @@ function cartiva_commerce_landing_config( $landing_id ) {
 		'offers'       => array(),
 		'bumps'        => array(),
 		'layout'       => 'one',
+		'offer'        => array(),
 	);
 	$saved    = get_post_meta( (int) $landing_id, '_cartiva_landing', true );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -278,4 +279,42 @@ function cartiva_commerce_next_step( $landing_id, $type = null ) {
 		}
 	}
 	return 0;
+}
+
+/**
+ * Type of a funnel step, or ''.
+ *
+ * @param int $landing_id Landing page ID.
+ * @return string landing, checkout, upsell, downsell, thankyou or ''.
+ */
+function cartiva_commerce_step_type( $landing_id ) {
+	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	foreach ( $funnel ? cartiva_commerce_funnel_steps( $funnel ) : array() as $step ) {
+		if ( (int) $step['id'] === (int) $landing_id ) {
+			return (string) $step['type'];
+		}
+	}
+	return '';
+}
+
+/**
+ * The published step that follows a step, optionally skipping downsells
+ * (used after an upsell is accepted, or after a downsell).
+ *
+ * @param int  $landing_id     Landing page ID.
+ * @param bool $skip_downsells Skip downsell steps.
+ * @return array|null Step (id, type) or null.
+ */
+function cartiva_commerce_step_after( $landing_id, $skip_downsells = false ) {
+	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	$found  = false;
+	foreach ( $funnel ? cartiva_commerce_funnel_steps( $funnel ) : array() as $step ) {
+		if ( $found && 'publish' === get_post_status( (int) $step['id'] ) && ! ( $skip_downsells && 'downsell' === $step['type'] ) ) {
+			return $step;
+		}
+		if ( (int) $step['id'] === (int) $landing_id ) {
+			$found = true;
+		}
+	}
+	return null;
 }

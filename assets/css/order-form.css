@@ -278,3 +278,71 @@
 	.cartiva-offer__image img { width: 2.75rem; height: 2.75rem; }
 	.cartiva-offer__price { grid-column: 3; justify-items: start; text-align: left; }
 }
+
+/* Upsell / downsell offer */
+.cartiva-offer-box {
+	--cof-border: var(--wp--preset--color--border, #e3e3e3);
+	--cof-surface: var(--wp--preset--color--surface, #f6f6f4);
+	--cof-text: var(--wp--preset--color--contrast, #111);
+	--cof-muted: var(--wp--preset--color--muted, #6b6b6b);
+	--cof-accent: var(--wp--preset--color--accent, #de291b);
+	max-width: 760px;
+	margin-inline: auto;
+	padding: clamp(1.25rem, 4vw, 2rem);
+	border: 2px solid var(--cof-accent);
+	border-radius: var(--wp--custom--radius--md, 14px);
+	background: var(--wp--preset--color--base, #fff);
+}
+.cartiva-offer-box__product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1.5rem; align-items: center; }
+.cartiva-offer-box__image img { display: block; width: 100%; height: auto; border-radius: 12px; }
+.cartiva-offer-box__info p { margin: 0 0 .6rem; }
+.cartiva-offer-box__name { font-size: 1.35rem; font-weight: 800; line-height: 1.25; }
+.cartiva-offer-box__price { font-size: 1.6rem; font-weight: 800; }
+.cartiva-offer-box__price del { margin-right: .4rem; color: var(--cof-muted); font-size: 1.05rem; font-weight: 400; }
+.cartiva-offer-box__price ins { color: var(--cof-accent); text-decoration: none; }
+.cartiva-offer-box__note { color: var(--cof-muted); font-size: .92rem; }
+.cartiva-offer-box__form { display: grid; gap: .6rem; margin: 1.5rem 0 0; }
+.cartiva-offer-box__yes,
+.cartiva-offer-box__no { display: block; width: 100%; border: 0; font: inherit; text-align: center; cursor: pointer; }
+.cartiva-offer-box__yes {
+	min-height: 3.6rem;
+	padding: .9rem 1rem;
+	border-radius: 12px;
+	background: var(--cof-accent);
+	color: #fff;
+	font-size: 1.15rem;
+	font-weight: 800;
+}
+.cartiva-offer-box__yes:hover { background: var(--cof-text); }
+.cartiva-offer-box__no { padding: .5rem; background: none; color: var(--cof-muted); text-decoration: underline; }
+.cartiva-offer-box__form.is-sending button { opacity: .6; pointer-events: none; }
+.cartiva-offer-box [aria-disabled="true"] { cursor: default; opacity: .7; }
+@media (max-width: 600px) {
+	.cartiva-offer-box__product { grid-template-columns: 1fr; }
+}
+
+/* Thank-you order details */
+.cartiva-order-details {
+	--cof-border: var(--wp--preset--color--border, #e3e3e3);
+	--cof-surface: var(--wp--preset--color--surface, #f6f6f4);
+	--cof-muted: var(--wp--preset--color--muted, #6b6b6b);
+	max-width: 760px;
+	margin-inline: auto;
+	padding: clamp(1.25rem, 4vw, 2rem);
+	border: 1px solid var(--cof-border);
+	border-radius: var(--wp--custom--radius--md, 14px);
+	background: var(--wp--preset--color--base, #fff);
+}
+.cartiva-order-details__lead { margin: 0 0 1rem; font-size: 1.1rem; font-weight: 700; }
+.cartiva-order-details__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.cartiva-order-details__facts li { display: grid; gap: .2rem; padding: .75rem .9rem; border-radius: 10px; background: var(--cof-surface); }
+.cartiva-order-details__facts span { color: var(--cof-muted); font-size: .85rem; }
+.cartiva-order-details__items { width: 100%; margin: 0 0 1.5rem; border-collapse: collapse; }
+.cartiva-order-details__items th,
+.cartiva-order-details__items td { padding: .6rem 0; border: 0; border-bottom: 1px solid var(--cof-border); font-weight: 400; text-align: left; }
+.cartiva-order-details__items td { text-align: right; }
+.cartiva-order-details__items th span { color: var(--cof-muted); }
+.cartiva-order-details__items .is-total th,
+.cartiva-order-details__items .is-total td { font-weight: 700; }
+.cartiva-order-details__address h3 { margin: 0 0 .4rem; font-size: 1rem; }
+.cartiva-order-details__address address { font-style: normal; line-height: 1.6; }

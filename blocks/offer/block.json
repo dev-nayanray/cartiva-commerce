@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cartiva-commerce/offer",
+	"version": "1.2.0",
+	"title": "Upsell offer",
+	"category": "woocommerce",
+	"icon": "megaphone",
+	"description": "Upsell or downsell offer of a Cartiva Commerce funnel step: the product, its price and the Yes / No buttons that add it to the order in one click.",
+	"keywords": [
+		"upsell",
+		"downsell",
+		"offer",
+		"one click"
+	],
+	"textdomain": "cartiva-commerce",
+	"supports": {
+		"html": false,
+		"multiple": false,
+		"reusable": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}

@@ -1,15 +1,15 @@
 === Cartiva Commerce ===
 Contributors: godevs
-Tags: woocommerce, sales funnel, landing page, order bump, checkout fields
+Tags: woocommerce, sales funnel, upsell, order bump, checkout fields
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sales funnels, one-product landing pages with a short checkout, order bumps, product packs and a checkout field editor for WooCommerce. All free.
+Sales funnels with one-click upsells, order bumps, product packs, short landing page checkouts and a checkout field editor for WooCommerce. All free.
 
 == Description ==
 
@@ -24,6 +24,15 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 * Buttons on a sales page that link to `#order` open the next step automatically.
 * Buyers land on the funnel's thank-you step with their order details.
 * Visits, orders, revenue and conversion for each funnel.
+
+= One-click upsells and downsells =
+
+* Right after the order, show an **Upsell** step: one click on "Yes" adds the product to the same order, at your offer price. Nothing to fill in again.
+* "No thanks" shows the **Downsell** step placed after it, with a smaller or cheaper offer.
+* Several upsells in a row, each with its own product, quantity, discount and button texts.
+* Works with Cash on delivery, bank transfer and check. Orders paid another way skip the offers and go straight to the thank-you step.
+* Stock, order totals and order notes are updated, and the offer product is marked on the order.
+* **Order details** block for thank-you steps: order number, items, total, payment and delivery details, plus the payment method's instructions (for example your bank details).
 
 = Product options and order bumps =
 
@@ -67,7 +76,7 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 
 1. Install and activate WooCommerce.
 2. Go to **Plugins > Add New**, search for **Cartiva Commerce**, install and activate it.
-3. Go to **Cartiva Funnels** and click **Create a funnel from the template**.
+3. Go to **Cartiva Funnels** and click **Create a funnel from the template** (or **Template with upsell and downsell**).
 4. Open the **Checkout** step, add the product in the **Landing page: product and order form** box, choose the fields and payment methods.
 5. Check the text on the three steps and publish them. Visit the first step and place a test order.
 
@@ -84,6 +93,18 @@ No. Every landing page keeps its own fields, and the main checkout keeps its own
 = How do I make a "Buy 1, 2 or 3" offer? =
 
 In the landing page box, set **How shoppers choose** to "Shoppers pick one option". Add the same product three times with quantity 1, 2 and 3, give the bigger packs a discount and a badge, and tick **Selected first** on the one to preselect.
+
+= Why don't upsells show for card payments? =
+
+A card payment is charged when the order is placed. Adding a product afterwards would need a second charge on the saved card, which depends on the payment plugin. This version adds offers to orders that are paid later (Cash on delivery, bank transfer, check). Developers can allow other methods with the `cartiva_commerce_upsell_gateways` filter, but only for methods that charge later.
+
+= Does the order email include the upsell? =
+
+WooCommerce sends the order email when the order is placed, before the buyer sees the offer, so that first email lists the original items. The order in your dashboard, the thank-you step and later emails (such as Completed) include the upsell.
+
+= How long can buyers accept an offer? =
+
+Two hours after the order, while it is pending, on hold or processing. Developers can change this with the `cartiva_commerce_offer_window` filter.
 
 = Do order bumps work on the main checkout? =
 
@@ -118,6 +139,12 @@ Yes. Every feature is in this plugin. There is no pro version.
 
 == Changelog ==
 
+= 1.2.0 =
+* New: One-click upsell and downsell steps that add the offer to the same order (Cash on delivery, bank transfer, check).
+* New: Upsell offer block and Order details block for thank-you steps.
+* New: Funnel template with upsell and downsell.
+* Improved: Thank-you steps show the order details where you place the block.
+
 = 1.1.0 =
 * New: Funnels with steps (sales page, checkout, thank you), a one-click funnel template and funnel results.
 * New: Product options: pick one package or several products, each with its own quantity, discount and badge.
@@ -130,6 +157,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Adds one-click upsells and downsells, and an order details block for thank-you pages.
 
 = 1.1.0 =
 Adds funnels, product packs, order bumps and checkout layouts. Existing landing pages keep working unchanged.

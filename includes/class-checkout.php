@@ -168,24 +168,35 @@ class Cartiva_Commerce_Checkout {
 	 * @return string
 	 */
 	public static function thankyou_url( $url, $order ) {
-		if ( ! $order instanceof WC_Order ) {
+		if ( ! $order instanceof WC_Order || ! (int) $order->get_meta( '_cartiva_landing_id' ) ) {
 			return $url;
 		}
-		$landing_id = (int) $order->get_meta( '_cartiva_landing_id' );
-		if ( ! $landing_id ) {
-			return $url;
+		return self::final_url( $order, $url );
+	}
+
+	/**
+	 * The end of the buying journey for an order: the landing page's
+	 * thank-you page or funnel step, else WooCommerce's order received page.
+	 *
+	 * @param WC_Order    $order    Order.
+	 * @param string|null $fallback WooCommerce's URL, when already known.
+	 * @return string
+	 */
+	public static function final_url( $order, $fallback = null ) {
+		$page = self::thankyou_target( (int) $order->get_meta( '_cartiva_landing_id' ) );
+		if ( $page ) {
+			return add_query_arg(
+				array(
+					'cartiva_order' => $order->get_id(),
+					'key'           => $order->get_order_key(),
+				),
+				get_permalink( $page )
+			);
 		}
-		$page = self::thankyou_target( $landing_id );
-		if ( ! $page ) {
-			return $url;
+		if ( null !== $fallback ) {
+			return $fallback;
 		}
-		return add_query_arg(
-			array(
-				'cartiva_order' => $order->get_id(),
-				'key'           => $order->get_order_key(),
-			),
-			get_permalink( $page )
-		);
+		return add_query_arg( 'key', $order->get_order_key(), wc_get_endpoint_url( 'order-received', (string) $order->get_id(), wc_get_checkout_url() ) );
 	}
 
 	/**
@@ -221,7 +232,7 @@ class Cartiva_Commerce_Checkout {
 			return $content;
 		}
 		$landing_id = (int) $order->get_meta( '_cartiva_landing_id' );
-		if ( ! $landing_id || self::thankyou_target( $landing_id ) !== (int) get_the_ID() ) {
+		if ( ! $landing_id || self::thankyou_target( $landing_id ) !== (int) get_the_ID() || has_block( 'cartiva-commerce/order-details', (int) get_the_ID() ) ) {
 			return $content;
 		}
 		ob_start();

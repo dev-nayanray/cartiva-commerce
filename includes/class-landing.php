@@ -360,6 +360,30 @@ class Cartiva_Commerce_Landing {
 				</tr>
 			</table>
 
+			<h3><?php esc_html_e( 'Upsell or downsell offer', 'cartiva-commerce' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'Only for pages used as an Upsell or Downsell step in a funnel. Buyers see the offer right after their order, and one click adds it to the same order. Works with Cash on delivery, bank transfer and check payments; orders paid another way skip the offer.', 'cartiva-commerce' ); ?></p>
+			<?php $offer = Cartiva_Commerce_Upsells::offer( $post->ID ); ?>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Offer product', 'cartiva-commerce' ); ?></th>
+					<td><?php self::product_select( 'cartiva_landing[offer][item]', $offer, __( 'Offer product', 'cartiva-commerce' ) ); ?></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-offer-qty"><?php esc_html_e( 'Quantity and discount', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-offer-qty" type="number" min="1" max="99" class="small-text" name="cartiva_landing[offer][qty]" value="<?php echo esc_attr( (string) $offer['qty'] ); ?>" />
+						<label class="cartiva-inline"><?php esc_html_e( 'Discount %', 'cartiva-commerce' ); ?> <input type="number" min="0" max="90" step="0.5" class="small-text" name="cartiva_landing[offer][discount]" value="<?php echo esc_attr( (string) $offer['discount'] ); ?>" /></label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-offer-yes"><?php esc_html_e( 'Button texts', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-offer-yes" type="text" class="regular-text" name="cartiva_landing[offer][yes_label]" value="<?php echo esc_attr( $offer['yes_label'] ); ?>" placeholder="<?php esc_attr_e( 'Yes, add it to my order', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'Yes button', 'cartiva-commerce' ); ?>" />
+						<input type="text" class="regular-text" name="cartiva_landing[offer][no_label]" value="<?php echo esc_attr( $offer['no_label'] ); ?>" placeholder="<?php esc_attr_e( 'No thanks, I don\'t want this offer', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'No button', 'cartiva-commerce' ); ?>" />
+					</td>
+				</tr>
+			</table>
+
 			<h3><?php esc_html_e( 'Payment', 'cartiva-commerce' ); ?></h3>
 			<table class="form-table" role="presentation">
 				<tr>
@@ -481,7 +505,18 @@ class Cartiva_Commerce_Landing {
 				)
 			);
 		}
-		$first = $offers ? $offers[0] : array(
+		$offer_raw = isset( $raw['offer'] ) && is_array( $raw['offer'] ) ? $raw['offer'] : array();
+		$offer_ids = self::resolve_item( isset( $offer_raw['item'] ) ? $offer_raw['item'] : 0 );
+		$offer     = $offer_ids ? array_merge(
+			$offer_ids,
+			array(
+				'qty'       => isset( $offer_raw['qty'] ) ? max( 1, min( 99, absint( $offer_raw['qty'] ) ) ) : 1,
+				'discount'  => isset( $offer_raw['discount'] ) ? (float) max( 0, min( 90, round( (float) $offer_raw['discount'], 1 ) ) ) : 0.0,
+				'yes_label' => isset( $offer_raw['yes_label'] ) ? sanitize_text_field( $offer_raw['yes_label'] ) : '',
+				'no_label'  => isset( $offer_raw['no_label'] ) ? sanitize_text_field( $offer_raw['no_label'] ) : '',
+			)
+		) : array();
+		$first     = $offers ? $offers[0] : array(
 			'product_id'   => 0,
 			'variation_id' => 0,
 			'qty'          => 1,
@@ -496,6 +531,7 @@ class Cartiva_Commerce_Landing {
 			'offers'       => $offers,
 			'bumps'        => $bumps,
 			'layout'       => in_array( $layout, array( 'one', 'two', 'steps' ), true ) ? $layout : 'one',
+			'offer'        => $offer,
 			'gateways'     => array_values( array_intersect( $gateways, $enabled ) ),
 			'preset'       => isset( $presets[ $preset ] ) ? $preset : 'bd_cod',
 			'fields'       => Cartiva_Commerce_Fields::sanitize_config( isset( $raw['fields'] ) ? $raw['fields'] : array() ),
