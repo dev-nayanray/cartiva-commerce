@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Cartiva Commerce
  * Plugin URI:        https://godevs.net/plugins/cartiva-commerce/
- * Description:       Sales funnels and single product landing pages with a one-page checkout, product options, order bumps, one-click upsells and downsells, A/B tests, analytics, pixel tracking, checkout field editor (per landing page and for the main checkout), and a Buy now button for WooCommerce. Free, fast and theme-independent; designed to match the Cartiva theme.
- * Version:           1.3.0
+ * Description:       Sales funnels and single product landing pages with a one-page checkout, product options, order bumps, one-click upsells and downsells, A/B tests, analytics, pixel tracking, abandoned checkout recovery, checkout field editor (per landing page and for the main checkout), and a Buy now button for WooCommerce. Free, fast and theme-independent; designed to match the Cartiva theme.
+ * Version:           1.4.0
  * Requires at least: 6.9
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CARTIVA_COMMERCE_VERSION', '1.3.0' );
+define( 'CARTIVA_COMMERCE_VERSION', '1.4.0' );
 define( 'CARTIVA_COMMERCE_FILE', __FILE__ );
 define( 'CARTIVA_COMMERCE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CARTIVA_COMMERCE_URL', plugin_dir_url( __FILE__ ) );
@@ -61,6 +61,8 @@ function cartiva_commerce_init() {
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-analytics.php';
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-ab-test.php';
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-tracking.php';
+	require_once CARTIVA_COMMERCE_DIR . 'includes/class-recovery.php';
+	require_once CARTIVA_COMMERCE_DIR . 'includes/class-recovery-admin.php';
 
 	Cartiva_Commerce_Settings::init();
 	Cartiva_Commerce_Buy_Now::init();
@@ -74,6 +76,8 @@ function cartiva_commerce_init() {
 	Cartiva_Commerce_Analytics::init();
 	Cartiva_Commerce_AB_Test::init();
 	Cartiva_Commerce_Tracking::init();
+	Cartiva_Commerce_Recovery::init();
+	Cartiva_Commerce_Recovery_Admin::init();
 }
 add_action( 'plugins_loaded', 'cartiva_commerce_init', 20 );
 
@@ -99,6 +103,7 @@ register_activation_hook( __FILE__, 'cartiva_commerce_activate' );
  * Clean up rewrite rules on deactivation.
  */
 function cartiva_commerce_deactivate() {
+	wp_clear_scheduled_hook( 'cartiva_commerce_recovery_cron' );
 	flush_rewrite_rules();
 }
 register_deactivation_hook( __FILE__, 'cartiva_commerce_deactivate' );

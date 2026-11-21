@@ -102,6 +102,27 @@ class Cartiva_Commerce_Settings {
 			$output['main_fields'] = Cartiva_Commerce_Fields::sanitize_config( isset( $input['main']['fields'] ) ? $input['main']['fields'] : array() );
 			$output['main_bd_phone'] = ! empty( $input['main_bd_phone'] );
 			$output['main_coupon']   = ! empty( $input['main_coupon'] );
+		} elseif ( 'recovery' === $tab ) {
+			$output['recovery']       = ! empty( $input['recovery'] );
+			$output['recovery_main']  = ! empty( $input['recovery_main'] );
+			$output['recovery_after'] = isset( $input['recovery_after'] ) ? max( 10, min( 1440, absint( $input['recovery_after'] ) ) ) : 30;
+			$output['recovery_keep']  = isset( $input['recovery_keep'] ) ? max( 1, min( 365, absint( $input['recovery_keep'] ) ) ) : 30;
+			$output['recovery_note']  = isset( $input['recovery_note'] ) ? sanitize_text_field( $input['recovery_note'] ) : '';
+			$output['coupon_percent'] = isset( $input['coupon_percent'] ) ? max( 1, min( 90, absint( $input['coupon_percent'] ) ) ) : 10;
+			$output['coupon_days']    = isset( $input['coupon_days'] ) ? max( 1, min( 60, absint( $input['coupon_days'] ) ) ) : 3;
+			$output['whatsapp_text']  = isset( $input['whatsapp_text'] ) ? sanitize_textarea_field( $input['whatsapp_text'] ) : '';
+			$emails                   = array();
+			foreach ( Cartiva_Commerce_Recovery::default_emails() as $i => $default ) {
+				$row          = isset( $input['emails'][ $i ] ) && is_array( $input['emails'][ $i ] ) ? $input['emails'][ $i ] : array();
+				$emails[ $i ] = array(
+					'enabled' => ! empty( $row['enabled'] ),
+					'hours'   => isset( $row['hours'] ) ? max( 0.5, min( 720, round( (float) $row['hours'], 1 ) ) ) : $default['hours'],
+					'subject' => isset( $row['subject'] ) && '' !== trim( $row['subject'] ) ? sanitize_text_field( $row['subject'] ) : $default['subject'],
+					'body'    => isset( $row['body'] ) && '' !== trim( $row['body'] ) ? sanitize_textarea_field( $row['body'] ) : $default['body'],
+					'coupon'  => ! empty( $row['coupon'] ),
+				);
+			}
+			$output['emails'] = $emails;
 		} elseif ( 'tracking' === $tab ) {
 			$fb                     = isset( $input['fb_pixel'] ) ? preg_replace( '/\D/', '', (string) $input['fb_pixel'] ) : '';
 			$ga                     = isset( $input['ga4_id'] ) ? strtoupper( trim( (string) $input['ga4_id'] ) ) : '';
@@ -180,7 +201,7 @@ class Cartiva_Commerce_Settings {
 		}
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab switch only.
 		$tab      = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
-		$tab      = in_array( $tab, array( 'general', 'fields', 'tracking' ), true ) ? $tab : 'general';
+		$tab      = in_array( $tab, array( 'general', 'fields', 'tracking', 'recovery' ), true ) ? $tab : 'general';
 		$settings = cartiva_commerce_settings();
 		?>
 		<div class="wrap cartiva-commerce-admin">
@@ -188,6 +209,7 @@ class Cartiva_Commerce_Settings {
 			<nav class="nav-tab-wrapper">
 				<a href="<?php echo esc_url( self::url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'General', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'fields' ) ); ?>" class="nav-tab<?php echo 'fields' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main checkout fields', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( self::url( 'recovery' ) ); ?>" class="nav-tab<?php echo 'recovery' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Recovery', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'tracking' ) ); ?>" class="nav-tab<?php echo 'tracking' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Tracking', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>" class="nav-tab"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
 			</nav>
@@ -204,7 +226,28 @@ class Cartiva_Commerce_Settings {
 				<?php
 				if ( 'fields' === $tab ) {
 					self::render_fields_tab( $settings );
-				} elseif ( 'tracking' === $tab ) {
+				} elseif ( 'recovery' === $tab ) {
+			$output['recovery']       = ! empty( $input['recovery'] );
+			$output['recovery_main']  = ! empty( $input['recovery_main'] );
+			$output['recovery_after'] = isset( $input['recovery_after'] ) ? max( 10, min( 1440, absint( $input['recovery_after'] ) ) ) : 30;
+			$output['recovery_keep']  = isset( $input['recovery_keep'] ) ? max( 1, min( 365, absint( $input['recovery_keep'] ) ) ) : 30;
+			$output['recovery_note']  = isset( $input['recovery_note'] ) ? sanitize_text_field( $input['recovery_note'] ) : '';
+			$output['coupon_percent'] = isset( $input['coupon_percent'] ) ? max( 1, min( 90, absint( $input['coupon_percent'] ) ) ) : 10;
+			$output['coupon_days']    = isset( $input['coupon_days'] ) ? max( 1, min( 60, absint( $input['coupon_days'] ) ) ) : 3;
+			$output['whatsapp_text']  = isset( $input['whatsapp_text'] ) ? sanitize_textarea_field( $input['whatsapp_text'] ) : '';
+			$emails                   = array();
+			foreach ( Cartiva_Commerce_Recovery::default_emails() as $i => $default ) {
+				$row          = isset( $input['emails'][ $i ] ) && is_array( $input['emails'][ $i ] ) ? $input['emails'][ $i ] : array();
+				$emails[ $i ] = array(
+					'enabled' => ! empty( $row['enabled'] ),
+					'hours'   => isset( $row['hours'] ) ? max( 0.5, min( 720, round( (float) $row['hours'], 1 ) ) ) : $default['hours'],
+					'subject' => isset( $row['subject'] ) && '' !== trim( $row['subject'] ) ? sanitize_text_field( $row['subject'] ) : $default['subject'],
+					'body'    => isset( $row['body'] ) && '' !== trim( $row['body'] ) ? sanitize_textarea_field( $row['body'] ) : $default['body'],
+					'coupon'  => ! empty( $row['coupon'] ),
+				);
+			}
+			$output['emails'] = $emails;
+		} elseif ( 'tracking' === $tab ) {
 					self::render_tracking_tab( $settings );
 				} else {
 					self::render_general_tab( $settings );
@@ -244,6 +287,80 @@ class Cartiva_Commerce_Settings {
 			<a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Funnels::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
 			<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a>
 		</p>
+		<?php
+	}
+
+	/**
+	 * Recovery tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_recovery_tab( $settings ) {
+		$emails = Cartiva_Commerce_Recovery::emails();
+		?>
+		<p class="description"><?php esc_html_e( 'When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Funnels > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back.', 'cartiva-commerce' ); ?></p>
+		<table class="form-table" role="presentation">
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Save abandoned checkouts', 'cartiva-commerce' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="cartiva_commerce_settings[recovery]" value="1" <?php checked( ! empty( $settings['recovery'] ) ); ?> /> <?php esc_html_e( 'On landing page order forms', 'cartiva-commerce' ); ?></label><br>
+					<label><input type="checkbox" name="cartiva_commerce_settings[recovery_main]" value="1" <?php checked( ! empty( $settings['recovery_main'] ) ); ?> /> <?php esc_html_e( 'Also on the main checkout (classic checkout only)', 'cartiva-commerce' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="cartiva-recovery-after"><?php esc_html_e( 'Abandoned after', 'cartiva-commerce' ); ?></label></th>
+				<td><input id="cartiva-recovery-after" type="number" min="10" max="1440" class="small-text" name="cartiva_commerce_settings[recovery_after]" value="<?php echo esc_attr( (string) $settings['recovery_after'] ); ?>" /> <?php esc_html_e( 'minutes without an order', 'cartiva-commerce' ); ?></td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="cartiva-recovery-keep"><?php esc_html_e( 'Delete entries after', 'cartiva-commerce' ); ?></label></th>
+				<td><input id="cartiva-recovery-keep" type="number" min="1" max="365" class="small-text" name="cartiva_commerce_settings[recovery_keep]" value="<?php echo esc_attr( (string) $settings['recovery_keep'] ); ?>" /> <?php esc_html_e( 'days', 'cartiva-commerce' ); ?></td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="cartiva-recovery-note"><?php esc_html_e( 'Notice on the form', 'cartiva-commerce' ); ?></label></th>
+				<td>
+					<input id="cartiva-recovery-note" type="text" class="large-text" name="cartiva_commerce_settings[recovery_note]" value="<?php echo esc_attr( (string) $settings['recovery_note'] ); ?>" placeholder="<?php esc_attr_e( 'We save the details you enter here so we can help you if your order is not finished.', 'cartiva-commerce' ); ?>" />
+					<p class="description"><?php esc_html_e( 'Shown under the details, so shoppers know their details are saved. Mention it in your privacy policy too.', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+		</table>
+
+		<h2><?php esc_html_e( 'Reminder emails', 'cartiva-commerce' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'Sent to shoppers who entered an email, in this order, counted from when the checkout became abandoned. They stop as soon as the shopper orders or clicks "Stop these reminders". Placeholders: {name} {products} {total} {button} {link} {coupon} {discount} {expires} {site}', 'cartiva-commerce' ); ?></p>
+		<?php foreach ( $emails as $i => $email ) : ?>
+			<?php $base = 'cartiva_commerce_settings[emails][' . $i . ']'; ?>
+			<fieldset class="cartiva-email-box">
+				<legend>
+					<label><input type="checkbox" name="<?php echo esc_attr( $base . '[enabled]' ); ?>" value="1" <?php checked( ! empty( $email['enabled'] ) ); ?> />
+					<?php
+					/* translators: %d: email number. */
+					echo esc_html( sprintf( __( 'Email %d', 'cartiva-commerce' ), $i + 1 ) );
+					?>
+					</label>
+				</legend>
+				<p>
+					<label><?php esc_html_e( 'Send after', 'cartiva-commerce' ); ?> <input type="number" min="0.5" max="720" step="0.5" class="small-text" name="<?php echo esc_attr( $base . '[hours]' ); ?>" value="<?php echo esc_attr( (string) $email['hours'] ); ?>" /> <?php esc_html_e( 'hours', 'cartiva-commerce' ); ?></label>
+					<label class="cartiva-inline"><input type="checkbox" name="<?php echo esc_attr( $base . '[coupon]' ); ?>" value="1" <?php checked( ! empty( $email['coupon'] ) ); ?> /> <?php esc_html_e( 'Include a one-time coupon', 'cartiva-commerce' ); ?></label>
+				</p>
+				<p><label class="cartiva-block-label"><?php esc_html_e( 'Subject', 'cartiva-commerce' ); ?><br><input type="text" class="large-text" name="<?php echo esc_attr( $base . '[subject]' ); ?>" value="<?php echo esc_attr( $email['subject'] ); ?>" /></label></p>
+				<p><label class="cartiva-block-label"><?php esc_html_e( 'Message', 'cartiva-commerce' ); ?><br><textarea class="large-text" rows="6" name="<?php echo esc_attr( $base . '[body]' ); ?>"><?php echo esc_textarea( $email['body'] ); ?></textarea></label></p>
+			</fieldset>
+		<?php endforeach; ?>
+
+		<h2><?php esc_html_e( 'Coupon', 'cartiva-commerce' ); ?></h2>
+		<table class="form-table" role="presentation">
+			<tr>
+				<th scope="row"><label for="cartiva-coupon-percent"><?php esc_html_e( 'Discount', 'cartiva-commerce' ); ?></label></th>
+				<td>
+					<input id="cartiva-coupon-percent" type="number" min="1" max="90" class="small-text" name="cartiva_commerce_settings[coupon_percent]" value="<?php echo esc_attr( (string) $settings['coupon_percent'] ); ?>" /> %
+					<label class="cartiva-inline"><?php esc_html_e( 'valid for', 'cartiva-commerce' ); ?> <input type="number" min="1" max="60" class="small-text" name="cartiva_commerce_settings[coupon_days]" value="<?php echo esc_attr( (string) $settings['coupon_days'] ); ?>" /> <?php esc_html_e( 'days', 'cartiva-commerce' ); ?></label>
+					<p class="description"><?php esc_html_e( 'Each shopper gets their own code, usable once, only with their email address. It is also applied automatically when they open the reminder link.', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+		</table>
+
+		<h2><?php esc_html_e( 'WhatsApp message', 'cartiva-commerce' ); ?></h2>
+		<p><textarea class="large-text" rows="3" name="cartiva_commerce_settings[whatsapp_text]" aria-label="<?php esc_attr_e( 'WhatsApp message', 'cartiva-commerce' ); ?>" placeholder="<?php echo esc_attr( Cartiva_Commerce_Recovery::default_whatsapp() ); ?>"><?php echo esc_textarea( (string) $settings['whatsapp_text'] ); ?></textarea></p>
+		<p class="description"><?php esc_html_e( 'Filled in when you click WhatsApp in the list, ready to send from your phone or WhatsApp Web. Placeholders: {name} {products} {total} {link} {site}', 'cartiva-commerce' ); ?></p>
 		<?php
 	}
 

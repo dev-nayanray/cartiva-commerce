@@ -1,15 +1,15 @@
 === Cartiva Commerce ===
 Contributors: godevs
-Tags: woocommerce, sales funnel, upsell, order bump, checkout fields
+Tags: woocommerce, sales funnel, upsell, abandoned cart, order bump
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sales funnels with one-click upsells, order bumps, A/B tests, analytics and pixel tracking, plus a checkout field editor for WooCommerce. All free.
+Sales funnels with one-click upsells, order bumps, abandoned checkout recovery, A/B tests, analytics and pixel tracking for WooCommerce. All free.
 
 == Description ==
 
@@ -33,6 +33,15 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 * Works with Cash on delivery, bank transfer and check. Orders paid another way skip the offers and go straight to the thank-you step.
 * Stock, order totals and order notes are updated, and the offer product is marked on the order.
 * **Order details** block for thank-you steps: order number, items, total, payment and delivery details, plus the payment method's instructions (for example your bank details).
+
+= Abandoned checkout recovery =
+
+* When shoppers enter their phone or email on an order form but do not order, they appear under **Cartiva Funnels > Abandoned checkouts** with their cart, a **Call** button and a **WhatsApp** button with a ready message.
+* Up to three **reminder emails** (after 1 hour, 24 hours and optionally 72 hours), with a "Finish my order" link that puts the cart back and fills in their details.
+* Optional **one-time coupon** in a reminder, locked to the shopper's email and applied automatically from the link.
+* An order from the same shopper (same session, phone or email) marks the checkout **Recovered**; see abandoned, recovered, recovery rate and recovered revenue for the last 30 days.
+* Privacy: a notice on the form, a "Stop these reminders" link in every email, automatic deletion after 30 days, and WordPress personal data export and erase.
+* Developers can send an SMS with the `cartiva_commerce_checkout_abandoned` action.
 
 = Analytics and A/B tests =
 
@@ -120,6 +129,14 @@ WooCommerce sends the order email when the order is placed, before the buyer see
 
 Two hours after the order, while it is pending, on hold or processing. Developers can change this with the `cartiva_commerce_offer_window` filter.
 
+= My customers rarely give an email. Does recovery still help? =
+
+Yes. Most order forms ask for a mobile number, and every abandoned checkout with a phone number shows Call and WhatsApp buttons. The WhatsApp message includes the shopper's name, products and the link that restores their order. Reminder emails go only to shoppers who entered an email.
+
+= Do reminder emails need a cron job? =
+
+They use WordPress's scheduled tasks, which run when your site has visitors. On low-traffic sites, set up a real cron job for wp-cron.php (most hosts have this in their control panel) so reminders go out on time.
+
 = Is the A/B test result reliable? =
 
 Wait until each version has about 30 orders or more. With fewer orders, differences are often luck. The page shows visits, orders, conversion and revenue for both versions since the test started.
@@ -160,8 +177,13 @@ Yes. Every feature is in this plugin. There is no pro version.
 4. The main checkout field editor.
 5. Funnel analytics with revenue per day.
 6. An A/B test with results for both versions.
+7. Abandoned checkouts with Call and WhatsApp buttons.
 
 == Changelog ==
+
+= 1.4.0 =
+* New: Abandoned checkout recovery: saved details with a notice on the form, list with Call and WhatsApp buttons, up to three reminder emails with a cart-restoring link, optional one-time coupon, recovered revenue.
+* New: Personal data export and erase for abandoned checkouts; uninstalling removes them.
 
 = 1.3.0 =
 * New: Analytics page with date ranges, per funnel and landing page results, bump and upsell acceptance, and revenue per day.
@@ -187,6 +209,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+Adds abandoned checkout recovery with reminder emails, coupons and WhatsApp follow-up.
 
 = 1.3.0 =
 Adds analytics, A/B tests and Facebook, GA4 and TikTok tracking.

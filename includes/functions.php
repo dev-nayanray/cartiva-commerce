@@ -16,6 +16,13 @@ if ( ! defined( 'CARTIVA_COMMERCE_LANDING' ) ) {
 	define( 'CARTIVA_COMMERCE_LANDING', 'cartiva_landing' );
 }
 
+if ( ! defined( 'CARTIVA_COMMERCE_RECOVERY' ) ) {
+	/**
+	 * Abandoned checkout post type name.
+	 */
+	define( 'CARTIVA_COMMERCE_RECOVERY', 'cartiva_recovery' );
+}
+
 if ( ! defined( 'CARTIVA_COMMERCE_FUNNEL' ) ) {
 	/**
 	 * Funnel post type name.
@@ -40,6 +47,15 @@ function cartiva_commerce_settings() {
 		'ga4_id'         => '',
 		'tiktok_pixel'   => '',
 		'track_store'    => false,
+		'recovery'       => true,
+		'recovery_main'  => false,
+		'recovery_after' => 30,
+		'recovery_keep'  => 30,
+		'recovery_note'  => '',
+		'emails'         => array(),
+		'coupon_percent' => 10,
+		'coupon_days'    => 3,
+		'whatsapp_text'  => '',
 	);
 	$saved    = get_option( 'cartiva_commerce_settings', array() );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -390,4 +406,51 @@ function cartiva_commerce_visits_between( $landing_id, $from = '', $to = '' ) {
 		}
 	}
 	return $total;
+}
+
+/**
+ * A phone number in international digits for WhatsApp links (wa.me).
+ * Local numbers starting with 0 get the store country's calling code
+ * (Bangladesh: 01712345678 becomes 8801712345678).
+ *
+ * @param string $phone   Phone number.
+ * @param string $country Store country code.
+ * @return string Digits, or '' when too short.
+ */
+function cartiva_commerce_whatsapp_number( $phone, $country = '' ) {
+	$raw    = trim( (string) $phone );
+	$digits = preg_replace( '/\D/', '', $raw );
+	if ( 0 === strpos( $raw, '+' ) || 0 === strpos( $digits, '00' ) ) {
+		$digits = ltrim( $digits, '0' );
+	} elseif ( 0 === strpos( $digits, '0' ) ) {
+		$codes  = array(
+			'BD' => '880',
+			'IN' => '91',
+			'PK' => '92',
+			'NP' => '977',
+			'LK' => '94',
+			'GB' => '44',
+			'MY' => '60',
+			'AE' => '971',
+			'SA' => '966',
+		);
+		$code   = isset( $codes[ strtoupper( (string) $country ) ] ) ? $codes[ strtoupper( (string) $country ) ] : '';
+		$digits = '' !== $code ? $code . substr( $digits, 1 ) : $digits;
+	}
+	return strlen( $digits ) >= 10 ? $digits : '';
+}
+
+/**
+ * Fill {placeholders} in a message.
+ *
+ * @param string $text   Text.
+ * @param array  $values Placeholder => value.
+ * @return string
+ */
+function cartiva_commerce_fill( $text, $values ) {
+	$pairs = array();
+	foreach ( $values as $key => $value ) {
+		$pairs[ '{' . $key . '}' ] = (string) $value;
+	}
+	return strtr( (string) $text, $pairs );
 }

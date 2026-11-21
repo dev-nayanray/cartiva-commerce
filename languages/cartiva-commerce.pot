@@ -9,7 +9,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: cartiva-commerce\n"
 
-#: cartiva-commerce.php:87
+#: cartiva-commerce.php:91
 msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-settings.php:158 includes/class-funnels.php:436
+#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-settings.php:179 includes/class-funnels.php:436
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -117,6 +117,96 @@ msgstr ""
 
 #: includes/class-ab-test.php:428
 msgid "Wait for enough orders before choosing: with fewer than about 30 orders per version, differences are often luck. When B wins, its content and settings move to this page, so the address, funnel position and history stay. The old version is kept as a revision."
+msgstr ""
+
+#: includes/class-recovery.php:65
+msgid "You left something in your cart"
+msgstr ""
+
+#: includes/class-recovery.php:66
+msgid "Hi {name},\n\nYou were about to order {products}. Your order is not finished yet, and we saved it for you.\n\n{button}\n\nIf you have a question, just reply to this email.\n\n{site}"
+msgstr ""
+
+#: includes/class-recovery.php:72
+msgid "Your order is still waiting"
+msgstr ""
+
+#: includes/class-recovery.php:73
+msgid "Hi {name},\n\nYour cart with {products} ({total}) is still saved. Finish your order in one click:\n\n{button}\n\n{site}"
+msgstr ""
+
+#: includes/class-recovery.php:79
+msgid "A little gift to finish your order"
+msgstr ""
+
+#: includes/class-recovery.php:80
+msgid "Hi {name},\n\nHere is {discount} off your order with the code {coupon}. It is valid until {expires}.\n\n{button}\n\n{site}"
+msgstr ""
+
+#: includes/class-recovery.php:106
+msgid "Hello {name}, this is {site}. We saw your order for {products} was not finished. Can we help you complete it? {link}"
+msgstr ""
+
+#: includes/class-recovery.php:117 includes/class-recovery.php:119 includes/class-recovery.php:120 includes/class-recovery.php:872
+msgid "Abandoned checkouts"
+msgstr ""
+
+#: includes/class-recovery.php:118 includes/class-recovery.php:121
+msgid "Abandoned checkout"
+msgstr ""
+
+#: includes/class-recovery.php:122
+msgid "Search abandoned checkouts"
+msgstr ""
+
+#: includes/class-recovery.php:123
+msgid "No abandoned checkouts yet."
+msgstr ""
+
+#: includes/class-recovery.php:155
+msgid "Every 15 minutes"
+msgstr ""
+
+#: includes/class-recovery.php:210 includes/class-settings.php:321
+msgid "We save the details you enter here so we can help you if your order is not finished."
+msgstr ""
+
+#. translators: %d: abandoned checkout ID.
+#: includes/class-recovery.php:438
+msgid "Recovered abandoned checkout #%d."
+msgstr ""
+
+#: includes/class-recovery.php:511
+msgid "You will not get more reminders about this order."
+msgstr ""
+
+#. translators: %d: abandoned checkout ID.
+#: includes/class-recovery.php:701
+msgid "Cartiva Commerce: reminder coupon for abandoned checkout #%d"
+msgstr ""
+
+#: includes/class-recovery.php:722
+msgid "there"
+msgstr ""
+
+#: includes/class-recovery.php:725
+msgid "your items"
+msgstr ""
+
+#: includes/class-recovery.php:758
+msgid "Finish my order"
+msgstr ""
+
+#: includes/class-recovery.php:765
+msgid "Stop these reminders"
+msgstr ""
+
+#: includes/class-recovery.php:804 includes/class-recovery.php:818
+msgid "Cartiva Commerce abandoned checkouts"
+msgstr ""
+
+#: includes/class-recovery.php:867 includes/class-landing.php:289
+msgid "Products"
 msgstr ""
 
 #: includes/class-order-form.php:54
@@ -216,7 +306,7 @@ msgstr ""
 msgid "Postcode / ZIP"
 msgstr ""
 
-#: includes/class-fields.php:38
+#: includes/class-fields.php:38 includes/class-recovery-admin.php:297
 msgid "Phone"
 msgstr ""
 
@@ -277,7 +367,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: includes/class-buy-now.php:48 includes/class-settings.php:236
+#: includes/class-buy-now.php:48 includes/class-settings.php:279
 msgid "Buy now"
 msgstr ""
 
@@ -349,7 +439,7 @@ msgstr ""
 msgid "Product name"
 msgstr ""
 
-#: includes/class-landing.php:220 includes/class-landing.php:308 includes/class-settings.php:371
+#: includes/class-landing.php:220 includes/class-landing.php:308 includes/class-settings.php:488
 msgid "Label"
 msgstr ""
 
@@ -431,10 +521,6 @@ msgstr ""
 
 #: includes/class-landing.php:288
 msgid "Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step."
-msgstr ""
-
-#: includes/class-landing.php:289
-msgid "Products"
 msgstr ""
 
 #: includes/class-landing.php:292
@@ -553,7 +639,7 @@ msgstr ""
 msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
 msgstr ""
 
-#: includes/class-landing.php:435 includes/class-settings.php:304
+#: includes/class-landing.php:435 includes/class-settings.php:421
 msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
 msgstr ""
 
@@ -561,183 +647,439 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:187
+#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:208
 msgid "Cartiva Commerce"
 msgstr ""
 
 #. translators: %s: field name such as Facebook Pixel ID.
-#: includes/class-settings.php:116
+#: includes/class-settings.php:137
 msgid "The %s does not look right, so it was not saved."
 msgstr ""
 
-#: includes/class-settings.php:189
+#: includes/class-settings.php:210
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:190
+#: includes/class-settings.php:211
 msgid "Main checkout fields"
 msgstr ""
 
-#: includes/class-settings.php:191
+#: includes/class-settings.php:212
+msgid "Recovery"
+msgstr ""
+
+#: includes/class-settings.php:213
 msgid "Tracking"
 msgstr ""
 
-#: includes/class-settings.php:192 includes/class-funnels.php:59 includes/class-funnels.php:68
+#: includes/class-settings.php:214 includes/class-funnels.php:59 includes/class-funnels.php:68
 msgid "Funnels"
 msgstr ""
 
-#: includes/class-settings.php:199
+#: includes/class-settings.php:221
 msgid "Your checkout page now uses the classic checkout. The previous version is saved as a page revision."
 msgstr ""
 
-#: includes/class-settings.php:228
+#: includes/class-settings.php:271
 msgid "Buy now button"
 msgstr ""
 
-#: includes/class-settings.php:230
+#: includes/class-settings.php:273
 msgid "Show a Buy now button under Add to cart that goes straight to checkout"
 msgstr ""
 
-#: includes/class-settings.php:234
+#: includes/class-settings.php:277
 msgid "Buy now label"
 msgstr ""
 
-#: includes/class-settings.php:237
+#: includes/class-settings.php:280
 msgid "For example: Order now. Leave empty for \"Buy now\"."
 msgstr ""
 
-#: includes/class-settings.php:241 includes/class-analytics.php:396
+#: includes/class-settings.php:284 includes/class-analytics.php:396
 msgid "Funnels and landing pages"
 msgstr ""
 
-#: includes/class-settings.php:242
+#: includes/class-settings.php:285
 msgid "A funnel leads shoppers through steps: a sales page, a checkout and a thank-you page. A single landing page can also sell on its own, with the order form on the same page."
 msgstr ""
 
-#: includes/class-settings.php:244 includes/class-funnels.php:127
+#: includes/class-settings.php:287 includes/class-funnels.php:127
 msgid "Create a funnel from the template"
 msgstr ""
 
-#: includes/class-settings.php:245
+#: includes/class-settings.php:288
 msgid "Add a landing page"
 msgstr ""
 
-#: includes/class-settings.php:257
-msgid "Facebook (Meta) Pixel ID"
-msgstr ""
-
-#: includes/class-settings.php:257
-msgid "Events Manager > Data sources > your pixel. Numbers only."
-msgstr ""
-
-#: includes/class-settings.php:258
-msgid "Google Analytics 4 Measurement ID"
-msgstr ""
-
-#: includes/class-settings.php:258
-msgid "Admin > Data streams > your web stream."
-msgstr ""
-
-#: includes/class-settings.php:259
-msgid "TikTok Pixel ID"
-msgstr ""
-
-#: includes/class-settings.php:259
-msgid "TikTok Ads Manager > Assets > Events > Web events."
-msgstr ""
-
-#: includes/class-settings.php:262
-msgid "Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off."
-msgstr ""
-
-#: includes/class-settings.php:274
-msgid "Where"
-msgstr ""
-
-#: includes/class-settings.php:276
-msgid "Also track the rest of the store (product pages, main checkout and order received page)"
-msgstr ""
-
-#: includes/class-settings.php:277
-msgid "Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked."
-msgstr ""
-
-#: includes/class-settings.php:281
-msgid "Privacy: the pixels load services from Meta, Google and TikTok in your visitors' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies."
-msgstr ""
-
-#: includes/class-settings.php:294
-msgid "Your checkout page uses the WooCommerce Checkout block."
-msgstr ""
-
-#: includes/class-settings.php:295
-msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
-msgstr ""
-
-#: includes/class-settings.php:296
-msgid "Use the classic checkout"
-msgstr ""
-
 #: includes/class-settings.php:301
-msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
+msgid "When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Funnels > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back."
 msgstr ""
 
-#: includes/class-settings.php:308
-msgid "Show the \"Have a coupon?\" link on the main checkout"
+#: includes/class-settings.php:304
+msgid "Save abandoned checkouts"
+msgstr ""
+
+#: includes/class-settings.php:306
+msgid "On landing page order forms"
+msgstr ""
+
+#: includes/class-settings.php:307
+msgid "Also on the main checkout (classic checkout only)"
+msgstr ""
+
+#: includes/class-settings.php:311
+msgid "Abandoned after"
+msgstr ""
+
+#: includes/class-settings.php:312
+msgid "minutes without an order"
+msgstr ""
+
+#: includes/class-settings.php:315
+msgid "Delete entries after"
+msgstr ""
+
+#: includes/class-settings.php:316 includes/class-settings.php:355
+msgid "days"
+msgstr ""
+
+#: includes/class-settings.php:319
+msgid "Notice on the form"
+msgstr ""
+
+#: includes/class-settings.php:322
+msgid "Shown under the details, so shoppers know their details are saved. Mention it in your privacy policy too."
+msgstr ""
+
+#: includes/class-settings.php:327
+msgid "Reminder emails"
+msgstr ""
+
+#: includes/class-settings.php:328
+msgid "Sent to shoppers who entered an email, in this order, counted from when the checkout became abandoned. They stop as soon as the shopper orders or clicks \"Stop these reminders\". Placeholders: {name} {products} {total} {button} {link} {coupon} {discount} {expires} {site}"
+msgstr ""
+
+#. translators: %d: email number.
+#: includes/class-settings.php:336
+msgid "Email %d"
+msgstr ""
+
+#: includes/class-settings.php:341
+msgid "Send after"
+msgstr ""
+
+#: includes/class-settings.php:341
+msgid "hours"
+msgstr ""
+
+#: includes/class-settings.php:342
+msgid "Include a one-time coupon"
+msgstr ""
+
+#: includes/class-settings.php:344
+msgid "Subject"
+msgstr ""
+
+#: includes/class-settings.php:345
+msgid "Message"
 msgstr ""
 
 #: includes/class-settings.php:349
-msgid "Full width"
+msgid "Coupon"
 msgstr ""
 
-#: includes/class-settings.php:350
-msgid "Left half"
+#: includes/class-settings.php:352
+msgid "Discount"
 msgstr ""
 
-#: includes/class-settings.php:351
-msgid "Right half"
+#: includes/class-settings.php:355
+msgid "valid for"
 msgstr ""
 
 #: includes/class-settings.php:356
+msgid "Each shopper gets their own code, usable once, only with their email address. It is also applied automatically when they open the reminder link."
+msgstr ""
+
+#: includes/class-settings.php:361 includes/class-settings.php:362
+msgid "WhatsApp message"
+msgstr ""
+
+#: includes/class-settings.php:363
+msgid "Filled in when you click WhatsApp in the list, ready to send from your phone or WhatsApp Web. Placeholders: {name} {products} {total} {link} {site}"
+msgstr ""
+
+#: includes/class-settings.php:374
+msgid "Facebook (Meta) Pixel ID"
+msgstr ""
+
+#: includes/class-settings.php:374
+msgid "Events Manager > Data sources > your pixel. Numbers only."
+msgstr ""
+
+#: includes/class-settings.php:375
+msgid "Google Analytics 4 Measurement ID"
+msgstr ""
+
+#: includes/class-settings.php:375
+msgid "Admin > Data streams > your web stream."
+msgstr ""
+
+#: includes/class-settings.php:376
+msgid "TikTok Pixel ID"
+msgstr ""
+
+#: includes/class-settings.php:376
+msgid "TikTok Ads Manager > Assets > Events > Web events."
+msgstr ""
+
+#: includes/class-settings.php:379
+msgid "Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off."
+msgstr ""
+
+#: includes/class-settings.php:391
+msgid "Where"
+msgstr ""
+
+#: includes/class-settings.php:393
+msgid "Also track the rest of the store (product pages, main checkout and order received page)"
+msgstr ""
+
+#: includes/class-settings.php:394
+msgid "Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked."
+msgstr ""
+
+#: includes/class-settings.php:398
+msgid "Privacy: the pixels load services from Meta, Google and TikTok in your visitors' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies."
+msgstr ""
+
+#: includes/class-settings.php:411
+msgid "Your checkout page uses the WooCommerce Checkout block."
+msgstr ""
+
+#: includes/class-settings.php:412
+msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
+msgstr ""
+
+#: includes/class-settings.php:413
+msgid "Use the classic checkout"
+msgstr ""
+
+#: includes/class-settings.php:418
+msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
+msgstr ""
+
+#: includes/class-settings.php:425
+msgid "Show the \"Have a coupon?\" link on the main checkout"
+msgstr ""
+
+#: includes/class-settings.php:466
+msgid "Full width"
+msgstr ""
+
+#: includes/class-settings.php:467
+msgid "Left half"
+msgstr ""
+
+#: includes/class-settings.php:468
+msgid "Right half"
+msgstr ""
+
+#: includes/class-settings.php:473
 msgid "Form fields"
 msgstr ""
 
-#: includes/class-settings.php:364
+#: includes/class-settings.php:481
 msgid "Pick a preset, or change any field below to make it your own. Full name replaces First and Last name. Hidden fields are filled in automatically where needed (for example, the country is your store country)."
 msgstr ""
 
-#: includes/class-settings.php:368
+#: includes/class-settings.php:485
 msgid "Field"
 msgstr ""
 
-#: includes/class-settings.php:369 includes/class-analytics.php:381
+#: includes/class-settings.php:486 includes/class-analytics.php:381
 msgid "Show"
 msgstr ""
 
-#: includes/class-settings.php:370
+#: includes/class-settings.php:487
 msgid "Required"
 msgstr ""
 
-#: includes/class-settings.php:372
+#: includes/class-settings.php:489
 msgid "Placeholder"
 msgstr ""
 
-#: includes/class-settings.php:373
+#: includes/class-settings.php:490
 msgid "Width"
 msgstr ""
 
-#: includes/class-settings.php:374 includes/class-funnels.php:237
+#: includes/class-settings.php:491 includes/class-funnels.php:237
 msgid "Order"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:385
+#: includes/class-settings.php:502
 msgid "Show %s"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:386
+#: includes/class-settings.php:503
 msgid "%s is required"
+msgstr ""
+
+#: includes/class-recovery-admin.php:39
+msgid "Filling in"
+msgstr ""
+
+#: includes/class-recovery-admin.php:40
+msgid "Abandoned"
+msgstr ""
+
+#: includes/class-recovery-admin.php:41 includes/class-recovery-admin.php:259
+msgid "Recovered"
+msgstr ""
+
+#: includes/class-recovery-admin.php:42
+msgid "Ordered"
+msgstr ""
+
+#: includes/class-recovery-admin.php:55
+msgid "Customer"
+msgstr ""
+
+#: includes/class-recovery-admin.php:56
+msgid "Contact"
+msgstr ""
+
+#: includes/class-recovery-admin.php:57 includes/class-recovery-admin.php:314
+msgid "Cart"
+msgstr ""
+
+#: includes/class-recovery-admin.php:58
+msgid "Form"
+msgstr ""
+
+#: includes/class-recovery-admin.php:59 includes/class-recovery-admin.php:308
+msgid "Status"
+msgstr ""
+
+#: includes/class-recovery-admin.php:60
+msgid "Reminders"
+msgstr ""
+
+#: includes/class-recovery-admin.php:61
+msgid "Started"
+msgstr ""
+
+#: includes/class-recovery-admin.php:75
+msgid "Call"
+msgstr ""
+
+#: includes/class-recovery-admin.php:78
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/class-recovery-admin.php:107
+msgid "Main checkout"
+msgstr ""
+
+#. translators: %s: order number.
+#: includes/class-recovery-admin.php:118
+msgid "Order #%s"
+msgstr ""
+
+#: includes/class-recovery-admin.php:126
+msgid "Unsubscribed"
+msgstr ""
+
+#: includes/class-recovery-admin.php:145 includes/class-recovery-admin.php:281
+msgid "Details"
+msgstr ""
+
+#: includes/class-recovery-admin.php:176
+msgid "All"
+msgstr ""
+
+#: includes/class-recovery-admin.php:258
+msgid "Abandoned (30 days)"
+msgstr ""
+
+#: includes/class-recovery-admin.php:260
+msgid "Recovery rate"
+msgstr ""
+
+#: includes/class-recovery-admin.php:261
+msgid "Recovered revenue"
+msgstr ""
+
+#: includes/class-recovery-admin.php:269
+msgid "Saving abandoned checkouts is switched off."
+msgstr ""
+
+#: includes/class-recovery-admin.php:269 includes/class-recovery-admin.php:271
+msgid "Recovery settings"
+msgstr ""
+
+#: includes/class-recovery-admin.php:271
+msgid "A checkout counts as abandoned when no order follows within the time set in the recovery settings. Call or message the shopper, or let the reminder emails do it. Entries are deleted automatically after the keep period."
+msgstr ""
+
+#: includes/class-recovery-admin.php:296 includes/class-analytics.php:403
+msgid "Name"
+msgstr ""
+
+#: includes/class-recovery-admin.php:298
+msgid "Email"
+msgstr ""
+
+#: includes/class-recovery-admin.php:299
+msgid "Address"
+msgstr ""
+
+#: includes/class-recovery-admin.php:300
+msgid "Address line 2"
+msgstr ""
+
+#: includes/class-recovery-admin.php:301
+msgid "City"
+msgstr ""
+
+#: includes/class-recovery-admin.php:302
+msgid "District / state"
+msgstr ""
+
+#: includes/class-recovery-admin.php:303
+msgid "Postcode"
+msgstr ""
+
+#: includes/class-recovery-admin.php:316
+msgid "Recovery link"
+msgstr ""
+
+#: includes/class-recovery-admin.php:319
+msgid "Opening this link puts the products back in the cart and opens the order form with the details filled in. Send it by SMS or chat if you like."
+msgstr ""
+
+#: includes/class-recovery-admin.php:323
+msgid "Reminders sent"
+msgstr ""
+
+#: includes/class-recovery-admin.php:327
+msgid "None yet."
+msgstr ""
+
+#. translators: 1: reminder number, 2: date and time.
+#: includes/class-recovery-admin.php:331
+msgid "Email %1$d: %2$s"
+msgstr ""
+
+#. translators: %s: coupon code.
+#: includes/class-recovery-admin.php:337
+msgid "Coupon: %s"
+msgstr ""
+
+#: includes/class-recovery-admin.php:343
+msgid "All abandoned checkouts"
 msgstr ""
 
 #: includes/class-analytics.php:33 includes/class-analytics.php:371
@@ -794,10 +1136,6 @@ msgstr ""
 
 #: includes/class-analytics.php:398
 msgid "No published funnels or landing pages yet."
-msgstr ""
-
-#: includes/class-analytics.php:403
-msgid "Name"
 msgstr ""
 
 #: includes/class-analytics.php:409

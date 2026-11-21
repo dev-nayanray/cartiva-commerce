@@ -346,3 +346,6 @@
 .cartiva-order-details__items .is-total td { font-weight: 700; }
 .cartiva-order-details__address h3 { margin: 0 0 .4rem; font-size: 1rem; }
 .cartiva-order-details__address address { font-style: normal; line-height: 1.6; }
+
+/* Notice that details are saved */
+.cartiva-capture-note { margin: .25rem 0 1rem; color: var(--cof-muted, #6b6b6b); font-size: .82rem; }
