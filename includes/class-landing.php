@@ -114,16 +114,19 @@ class Cartiva_Commerce_Landing {
 		if ( ! function_exists( 'register_block_template' ) || ! wp_is_block_theme() ) {
 			return;
 		}
+		// Themes with a distraction-free landing header and footer (Cartiva has them) get those.
+		$header = file_exists( get_theme_file_path( 'parts/landing-header.html' ) ) ? 'landing-header' : 'header';
+		$footer = file_exists( get_theme_file_path( 'parts/landing-footer.html' ) ) ? 'landing-footer' : 'footer';
 		register_block_template(
 			'cartiva-commerce//single-' . CARTIVA_COMMERCE_LANDING,
 			array(
 				'title'       => __( 'Single landing page', 'cartiva-commerce' ),
 				'description' => __( 'Shows a Cartiva Commerce landing page at full width between the site header and footer.', 'cartiva-commerce' ),
-				'content'     => '<!-- wp:template-part {"slug":"header","tagName":"header"} /-->' . "\n"
+				'content'     => '<!-- wp:template-part {"slug":"' . $header . '","tagName":"header"} /-->' . "\n"
 					. '<!-- wp:group {"tagName":"main","align":"full","layout":{"type":"constrained"}} -->' . "\n"
 					. '<main class="wp-block-group alignfull"><!-- wp:post-content {"align":"full","layout":{"type":"constrained"}} /--></main>' . "\n"
 					. '<!-- /wp:group -->' . "\n"
-					. '<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->',
+					. '<!-- wp:template-part {"slug":"' . $footer . '","tagName":"footer"} /-->',
 				'post_types'  => array( CARTIVA_COMMERCE_LANDING ),
 			)
 		);

@@ -396,6 +396,16 @@ class Cartiva_Commerce_Funnels {
 			return '<!-- wp:paragraph {"align":"center"} --><p class="has-text-align-center">' . esc_html( $text ) . '</p><!-- /wp:paragraph -->';
 		};
 		$parts    = array();
+		// The Cartiva theme has ready-made designs for each step.
+		$theme_pattern = array(
+			'checkout' => 'funnel-checkout',
+			'upsell'   => 'funnel-upsell',
+			'downsell' => 'funnel-downsell',
+			'thankyou' => 'funnel-thankyou',
+		);
+		if ( isset( $theme_pattern[ $type ] ) && $has( $theme_pattern[ $type ] ) ) {
+			return '<!-- wp:pattern {"slug":"cartiva/' . $theme_pattern[ $type ] . '"} /-->';
+		}
 		if ( 'landing' === $type ) {
 			if ( $has( 'landing-hero' ) ) {
 				foreach ( array( 'landing-offer', 'landing-hero', 'landing-benefits', 'landing-steps', 'landing-comparison', 'landing-guarantee', 'landing-faq', 'landing-cta' ) as $slug ) {

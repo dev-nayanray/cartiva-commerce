@@ -82,8 +82,8 @@
 .cartiva-order-form .form-row { margin: 0 0 .85rem; padding: 0; }
 .cartiva-order-form .form-row label { display: block; margin-bottom: .3rem; font-weight: 600; font-size: .92rem; }
 .cartiva-order-form .form-row-first,
-.cartiva-order-form .form-row-last { width: calc(50% - .4rem); float: left; }
-.cartiva-order-form .form-row-last { float: right; }
+.cartiva-order-form .form-row-last { width: calc(50% - .4rem); float: inline-start; }
+.cartiva-order-form .form-row-last { float: inline-end; }
 .cartiva-order-form .form-row-wide { clear: both; }
 .cartiva-order-form .woocommerce-billing-fields__field-wrapper::after { content: ""; display: table; clear: both; }
 .cartiva-order-form input.input-text,
@@ -105,9 +105,9 @@
 .cartiva-order-form select:focus { outline: 2px solid var(--cof-text); outline-offset: 1px; border-color: transparent; }
 .cartiva-order-form .woocommerce-checkout-review-order-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 .cartiva-order-form .woocommerce-checkout-review-order-table th,
-.cartiva-order-form .woocommerce-checkout-review-order-table td { padding: .55rem 0; border: 0; border-bottom: 1px solid var(--cof-border); text-align: left; }
+.cartiva-order-form .woocommerce-checkout-review-order-table td { padding: .55rem 0; border: 0; border-bottom: 1px solid var(--cof-border); text-align: start; }
 .cartiva-order-form .woocommerce-checkout-review-order-table td:last-child,
-.cartiva-order-form .woocommerce-checkout-review-order-table th:last-child { text-align: right; }
+.cartiva-order-form .woocommerce-checkout-review-order-table th:last-child { text-align: end; }
 .cartiva-order-form .woocommerce-checkout-review-order-table .order-total { font-size: 1.1rem; }
 .cartiva-order-form #payment { margin-top: 1rem; border-radius: 12px; background: var(--cof-surface); }
 .cartiva-order-form #payment ul.payment_methods { margin: 0; padding: 1rem; border-bottom: 1px solid var(--cof-border); list-style: none; }
@@ -132,7 +132,7 @@
 @media (max-width: 480px) {
 	.cartiva-order-form .form-row-first,
 	.cartiva-order-form .form-row-last { width: 100%; float: none; }
-	.cartiva-order-form__qty { margin-left: auto; }
+	.cartiva-order-form__qty { margin-inline-start: auto; }
 }
 
 /* Thank-you page summary */
@@ -164,13 +164,13 @@
 .cartiva-offer__name { font-weight: 700; line-height: 1.3; }
 .cartiva-offer__qty { color: var(--cof-muted); font-weight: 600; }
 .cartiva-offer__save { color: #0a7a33; font-size: .85rem; font-weight: 700; }
-.cartiva-offer__price { display: grid; justify-items: end; font-weight: 800; text-align: right; }
+.cartiva-offer__price { display: grid; justify-items: end; font-weight: 800; text-align: end; }
 .cartiva-offer__price del { color: var(--cof-muted); font-size: .85rem; font-weight: 400; }
 .cartiva-offer__price ins { text-decoration: none; }
 .cartiva-offer__badge {
 	position: absolute;
 	top: -.65rem;
-	right: .9rem;
+	inset-inline-end: .9rem;
 	padding: .15rem .6rem;
 	border-radius: 999px;
 	background: var(--cof-accent);
@@ -205,7 +205,7 @@
 .cartiva-bump__image img { display: block; width: 3.5rem; height: 3.5rem; border-radius: 8px; object-fit: cover; }
 .cartiva-bump__body p { margin: 0 0 .3rem; font-size: .92rem; }
 .cartiva-bump__price { font-weight: 800; }
-.cartiva-bump__price del { margin-right: .3rem; color: var(--cof-muted); font-weight: 400; }
+.cartiva-bump__price del { margin-inline-end: .3rem; color: var(--cof-muted); font-weight: 400; }
 
 /* Coupon */
 .cartiva-coupon { display: flex; gap: .5rem; margin: 0 0 1rem; }
@@ -276,7 +276,7 @@
 @media (max-width: 480px) {
 	.cartiva-offer { grid-template-columns: auto 2.75rem 1fr; }
 	.cartiva-offer__image img { width: 2.75rem; height: 2.75rem; }
-	.cartiva-offer__price { grid-column: 3; justify-items: start; text-align: left; }
+	.cartiva-offer__price { grid-column: 3; justify-items: start; text-align: start; }
 }
 
 /* Upsell / downsell offer */
@@ -298,7 +298,7 @@
 .cartiva-offer-box__info p { margin: 0 0 .6rem; }
 .cartiva-offer-box__name { font-size: 1.35rem; font-weight: 800; line-height: 1.25; }
 .cartiva-offer-box__price { font-size: 1.6rem; font-weight: 800; }
-.cartiva-offer-box__price del { margin-right: .4rem; color: var(--cof-muted); font-size: 1.05rem; font-weight: 400; }
+.cartiva-offer-box__price del { margin-inline-end: .4rem; color: var(--cof-muted); font-size: 1.05rem; font-weight: 400; }
 .cartiva-offer-box__price ins { color: var(--cof-accent); text-decoration: none; }
 .cartiva-offer-box__note { color: var(--cof-muted); font-size: .92rem; }
 .cartiva-offer-box__form { display: grid; gap: .6rem; margin: 1.5rem 0 0; }
@@ -339,8 +339,8 @@
 .cartiva-order-details__facts span { color: var(--cof-muted); font-size: .85rem; }
 .cartiva-order-details__items { width: 100%; margin: 0 0 1.5rem; border-collapse: collapse; }
 .cartiva-order-details__items th,
-.cartiva-order-details__items td { padding: .6rem 0; border: 0; border-bottom: 1px solid var(--cof-border); font-weight: 400; text-align: left; }
-.cartiva-order-details__items td { text-align: right; }
+.cartiva-order-details__items td { padding: .6rem 0; border: 0; border-bottom: 1px solid var(--cof-border); font-weight: 400; text-align: start; }
+.cartiva-order-details__items td { text-align: end; }
 .cartiva-order-details__items th span { color: var(--cof-muted); }
 .cartiva-order-details__items .is-total th,
 .cartiva-order-details__items .is-total td { font-weight: 700; }

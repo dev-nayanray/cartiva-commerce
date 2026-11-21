@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 
 * Adds a Buy now button next to Add to cart on product pages. It adds the product and goes straight to checkout.
 * Turn it on or off and change its label in **WooCommerce > Cartiva Commerce**.
+
+= Languages =
+
+* Bangla (bn_BD) translation included, for the shop front and the admin.
+* Right-to-left languages are supported (the cart slides in from the left).
 
 = Good to know =
 
@@ -198,6 +203,11 @@ Yes. Every feature is in this plugin. There is no pro version.
 
 == Changelog ==
 
+= 1.6.0 =
+* New: Bangla (bn_BD) translation.
+* New: Right-to-left language support for the order form and slide-out cart.
+* New: With the Cartiva theme, funnel templates use its step designs, landing pages use its distraction-free header and footer, and the theme's header and mobile bar carts open the slide-out cart.
+
 = 1.5.0 =
 * New: Slide-out cart with quantity changes, remove, cross-sell suggestions, optional floating button and header link takeover.
 * New: Free shipping progress bar (drawer, cart and checkout).
@@ -232,6 +242,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.6.0 =
+Adds the Bangla translation, right-to-left support and better integration with the Cartiva theme.
 
 = 1.5.0 =
 Adds a slide-out cart, free shipping bar, BOGO deals and coupons that apply themselves.

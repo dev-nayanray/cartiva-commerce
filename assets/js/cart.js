@@ -107,6 +107,16 @@
 		}
 	} );
 
+	// Theme cart buttons marked for the drawer (the Cartiva theme marks its header and mobile bar carts).
+	document.addEventListener( 'click', function ( event ) {
+		var trigger = event.target.closest ? event.target.closest( '[data-cartiva-open-cart]' ) : null;
+		if ( trigger && ! trigger.closest( '#cartiva-side-cart' ) ) {
+			event.preventDefault();
+			event.stopPropagation();
+			open();
+		}
+	}, true );
+
 	// Optional: links to the cart page open the drawer instead.
 	if ( settings.links ) {
 		document.addEventListener( 'click', function ( event ) {

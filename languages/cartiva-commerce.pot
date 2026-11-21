@@ -9,27 +9,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: cartiva-commerce\n"
 
-#: cartiva-commerce.php:95
+#: cartiva-commerce.php:96
 msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
 msgstr ""
 
-#: includes/class-stats.php:37 includes/class-landing.php:249 includes/class-landing.php:332
+#: includes/class-stats.php:37 includes/class-landing.php:252 includes/class-landing.php:335
 msgid "Product"
 msgstr ""
 
-#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:265 includes/class-funnels.php:545
+#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:265 includes/class-funnels.php:555
 msgid "Visits"
 msgstr ""
 
-#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:266 includes/class-funnels.php:546
+#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:266 includes/class-funnels.php:556
 msgid "Orders"
 msgstr ""
 
-#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:267 includes/class-funnels.php:547
+#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:267 includes/class-funnels.php:557
 msgid "Revenue"
 msgstr ""
 
-#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:268 includes/class-funnels.php:548
+#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:268 includes/class-funnels.php:558
 msgid "Conversion"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-settings.php:212 includes/class-funnels.php:436
+#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-settings.php:212 includes/class-funnels.php:446
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Cartiva Commerce abandoned checkouts"
 msgstr ""
 
-#: includes/class-recovery.php:867 includes/class-landing.php:289
+#: includes/class-recovery.php:867 includes/class-landing.php:292
 msgid "Products"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgstr ""
 msgid "Your details"
 msgstr ""
 
-#: includes/class-order-form.php:56 includes/class-landing.php:387 includes/class-upsells.php:395
+#: includes/class-order-form.php:56 includes/class-landing.php:390 includes/class-upsells.php:395
 msgid "Payment"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Decrease quantity"
 msgstr ""
 
-#: includes/class-order-form.php:139 includes/class-landing.php:219
+#: includes/class-order-form.php:139 includes/class-landing.php:222
 msgid "Quantity"
 msgstr ""
 
@@ -432,7 +432,7 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: includes/class-cart.php:304 includes/class-funnels.php:44 includes/class-funnels.php:452
+#: includes/class-cart.php:304 includes/class-funnels.php:44 includes/class-funnels.php:462
 msgid "Checkout"
 msgstr ""
 
@@ -492,239 +492,239 @@ msgstr ""
 msgid "No landing pages in the trash."
 msgstr ""
 
-#: includes/class-landing.php:100 includes/class-funnels.php:407
+#: includes/class-landing.php:100 includes/class-funnels.php:417
 msgid "Your product headline"
 msgstr ""
 
-#: includes/class-landing.php:103 includes/class-funnels.php:408
+#: includes/class-landing.php:103 includes/class-funnels.php:418
 msgid "Say in one or two sentences what the product does and why it is worth buying."
 msgstr ""
 
-#: includes/class-landing.php:120
+#: includes/class-landing.php:123
 msgid "Single landing page"
 msgstr ""
 
-#: includes/class-landing.php:121
+#: includes/class-landing.php:124
 msgid "Shows a Cartiva Commerce landing page at full width between the site header and footer."
 msgstr ""
 
-#: includes/class-landing.php:138
+#: includes/class-landing.php:141
 msgid "Landing page: product and order form"
 msgstr ""
 
-#: includes/class-landing.php:190
+#: includes/class-landing.php:193
 msgid "Search for a product or a variation"
 msgstr ""
 
-#: includes/class-landing.php:218 includes/class-landing.php:306
+#: includes/class-landing.php:221 includes/class-landing.php:309
 msgid "Product or variation"
 msgstr ""
 
-#: includes/class-landing.php:220
+#: includes/class-landing.php:223
 msgid "Product name"
 msgstr ""
 
-#: includes/class-landing.php:220 includes/class-landing.php:308 includes/class-settings.php:674
+#: includes/class-landing.php:223 includes/class-landing.php:311 includes/class-settings.php:674
 msgid "Label"
 msgstr ""
 
-#: includes/class-landing.php:221 includes/class-landing.php:254 includes/class-landing.php:309 includes/class-landing.php:334 includes/class-landing.php:375
+#: includes/class-landing.php:224 includes/class-landing.php:257 includes/class-landing.php:312 includes/class-landing.php:337 includes/class-landing.php:378
 msgid "Discount %"
 msgstr ""
 
-#: includes/class-landing.php:222
+#: includes/class-landing.php:225
 msgid "Best value"
 msgstr ""
 
-#: includes/class-landing.php:222 includes/class-landing.php:310
+#: includes/class-landing.php:225 includes/class-landing.php:313
 msgid "Badge"
 msgstr ""
 
-#: includes/class-landing.php:223 includes/class-landing.php:311
+#: includes/class-landing.php:226 includes/class-landing.php:314
 msgid "Selected first"
 msgstr ""
 
-#: includes/class-landing.php:224 includes/class-landing.php:262 includes/class-landing.php:312 includes/class-landing.php:337 includes/class-settings.php:399 includes/class-settings.php:459 includes/class-funnels.php:213
+#: includes/class-landing.php:227 includes/class-landing.php:265 includes/class-landing.php:315 includes/class-landing.php:340 includes/class-settings.php:399 includes/class-settings.php:459 includes/class-funnels.php:213
 msgid "Remove"
 msgstr ""
 
-#: includes/class-landing.php:251 includes/class-landing.php:381 includes/class-upsells.php:349
+#: includes/class-landing.php:254 includes/class-landing.php:384 includes/class-upsells.php:349
 msgid "Yes, add it to my order"
 msgstr ""
 
-#: includes/class-landing.php:251
+#: includes/class-landing.php:254
 msgid "Tick box text"
 msgstr ""
 
-#: includes/class-landing.php:252
+#: includes/class-landing.php:255
 msgid "One line on why it is worth adding"
 msgstr ""
 
-#: includes/class-landing.php:252
+#: includes/class-landing.php:255
 msgid "Description"
 msgstr ""
 
-#: includes/class-landing.php:255 includes/class-landing.php:335
+#: includes/class-landing.php:258 includes/class-landing.php:338
 msgid "Show when the order is at least"
 msgstr ""
 
-#: includes/class-landing.php:257 includes/class-landing.php:336
+#: includes/class-landing.php:260 includes/class-landing.php:339
 msgid "Position"
 msgstr ""
 
-#: includes/class-landing.php:258
+#: includes/class-landing.php:261
 msgid "Above payment"
 msgstr ""
 
-#: includes/class-landing.php:259
+#: includes/class-landing.php:262
 msgid "Below the address"
 msgstr ""
 
-#: includes/class-landing.php:277
+#: includes/class-landing.php:280
 msgid "One product (shoppers can change the quantity)"
 msgstr ""
 
-#: includes/class-landing.php:278
+#: includes/class-landing.php:281
 msgid "Shoppers pick one option, for example 1, 2 or 3 pieces"
 msgstr ""
 
-#: includes/class-landing.php:279
+#: includes/class-landing.php:282
 msgid "Shoppers pick one or more products"
 msgstr ""
 
-#: includes/class-landing.php:282
+#: includes/class-landing.php:285
 msgid "One column"
 msgstr ""
 
-#: includes/class-landing.php:283
+#: includes/class-landing.php:286
 msgid "Two columns (details left, order summary right)"
 msgstr ""
 
-#: includes/class-landing.php:284
+#: includes/class-landing.php:287
 msgid "Two steps (details, then payment)"
 msgstr ""
 
-#: includes/class-landing.php:288
+#: includes/class-landing.php:291
 msgid "Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step."
 msgstr ""
 
-#: includes/class-landing.php:292
+#: includes/class-landing.php:295
 msgid "How shoppers choose"
 msgstr ""
 
-#: includes/class-landing.php:299
+#: includes/class-landing.php:302
 msgid "Show a quantity changer (one product only)"
 msgstr ""
 
-#: includes/class-landing.php:307
+#: includes/class-landing.php:310
 msgid "Qty"
 msgstr ""
 
-#: includes/class-landing.php:323
+#: includes/class-landing.php:326
 msgid "Add product option"
 msgstr ""
 
-#: includes/class-landing.php:324
+#: includes/class-landing.php:327
 msgid "Opening the page puts the options marked \"Selected first\" in the cart. Example packs: 1 piece; 2 pieces with 10% off and the badge \"Most popular\"; 3 pieces with 15% off."
 msgstr ""
 
-#: includes/class-landing.php:327
+#: includes/class-landing.php:330
 msgid "Order bumps"
 msgstr ""
 
-#: includes/class-landing.php:328
+#: includes/class-landing.php:331
 msgid "A tick box on the order form that adds an extra product, often at a special price."
 msgstr ""
 
-#: includes/class-landing.php:333
+#: includes/class-landing.php:336
 msgid "Tick box text and description"
 msgstr ""
 
-#: includes/class-landing.php:348
+#: includes/class-landing.php:351
 msgid "Add order bump"
 msgstr ""
 
-#: includes/class-landing.php:351
+#: includes/class-landing.php:354
 msgid "Order form layout"
 msgstr ""
 
-#: includes/class-landing.php:354
+#: includes/class-landing.php:357
 msgid "Layout"
 msgstr ""
 
-#: includes/class-landing.php:363
+#: includes/class-landing.php:366
 msgid "Upsell or downsell offer"
 msgstr ""
 
-#: includes/class-landing.php:364
+#: includes/class-landing.php:367
 msgid "Only for pages used as an Upsell or Downsell step in a funnel. Buyers see the offer right after their order, and one click adds it to the same order. Works with Cash on delivery, bank transfer and check payments; orders paid another way skip the offer."
 msgstr ""
 
-#: includes/class-landing.php:368 includes/class-landing.php:369
+#: includes/class-landing.php:371 includes/class-landing.php:372
 msgid "Offer product"
 msgstr ""
 
-#: includes/class-landing.php:372
+#: includes/class-landing.php:375
 msgid "Quantity and discount"
 msgstr ""
 
-#: includes/class-landing.php:379
+#: includes/class-landing.php:382
 msgid "Button texts"
 msgstr ""
 
-#: includes/class-landing.php:381
+#: includes/class-landing.php:384
 msgid "Yes button"
 msgstr ""
 
-#: includes/class-landing.php:382 includes/class-upsells.php:350
+#: includes/class-landing.php:385 includes/class-upsells.php:350
 msgid "No thanks, I don't want this offer"
 msgstr ""
 
-#: includes/class-landing.php:382
+#: includes/class-landing.php:385
 msgid "No button"
 msgstr ""
 
-#: includes/class-landing.php:390
+#: includes/class-landing.php:393
 msgid "Payment methods"
 msgstr ""
 
-#: includes/class-landing.php:396
+#: includes/class-landing.php:399
 msgid "No payment methods are enabled yet. Enable them in WooCommerce > Settings > Payments."
 msgstr ""
 
-#: includes/class-landing.php:405
+#: includes/class-landing.php:408
 msgid "Tick the methods to offer on this page, for example only Cash on delivery. Leave all unticked to offer every enabled method."
 msgstr ""
 
-#: includes/class-landing.php:410
+#: includes/class-landing.php:413
 msgid "Coupons"
 msgstr ""
 
-#: includes/class-landing.php:411
+#: includes/class-landing.php:414
 msgid "Show the coupon field"
 msgstr ""
 
-#: includes/class-landing.php:414
+#: includes/class-landing.php:417
 msgid "Thank-you page"
 msgstr ""
 
-#: includes/class-landing.php:422
+#: includes/class-landing.php:425
 msgid "WooCommerce order received page"
 msgstr ""
 
-#: includes/class-landing.php:427
+#: includes/class-landing.php:430
 msgid "Optional. The order summary is shown at the top of the page you pick."
 msgstr ""
 
-#: includes/class-landing.php:432
+#: includes/class-landing.php:435
 msgid "Order form fields"
 msgstr ""
 
-#: includes/class-landing.php:433
+#: includes/class-landing.php:436
 msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
 msgstr ""
 
-#: includes/class-landing.php:435 includes/class-settings.php:607
+#: includes/class-landing.php:438 includes/class-settings.php:607
 msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
 msgstr ""
 
@@ -1391,19 +1391,19 @@ msgstr ""
 msgid "Visits count the first step of each funnel, without bots and your own visits while logged in. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes. Daily visits are recorded from version 1.3 on."
 msgstr ""
 
-#: includes/class-funnels.php:43 includes/class-funnels.php:451
+#: includes/class-funnels.php:43 includes/class-funnels.php:461
 msgid "Sales page"
 msgstr ""
 
-#: includes/class-funnels.php:45 includes/class-funnels.php:456
+#: includes/class-funnels.php:45 includes/class-funnels.php:466
 msgid "Upsell"
 msgstr ""
 
-#: includes/class-funnels.php:46 includes/class-funnels.php:457
+#: includes/class-funnels.php:46 includes/class-funnels.php:467
 msgid "Downsell"
 msgstr ""
 
-#: includes/class-funnels.php:47 includes/class-funnels.php:459
+#: includes/class-funnels.php:47 includes/class-funnels.php:469
 msgid "Thank you"
 msgstr ""
 
@@ -1419,7 +1419,7 @@ msgstr ""
 msgid "Edit funnel"
 msgstr ""
 
-#: includes/class-funnels.php:64 includes/class-funnels.php:443
+#: includes/class-funnels.php:64 includes/class-funnels.php:453
 msgid "New funnel"
 msgstr ""
 
@@ -1451,7 +1451,7 @@ msgstr ""
 msgid "Template with upsell and downsell"
 msgstr ""
 
-#: includes/class-funnels.php:138 includes/class-funnels.php:544
+#: includes/class-funnels.php:138 includes/class-funnels.php:554
 msgid "Steps"
 msgstr ""
 
@@ -1508,48 +1508,48 @@ msgstr ""
 msgid "Visits count the first step. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes."
 msgstr ""
 
-#: includes/class-funnels.php:409
+#: includes/class-funnels.php:419
 msgid "Order now"
 msgstr ""
 
-#: includes/class-funnels.php:412
+#: includes/class-funnels.php:422
 msgid "Complete your order"
 msgstr ""
 
-#: includes/class-funnels.php:413
+#: includes/class-funnels.php:423
 msgid "Fill in your details. Pay when the parcel arrives."
 msgstr ""
 
-#: includes/class-funnels.php:416
+#: includes/class-funnels.php:426
 msgid "Wait! Your order is not complete yet"
 msgstr ""
 
-#: includes/class-funnels.php:417
+#: includes/class-funnels.php:427
 msgid "Add this to your order now at a special price. This offer is only on this page."
 msgstr ""
 
-#: includes/class-funnels.php:420
+#: includes/class-funnels.php:430
 msgid "How about this instead?"
 msgstr ""
 
-#: includes/class-funnels.php:421
+#: includes/class-funnels.php:431
 msgid "A smaller offer at an even better price, added to the same order."
 msgstr ""
 
-#: includes/class-funnels.php:424
+#: includes/class-funnels.php:434
 msgid "Thank you for your order!"
 msgstr ""
 
-#: includes/class-funnels.php:425
+#: includes/class-funnels.php:435
 msgid "We will call you soon to confirm your order."
 msgstr ""
 
 #. translators: %s: step type such as Checkout.
-#: includes/class-funnels.php:567
+#: includes/class-funnels.php:577
 msgid "%s (draft)"
 msgstr ""
 
-#: includes/class-funnels.php:602
+#: includes/class-funnels.php:612
 msgid "View first step"
 msgstr ""
 

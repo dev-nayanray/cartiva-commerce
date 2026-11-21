@@ -18,7 +18,7 @@
 .cartiva-sc__panel {
 	position: absolute;
 	top: 0;
-	right: 0;
+	inset-inline-end: 0;
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
@@ -92,7 +92,7 @@ html.cartiva-sc-open { overflow: hidden; }
 /* Floating button */
 .cartiva-sc-toggle {
 	position: fixed;
-	right: 1rem;
+	inset-inline-end: 1rem;
 	bottom: 1rem;
 	z-index: 99990;
 	display: grid;
@@ -106,7 +106,7 @@ html.cartiva-sc-open { overflow: hidden; }
 	box-shadow: 0 10px 30px -10px rgb(0 0 0 / .5);
 	cursor: pointer;
 }
-.cartiva-sc-toggle .cartiva-sc-count { position: absolute; top: -.2rem; right: -.2rem; display: grid; place-items: center; min-width: 1.4rem; height: 1.4rem; padding: 0 .3rem; border-radius: 999px; background: var(--csc-accent); color: #fff; font-size: .75rem; font-weight: 800; }
+.cartiva-sc-toggle .cartiva-sc-count { position: absolute; top: -.2rem; inset-inline-end: -.2rem; display: grid; place-items: center; min-width: 1.4rem; height: 1.4rem; padding: 0 .3rem; border-radius: 999px; background: var(--csc-accent); color: #fff; font-size: .75rem; font-weight: 800; }
 .cartiva-sc-toggle .cartiva-sc-count[data-count="0"] { display: none; }
 /* Room for the Cartiva theme's mobile bar. */
 @media (max-width: 781px) {
@@ -114,4 +114,8 @@ html.cartiva-sc-open { overflow: hidden; }
 }
 
 /* Gift lines on the classic cart page */
-.cartiva-gift-badge { display: inline-block; margin-left: .4rem; padding: .05rem .5rem; border-radius: 999px; background: #e7f5ea; color: #00691c; font-size: .75rem; font-weight: 700; vertical-align: middle; }
+.cartiva-gift-badge { display: inline-block; margin-inline-start: .4rem; padding: .05rem .5rem; border-radius: 999px; background: #e7f5ea; color: #00691c; font-size: .75rem; font-weight: 700; vertical-align: middle; }
+
+/* Right-to-left languages: the drawer slides in from the left. */
+[dir="rtl"] .cartiva-sc__panel { box-shadow: 20px 0 50px -20px rgb(0 0 0 / .35); }
+[dir="rtl"] .cartiva-sc:not(.is-open) .cartiva-sc__panel { transform: translateX(-100%); }

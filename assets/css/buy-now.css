@@ -1,7 +1,7 @@
 /* Cartiva Commerce: Buy now button. Uses theme colors when available. */
 form.cart .single_add_to_cart_button.cartiva-buy-now {
 	flex: 1 1 100%;
-	margin-left: 0;
+	margin-inline-start: 0;
 	background: var(--wp--preset--color--accent, #de291b);
 	border-color: var(--wp--preset--color--accent, #de291b);
 	color: #fff;
