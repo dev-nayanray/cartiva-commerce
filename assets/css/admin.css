@@ -1,0 +1,20 @@
+/* Cartiva Commerce admin */
+.cartiva-commerce-admin .nav-tab-wrapper { margin-bottom: 16px; }
+.cartiva-commerce-callout { padding: 4px 12px; max-width: 900px; }
+.cartiva-fields { max-width: 1100px; }
+.cartiva-fields__table { margin-top: 8px; }
+.cartiva-fields__table th[scope="row"] { width: 18%; }
+.cartiva-fields__table th[scope="row"] code { font-size: 11px; color: #646970; background: none; padding: 0; }
+.cartiva-fields__table td { vertical-align: middle; }
+.cartiva-fields__table input[type="text"] { width: 100%; }
+.cartiva-fields__table tr.is-hidden-field th,
+.cartiva-fields__table tr.is-hidden-field input[type="text"],
+.cartiva-fields__table tr.is-hidden-field select,
+.cartiva-fields__table tr.is-hidden-field input[type="number"] { opacity: .45; }
+.cartiva-fields.is-default .cartiva-fields__table { opacity: .7; }
+.cartiva-landing-box .form-table th { width: 200px; }
+.cartiva-landing-box .cartiva-gateways label { display: inline-block; margin: 0 16px 6px 0; }
+.cartiva-landing-box h3 { margin: 24px 0 8px; padding-top: 16px; border-top: 1px solid #dcdcde; }
+.cartiva-landing-box h3:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.column-cartiva_product { width: 18%; }
+.column-cartiva_visits, .column-cartiva_orders, .column-cartiva_revenue, .column-cartiva_conversion { width: 9%; }

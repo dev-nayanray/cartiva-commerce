@@ -1,0 +1,16 @@
+/* Cartiva Commerce: Buy now button. Uses theme colors when available. */
+form.cart .single_add_to_cart_button.cartiva-buy-now {
+	flex: 1 1 100%;
+	margin-left: 0;
+	background: var(--wp--preset--color--accent, #de291b);
+	border-color: var(--wp--preset--color--accent, #de291b);
+	color: #fff;
+}
+form.cart .single_add_to_cart_button.cartiva-buy-now:hover,
+form.cart .single_add_to_cart_button.cartiva-buy-now:focus-visible {
+	background: var(--wp--preset--color--contrast, #111);
+	border-color: var(--wp--preset--color--contrast, #111);
+	color: #fff;
+}
+form.cart .single_add_to_cart_button.cartiva-buy-now.disabled { opacity: .5; cursor: not-allowed; }
+form.cart:not(.variations_form):not(.grouped_form) { flex-wrap: wrap; }

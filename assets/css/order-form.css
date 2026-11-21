@@ -1,0 +1,139 @@
+/**
+ * Cartiva Commerce: landing order form. One column, mobile first.
+ * Uses theme colors when the theme provides them (Cartiva does).
+ */
+.cartiva-order-form {
+	--cof-border: var(--wp--preset--color--border, #e3e3e3);
+	--cof-surface: var(--wp--preset--color--surface, #f6f6f4);
+	--cof-text: var(--wp--preset--color--contrast, #111);
+	--cof-muted: var(--wp--preset--color--muted, #6b6b6b);
+	--cof-accent: var(--wp--preset--color--accent, #de291b);
+	--cof-radius: var(--wp--custom--radius--md, 14px);
+	max-width: 640px;
+	margin-inline: auto;
+	padding: clamp(1.25rem, 4vw, 2rem);
+	border: 1px solid var(--cof-border);
+	border-radius: var(--cof-radius);
+	background: var(--wp--preset--color--base, #fff);
+	box-shadow: 0 20px 50px -30px rgb(0 0 0 / .25);
+	scroll-margin-top: 6rem;
+}
+.cartiva-order-form__heading { margin: 0 0 1rem; text-align: center; }
+.cartiva-order-form__notice { margin: 0; padding: 1rem; border-radius: 10px; background: var(--cof-surface); }
+
+/* Product summary */
+.cartiva-order-form__product {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .9rem;
+	margin-bottom: 1.25rem;
+	padding: .9rem;
+	border-radius: 12px;
+	background: var(--cof-surface);
+}
+.cartiva-order-form__image img { display: block; width: 4.5rem; height: 4.5rem; border-radius: 10px; object-fit: cover; }
+.cartiva-order-form__info { flex: 1 1 10rem; min-width: 0; }
+.cartiva-order-form__info p { margin: 0; }
+.cartiva-order-form__name { font-weight: 700; line-height: 1.3; }
+.cartiva-order-form__price { margin-top: .2rem !important; font-weight: 700; }
+.cartiva-order-form__price del { color: var(--cof-muted); font-weight: 400; }
+.cartiva-order-form__price ins { color: var(--cof-accent); text-decoration: none; }
+.cartiva-order-form__qty {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid var(--cof-border);
+	border-radius: 999px;
+	background: var(--wp--preset--color--base, #fff);
+}
+.cartiva-order-form__qty.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-order-form__qty-btn {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 0;
+	background: none;
+	color: inherit;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+.cartiva-order-form__qty-input {
+	width: 2.75rem;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	font-weight: 700;
+	text-align: center;
+	-moz-appearance: textfield;
+}
+.cartiva-order-form__qty-input::-webkit-outer-spin-button,
+.cartiva-order-form__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* WooCommerce classic checkout inside the form: stack everything */
+.cartiva-order-form .woocommerce-checkout .col2-set,
+.cartiva-order-form .woocommerce-checkout .col2-set .col-1,
+.cartiva-order-form .woocommerce-checkout .col2-set .col-2,
+.cartiva-order-form #customer_details,
+.cartiva-order-form #order_review,
+.cartiva-order-form #order_review_heading { float: none; width: 100%; max-width: none; }
+.cartiva-order-form .woocommerce-billing-fields > h3,
+.cartiva-order-form .woocommerce-additional-fields > h3 { display: none; }
+.cartiva-order-form #order_review_heading { margin: 1.25rem 0 .5rem; font-size: 1.05rem; }
+.cartiva-order-form .form-row { margin: 0 0 .85rem; padding: 0; }
+.cartiva-order-form .form-row label { display: block; margin-bottom: .3rem; font-weight: 600; font-size: .92rem; }
+.cartiva-order-form .form-row-first,
+.cartiva-order-form .form-row-last { width: calc(50% - .4rem); float: left; }
+.cartiva-order-form .form-row-last { float: right; }
+.cartiva-order-form .form-row-wide { clear: both; }
+.cartiva-order-form .woocommerce-billing-fields__field-wrapper::after { content: ""; display: table; clear: both; }
+.cartiva-order-form input.input-text,
+.cartiva-order-form textarea,
+.cartiva-order-form select {
+	width: 100%;
+	min-height: 3rem;
+	padding: .7rem .9rem;
+	border: 1px solid var(--cof-border);
+	border-radius: 10px;
+	background: var(--wp--preset--color--base, #fff);
+	color: var(--cof-text);
+	font: inherit;
+	font-size: 1rem;
+	box-sizing: border-box;
+}
+.cartiva-order-form input.input-text:focus,
+.cartiva-order-form textarea:focus,
+.cartiva-order-form select:focus { outline: 2px solid var(--cof-text); outline-offset: 1px; border-color: transparent; }
+.cartiva-order-form .woocommerce-checkout-review-order-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.cartiva-order-form .woocommerce-checkout-review-order-table th,
+.cartiva-order-form .woocommerce-checkout-review-order-table td { padding: .55rem 0; border: 0; border-bottom: 1px solid var(--cof-border); text-align: left; }
+.cartiva-order-form .woocommerce-checkout-review-order-table td:last-child,
+.cartiva-order-form .woocommerce-checkout-review-order-table th:last-child { text-align: right; }
+.cartiva-order-form .woocommerce-checkout-review-order-table .order-total { font-size: 1.1rem; }
+.cartiva-order-form #payment { margin-top: 1rem; border-radius: 12px; background: var(--cof-surface); }
+.cartiva-order-form #payment ul.payment_methods { margin: 0; padding: 1rem; border-bottom: 1px solid var(--cof-border); list-style: none; }
+.cartiva-order-form #payment ul.payment_methods li { margin: 0 0 .5rem; }
+.cartiva-order-form #payment div.payment_box { margin-top: .5rem; padding: .75rem; border-radius: 8px; background: var(--wp--preset--color--base, #fff); font-size: .9rem; }
+.cartiva-order-form #payment .place-order { padding: 1rem; }
+.cartiva-order-form #place_order {
+	width: 100%;
+	min-height: 3.4rem;
+	border: 0;
+	border-radius: 12px;
+	background: var(--cof-accent);
+	color: #fff;
+	font: inherit;
+	font-size: 1.1rem;
+	font-weight: 800;
+	cursor: pointer;
+}
+.cartiva-order-form #place_order:hover { background: var(--cof-text); }
+.cartiva-order-form .woocommerce-privacy-policy-text,
+.cartiva-order-form .woocommerce-terms-and-conditions-wrapper { font-size: .85rem; color: var(--cof-muted); }
+@media (max-width: 480px) {
+	.cartiva-order-form .form-row-first,
+	.cartiva-order-form .form-row-last { width: 100%; float: none; }
+	.cartiva-order-form__qty { margin-left: auto; }
+}
+
+/* Thank-you page summary */
+.cartiva-commerce-thankyou { margin-bottom: 2rem; }

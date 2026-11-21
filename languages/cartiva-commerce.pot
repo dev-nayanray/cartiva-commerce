@@ -1,0 +1,401 @@
+# Copyright (C) 2026 godevs
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cartiva Commerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cartiva-commerce\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: cartiva-commerce\n"
+
+#: cartiva-commerce.php:75
+msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
+msgstr ""
+
+#: includes/class-stats.php:37 includes/class-landing.php:191
+msgid "Product"
+msgstr ""
+
+#: includes/class-stats.php:38
+msgid "Visits"
+msgstr ""
+
+#: includes/class-stats.php:39
+msgid "Orders"
+msgstr ""
+
+#: includes/class-stats.php:40
+msgid "Revenue"
+msgstr ""
+
+#: includes/class-stats.php:41
+msgid "Conversion"
+msgstr ""
+
+#: includes/class-stats.php:102
+msgid "No product chosen"
+msgstr ""
+
+#: includes/class-order-form.php:52
+msgid "Could not update the quantity. Please try again."
+msgstr ""
+
+#: includes/class-order-form.php:80
+msgid "Choose the product to sell in the \"Landing page: product and order form\" box when editing this landing page."
+msgstr ""
+
+#: includes/class-order-form.php:85
+msgid "Sorry, this product is out of stock right now."
+msgstr ""
+
+#: includes/class-order-form.php:105
+msgid "Decrease quantity"
+msgstr ""
+
+#: includes/class-order-form.php:106 includes/class-landing.php:205
+msgid "Quantity"
+msgstr ""
+
+#: includes/class-order-form.php:107
+msgid "Increase quantity"
+msgstr ""
+
+#: includes/class-fields.php:28
+msgid "Full name"
+msgstr ""
+
+#: includes/class-fields.php:29
+msgid "First name"
+msgstr ""
+
+#: includes/class-fields.php:30
+msgid "Last name"
+msgstr ""
+
+#: includes/class-fields.php:31
+msgid "Company name"
+msgstr ""
+
+#: includes/class-fields.php:32
+msgid "Country / Region"
+msgstr ""
+
+#: includes/class-fields.php:33
+msgid "Street address"
+msgstr ""
+
+#: includes/class-fields.php:34
+msgid "Apartment, suite, unit, etc."
+msgstr ""
+
+#: includes/class-fields.php:35
+msgid "Town / City"
+msgstr ""
+
+#: includes/class-fields.php:36
+msgid "State / County"
+msgstr ""
+
+#: includes/class-fields.php:37
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: includes/class-fields.php:38
+msgid "Phone"
+msgstr ""
+
+#: includes/class-fields.php:39
+msgid "Email address"
+msgstr ""
+
+#: includes/class-fields.php:40
+msgid "Order notes"
+msgstr ""
+
+#: includes/class-fields.php:62
+msgid "WooCommerce default (no changes)"
+msgstr ""
+
+#: includes/class-fields.php:64
+msgid "Short COD form: Full name, Mobile, Address"
+msgstr ""
+
+#: includes/class-fields.php:65
+msgid "Minimal: Full name, Email, Phone"
+msgstr ""
+
+#: includes/class-fields.php:66
+msgid "Custom (edit the fields below)"
+msgstr ""
+
+#: includes/class-fields.php:98
+msgid "Your full name"
+msgstr ""
+
+#: includes/class-fields.php:98
+msgid "e.g. Rahim Uddin"
+msgstr ""
+
+#: includes/class-fields.php:99
+msgid "Mobile number"
+msgstr ""
+
+#: includes/class-fields.php:100
+msgid "Full address"
+msgstr ""
+
+#: includes/class-fields.php:100
+msgid "House, road, area, district"
+msgstr ""
+
+#: includes/class-buy-now.php:48 includes/class-settings.php:217
+msgid "Buy now"
+msgstr ""
+
+#: includes/class-landing.php:37 includes/class-landing.php:47 includes/class-landing.php:48 includes/class-settings.php:175 includes/class-settings.php:222
+msgid "Landing pages"
+msgstr ""
+
+#: includes/class-landing.php:38 includes/class-checkout.php:227
+msgid "Landing page"
+msgstr ""
+
+#: includes/class-landing.php:39 includes/class-landing.php:40
+msgid "Add landing page"
+msgstr ""
+
+#: includes/class-landing.php:41
+msgid "Edit landing page"
+msgstr ""
+
+#: includes/class-landing.php:42
+msgid "New landing page"
+msgstr ""
+
+#: includes/class-landing.php:43
+msgid "View landing page"
+msgstr ""
+
+#: includes/class-landing.php:44
+msgid "Search landing pages"
+msgstr ""
+
+#: includes/class-landing.php:45
+msgid "No landing pages yet."
+msgstr ""
+
+#: includes/class-landing.php:46
+msgid "No landing pages in the trash."
+msgstr ""
+
+#: includes/class-landing.php:101
+msgid "Your product headline"
+msgstr ""
+
+#: includes/class-landing.php:104
+msgid "Say in one or two sentences what the product does and why it is worth buying."
+msgstr ""
+
+#: includes/class-landing.php:121
+msgid "Single landing page"
+msgstr ""
+
+#: includes/class-landing.php:122
+msgid "Shows a Cartiva Commerce landing page at full width between the site header and footer."
+msgstr ""
+
+#: includes/class-landing.php:139
+msgid "Landing page: product and order form"
+msgstr ""
+
+#: includes/class-landing.php:194
+msgid "Product to sell"
+msgstr ""
+
+#: includes/class-landing.php:196
+msgid "Search for a product or a variation"
+msgstr ""
+
+#: includes/class-landing.php:201
+msgid "Opening this landing page puts this product in the cart, so the order form is ready to fill in. For a product with sizes or colors, pick the exact variation."
+msgstr ""
+
+#: includes/class-landing.php:208
+msgid "Let shoppers change the quantity"
+msgstr ""
+
+#: includes/class-landing.php:213
+msgid "Payment"
+msgstr ""
+
+#: includes/class-landing.php:216
+msgid "Payment methods"
+msgstr ""
+
+#: includes/class-landing.php:222
+msgid "No payment methods are enabled yet. Enable them in WooCommerce > Settings > Payments."
+msgstr ""
+
+#: includes/class-landing.php:231
+msgid "Tick the methods to offer on this page, for example only Cash on delivery. Leave all unticked to offer every enabled method."
+msgstr ""
+
+#: includes/class-landing.php:236
+msgid "Coupons"
+msgstr ""
+
+#: includes/class-landing.php:237
+msgid "Show the coupon field"
+msgstr ""
+
+#: includes/class-landing.php:240
+msgid "Thank-you page"
+msgstr ""
+
+#: includes/class-landing.php:248
+msgid "WooCommerce order received page"
+msgstr ""
+
+#: includes/class-landing.php:253
+msgid "Optional. The order summary is shown at the top of the page you pick."
+msgstr ""
+
+#: includes/class-landing.php:258
+msgid "Order form fields"
+msgstr ""
+
+#: includes/class-landing.php:259
+msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
+msgstr ""
+
+#: includes/class-landing.php:261 includes/class-settings.php:247
+msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
+msgstr ""
+
+#: includes/class-settings.php:38
+msgid "Settings"
+msgstr ""
+
+#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:171
+msgid "Cartiva Commerce"
+msgstr ""
+
+#: includes/class-settings.php:143
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: includes/class-settings.php:173
+msgid "General"
+msgstr ""
+
+#: includes/class-settings.php:174
+msgid "Main checkout fields"
+msgstr ""
+
+#: includes/class-settings.php:182
+msgid "Your checkout page now uses the classic checkout. The previous version is saved as a page revision."
+msgstr ""
+
+#: includes/class-settings.php:209
+msgid "Buy now button"
+msgstr ""
+
+#: includes/class-settings.php:211
+msgid "Show a Buy now button under Add to cart that goes straight to checkout"
+msgstr ""
+
+#: includes/class-settings.php:215
+msgid "Buy now label"
+msgstr ""
+
+#: includes/class-settings.php:218
+msgid "For example: Order now. Leave empty for \"Buy now\"."
+msgstr ""
+
+#: includes/class-settings.php:223
+msgid "Create a sales page for one product with its own short order form. Each landing page has its own fields, payment methods and thank-you page."
+msgstr ""
+
+#: includes/class-settings.php:224
+msgid "Add a landing page"
+msgstr ""
+
+#: includes/class-settings.php:237
+msgid "Your checkout page uses the WooCommerce Checkout block."
+msgstr ""
+
+#: includes/class-settings.php:238
+msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
+msgstr ""
+
+#: includes/class-settings.php:239
+msgid "Use the classic checkout"
+msgstr ""
+
+#: includes/class-settings.php:244
+msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
+msgstr ""
+
+#: includes/class-settings.php:288
+msgid "Full width"
+msgstr ""
+
+#: includes/class-settings.php:289
+msgid "Left half"
+msgstr ""
+
+#: includes/class-settings.php:290
+msgid "Right half"
+msgstr ""
+
+#: includes/class-settings.php:295
+msgid "Form fields"
+msgstr ""
+
+#: includes/class-settings.php:303
+msgid "Pick a preset, or change any field below to make it your own. Full name replaces First and Last name. Hidden fields are filled in automatically where needed (for example, the country is your store country)."
+msgstr ""
+
+#: includes/class-settings.php:307
+msgid "Field"
+msgstr ""
+
+#: includes/class-settings.php:308
+msgid "Show"
+msgstr ""
+
+#: includes/class-settings.php:309
+msgid "Required"
+msgstr ""
+
+#: includes/class-settings.php:310
+msgid "Label"
+msgstr ""
+
+#: includes/class-settings.php:311
+msgid "Placeholder"
+msgstr ""
+
+#: includes/class-settings.php:312
+msgid "Width"
+msgstr ""
+
+#: includes/class-settings.php:313
+msgid "Order"
+msgstr ""
+
+#. translators: %s: field name.
+#: includes/class-settings.php:324
+msgid "Show %s"
+msgstr ""
+
+#. translators: %s: field name.
+#: includes/class-settings.php:325
+msgid "%s is required"
+msgstr ""
+
+#: includes/class-checkout.php:87
+msgid "Please enter a valid 11-digit mobile number, for example 01712345678."
+msgstr ""
+

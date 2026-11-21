@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cartiva-commerce/order-form",
+	"version": "1.0.0",
+	"title": "Landing order form",
+	"category": "woocommerce",
+	"icon": "cart",
+	"description": "The one-page order form of a Cartiva Commerce landing page: product summary, quantity, the fields you chose, payment and Place order.",
+	"keywords": [ "checkout", "order", "landing", "cod" ],
+	"textdomain": "cartiva-commerce",
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"multiple": false,
+		"reusable": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}
