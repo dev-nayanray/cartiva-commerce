@@ -433,6 +433,7 @@ class Cartiva_Commerce_Landing {
 			<p class="description"><?php esc_html_e( 'These fields apply to this landing page only. Your main checkout keeps its own fields.', 'cartiva-commerce' ); ?></p>
 			<?php Cartiva_Commerce_Settings::fields_editor( 'cartiva_landing', (string) $config['preset'], (array) $config['fields'], Cartiva_Commerce_Fields::presets() ); ?>
 			<p><label><input type="checkbox" name="cartiva_landing[bd_phone]" value="1" <?php checked( ! empty( $config['bd_phone'] ) ); ?> /> <?php esc_html_e( 'Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)', 'cartiva-commerce' ); ?></label></p>
+			<?php Cartiva_Commerce_AB_Test::render_section( $post ); ?>
 		</div>
 		<?php
 	}
@@ -609,8 +610,8 @@ class Cartiva_Commerce_Landing {
 		}
 		nocache_headers();
 
-		if ( ! current_user_can( 'edit_post', $landing_id ) ) {
-			update_post_meta( $landing_id, '_cartiva_visits', (int) get_post_meta( $landing_id, '_cartiva_visits', true ) + 1 );
+		if ( ! current_user_can( 'edit_post', $landing_id ) && ! cartiva_commerce_is_bot() && ! isset( $_GET['cartiva_order'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only check: offer and thank-you views of an order are not new visits.
+			cartiva_commerce_count_visit( $landing_id );
 		}
 
 		if ( ! self::sells( $landing_id ) || ! WC()->cart ) {

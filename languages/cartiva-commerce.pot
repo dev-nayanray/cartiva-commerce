@@ -9,7 +9,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: cartiva-commerce\n"
 
-#: cartiva-commerce.php:81
+#: cartiva-commerce.php:87
 msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
 msgstr ""
 
@@ -17,24 +17,106 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: includes/class-stats.php:38 includes/class-funnels.php:265 includes/class-funnels.php:541
+#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:265 includes/class-funnels.php:545
 msgid "Visits"
 msgstr ""
 
-#: includes/class-stats.php:39 includes/class-funnels.php:266 includes/class-funnels.php:542
+#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:266 includes/class-funnels.php:546
 msgid "Orders"
 msgstr ""
 
-#: includes/class-stats.php:40 includes/class-funnels.php:267 includes/class-funnels.php:543
+#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:267 includes/class-funnels.php:547
 msgid "Revenue"
 msgstr ""
 
-#: includes/class-stats.php:41 includes/class-funnels.php:268 includes/class-funnels.php:544
+#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:268 includes/class-funnels.php:548
 msgid "Conversion"
 msgstr ""
 
 #: includes/class-stats.php:102
 msgid "No product chosen"
+msgstr ""
+
+#: includes/class-ab-test.php:152 includes/class-funnels.php:159
+msgid "(no title)"
+msgstr ""
+
+#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-settings.php:158 includes/class-funnels.php:436
+msgid "You are not allowed to do this."
+msgstr ""
+
+#. translators: %s: page title.
+#: includes/class-ab-test.php:275
+msgid "%s (variant B)"
+msgstr ""
+
+#: includes/class-ab-test.php:356 includes/class-ab-test.php:368
+msgid "A/B test"
+msgstr ""
+
+#. translators: %s: link to the tested page.
+#: includes/class-ab-test.php:359
+msgid "This page is variant B of %s. Its results are shown there."
+msgstr ""
+
+#: includes/class-ab-test.php:369
+msgid "Show a different version of this page to part of your visitors and keep the one that sells better. Each visitor always sees the same version."
+msgstr ""
+
+#: includes/class-ab-test.php:374
+msgid "Test finished. The winning version is now on this page."
+msgstr ""
+
+#: includes/class-ab-test.php:378
+msgid "Variant B"
+msgstr ""
+
+#: includes/class-ab-test.php:381
+msgid "No test"
+msgstr ""
+
+#: includes/class-ab-test.php:387
+msgid "Create variant B from a copy of this page"
+msgstr ""
+
+#: includes/class-ab-test.php:392
+msgid "Visitors who see B"
+msgstr ""
+
+#: includes/class-ab-test.php:395
+msgid "Run the test"
+msgstr ""
+
+#: includes/class-ab-test.php:396
+msgid "The test runs while variant B is published. Preview B by adding ?cartiva_variant=b to this page address."
+msgstr ""
+
+#: includes/class-ab-test.php:408
+msgid "Version"
+msgstr ""
+
+#: includes/class-ab-test.php:413
+msgid "Action"
+msgstr ""
+
+#: includes/class-ab-test.php:416
+msgid "A (this page)"
+msgstr ""
+
+#: includes/class-ab-test.php:416
+msgid "B (variant)"
+msgstr ""
+
+#: includes/class-ab-test.php:423
+msgid "Keep A, end test"
+msgstr ""
+
+#: includes/class-ab-test.php:423
+msgid "B wins: use it here"
+msgstr ""
+
+#: includes/class-ab-test.php:428
+msgid "Wait for enough orders before choosing: with fewer than about 30 orders per version, differences are often luck. When B wins, its content and settings move to this page, so the address, funnel position and history stay. The old version is kept as a revision."
 msgstr ""
 
 #: includes/class-order-form.php:54
@@ -195,7 +277,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: includes/class-buy-now.php:48 includes/class-settings.php:218
+#: includes/class-buy-now.php:48 includes/class-settings.php:236
 msgid "Buy now"
 msgstr ""
 
@@ -203,7 +285,7 @@ msgstr ""
 msgid "Landing pages"
 msgstr ""
 
-#: includes/class-landing.php:38 includes/class-funnels.php:190 includes/class-funnels.php:234 includes/class-checkout.php:255
+#: includes/class-landing.php:38 includes/class-analytics.php:419 includes/class-funnels.php:190 includes/class-funnels.php:234 includes/class-checkout.php:255
 msgid "Landing page"
 msgstr ""
 
@@ -267,7 +349,7 @@ msgstr ""
 msgid "Product name"
 msgstr ""
 
-#: includes/class-landing.php:220 includes/class-landing.php:308 includes/class-settings.php:318
+#: includes/class-landing.php:220 includes/class-landing.php:308 includes/class-settings.php:371
 msgid "Label"
 msgstr ""
 
@@ -471,7 +553,7 @@ msgstr ""
 msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
 msgstr ""
 
-#: includes/class-landing.php:435 includes/class-settings.php:251
+#: includes/class-landing.php:435 includes/class-settings.php:304
 msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
 msgstr ""
 
@@ -479,134 +561,263 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:172
+#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:187
 msgid "Cartiva Commerce"
 msgstr ""
 
-#: includes/class-settings.php:144 includes/class-funnels.php:436
-msgid "You are not allowed to do this."
+#. translators: %s: field name such as Facebook Pixel ID.
+#: includes/class-settings.php:116
+msgid "The %s does not look right, so it was not saved."
 msgstr ""
 
-#: includes/class-settings.php:174
+#: includes/class-settings.php:189
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:175
+#: includes/class-settings.php:190
 msgid "Main checkout fields"
 msgstr ""
 
-#: includes/class-settings.php:176 includes/class-funnels.php:59 includes/class-funnels.php:68
+#: includes/class-settings.php:191
+msgid "Tracking"
+msgstr ""
+
+#: includes/class-settings.php:192 includes/class-funnels.php:59 includes/class-funnels.php:68
 msgid "Funnels"
 msgstr ""
 
-#: includes/class-settings.php:183
+#: includes/class-settings.php:199
 msgid "Your checkout page now uses the classic checkout. The previous version is saved as a page revision."
 msgstr ""
 
-#: includes/class-settings.php:210
+#: includes/class-settings.php:228
 msgid "Buy now button"
 msgstr ""
 
-#: includes/class-settings.php:212
+#: includes/class-settings.php:230
 msgid "Show a Buy now button under Add to cart that goes straight to checkout"
 msgstr ""
 
-#: includes/class-settings.php:216
+#: includes/class-settings.php:234
 msgid "Buy now label"
 msgstr ""
 
-#: includes/class-settings.php:219
+#: includes/class-settings.php:237
 msgid "For example: Order now. Leave empty for \"Buy now\"."
 msgstr ""
 
-#: includes/class-settings.php:223
+#: includes/class-settings.php:241 includes/class-analytics.php:396
 msgid "Funnels and landing pages"
 msgstr ""
 
-#: includes/class-settings.php:224
+#: includes/class-settings.php:242
 msgid "A funnel leads shoppers through steps: a sales page, a checkout and a thank-you page. A single landing page can also sell on its own, with the order form on the same page."
 msgstr ""
 
-#: includes/class-settings.php:226 includes/class-funnels.php:127
+#: includes/class-settings.php:244 includes/class-funnels.php:127
 msgid "Create a funnel from the template"
 msgstr ""
 
-#: includes/class-settings.php:227
+#: includes/class-settings.php:245
 msgid "Add a landing page"
 msgstr ""
 
-#: includes/class-settings.php:241
+#: includes/class-settings.php:257
+msgid "Facebook (Meta) Pixel ID"
+msgstr ""
+
+#: includes/class-settings.php:257
+msgid "Events Manager > Data sources > your pixel. Numbers only."
+msgstr ""
+
+#: includes/class-settings.php:258
+msgid "Google Analytics 4 Measurement ID"
+msgstr ""
+
+#: includes/class-settings.php:258
+msgid "Admin > Data streams > your web stream."
+msgstr ""
+
+#: includes/class-settings.php:259
+msgid "TikTok Pixel ID"
+msgstr ""
+
+#: includes/class-settings.php:259
+msgid "TikTok Ads Manager > Assets > Events > Web events."
+msgstr ""
+
+#: includes/class-settings.php:262
+msgid "Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off."
+msgstr ""
+
+#: includes/class-settings.php:274
+msgid "Where"
+msgstr ""
+
+#: includes/class-settings.php:276
+msgid "Also track the rest of the store (product pages, main checkout and order received page)"
+msgstr ""
+
+#: includes/class-settings.php:277
+msgid "Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked."
+msgstr ""
+
+#: includes/class-settings.php:281
+msgid "Privacy: the pixels load services from Meta, Google and TikTok in your visitors' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies."
+msgstr ""
+
+#: includes/class-settings.php:294
 msgid "Your checkout page uses the WooCommerce Checkout block."
 msgstr ""
 
-#: includes/class-settings.php:242
+#: includes/class-settings.php:295
 msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
 msgstr ""
 
-#: includes/class-settings.php:243
+#: includes/class-settings.php:296
 msgid "Use the classic checkout"
 msgstr ""
 
-#: includes/class-settings.php:248
+#: includes/class-settings.php:301
 msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
 msgstr ""
 
-#: includes/class-settings.php:255
+#: includes/class-settings.php:308
 msgid "Show the \"Have a coupon?\" link on the main checkout"
 msgstr ""
 
-#: includes/class-settings.php:296
+#: includes/class-settings.php:349
 msgid "Full width"
 msgstr ""
 
-#: includes/class-settings.php:297
+#: includes/class-settings.php:350
 msgid "Left half"
 msgstr ""
 
-#: includes/class-settings.php:298
+#: includes/class-settings.php:351
 msgid "Right half"
 msgstr ""
 
-#: includes/class-settings.php:303
+#: includes/class-settings.php:356
 msgid "Form fields"
 msgstr ""
 
-#: includes/class-settings.php:311
+#: includes/class-settings.php:364
 msgid "Pick a preset, or change any field below to make it your own. Full name replaces First and Last name. Hidden fields are filled in automatically where needed (for example, the country is your store country)."
 msgstr ""
 
-#: includes/class-settings.php:315
+#: includes/class-settings.php:368
 msgid "Field"
 msgstr ""
 
-#: includes/class-settings.php:316
+#: includes/class-settings.php:369 includes/class-analytics.php:381
 msgid "Show"
 msgstr ""
 
-#: includes/class-settings.php:317
+#: includes/class-settings.php:370
 msgid "Required"
 msgstr ""
 
-#: includes/class-settings.php:319
+#: includes/class-settings.php:372
 msgid "Placeholder"
 msgstr ""
 
-#: includes/class-settings.php:320
+#: includes/class-settings.php:373
 msgid "Width"
 msgstr ""
 
-#: includes/class-settings.php:321 includes/class-funnels.php:237
+#: includes/class-settings.php:374 includes/class-funnels.php:237
 msgid "Order"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:332
+#: includes/class-settings.php:385
 msgid "Show %s"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:333
+#: includes/class-settings.php:386
 msgid "%s is required"
+msgstr ""
+
+#: includes/class-analytics.php:33 includes/class-analytics.php:371
+msgid "Funnel analytics"
+msgstr ""
+
+#: includes/class-analytics.php:34
+msgid "Analytics"
+msgstr ""
+
+#: includes/class-analytics.php:149
+msgid "Last 7 days"
+msgstr ""
+
+#: includes/class-analytics.php:150
+msgid "Last 30 days"
+msgstr ""
+
+#: includes/class-analytics.php:151
+msgid "Last 90 days"
+msgstr ""
+
+#: includes/class-analytics.php:152
+msgid "Last 12 months"
+msgstr ""
+
+#: includes/class-analytics.php:312 includes/class-analytics.php:391
+msgid "Revenue per day"
+msgstr ""
+
+#: includes/class-analytics.php:341
+msgid "Show as a table"
+msgstr ""
+
+#: includes/class-analytics.php:341
+msgid "Day"
+msgstr ""
+
+#: includes/class-analytics.php:364 includes/class-analytics.php:408
+msgid "Average order"
+msgstr ""
+
+#: includes/class-analytics.php:366
+msgid "Order bump taken"
+msgstr ""
+
+#: includes/class-analytics.php:367 includes/class-analytics.php:411
+msgid "Upsells accepted"
+msgstr ""
+
+#: includes/class-analytics.php:375
+msgid "Date range"
+msgstr ""
+
+#: includes/class-analytics.php:398
+msgid "No published funnels or landing pages yet."
+msgstr ""
+
+#: includes/class-analytics.php:403
+msgid "Name"
+msgstr ""
+
+#: includes/class-analytics.php:409
+msgid "Bump taken"
+msgstr ""
+
+#: includes/class-analytics.php:410
+msgid "Bump revenue"
+msgstr ""
+
+#: includes/class-analytics.php:412
+msgid "Upsell revenue"
+msgstr ""
+
+#: includes/class-analytics.php:419 includes/class-funnels.php:60
+msgid "Funnel"
+msgstr ""
+
+#: includes/class-analytics.php:436
+msgid "Visits count the first step of each funnel, without bots and your own visits while logged in. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes. Daily visits are recorded from version 1.3 on."
 msgstr ""
 
 #: includes/class-funnels.php:43 includes/class-funnels.php:451
@@ -627,10 +838,6 @@ msgstr ""
 
 #: includes/class-funnels.php:47 includes/class-funnels.php:459
 msgid "Thank you"
-msgstr ""
-
-#: includes/class-funnels.php:60
-msgid "Funnel"
 msgstr ""
 
 #: includes/class-funnels.php:61
@@ -677,16 +884,12 @@ msgstr ""
 msgid "Template with upsell and downsell"
 msgstr ""
 
-#: includes/class-funnels.php:138 includes/class-funnels.php:540
+#: includes/class-funnels.php:138 includes/class-funnels.php:544
 msgid "Steps"
 msgstr ""
 
 #: includes/class-funnels.php:139
 msgid "Results"
-msgstr ""
-
-#: includes/class-funnels.php:159
-msgid "(no title)"
 msgstr ""
 
 #. translators: 1: page title, 2: status such as Draft.
@@ -775,11 +978,11 @@ msgid "We will call you soon to confirm your order."
 msgstr ""
 
 #. translators: %s: step type such as Checkout.
-#: includes/class-funnels.php:563
+#: includes/class-funnels.php:567
 msgid "%s (draft)"
 msgstr ""
 
-#: includes/class-funnels.php:598
+#: includes/class-funnels.php:602
 msgid "View first step"
 msgstr ""
 

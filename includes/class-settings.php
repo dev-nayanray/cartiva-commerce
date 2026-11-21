@@ -102,6 +102,20 @@ class Cartiva_Commerce_Settings {
 			$output['main_fields'] = Cartiva_Commerce_Fields::sanitize_config( isset( $input['main']['fields'] ) ? $input['main']['fields'] : array() );
 			$output['main_bd_phone'] = ! empty( $input['main_bd_phone'] );
 			$output['main_coupon']   = ! empty( $input['main_coupon'] );
+		} elseif ( 'tracking' === $tab ) {
+			$fb                     = isset( $input['fb_pixel'] ) ? preg_replace( '/\D/', '', (string) $input['fb_pixel'] ) : '';
+			$ga                     = isset( $input['ga4_id'] ) ? strtoupper( trim( (string) $input['ga4_id'] ) ) : '';
+			$tt                     = isset( $input['tiktok_pixel'] ) ? strtoupper( preg_replace( '/[^A-Za-z0-9]/', '', (string) $input['tiktok_pixel'] ) ) : '';
+			$output['fb_pixel']     = strlen( $fb ) >= 10 && strlen( $fb ) <= 20 ? $fb : '';
+			$output['ga4_id']       = preg_match( '/^G-[A-Z0-9]{4,15}$/', $ga ) ? $ga : '';
+			$output['tiktok_pixel'] = strlen( $tt ) >= 10 && strlen( $tt ) <= 30 ? $tt : '';
+			$output['track_store']  = ! empty( $input['track_store'] );
+			foreach ( array( 'fb_pixel' => 'Facebook Pixel ID', 'ga4_id' => 'GA4 Measurement ID', 'tiktok_pixel' => 'TikTok Pixel ID' ) as $field => $name ) {
+				if ( ! empty( $input[ $field ] ) && '' === $output[ $field ] ) {
+					/* translators: %s: field name such as Facebook Pixel ID. */
+					add_settings_error( 'cartiva_commerce_settings', 'cartiva_' . $field, sprintf( __( 'The %s does not look right, so it was not saved.', 'cartiva-commerce' ), $name ) );
+				}
+			}
 		} else {
 			$output['buy_now']       = ! empty( $input['buy_now'] );
 			$output['buy_now_label'] = isset( $input['buy_now_label'] ) ? sanitize_text_field( $input['buy_now_label'] ) : '';
@@ -165,7 +179,8 @@ class Cartiva_Commerce_Settings {
 			return;
 		}
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab switch only.
-		$tab      = isset( $_GET['tab'] ) && 'fields' === sanitize_key( wp_unslash( $_GET['tab'] ) ) ? 'fields' : 'general';
+		$tab      = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
+		$tab      = in_array( $tab, array( 'general', 'fields', 'tracking' ), true ) ? $tab : 'general';
 		$settings = cartiva_commerce_settings();
 		?>
 		<div class="wrap cartiva-commerce-admin">
@@ -173,6 +188,7 @@ class Cartiva_Commerce_Settings {
 			<nav class="nav-tab-wrapper">
 				<a href="<?php echo esc_url( self::url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'General', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url( 'fields' ) ); ?>" class="nav-tab<?php echo 'fields' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main checkout fields', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( self::url( 'tracking' ) ); ?>" class="nav-tab<?php echo 'tracking' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Tracking', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>" class="nav-tab"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
 			</nav>
 			<?php settings_errors(); ?>
@@ -188,6 +204,8 @@ class Cartiva_Commerce_Settings {
 				<?php
 				if ( 'fields' === $tab ) {
 					self::render_fields_tab( $settings );
+				} elseif ( 'tracking' === $tab ) {
+					self::render_tracking_tab( $settings );
 				} else {
 					self::render_general_tab( $settings );
 				}
@@ -226,6 +244,41 @@ class Cartiva_Commerce_Settings {
 			<a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Funnels::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
 			<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a>
 		</p>
+		<?php
+	}
+
+	/**
+	 * Tracking tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_tracking_tab( $settings ) {
+		$fields = array(
+			'fb_pixel'     => array( __( 'Facebook (Meta) Pixel ID', 'cartiva-commerce' ), '123456789012345', __( 'Events Manager > Data sources > your pixel. Numbers only.', 'cartiva-commerce' ) ),
+			'ga4_id'       => array( __( 'Google Analytics 4 Measurement ID', 'cartiva-commerce' ), 'G-XXXXXXXXXX', __( 'Admin > Data streams > your web stream.', 'cartiva-commerce' ) ),
+			'tiktok_pixel' => array( __( 'TikTok Pixel ID', 'cartiva-commerce' ), 'C1A2B3C4D5E6F7G8H9I0', __( 'TikTok Ads Manager > Assets > Events > Web events.', 'cartiva-commerce' ) ),
+		);
+		?>
+		<p class="description"><?php esc_html_e( 'Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off.', 'cartiva-commerce' ); ?></p>
+		<table class="form-table" role="presentation">
+			<?php foreach ( $fields as $key => $field ) : ?>
+				<tr>
+					<th scope="row"><label for="cartiva-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $field[0] ); ?></label></th>
+					<td>
+						<input type="text" class="regular-text code" id="cartiva-<?php echo esc_attr( $key ); ?>" name="cartiva_commerce_settings[<?php echo esc_attr( $key ); ?>]" value="<?php echo esc_attr( (string) $settings[ $key ] ); ?>" placeholder="<?php echo esc_attr( $field[1] ); ?>" autocomplete="off" />
+						<p class="description"><?php echo esc_html( $field[2] ); ?></p>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Where', 'cartiva-commerce' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="cartiva_commerce_settings[track_store]" value="1" <?php checked( ! empty( $settings['track_store'] ) ); ?> /> <?php esc_html_e( 'Also track the rest of the store (product pages, main checkout and order received page)', 'cartiva-commerce' ); ?></label>
+					<p class="description"><?php esc_html_e( 'Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked.', 'cartiva-commerce' ); ?></p>
+				</td>
+			</tr>
+		</table>
+		<p class="description"><?php esc_html_e( 'Privacy: the pixels load services from Meta, Google and TikTok in your visitors\' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies.', 'cartiva-commerce' ); ?></p>
 		<?php
 	}
 

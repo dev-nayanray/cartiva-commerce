@@ -514,14 +514,18 @@ class Cartiva_Commerce_Funnels {
 		if ( is_array( $cached ) ) {
 			return $cached;
 		}
-		$steps  = cartiva_commerce_funnel_steps( $funnel_id );
+		$pages  = Cartiva_Commerce_Analytics::funnel_pages( $funnel_id );
 		$totals = array(
-			'visits'  => $steps ? (int) get_post_meta( (int) $steps[0]['id'], '_cartiva_visits', true ) : 0,
+			'visits'  => 0,
 			'orders'  => 0,
 			'revenue' => 0.0,
 		);
-		foreach ( $steps as $step ) {
-			$step_totals        = Cartiva_Commerce_Stats::totals( (int) $step['id'] );
+		foreach ( $pages['entry'] as $id ) {
+			$totals['visits'] += (int) get_post_meta( $id, '_cartiva_visits', true );
+		}
+		// Every step and A/B variant of the funnel, so results include both groups.
+		foreach ( $pages['all'] as $id ) {
+			$step_totals        = Cartiva_Commerce_Stats::totals( $id );
 			$totals['orders']  += $step_totals['orders'];
 			$totals['revenue'] += $step_totals['revenue'];
 		}

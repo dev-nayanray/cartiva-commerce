@@ -31,3 +31,29 @@
 .cartiva-block-label { display: block; margin-bottom: 6px; }
 .cartiva-funnel-results { margin: 0; }
 .cartiva-funnel-results li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f1; }
+
+/* Analytics */
+.cartiva-analytics__filter { display: flex; gap: 8px; align-items: center; margin: 12px 0 16px; }
+.cartiva-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0 0 16px; }
+.cartiva-tiles li { display: grid; gap: 4px; margin: 0; padding: 14px 16px; border: 1px solid #dcdcde; border-radius: 8px; background: #fff; }
+.cartiva-tiles span { color: #50575e; font-size: 13px; }
+.cartiva-tiles strong { color: #1d2327; font-size: 22px; font-weight: 600; line-height: 1.2; }
+.cartiva-panel { margin: 0 0 16px; padding: 16px; border: 1px solid #dcdcde; border-radius: 8px; background: #fff; }
+.cartiva-panel h2 { margin-top: 0; font-size: 15px; }
+.cartiva-table-scroll { overflow-x: auto; }
+.cartiva-panel table th[scope="row"] { font-weight: 600; }
+.cartiva-kind { display: block; color: #646970; font-size: 12px; font-weight: 400; }
+.cartiva-chart { display: block; width: 100%; height: auto; max-height: 260px; }
+.cartiva-chart__bar { fill: #2271b1; }
+.cartiva-chart__hit { fill: transparent; }
+.cartiva-chart__day:hover .cartiva-chart__bar { fill: #135e96; }
+.cartiva-chart__day:hover .cartiva-chart__hit { fill: rgba(34, 113, 177, .06); }
+.cartiva-chart__grid { stroke: #f0f0f1; stroke-width: 1; }
+.cartiva-chart__base { stroke: #c3c4c7; stroke-width: 1; }
+.cartiva-chart__axis { fill: #646970; font-size: 11px; }
+.cartiva-chart__table { margin-top: 8px; }
+.cartiva-chart__table summary { cursor: pointer; color: #2271b1; }
+.cartiva-ab-results { margin: 8px 0; }
+@media (forced-colors: active) {
+	.cartiva-chart__bar { fill: CanvasText; }
+}

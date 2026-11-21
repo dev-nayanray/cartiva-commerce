@@ -36,6 +36,10 @@ function cartiva_commerce_settings() {
 		'main_fields'    => array(),
 		'main_bd_phone'  => false,
 		'main_coupon'    => true,
+		'fb_pixel'       => '',
+		'ga4_id'         => '',
+		'tiktok_pixel'   => '',
+		'track_store'    => false,
 	);
 	$saved    = get_option( 'cartiva_commerce_settings', array() );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -265,7 +269,8 @@ function cartiva_commerce_funnel_steps( $funnel_id ) {
  * @return int
  */
 function cartiva_commerce_next_step( $landing_id, $type = null ) {
-	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	$landing_id = cartiva_commerce_canonical_step( $landing_id );
+	$funnel     = cartiva_commerce_funnel_of( $landing_id );
 	if ( ! $funnel ) {
 		return 0;
 	}
@@ -288,7 +293,8 @@ function cartiva_commerce_next_step( $landing_id, $type = null ) {
  * @return string landing, checkout, upsell, downsell, thankyou or ''.
  */
 function cartiva_commerce_step_type( $landing_id ) {
-	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	$landing_id = cartiva_commerce_canonical_step( $landing_id );
+	$funnel     = cartiva_commerce_funnel_of( $landing_id );
 	foreach ( $funnel ? cartiva_commerce_funnel_steps( $funnel ) : array() as $step ) {
 		if ( (int) $step['id'] === (int) $landing_id ) {
 			return (string) $step['type'];
@@ -306,7 +312,8 @@ function cartiva_commerce_step_type( $landing_id ) {
  * @return array|null Step (id, type) or null.
  */
 function cartiva_commerce_step_after( $landing_id, $skip_downsells = false ) {
-	$funnel = cartiva_commerce_funnel_of( $landing_id );
+	$landing_id = cartiva_commerce_canonical_step( $landing_id );
+	$funnel     = cartiva_commerce_funnel_of( $landing_id );
 	$found  = false;
 	foreach ( $funnel ? cartiva_commerce_funnel_steps( $funnel ) : array() as $step ) {
 		if ( $found && 'publish' === get_post_status( (int) $step['id'] ) && ! ( $skip_downsells && 'downsell' === $step['type'] ) ) {
@@ -317,4 +324,70 @@ function cartiva_commerce_step_after( $landing_id, $skip_downsells = false ) {
 		}
 	}
 	return null;
+}
+
+/**
+ * The funnel step a page stands for. An A/B test variant stands for the step
+ * it is tested against; every other page stands for itself.
+ *
+ * @param int $landing_id Landing page ID.
+ * @return int
+ */
+function cartiva_commerce_canonical_step( $landing_id ) {
+	$parent = (int) get_post_meta( (int) $landing_id, '_cartiva_ab_parent', true );
+	return $parent > 0 ? $parent : (int) $landing_id;
+}
+
+/**
+ * Is the visitor a search engine or another bot? Bots are not counted and
+ * not put into A/B tests.
+ *
+ * @return bool
+ */
+function cartiva_commerce_is_bot() {
+	$agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) ) : '';
+	return '' === $agent || (bool) preg_match( '/bot|crawl|spider|slurp|facebookexternalhit|preview|lighthouse|headless|curl|wget|python|monitor/', $agent );
+}
+
+/**
+ * Count a visit to a landing page: the total and a per-day log (kept for
+ * 400 days) for the analytics date ranges.
+ *
+ * @param int $landing_id Landing page ID.
+ */
+function cartiva_commerce_count_visit( $landing_id ) {
+	$landing_id = (int) $landing_id;
+	update_post_meta( $landing_id, '_cartiva_visits', (int) get_post_meta( $landing_id, '_cartiva_visits', true ) + 1 );
+	$log   = get_post_meta( $landing_id, '_cartiva_visits_log', true );
+	$log   = is_array( $log ) ? $log : array();
+	$today = gmdate( 'Y-m-d', time() + (int) round( (float) get_option( 'gmt_offset', 0 ) * HOUR_IN_SECONDS ) );
+	$log[ $today ] = isset( $log[ $today ] ) ? (int) $log[ $today ] + 1 : 1;
+	if ( count( $log ) > 400 ) {
+		ksort( $log );
+		$log = array_slice( $log, -400, null, true );
+	}
+	update_post_meta( $landing_id, '_cartiva_visits_log', $log );
+}
+
+/**
+ * Visits of a landing page between two days (Y-m-d, inclusive), or all time
+ * when $from is empty.
+ *
+ * @param int    $landing_id Landing page ID.
+ * @param string $from       First day or ''.
+ * @param string $to         Last day or ''.
+ * @return int
+ */
+function cartiva_commerce_visits_between( $landing_id, $from = '', $to = '' ) {
+	if ( '' === $from ) {
+		return (int) get_post_meta( (int) $landing_id, '_cartiva_visits', true );
+	}
+	$log   = get_post_meta( (int) $landing_id, '_cartiva_visits_log', true );
+	$total = 0;
+	foreach ( is_array( $log ) ? $log : array() as $day => $count ) {
+		if ( $day >= $from && ( '' === $to || $day <= $to ) ) {
+			$total += (int) $count;
+		}
+	}
+	return $total;
 }

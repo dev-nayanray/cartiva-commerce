@@ -100,7 +100,12 @@
 			landing: check.data( 'landing' ),
 			index: check.data( 'index' ),
 			on: this.checked ? 1 : 0,
-		}, bump ).fail( function () {
+		}, bump ).done( function ( res ) {
+			var item = check.data( 'item' );
+			if ( res && res.success && check.prop( 'checked' ) && item ) {
+				$( document.body ).trigger( 'cartiva_bump_added', [ item ] );
+			}
+		} ).fail( function () {
 			check.prop( 'checked', ! check.prop( 'checked' ) );
 			bump.toggleClass( 'is-added', check.prop( 'checked' ) );
 		} );

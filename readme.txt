@@ -5,11 +5,11 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sales funnels with one-click upsells, order bumps, product packs, short landing page checkouts and a checkout field editor for WooCommerce. All free.
+Sales funnels with one-click upsells, order bumps, A/B tests, analytics and pixel tracking, plus a checkout field editor for WooCommerce. All free.
 
 == Description ==
 
@@ -33,6 +33,20 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 * Works with Cash on delivery, bank transfer and check. Orders paid another way skip the offers and go straight to the thank-you step.
 * Stock, order totals and order notes are updated, and the offer product is marked on the order.
 * **Order details** block for thank-you steps: order number, items, total, payment and delivery details, plus the payment method's instructions (for example your bank details).
+
+= Analytics and A/B tests =
+
+* **Analytics** page: revenue, orders, average order, conversion, order bump and upsell acceptance for every funnel and landing page, for the last 7, 30 or 90 days or 12 months, with revenue per day.
+* **A/B tests** on any landing page or funnel step: create variant B from a copy in one click, choose the share of visitors who see it, and compare visits, orders, conversion and revenue. Each visitor always sees the same version.
+* When B wins, one click moves it onto the original page, so its address, funnel position and history stay.
+* Bots and your own visits while logged in are not counted.
+
+= Facebook, Google Analytics 4 and TikTok tracking =
+
+* Add your Meta Pixel ID, GA4 Measurement ID and TikTok Pixel ID in **WooCommerce > Cartiva Commerce > Tracking**.
+* Events: PageView, ViewContent / view_item, InitiateCheckout / begin_checkout, AddToCart when an order bump is added, and Purchase.
+* Purchase is sent once per order, at the end of the funnel, with the final value after upsells, and with an event ID so it is not counted twice.
+* Optional tracking for the rest of the store. Respects consent plugins that support the WP Consent API.
 
 = Product options and order bumps =
 
@@ -106,6 +120,14 @@ WooCommerce sends the order email when the order is placed, before the buyer see
 
 Two hours after the order, while it is pending, on hold or processing. Developers can change this with the `cartiva_commerce_offer_window` filter.
 
+= Is the A/B test result reliable? =
+
+Wait until each version has about 30 orders or more. With fewer orders, differences are often luck. The page shows visits, orders, conversion and revenue for both versions since the test started.
+
+= Does tracking work with my cookie banner? =
+
+If your consent plugin supports the WP Consent API (for example Complianz or CookieYes), pixels load only after the visitor accepts marketing cookies. Developers can also use the `cartiva_commerce_tracking_allowed` filter.
+
 = Do order bumps work on the main checkout? =
 
 Not yet. In this version order bumps are shown on landing page order forms.
@@ -136,8 +158,16 @@ Yes. Every feature is in this plugin. There is no pro version.
 2. The landing page settings box: products, bumps, layout, payment methods and fields.
 3. A funnel with its steps and results.
 4. The main checkout field editor.
+5. Funnel analytics with revenue per day.
+6. An A/B test with results for both versions.
 
 == Changelog ==
+
+= 1.3.0 =
+* New: Analytics page with date ranges, per funnel and landing page results, bump and upsell acceptance, and revenue per day.
+* New: A/B tests with a one-click variant copy, traffic split, results and "B wins" switch.
+* New: Facebook Pixel, Google Analytics 4 and TikTok Pixel events, Purchase sent once with the final value.
+* Improved: Bots and logged-in editors are no longer counted as visits; visits are recorded per day.
 
 = 1.2.0 =
 * New: One-click upsell and downsell steps that add the offer to the same order (Cash on delivery, bank transfer, check).
@@ -157,6 +187,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Adds analytics, A/B tests and Facebook, GA4 and TikTok tracking.
 
 = 1.2.0 =
 Adds one-click upsells and downsells, and an order details block for thank-you pages.

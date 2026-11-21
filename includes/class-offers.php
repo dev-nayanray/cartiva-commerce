@@ -333,7 +333,7 @@ class Cartiva_Commerce_Offers {
 			?>
 			<div class="cartiva-bump<?php echo esc_attr( $bump['in_cart'] ? ' is-added' : '' ); ?>">
 				<label class="cartiva-bump__head" for="<?php echo esc_attr( $id ); ?>">
-					<input type="checkbox" id="<?php echo esc_attr( $id ); ?>" class="cartiva-bump__check" data-landing="<?php echo esc_attr( (string) $landing_id ); ?>" data-index="<?php echo esc_attr( (string) $index ); ?>" <?php checked( $bump['in_cart'] ); ?> />
+					<input type="checkbox" id="<?php echo esc_attr( $id ); ?>" class="cartiva-bump__check" data-landing="<?php echo esc_attr( (string) $landing_id ); ?>" data-index="<?php echo esc_attr( (string) $index ); ?>" data-item="<?php echo esc_attr( (string) wp_json_encode( Cartiva_Commerce_Tracking::item( $product, max( 1, (int) $row['qty'] ), cartiva_commerce_discounted( (float) $product->get_price(), (float) $row['discount'] ) ) ) ); ?>" <?php checked( $bump['in_cart'] ); ?> />
 					<span class="cartiva-bump__title"><?php echo esc_html( $title ); ?></span>
 				</label>
 				<div class="cartiva-bump__body">

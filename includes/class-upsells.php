@@ -297,7 +297,7 @@ class Cartiva_Commerce_Upsells {
 				__( 'Offer accepted: %1$s × %2$s added for %3$s.', 'cartiva-commerce' ),
 				$qty,
 				wp_strip_all_tags( $product->get_name() ),
-				wp_strip_all_tags( wc_price( $total, array( 'currency' => $order->get_currency() ) ) )
+				html_entity_decode( wp_strip_all_tags( wc_price( $total, array( 'currency' => $order->get_currency() ) ) ), ENT_QUOTES, 'UTF-8' )
 			)
 		);
 		return true;
