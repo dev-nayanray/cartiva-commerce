@@ -1,5 +1,5 @@
 <?php
-return ['project-id-version'=>'Cartiva Commerce 1.6.0','language'=>'bn_BD','plural-forms'=>'nplurals=2; plural=(n != 1);','domain'=>'cartiva-commerce','messages'=>[
+return ['project-id-version'=>'Cartiva Commerce 1.6.1','language'=>'bn_BD','plural-forms'=>'nplurals=2; plural=(n != 1);','domain'=>'cartiva-commerce','messages'=>[
 'Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce.'=>'Cartiva Commerce চালাতে WooCommerce লাগবে। অনুগ্রহ করে WooCommerce ইনস্টল ও চালু করুন।',
 'Product'=>'পণ্য',
 'Visits'=>'ভিজিট',
@@ -163,7 +163,9 @@ Here is {discount} off your order with the code {coupon}. It is valid until {exp
 'Single landing page'=>'একক ল্যান্ডিং পেজ',
 'Shows a Cartiva Commerce landing page at full width between the site header and footer.'=>'সাইটের হেডার ও ফুটারের মাঝে পুরো প্রস্থে Cartiva Commerce ল্যান্ডিং পেজ দেখায়।',
 'Landing page: product and order form'=>'ল্যান্ডিং পেজ: পণ্য ও অর্ডার ফর্ম',
+'Choose a product'=>'একটি পণ্য বাছাই করুন',
 'Search for a product or a variation'=>'পণ্য বা ভেরিয়েশন খুঁজুন',
+'%s — all variations'=>'%s — সব ভেরিয়েশন',
 'Product or variation'=>'পণ্য বা ভেরিয়েশন',
 'Product name'=>'পণ্যের নাম',
 'Label'=>'লেবেল',
@@ -187,6 +189,7 @@ Here is {discount} off your order with the code {coupon}. It is valid until {exp
 'Two columns (details left, order summary right)'=>'দুই কলাম (বাঁয়ে তথ্য, ডানে অর্ডারের সারাংশ)',
 'Two steps (details, then payment)'=>'দুই ধাপ (প্রথমে তথ্য, তারপর পেমেন্ট)',
 'Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step.'=>'যে ধাপ শুধু তথ্য দেয়, যেমন চেকআউট ধাপে নিয়ে যাওয়া সেলস পেজ বা ধন্যবাদ ধাপ, সেখানে পণ্য খালি রাখুন।',
+'This page has an order form but no product yet. Choose the product below, then update the page.'=>'এই পেজে অর্ডার ফর্ম আছে, কিন্তু এখনো কোনো পণ্য নেই। নিচে পণ্যটি বাছাই করুন, তারপর পেজটি আপডেট করুন।',
 'How shoppers choose'=>'ক্রেতা কীভাবে বাছাই করবেন',
 'Show a quantity changer (one product only)'=>'পরিমাণ বদলানোর বাটন দেখান (শুধু একটি পণ্যের ক্ষেত্রে)',
 'Qty'=>'পরিমাণ',
@@ -217,6 +220,13 @@ Here is {discount} off your order with the code {coupon}. It is valid until {exp
 'Order form fields'=>'অর্ডার ফর্মের ঘর',
 'These fields apply to this landing page only. Your main checkout keeps its own fields.'=>'এই ঘরগুলো শুধু এই ল্যান্ডিং পেজে প্রযোজ্য। আপনার মূল চেকআউটের ঘর আলাদা থাকে।',
 'Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)'=>'ফোন নম্বরটি সঠিক বাংলাদেশি মোবাইল নম্বর কিনা যাচাই করুন (01XXXXXXXXX)',
+'The variable product you chose has no variation that can be bought (check prices and stock), so it was not added.'=>'আপনার বাছাই করা ভেরিয়েবল পণ্যটির কেনার মতো কোনো ভেরিয়েশন নেই (দাম ও স্টক দেখুন), তাই এটি যোগ করা হয়নি।',
+'A variable product you chose has no variation that can be bought, so it was not added.'=>'আপনার বাছাই করা একটি ভেরিয়েবল পণ্যের কেনার মতো কোনো ভেরিয়েশন নেই, তাই এটি যোগ করা হয়নি।',
+'Order bumps and upsell offers add one exact item, so the variation "%s" was used. Choose another variation in the list if you prefer.'=>'অর্ডার বাম্প ও আপসেল অফারে একটি নির্দিষ্ট আইটেম যোগ হয়, তাই "%s" ভেরিয়েশনটি ব্যবহার করা হয়েছে। চাইলে তালিকা থেকে অন্য ভেরিয়েশন বাছাই করুন।',
+'Create landing page'=>'ল্যান্ডিং পেজ তৈরি করুন',
+'draft'=>'খসড়া',
+'Save the product first, then create a landing page for it here.'=>'আগে পণ্যটি সংরক্ষণ করুন, তারপর এখান থেকে এর ল্যান্ডিং পেজ তৈরি করুন।',
+'Creates a draft sales page with this product and its order form already set up.'=>'এই পণ্য ও অর্ডার ফর্ম আগে থেকেই সাজানো একটি খসড়া সেলস পেজ তৈরি করে।',
 'Settings'=>'সেটিংস',
 'Cartiva Commerce'=>'Cartiva Commerce',
 'The %s does not look right, so it was not saved.'=>'%s ঠিক মনে হচ্ছে না, তাই এটি সংরক্ষণ করা হয়নি।',

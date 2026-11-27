@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -203,6 +203,13 @@ Yes. Every feature is in this plugin. There is no pro version.
 
 == Changelog ==
 
+= 1.6.1 =
+* Fixed: A new landing page showed no product field until "Add product option" was clicked. It now always shows one.
+* Fixed: Choosing a variable product saved nothing. Its buyable variations now become choices on the order form (Size M, Size L…), and order bumps and upsells use one exact variation.
+* New: "Create landing page" on every product (products list and product screen), with the product and order form already set up.
+* Improved: Stores with up to 300 products pick from a searchable list that works even if the search script does not load.
+* Improved: Clear messages after saving, and a warning when a page has an order form but no product.
+
 = 1.6.0 =
 * New: Bangla (bn_BD) translation.
 * New: Right-to-left language support for the order form and slide-out cart.
@@ -242,6 +249,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.6.1 =
+Fixes assigning products to landing pages, including variable products.
 
 = 1.6.0 =
 Adds the Bangla translation, right-to-left support and better integration with the Cartiva theme.

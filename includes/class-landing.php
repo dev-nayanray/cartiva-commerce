@@ -27,6 +27,10 @@ class Cartiva_Commerce_Landing {
 		add_action( 'template_redirect', array( __CLASS__, 'prepare' ), 5 );
 		add_filter( 'woocommerce_is_checkout', array( __CLASS__, 'is_checkout' ) );
 		add_filter( 'body_class', array( __CLASS__, 'body_class' ) );
+		add_action( 'admin_notices', array( __CLASS__, 'admin_notices' ) );
+		add_filter( 'post_row_actions', array( __CLASS__, 'product_row_action' ), 10, 2 );
+		add_action( 'add_meta_boxes_product', array( __CLASS__, 'product_meta_box' ) );
+		add_action( 'admin_post_cartiva_commerce_product_landing', array( __CLASS__, 'create_for_product' ) );
 	}
 
 	/**
@@ -188,7 +192,20 @@ class Cartiva_Commerce_Landing {
 	 */
 	public static function product_select( $name, $row, $label ) {
 		$item_id = ! empty( $row['variation_id'] ) ? (int) $row['variation_id'] : ( isset( $row['product_id'] ) ? (int) $row['product_id'] : 0 );
-		$item    = $item_id ? wc_get_product( $item_id ) : null;
+		$choices = self::product_choices();
+		if ( null !== $choices ) {
+			// Small catalog: a plain list with search. It works even if the search script does not load.
+			?>
+			<select class="wc-enhanced-select cartiva-product-search" style="width:100%;min-width:220px" name="<?php echo esc_attr( $name ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" data-placeholder="<?php esc_attr_e( 'Choose a product', 'cartiva-commerce' ); ?>" data-allow_clear="true">
+				<option value=""><?php esc_html_e( 'Choose a product', 'cartiva-commerce' ); ?></option>
+				<?php foreach ( $choices as $id => $title ) : ?>
+					<option value="<?php echo esc_attr( (string) $id ); ?>" <?php selected( $item_id, $id ); ?>><?php echo esc_html( $title ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<?php
+			return;
+		}
+		$item = $item_id ? wc_get_product( $item_id ) : null;
 		?>
 		<select class="wc-product-search cartiva-product-search" style="width:100%;min-width:220px" name="<?php echo esc_attr( $name ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" data-placeholder="<?php esc_attr_e( 'Search for a product or a variation', 'cartiva-commerce' ); ?>" data-action="woocommerce_json_search_products_and_variations" data-allow_clear="true">
 			<?php if ( $item ) : ?>
@@ -196,6 +213,50 @@ class Cartiva_Commerce_Landing {
 			<?php endif; ?>
 		</select>
 		<?php
+	}
+
+	/**
+	 * Products to pick from in a small catalog (up to 300 products), with the
+	 * variations of variable products. Null for bigger stores: they search.
+	 *
+	 * @return array|null ID => title.
+	 */
+	public static function product_choices() {
+		static $choices = false;
+		if ( false !== $choices ) {
+			return $choices;
+		}
+		$products = wc_get_products(
+			array(
+				'limit'   => 301,
+				'status'  => array( 'publish', 'private', 'draft', 'pending' ),
+				'orderby' => 'title',
+				'order'   => 'ASC',
+				'type'    => array_diff( array_keys( wc_get_product_types() ), array( 'grouped', 'external' ) ),
+			)
+		);
+		if ( count( $products ) > 300 ) {
+			$choices = null;
+			return $choices;
+		}
+		$choices = array();
+		foreach ( $products as $product ) {
+			$name = wp_strip_all_tags( $product->get_name() );
+			$sku  = $product->get_sku() ? ' (' . $product->get_sku() . ')' : '';
+			if ( $product->is_type( 'variable' ) ) {
+				/* translators: %s: product name. */
+				$choices[ $product->get_id() ] = sprintf( __( '%s — all variations', 'cartiva-commerce' ), $name ) . $sku;
+				foreach ( array_slice( $product->get_children(), 0, 50 ) as $child_id ) {
+					$child = wc_get_product( $child_id );
+					if ( $child ) {
+						$choices[ $child_id ] = '— ' . wp_strip_all_tags( $child->get_name() ) . ( $child->get_sku() ? ' (' . $child->get_sku() . ')' : '' );
+					}
+				}
+			} else {
+				$choices[ $product->get_id() ] = $name . $sku;
+			}
+		}
+		return $choices;
 	}
 
 	/**
@@ -290,6 +351,9 @@ class Cartiva_Commerce_Landing {
 		<div class="cartiva-landing-box">
 			<p class="description"><?php esc_html_e( 'Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step.', 'cartiva-commerce' ); ?></p>
 			<h3><?php esc_html_e( 'Products', 'cartiva-commerce' ); ?></h3>
+			<?php if ( empty( $offers ) && has_block( 'cartiva-commerce/order-form', $post ) ) : ?>
+				<div class="notice notice-warning inline"><p><?php esc_html_e( 'This page has an order form but no product yet. Choose the product below, then update the page.', 'cartiva-commerce' ); ?></p></div>
+			<?php endif; ?>
 			<table class="form-table" role="presentation">
 				<tr>
 					<th scope="row"><label for="cartiva-landing-mode"><?php esc_html_e( 'How shoppers choose', 'cartiva-commerce' ); ?></label></th>
@@ -318,6 +382,9 @@ class Cartiva_Commerce_Landing {
 						<?php
 						foreach ( $offers as $i => $row ) {
 							self::offer_row( (string) $i, $row );
+						}
+						if ( empty( $offers ) ) {
+							self::offer_row( '0', array( 'default' => true ) );
 						}
 						?>
 					</tbody>
@@ -457,6 +524,7 @@ class Cartiva_Commerce_Landing {
 		$raw = isset( $_POST['cartiva_landing'] ) && is_array( $_POST['cartiva_landing'] ) ? wp_unslash( $_POST['cartiva_landing'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Each value is sanitized below.
 		update_post_meta( $post_id, '_cartiva_landing', self::sanitize( $raw ) );
 		delete_transient( 'cartiva_landing_stats_' . $post_id );
+		self::keep_notices();
 	}
 
 	/**
@@ -476,24 +544,50 @@ class Cartiva_Commerce_Landing {
 
 		$offers = array();
 		foreach ( isset( $raw['offers'] ) && is_array( $raw['offers'] ) ? $raw['offers'] : array() as $row ) {
-			$ids = is_array( $row ) ? self::resolve_item( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
-			if ( ! $ids ) {
+			$item_id = is_array( $row ) && isset( $row['item'] ) ? absint( $row['item'] ) : 0;
+			if ( ! $item_id ) {
 				continue;
 			}
-			$offers[] = array_merge(
-				$ids,
-				array(
-					'qty'      => isset( $row['qty'] ) ? max( 1, min( 99, absint( $row['qty'] ) ) ) : 1,
-					'label'    => isset( $row['label'] ) ? sanitize_text_field( $row['label'] ) : '',
-					'discount' => isset( $row['discount'] ) ? (float) max( 0, min( 90, round( (float) $row['discount'], 1 ) ) ) : 0.0,
-					'badge'    => isset( $row['badge'] ) ? sanitize_text_field( $row['badge'] ) : '',
-					'default'  => ! empty( $row['default'] ),
-				)
+			$base = array(
+				'qty'      => isset( $row['qty'] ) ? max( 1, min( 99, absint( $row['qty'] ) ) ) : 1,
+				'label'    => isset( $row['label'] ) ? sanitize_text_field( $row['label'] ) : '',
+				'discount' => isset( $row['discount'] ) ? (float) max( 0, min( 90, round( (float) $row['discount'], 1 ) ) ) : 0.0,
+				'badge'    => isset( $row['badge'] ) ? sanitize_text_field( $row['badge'] ) : '',
+				'default'  => ! empty( $row['default'] ),
 			);
+			$variations = self::variation_options( $item_id );
+			if ( null !== $variations ) {
+				// A variable product: each variation becomes a choice on the form.
+				if ( empty( $variations ) ) {
+					self::$notices[] = array( 'error', __( 'The variable product you chose has no variation that can be bought (check prices and stock), so it was not added.', 'cartiva-commerce' ) );
+					continue;
+				}
+				foreach ( $variations as $n => $variation ) {
+					$offers[] = array_merge(
+						$base,
+						$variation,
+						array(
+							'label'   => '' !== $base['label'] ? $base['label'] . ' — ' . $variation['label'] : $variation['label'],
+							'default' => $base['default'] && 0 === $n,
+						)
+					);
+				}
+				if ( 'single' === $mode ) {
+					$mode = 'one';
+				}
+				/* translators: %d: number of variations. */
+				self::$notices[] = array( 'info', sprintf( _n( 'The variable product was added as %d choice. Shoppers pick it on the order form.', 'The variable product was added as %d choices (one per variation). Shoppers pick theirs on the order form; you can remove the ones you do not want to sell here.', count( $variations ), 'cartiva-commerce' ), count( $variations ) ) );
+				continue;
+			}
+			$ids = self::resolve_item( $item_id );
+			if ( $ids ) {
+				$offers[] = array_merge( $ids, $base );
+			}
 		}
+		$offers = array_slice( $offers, 0, 30 );
 		$bumps = array();
 		foreach ( isset( $raw['bumps'] ) && is_array( $raw['bumps'] ) ? $raw['bumps'] : array() as $row ) {
-			$ids = is_array( $row ) ? self::resolve_item( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
+			$ids = is_array( $row ) ? self::resolve_single( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
 			if ( ! $ids || count( $bumps ) >= 5 ) {
 				continue;
 			}
@@ -510,7 +604,7 @@ class Cartiva_Commerce_Landing {
 			);
 		}
 		$offer_raw = isset( $raw['offer'] ) && is_array( $raw['offer'] ) ? $raw['offer'] : array();
-		$offer_ids = self::resolve_item( isset( $offer_raw['item'] ) ? $offer_raw['item'] : 0 );
+		$offer_ids = self::resolve_single( isset( $offer_raw['item'] ) ? $offer_raw['item'] : 0 );
 		$offer     = $offer_ids ? array_merge(
 			$offer_ids,
 			array(
@@ -569,6 +663,247 @@ class Cartiva_Commerce_Landing {
 			'product_id'   => (int) $item->get_id(),
 			'variation_id' => 0,
 		);
+	}
+
+	/**
+	 * Messages for the person saving the page.
+	 *
+	 * @var array[] Each: type (info, error), text.
+	 */
+	public static $notices = array();
+
+	/**
+	 * The buyable variations of a variable product, or null when the item is
+	 * not a variable product.
+	 *
+	 * @param int $item_id Product ID.
+	 * @return array[]|null Each: product_id, variation_id, label.
+	 */
+	public static function variation_options( $item_id ) {
+		$product = $item_id ? wc_get_product( (int) $item_id ) : null;
+		if ( ! $product || ! $product->is_type( 'variable' ) ) {
+			return null;
+		}
+		$list = array();
+		foreach ( $product->get_children() as $child_id ) {
+			$variation = wc_get_product( $child_id );
+			if ( ! $variation || ! $variation->is_purchasable() || ! $variation->is_in_stock() || 'publish' !== get_post_status( $child_id ) ) {
+				continue;
+			}
+			$label  = wc_get_formatted_variation( $variation, true, false, false );
+			$list[] = array(
+				'product_id'   => (int) $product->get_id(),
+				'variation_id' => (int) $child_id,
+				'label'        => '' !== trim( wp_strip_all_tags( $label ) ) ? wp_strip_all_tags( $label ) : wp_strip_all_tags( $variation->get_name() ),
+			);
+			if ( count( $list ) >= 30 ) {
+				break;
+			}
+		}
+		return $list;
+	}
+
+	/**
+	 * One buyable item: a variable product becomes its first buyable variation
+	 * (for order bumps and upsell offers, which add one exact item).
+	 *
+	 * @param mixed $item_id Product or variation ID.
+	 * @return array|null product_id, variation_id.
+	 */
+	public static function resolve_single( $item_id ) {
+		$variations = self::variation_options( absint( $item_id ) );
+		if ( null === $variations ) {
+			return self::resolve_item( $item_id );
+		}
+		if ( empty( $variations ) ) {
+			self::$notices[] = array( 'error', __( 'A variable product you chose has no variation that can be bought, so it was not added.', 'cartiva-commerce' ) );
+			return null;
+		}
+		/* translators: %s: variation, for example Size: L. */
+		self::$notices[] = array( 'info', sprintf( __( 'Order bumps and upsell offers add one exact item, so the variation "%s" was used. Choose another variation in the list if you prefer.', 'cartiva-commerce' ), $variations[0]['label'] ) );
+		return array(
+			'product_id'   => $variations[0]['product_id'],
+			'variation_id' => $variations[0]['variation_id'],
+		);
+	}
+
+	/**
+	 * Show save messages, and a reminder when a landing page with an order
+	 * form has no product.
+	 */
+	public static function admin_notices() {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( ! $screen || CARTIVA_COMMERCE_LANDING !== $screen->post_type || 'post' !== $screen->base ) {
+			return;
+		}
+		$key     = 'cartiva_landing_notices_' . get_current_user_id();
+		$notices = get_transient( $key );
+		if ( is_array( $notices ) ) {
+			delete_transient( $key );
+			foreach ( $notices as $notice ) {
+				printf( '<div class="notice notice-%1$s is-dismissible"><p>%2$s</p></div>', esc_attr( 'error' === $notice[0] ? 'error' : 'info' ), esc_html( $notice[1] ) );
+			}
+		}
+	}
+
+	/**
+	 * "Create landing page" in the products list.
+	 *
+	 * @param array   $actions Row actions.
+	 * @param WP_Post $post    Post.
+	 * @return array
+	 */
+	public static function product_row_action( $actions, $post ) {
+		if ( 'product' === $post->post_type && current_user_can( 'edit_pages' ) ) {
+			$actions['cartiva_landing'] = '<a href="' . esc_url( self::create_url( $post->ID ) ) . '">' . esc_html__( 'Create landing page', 'cartiva-commerce' ) . '</a>';
+		}
+		return $actions;
+	}
+
+	/**
+	 * Link that creates a landing page for a product.
+	 *
+	 * @param int $product_id Product ID.
+	 * @return string
+	 */
+	public static function create_url( $product_id ) {
+		return wp_nonce_url( admin_url( 'admin-post.php?action=cartiva_commerce_product_landing&product=' . (int) $product_id ), 'cartiva_product_landing_' . (int) $product_id );
+	}
+
+	/**
+	 * Box on the product screen: its landing pages and a create button.
+	 */
+	public static function product_meta_box() {
+		add_meta_box( 'cartiva-product-landing', __( 'Landing pages', 'cartiva-commerce' ), array( __CLASS__, 'render_product_box' ), 'product', 'side', 'low' );
+	}
+
+	/**
+	 * Landing pages that sell a product.
+	 *
+	 * @param int $product_id Product ID.
+	 * @return int[]
+	 */
+	public static function landings_for_product( $product_id ) {
+		$found = array();
+		$ids   = get_posts(
+			array(
+				'post_type'      => CARTIVA_COMMERCE_LANDING,
+				'post_status'    => array( 'publish', 'draft', 'pending', 'private' ),
+				'posts_per_page' => 100,
+				'fields'         => 'ids',
+			)
+		);
+		foreach ( $ids as $id ) {
+			foreach ( cartiva_commerce_landing_offers( cartiva_commerce_landing_config( $id ) ) as $offer ) {
+				if ( (int) $offer['product_id'] === (int) $product_id ) {
+					$found[] = (int) $id;
+					break;
+				}
+			}
+		}
+		return $found;
+	}
+
+	/**
+	 * Product screen box.
+	 *
+	 * @param WP_Post $post Product.
+	 */
+	public static function render_product_box( $post ) {
+		$pages = 'auto-draft' === $post->post_status ? array() : self::landings_for_product( $post->ID );
+		if ( $pages ) {
+			echo '<ul>';
+			foreach ( $pages as $id ) {
+				echo '<li><a href="' . esc_url( (string) get_edit_post_link( $id ) ) . '">' . esc_html( get_the_title( $id ) ) . '</a>' . ( 'publish' !== get_post_status( $id ) ? ' <em>(' . esc_html__( 'draft', 'cartiva-commerce' ) . ')</em>' : '' ) . '</li>';
+			}
+			echo '</ul>';
+		}
+		if ( 'auto-draft' === $post->post_status ) {
+			echo '<p class="description">' . esc_html__( 'Save the product first, then create a landing page for it here.', 'cartiva-commerce' ) . '</p>';
+			return;
+		}
+		echo '<p><a class="button" href="' . esc_url( self::create_url( $post->ID ) ) . '">' . esc_html__( 'Create landing page', 'cartiva-commerce' ) . '</a></p>';
+		echo '<p class="description">' . esc_html__( 'Creates a draft sales page with this product and its order form already set up.', 'cartiva-commerce' ) . '</p>';
+	}
+
+	/**
+	 * Create a landing page for a product (admin-post action).
+	 */
+	public static function create_for_product() {
+		$product_id = isset( $_GET['product'] ) ? absint( wp_unslash( $_GET['product'] ) ) : 0;
+		check_admin_referer( 'cartiva_product_landing_' . $product_id );
+		$product = $product_id ? wc_get_product( $product_id ) : null;
+		if ( ! $product || ! current_user_can( 'edit_pages' ) ) {
+			wp_die( esc_html__( 'You are not allowed to do this.', 'cartiva-commerce' ) );
+		}
+		$id = wp_insert_post(
+			array(
+				'post_type'    => CARTIVA_COMMERCE_LANDING,
+				'post_status'  => 'draft',
+				'post_title'   => wp_strip_all_tags( $product->get_name() ),
+				'post_content' => self::default_content(),
+			),
+			true
+		);
+		if ( is_wp_error( $id ) ) {
+			wp_die( esc_html( $id->get_error_message() ) );
+		}
+		update_post_meta(
+			$id,
+			'_cartiva_landing',
+			self::sanitize(
+				array(
+					'offer_mode'   => 'single',
+					'qty_editable' => 1,
+					'offers'       => array(
+						array(
+							'item'    => $product_id,
+							'default' => 1,
+						),
+					),
+					'preset'       => 'bd_cod',
+					'bd_phone'     => 1,
+				)
+			)
+		);
+		if ( has_post_thumbnail( $product_id ) ) {
+			set_post_thumbnail( $id, get_post_thumbnail_id( $product_id ) );
+		}
+		self::keep_notices();
+		wp_safe_redirect( admin_url( 'post.php?post=' . (int) $id . '&action=edit' ) );
+		exit;
+	}
+
+	/**
+	 * Starting content of a new landing page as block markup: the Cartiva
+	 * theme's landing sections when available, then the order form.
+	 *
+	 * @return string
+	 */
+	public static function default_content() {
+		$parts = array();
+		foreach ( self::default_blocks() as $block ) {
+			if ( 'core/pattern' === $block[0] ) {
+				$parts[] = '<!-- wp:pattern {"slug":"' . esc_attr( $block[1]['slug'] ) . '"} /-->';
+			} elseif ( 'core/heading' === $block[0] ) {
+				$parts[] = '<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">' . esc_html( $block[1]['content'] ) . '</h1><!-- /wp:heading -->';
+			} elseif ( 'core/paragraph' === $block[0] ) {
+				$parts[] = '<!-- wp:paragraph --><p>' . esc_html( $block[1]['content'] ) . '</p><!-- /wp:paragraph -->';
+			} else {
+				$parts[] = '<!-- wp:' . substr( $block[0], 0, 64 ) . ' /-->';
+			}
+		}
+		return implode( "\n\n", $parts );
+	}
+
+	/**
+	 * Keep this request's messages for the next screen.
+	 */
+	public static function keep_notices() {
+		if ( self::$notices ) {
+			set_transient( 'cartiva_landing_notices_' . get_current_user_id(), self::$notices, MINUTE_IN_SECONDS * 5 );
+			self::$notices = array();
+		}
 	}
 
 	/**

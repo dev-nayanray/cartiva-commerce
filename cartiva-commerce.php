@@ -3,7 +3,7 @@
  * Plugin Name:       Cartiva Commerce
  * Plugin URI:        https://godevs.net/plugins/cartiva-commerce/
  * Description:       Sales funnels and single product landing pages with a one-page checkout, product options, order bumps, one-click upsells and downsells, A/B tests, analytics, pixel tracking, abandoned checkout recovery, a slide-out cart, BOGO deals, auto-apply coupons, checkout field editor (per landing page and for the main checkout), and a Buy now button for WooCommerce. Free, fast and theme-independent; designed to match the Cartiva theme.
- * Version:           1.6.0
+ * Version:           1.6.1
  * Requires at least: 6.9
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CARTIVA_COMMERCE_VERSION', '1.6.0' );
+define( 'CARTIVA_COMMERCE_VERSION', '1.6.1' );
 define( 'CARTIVA_COMMERCE_FILE', __FILE__ );
 define( 'CARTIVA_COMMERCE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CARTIVA_COMMERCE_URL', plugin_dir_url( __FILE__ ) );
