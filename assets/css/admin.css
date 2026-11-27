@@ -208,3 +208,25 @@
 .cartiva-order-facts li { display: flex; justify-content: space-between; gap: 8px; margin: 0; padding: 6px 0; border-bottom: 1px solid #f0f0f1; }
 .cartiva-order-facts li span:first-child { color: #646970; }
 .cartiva-order-risk { margin: 10px 0 0; padding: 8px 10px; border-left: 4px solid #d63638; background: #fcf0f1; font-weight: 600; }
+
+/* Courier */
+.column-cartiva_courier { width: 14ch; }
+.cartiva-courier-state { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #f0f0f1; color: #3c434a; font-size: 12px; font-weight: 600; line-height: 20px; }
+.cartiva-courier-state--none { background: transparent; color: #8c8f94; font-weight: 400; padding: 0; }
+.cartiva-courier-state--pending { background: #fcf9e8; color: #6e4e00; }
+.cartiva-courier-state--transit { background: #e5f0fa; color: #135e96; }
+.cartiva-courier-state--delivered { background: #e7f5ea; color: #00691c; }
+.cartiva-courier-state--partial { background: #f3ebfa; color: #5b2b8a; }
+.cartiva-courier-state--returned { background: #fcf0f1; color: #8a2424; }
+.cartiva-courier-box label { font-weight: 600; }
+.cartiva-courier-msg:empty { display: none; }
+.cartiva-courier-msg.is-error, .cartiva-courier-test-result.is-error { color: #b32d2e; }
+.cartiva-courier-msg.is-ok, .cartiva-courier-test-result.is-ok { color: #00691c; }
+.cartiva-courier-test-result { margin-left: 8px; }
+.cartiva-history__verdict { margin: 0 0 12px; padding: 8px 10px; border-left: 4px solid #72aee6; background: #f0f6fc; font-weight: 600; }
+.cartiva-history__verdict--good { border-left-color: #00a32a; background: #edfaef; }
+.cartiva-history__verdict--warn { border-left-color: #dba617; background: #fcf9e8; }
+.cartiva-history__verdict--bad { border-left-color: #d63638; background: #fcf0f1; }
+.cartiva-courier-card h2 .cartiva-badge { margin-left: 6px; }
+.cartiva-settings-form .cartiva-card + .cartiva-card { margin-top: 20px; padding-top: 4px; border-top: 1px solid #dcdcde; border-radius: 0; }
+.cartiva-courier-test-result { color: #646970; }

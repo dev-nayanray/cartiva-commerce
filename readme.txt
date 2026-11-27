@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,10 @@ To change your main checkout fields or the Buy now button, go to **Cartiva Comme
 
 == Frequently Asked Questions ==
 
+= Which couriers can I send orders to? =
+
+Steadfast, Pathao and RedX. Add your API details in Cartiva Commerce > Settings > Courier and click Test connection. Pathao and RedX also have a test (sandbox) mode. Order data (name, phone, address, amount to collect) is sent to the courier you choose only when you send an order.
+
 = Does changing a landing page's fields change my main checkout? =
 
 No. Every landing page keeps its own fields, and the main checkout keeps its own. The plugin checks which form sent each request, so the live totals and the Place order step always use the right rules.
@@ -207,7 +211,25 @@ Yes. Every feature is in this plugin. There is no pro version.
 7. Abandoned checkouts with Call and WhatsApp buttons.
 8. The slide-out cart with the free shipping bar and suggestions.
 
+== External services ==
+
+The courier features connect to courier companies only after you add their API details, and only when you send an order, update its status, test the connection or check a customer's delivery history.
+
+* Steadfast Courier (portal.packzy.com): the order number, customer name, phone, address, amount to collect and item names are sent to book a parcel; the parcel number is sent to read its status; the customer's phone is sent for the delivery history check. Service terms and privacy policy: https://steadfast.com.bd
+* Pathao Courier (api-hermes.pathao.com, sandbox courier-api-sandbox.pathao.com): your Pathao login is sent to get an access token; the same order details are sent to book a parcel and the parcel number to read its status. Service terms and privacy policy: https://pathao.com
+* RedX (openapi.redx.com.bd, sandbox sandbox.redx.com.bd): the same order details and the chosen delivery area are sent to book a parcel; the parcel number to read its status; the list of delivery areas is downloaded. Service terms and privacy policy: https://redx.com.bd
+
+Customers' tracking links open the courier's own tracking page.
+
 == Changelog ==
+
+= 1.9.0 =
+* New: Courier booking for Steadfast, Pathao and RedX. Send one order from its order screen or many from Bulk actions in WooCommerce > Orders. Cash to collect, weight, note and the RedX area (guessed from the address) are filled in for you.
+* New: Courier column in the Orders list (Not sent, Waiting for pickup, On the way, Delivered, Returned) and an hourly status check. Optional instant updates through the Steadfast webhook.
+* New: Optionally mark orders Completed when delivered and Cancelled when returned.
+* New: Customer delivery history on the order screen (parcels received and refused at Steadfast) to spot risky cash on delivery orders.
+* New: Customers see a "Track your parcel" link on their order page.
+* New: Settings > Courier with a Test connection button for each courier.
 
 = 1.8.0 =
 * New: Start here page. Checks your store (products, cash on delivery, page links, checkout), creates a landing page or a whole funnel with upsell for a product in one click, and shows which extras are on.
@@ -269,6 +291,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.9.0 =
+Adds Steadfast, Pathao and RedX courier booking with parcel tracking and customer delivery history.
 
 = 1.8.0 =
 Adds a Start here page, order sources in the Orders list, delivery charge choice and fake order protection. Settings moved to Cartiva Commerce > Settings.

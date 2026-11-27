@@ -151,6 +151,28 @@ class Cartiva_Commerce_Settings {
 				);
 			}
 			$output['emails'] = $emails;
+		} elseif ( 'courier' === $tab ) {
+			$text = function ( $key ) use ( $input ) {
+				return isset( $input[ $key ] ) ? trim( sanitize_text_field( $input[ $key ] ) ) : '';
+			};
+			$default                    = isset( $input['courier_default'] ) ? sanitize_key( $input['courier_default'] ) : '';
+			$output['courier_default']  = isset( Cartiva_Commerce_Courier::providers()[ $default ] ) ? $default : '';
+			$output['courier_weight']   = isset( $input['courier_weight'] ) ? max( 0.1, min( 30, round( (float) $input['courier_weight'], 2 ) ) ) : 0.5;
+			$output['courier_note']     = $text( 'courier_note' );
+			$output['courier_complete'] = ! empty( $input['courier_complete'] );
+			$output['courier_cancel']   = ! empty( $input['courier_cancel'] );
+			foreach ( array( 'sf_key', 'sf_secret', 'pa_client_id', 'pa_client_secret', 'pa_username', 'pa_password', 'rx_token' ) as $key ) {
+				$output[ $key ] = $text( $key );
+			}
+			$output['pa_store_id']  = isset( $input['pa_store_id'] ) ? absint( $input['pa_store_id'] ) : 0;
+			$output['pa_sandbox']   = ! empty( $input['pa_sandbox'] );
+			$output['rx_sandbox']   = ! empty( $input['rx_sandbox'] );
+			$output['rx_store_id']  = isset( $input['rx_store_id'] ) ? absint( $input['rx_store_id'] ) : 0;
+			$output['rx_area_id']   = isset( $input['rx_area_id'] ) ? absint( $input['rx_area_id'] ) : 0;
+			$output['rx_area_name'] = $text( 'rx_area_name' );
+			if ( '' === (string) $output['sf_webhook_token'] ) {
+				$output['sf_webhook_token'] = wp_generate_password( 32, false );
+			}
 		} elseif ( 'protect' === $tab ) {
 			$mode                      = isset( $input['protect_mode'] ) ? sanitize_key( $input['protect_mode'] ) : 'flag';
 			$output['protect']         = ! empty( $input['protect'] );
@@ -279,6 +301,8 @@ class Cartiva_Commerce_Settings {
 					self::render_fields_tab( $settings );
 				} elseif ( 'protect' === $tab ) {
 					self::render_protect_tab( $settings );
+				} elseif ( 'courier' === $tab ) {
+					self::render_courier_tab( $settings );
 				} elseif ( 'cart' === $tab ) {
 			$output['side_cart']      = ! empty( $input['side_cart'] );
 			$output['side_cart_open'] = ! empty( $input['side_cart_open'] );
@@ -350,6 +374,7 @@ class Cartiva_Commerce_Settings {
 			'general'  => array( __( 'General', 'cartiva-commerce' ), __( 'Buy now button', 'cartiva-commerce' ), 'dashicons-admin-generic' ),
 			'fields'   => array( __( 'Checkout form', 'cartiva-commerce' ), __( 'Fields of the main checkout', 'cartiva-commerce' ), 'dashicons-feedback' ),
 			'protect'  => array( __( 'Fake order protection', 'cartiva-commerce' ), __( 'Repeat orders, blocked numbers', 'cartiva-commerce' ), 'dashicons-shield' ),
+			'courier'  => array( __( 'Courier', 'cartiva-commerce' ), __( 'Steadfast, Pathao, RedX', 'cartiva-commerce' ), 'dashicons-car' ),
 			'cart'     => array( __( 'Cart & deals', 'cartiva-commerce' ), __( 'Slide-out cart, free shipping, gifts', 'cartiva-commerce' ), 'dashicons-cart' ),
 			'recovery' => array( __( 'Recovery', 'cartiva-commerce' ), __( 'Win back unfinished orders', 'cartiva-commerce' ), 'dashicons-backup' ),
 			'tracking' => array( __( 'Tracking', 'cartiva-commerce' ), __( 'Facebook, Google, TikTok', 'cartiva-commerce' ), 'dashicons-chart-line' ),
@@ -380,6 +405,137 @@ class Cartiva_Commerce_Settings {
 			</nav>
 		</div>
 		<?php
+	}
+
+	/**
+	 * A text field row of the courier tab.
+	 *
+	 * @param array  $settings Settings.
+	 * @param string $key      Setting.
+	 * @param string $label    Label.
+	 * @param string $type     Input type.
+	 * @param string $help     Help text.
+	 */
+	private static function courier_field( $settings, $key, $label, $type = 'text', $help = '' ) {
+		$id = 'cartiva-' . str_replace( '_', '-', $key );
+		echo '<tr><th scope="row"><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label></th><td>';
+		echo '<input id="' . esc_attr( $id ) . '" type="' . esc_attr( $type ) . '" class="regular-text" autocomplete="off" name="cartiva_commerce_settings[' . esc_attr( $key ) . ']" value="' . esc_attr( 'number' === $type && ! $settings[ $key ] ? '' : (string) $settings[ $key ] ) . '" />';
+		if ( '' !== $help ) {
+			echo '<p class="description">' . esc_html( $help ) . '</p>';
+		}
+		echo '</td></tr>';
+	}
+
+	/**
+	 * Courier tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_courier_tab( $settings ) {
+		$ready = Cartiva_Commerce_Courier::ready();
+		?>
+		<div class="cartiva-card">
+			<h2><?php esc_html_e( 'Send orders to your courier', 'cartiva-commerce' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Connect the courier you use. Then send an order from its order screen, or tick many orders in WooCommerce > Orders and choose "Send to ..." from Bulk actions. The parcel number, status and a tracking link are saved on the order and shown to the customer.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><label for="cartiva-courier-default"><?php esc_html_e( 'Main courier', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<select id="cartiva-courier-default" name="cartiva_commerce_settings[courier_default]">
+							<?php foreach ( Cartiva_Commerce_Courier::providers() as $key => $label ) : ?>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $settings['courier_default'], $key ); ?>><?php echo esc_html( $label . ( isset( $ready[ $key ] ) ? '' : ' - ' . __( 'not connected', 'cartiva-commerce' ) ) ); ?></option>
+							<?php endforeach; ?>
+						</select>
+						<p class="description"><?php esc_html_e( 'Chosen first on the order screen.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-courier-weight"><?php esc_html_e( 'Usual parcel weight (kg)', 'cartiva-commerce' ); ?></label></th>
+					<td><input id="cartiva-courier-weight" type="number" min="0.1" max="30" step="0.1" class="small-text" name="cartiva_commerce_settings[courier_weight]" value="<?php echo esc_attr( (string) $settings['courier_weight'] ); ?>" /></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-courier-note"><?php esc_html_e( 'Note for every parcel', 'cartiva-commerce' ); ?></label></th>
+					<td><input id="cartiva-courier-note" type="text" class="regular-text" name="cartiva_commerce_settings[courier_note]" value="<?php echo esc_attr( (string) $settings['courier_note'] ); ?>" placeholder="<?php esc_attr_e( 'For example: Call before delivery', 'cartiva-commerce' ); ?>" /></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Order status', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[courier_complete]" value="1" <?php checked( ! empty( $settings['courier_complete'] ) ); ?> /> <span><?php esc_html_e( 'Mark the order Completed when the courier delivers it', 'cartiva-commerce' ); ?></span></label>
+						<label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[courier_cancel]" value="1" <?php checked( ! empty( $settings['courier_cancel'] ) ); ?> /> <span><?php esc_html_e( 'Mark the order Cancelled when the parcel is returned', 'cartiva-commerce' ); ?></span></label>
+						<p class="description"><?php esc_html_e( 'Parcel status is checked every hour.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="cartiva-card cartiva-courier-card">
+			<h2>Steadfast <?php self::courier_badge( isset( $ready['steadfast'] ) ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Find the API key and secret in the Steadfast merchant panel under API. Steadfast also powers the customer delivery history check (received and refused parcels) on the order screen.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<?php
+				self::courier_field( $settings, 'sf_key', __( 'API key', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'sf_secret', __( 'Secret key', 'cartiva-commerce' ), 'password' );
+				?>
+				<?php if ( '' !== (string) $settings['sf_webhook_token'] ) : ?>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Instant status updates (optional)', 'cartiva-commerce' ); ?></th>
+						<td>
+							<p class="description"><?php esc_html_e( 'In the Steadfast panel, add this webhook so status changes arrive at once instead of hourly:', 'cartiva-commerce' ); ?></p>
+							<p><?php esc_html_e( 'Callback URL', 'cartiva-commerce' ); ?>: <code><?php echo esc_html( Cartiva_Commerce_Courier::webhook_url() ); ?></code></p>
+							<p><?php esc_html_e( 'Auth token (Bearer)', 'cartiva-commerce' ); ?>: <code><?php echo esc_html( (string) $settings['sf_webhook_token'] ); ?></code></p>
+						</td>
+					</tr>
+				<?php endif; ?>
+			</table>
+			<p><button type="button" class="button" data-cartiva-courier-test="steadfast"><?php esc_html_e( 'Test connection', 'cartiva-commerce' ); ?></button> <span class="cartiva-courier-test-result" role="status"><?php esc_html_e( 'Save your changes first; the test uses the saved details.', 'cartiva-commerce' ); ?></span></p>
+		</div>
+
+		<div class="cartiva-card cartiva-courier-card">
+			<h2>Pathao <?php self::courier_badge( isset( $ready['pathao'] ) ); ?></h2>
+			<p class="description"><?php esc_html_e( 'In the Pathao merchant panel open Developer API to get the client ID and secret. Use the email and password you log in with. Save, click Test connection, and copy your store ID from the answer.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<?php
+				self::courier_field( $settings, 'pa_client_id', __( 'Client ID', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'pa_client_secret', __( 'Client secret', 'cartiva-commerce' ), 'password' );
+				self::courier_field( $settings, 'pa_username', __( 'Login email', 'cartiva-commerce' ), 'email' );
+				self::courier_field( $settings, 'pa_password', __( 'Login password', 'cartiva-commerce' ), 'password' );
+				self::courier_field( $settings, 'pa_store_id', __( 'Store ID', 'cartiva-commerce' ), 'number', __( 'The pickup store parcels are collected from.', 'cartiva-commerce' ) );
+				?>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Test mode', 'cartiva-commerce' ); ?></th>
+					<td><label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[pa_sandbox]" value="1" <?php checked( ! empty( $settings['pa_sandbox'] ) ); ?> /> <span><?php esc_html_e( 'Use the Pathao sandbox (no real parcels)', 'cartiva-commerce' ); ?></span></label></td>
+				</tr>
+			</table>
+			<p><button type="button" class="button" data-cartiva-courier-test="pathao"><?php esc_html_e( 'Test connection', 'cartiva-commerce' ); ?></button> <span class="cartiva-courier-test-result" role="status"><?php esc_html_e( 'Save your changes first; the test uses the saved details.', 'cartiva-commerce' ); ?></span></p>
+		</div>
+
+		<div class="cartiva-card cartiva-courier-card">
+			<h2>RedX <?php self::courier_badge( isset( $ready['redx'] ) ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Get the API access token from the RedX merchant panel (Developer API). RedX needs a delivery area for every parcel; it is guessed from the address and can be changed on the order screen.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<?php
+				self::courier_field( $settings, 'rx_token', __( 'API access token', 'cartiva-commerce' ), 'password' );
+				self::courier_field( $settings, 'rx_store_id', __( 'Pickup store ID (optional)', 'cartiva-commerce' ), 'number' );
+				self::courier_field( $settings, 'rx_area_id', __( 'Default area ID (optional)', 'cartiva-commerce' ), 'number', __( 'Used when the area cannot be guessed.', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'rx_area_name', __( 'Default area name (optional)', 'cartiva-commerce' ) );
+				?>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Test mode', 'cartiva-commerce' ); ?></th>
+					<td><label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[rx_sandbox]" value="1" <?php checked( ! empty( $settings['rx_sandbox'] ) ); ?> /> <span><?php esc_html_e( 'Use the RedX sandbox (no real parcels)', 'cartiva-commerce' ); ?></span></label></td>
+				</tr>
+			</table>
+			<p><button type="button" class="button" data-cartiva-courier-test="redx"><?php esc_html_e( 'Test connection', 'cartiva-commerce' ); ?></button> <span class="cartiva-courier-test-result" role="status"><?php esc_html_e( 'Save your changes first; the test uses the saved details.', 'cartiva-commerce' ); ?></span></p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Connected / not connected badge.
+	 *
+	 * @param bool $on Connected.
+	 */
+	private static function courier_badge( $on ) {
+		echo '<span class="cartiva-badge cartiva-badge--' . ( $on ? 'on' : 'off' ) . '">' . esc_html( $on ? __( 'Connected', 'cartiva-commerce' ) : __( 'Not connected', 'cartiva-commerce' ) ) . '</span>';
 	}
 
 	/**

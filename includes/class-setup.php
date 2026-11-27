@@ -126,6 +126,7 @@ class Cartiva_Commerce_Setup {
 	public static function extras() {
 		$s = cartiva_commerce_settings();
 		return array(
+			array( __( 'Courier booking', 'cartiva-commerce' ), __( 'Send orders to Steadfast, Pathao or RedX in one click and follow every parcel.', 'cartiva-commerce' ), (bool) Cartiva_Commerce_Courier::ready(), Cartiva_Commerce_Settings::url( 'courier' ), 'dashicons-car' ),
 			array( __( 'Fake order protection', 'cartiva-commerce' ), __( 'Spot repeat orders from the same phone and block numbers that refused parcels.', 'cartiva-commerce' ), ! empty( $s['protect'] ), Cartiva_Commerce_Settings::url( 'protect' ), 'dashicons-shield' ),
 			array( __( 'Abandoned order recovery', 'cartiva-commerce' ), __( 'See who left the form without ordering, call them or send a reminder with a coupon.', 'cartiva-commerce' ), ! empty( $s['recovery'] ), Cartiva_Commerce_Settings::url( 'recovery' ), 'dashicons-backup' ),
 			array( __( 'Facebook, Google and TikTok tracking', 'cartiva-commerce' ), __( 'Measure your ads: page views, checkouts and purchases.', 'cartiva-commerce' ), '' !== $s['fb_pixel'] || '' !== $s['ga4_id'] || '' !== $s['tiktok_pixel'], Cartiva_Commerce_Settings::url( 'tracking' ), 'dashicons-chart-line' ),
