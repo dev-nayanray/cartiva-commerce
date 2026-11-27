@@ -25,7 +25,7 @@ class Cartiva_Commerce_Analytics {
 	}
 
 	/**
-	 * Menu item under Cartiva Funnels.
+	 * Menu item in the Cartiva Commerce menu.
 	 */
 	public static function menu() {
 		add_submenu_page(

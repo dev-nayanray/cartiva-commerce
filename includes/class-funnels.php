@@ -23,6 +23,7 @@ class Cartiva_Commerce_Funnels {
 		add_action( 'add_meta_boxes_' . CARTIVA_COMMERCE_FUNNEL, array( __CLASS__, 'meta_boxes' ) );
 		add_action( 'save_post_' . CARTIVA_COMMERCE_FUNNEL, array( __CLASS__, 'save' ), 10, 2 );
 		add_action( 'admin_post_cartiva_commerce_new_funnel', array( __CLASS__, 'create_from_template' ) );
+		add_action( 'admin_post_cartiva_commerce_add_step', array( __CLASS__, 'add_step' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'list_intro' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_assets' ) );
 		add_filter( 'the_content', array( __CLASS__, 'next_step_links' ), 20 );
@@ -66,7 +67,7 @@ class Cartiva_Commerce_Funnels {
 					'not_found'          => __( 'No funnels yet.', 'cartiva-commerce' ),
 					'not_found_in_trash' => __( 'No funnels in the trash.', 'cartiva-commerce' ),
 					'all_items'          => __( 'Funnels', 'cartiva-commerce' ),
-					'menu_name'          => __( 'Cartiva Funnels', 'cartiva-commerce' ),
+					'menu_name'          => __( 'Cartiva Commerce', 'cartiva-commerce' ),
 				),
 				'public'          => false,
 				'show_ui'         => true,
@@ -203,6 +204,7 @@ class Cartiva_Commerce_Funnels {
 			</td>
 			<td class="cartiva-step-links">
 				<?php if ( $id ) : ?>
+					<?php echo self::step_badges( $id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in step_badges(). ?>
 					<a href="<?php echo esc_url( (string) get_edit_post_link( $id ) ); ?>"><?php esc_html_e( 'Edit', 'cartiva-commerce' ); ?></a>
 					| <a href="<?php echo esc_url( (string) get_permalink( $id ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'View', 'cartiva-commerce' ); ?></a>
 				<?php endif; ?>
@@ -225,6 +227,10 @@ class Cartiva_Commerce_Funnels {
 		$choices = self::step_choices();
 		$steps   = cartiva_commerce_funnel_steps( $post->ID );
 		wp_nonce_field( 'cartiva_funnel_save', 'cartiva_funnel_nonce' );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display only.
+		if ( isset( $_GET['cartiva_created'] ) ) {
+			echo '<div class="cartiva-callout cartiva-callout--success"><p><strong>' . esc_html__( 'Your funnel is ready.', 'cartiva-commerce' ) . '</strong> ' . esc_html__( 'Open each step to check its text and pictures. Steps marked Draft must be published before shoppers can see them.', 'cartiva-commerce' ) . '</p></div>';
+		}
 		?>
 		<p class="description"><?php esc_html_e( 'Shoppers go through the steps from top to bottom. On a sales page, buttons that link to #order (or #cartiva-next) open the next step. After an order, buyers see the Upsell steps that follow the checkout: "Yes" moves on to the next upsell, "No" shows the Downsell placed right after it. The flow ends on the Thank you step with the order details.', 'cartiva-commerce' ); ?></p>
 		<div class="cartiva-repeater" data-cartiva-repeater="steps">
@@ -246,9 +252,17 @@ class Cartiva_Commerce_Funnels {
 			</table>
 			<template><?php self::step_row( '__i__', array(), $choices ); ?></template>
 			<p>
-				<button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add step', 'cartiva-commerce' ); ?></button>
-				<a class="button-link" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Create a new landing page', 'cartiva-commerce' ); ?></a>
+				<button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add an existing page as a step', 'cartiva-commerce' ); ?></button>
 			</p>
+			<?php if ( 'auto-draft' !== $post->post_status ) : ?>
+				<div class="cartiva-add-step">
+					<strong><?php esc_html_e( 'Add a new step:', 'cartiva-commerce' ); ?></strong>
+					<?php foreach ( self::step_types() as $type => $label ) : ?>
+						<a class="button" href="<?php echo esc_url( self::add_step_url( $post->ID, $type ) ); ?>">+ <?php echo esc_html( $label ); ?></a>
+					<?php endforeach; ?>
+					<p class="description"><?php esc_html_e( 'Creates a draft page with ready-made content and adds it at the end. Save your changes above first.', 'cartiva-commerce' ); ?></p>
+				</div>
+			<?php endif; ?>
 		</div>
 		<?php
 	}
@@ -436,6 +450,85 @@ class Cartiva_Commerce_Funnels {
 			$parts[] = '<!-- wp:cartiva-commerce/order-details /-->';
 		}
 		return implode( "\n\n", $parts );
+	}
+
+	/**
+	 * Status and product badges of a step.
+	 *
+	 * @param int $id Landing page ID.
+	 * @return string
+	 */
+	public static function step_badges( $id ) {
+		$live   = 'publish' === get_post_status( $id );
+		$html   = '<span class="cartiva-badge cartiva-badge--' . ( $live ? 'on' : 'off' ) . '">' . esc_html( $live ? __( 'Live', 'cartiva-commerce' ) : __( 'Draft', 'cartiva-commerce' ) ) . '</span> ';
+		$config = cartiva_commerce_landing_config( $id );
+		$offers = cartiva_commerce_landing_offers( $config );
+		$type   = cartiva_commerce_step_type( $id );
+		if ( $offers ) {
+			$first   = wc_get_product( $offers[0]['variation_id'] ? $offers[0]['variation_id'] : $offers[0]['product_id'] );
+			$html   .= '<span class="cartiva-badge">' . esc_html( $first ? wp_strip_all_tags( $first->get_name() ) : '' ) . ( count( $offers ) > 1 ? ' +' . ( count( $offers ) - 1 ) : '' ) . '</span> ';
+		} elseif ( 'checkout' === $type ) {
+			$html .= '<span class="cartiva-badge cartiva-badge--warn">' . esc_html__( 'No product', 'cartiva-commerce' ) . '</span> ';
+		}
+		if ( in_array( $type, array( 'upsell', 'downsell' ), true ) && empty( $config['offer'] ) ) {
+			$html .= '<span class="cartiva-badge cartiva-badge--warn">' . esc_html__( 'No offer product', 'cartiva-commerce' ) . '</span> ';
+		}
+		return $html . '<br>';
+	}
+
+	/**
+	 * Link that creates a new step of a type in a funnel.
+	 *
+	 * @param int    $funnel_id Funnel ID.
+	 * @param string $type      Step type.
+	 * @return string
+	 */
+	public static function add_step_url( $funnel_id, $type ) {
+		return wp_nonce_url(
+			add_query_arg(
+				array(
+					'action' => 'cartiva_commerce_add_step',
+					'funnel' => (int) $funnel_id,
+					'type'   => $type,
+				),
+				admin_url( 'admin-post.php' )
+			),
+			'cartiva_commerce_add_step_' . (int) $funnel_id
+		);
+	}
+
+	/**
+	 * Create a new draft step at the end of a funnel (admin-post action).
+	 */
+	public static function add_step() {
+		$funnel_id = isset( $_GET['funnel'] ) ? absint( wp_unslash( $_GET['funnel'] ) ) : 0;
+		check_admin_referer( 'cartiva_commerce_add_step_' . $funnel_id );
+		$type  = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : 'landing';
+		$types = self::step_types();
+		if ( CARTIVA_COMMERCE_FUNNEL !== get_post_type( $funnel_id ) || ! current_user_can( 'edit_post', $funnel_id ) || ! isset( $types[ $type ] ) ) {
+			wp_die( esc_html__( 'You are not allowed to do this.', 'cartiva-commerce' ) );
+		}
+		$step_id = wp_insert_post(
+			array(
+				'post_type'    => CARTIVA_COMMERCE_LANDING,
+				'post_status'  => 'draft',
+				/* translators: 1: funnel name, 2: step type. */
+				'post_title'   => sprintf( __( '%1$s: %2$s', 'cartiva-commerce' ), get_the_title( $funnel_id ), $types[ $type ] ),
+				'post_content' => self::template_content( $type ),
+			),
+			true
+		);
+		if ( is_wp_error( $step_id ) ) {
+			wp_die( esc_html( $step_id->get_error_message() ) );
+		}
+		$steps   = cartiva_commerce_funnel_steps( $funnel_id );
+		$steps[] = array(
+			'id'   => (int) $step_id,
+			'type' => $type,
+		);
+		self::set_steps( $funnel_id, $steps );
+		wp_safe_redirect( admin_url( 'post.php?post=' . (int) $step_id . '&action=edit' ) );
+		exit;
 	}
 
 	/**

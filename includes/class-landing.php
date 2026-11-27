@@ -329,6 +329,71 @@ class Cartiva_Commerce_Landing {
 	}
 
 	/**
+	 * Status checklist at the top of the settings box, so owners see at a
+	 * glance what is ready and what is missing.
+	 *
+	 * @param WP_Post $post   Landing page.
+	 * @param array   $config Settings.
+	 * @param array   $offers Product options.
+	 */
+	public static function render_status( $post, $config, $offers ) {
+		$items   = array();
+		$has     = ! empty( $offers );
+		$funnel  = cartiva_commerce_funnel_of( $post->ID );
+		$type    = $funnel ? cartiva_commerce_step_type( $post->ID ) : '';
+		if ( ! $has && in_array( $type, array( 'landing', 'upsell', 'downsell', 'thankyou' ), true ) ) {
+			// Steps that do not take the order themselves.
+			$has = true;
+			if ( in_array( $type, array( 'upsell', 'downsell' ), true ) ) {
+				$items[] = array( ! empty( $config['offer'] ) ? 'ok' : 'todo', ! empty( $config['offer'] ) ? __( 'Offer product set', 'cartiva-commerce' ) : __( 'No offer product yet: pick one in the Upsell offer tab', 'cartiva-commerce' ), 'upsell' );
+			} else {
+				$items[] = array( 'off', __( 'No order form here: the checkout step takes the order', 'cartiva-commerce' ), '' );
+			}
+		} else {
+			$items[] = array(
+				$has ? 'ok' : 'todo',
+				$has
+					/* translators: %d: number of product options. */
+					? sprintf( _n( '%d product option', '%d product options', count( $offers ), 'cartiva-commerce' ), count( $offers ) )
+					: __( 'No product yet: pick one in the Products tab', 'cartiva-commerce' ),
+				'products',
+			);
+		}
+		$gateways = self::enabled_gateways();
+		$picked   = array_intersect_key( $gateways, array_flip( (array) $config['gateways'] ) );
+		$items[]  = array(
+			$gateways ? 'ok' : 'todo',
+			$gateways ? ( $picked ? implode( ', ', $picked ) : __( 'All payment methods', 'cartiva-commerce' ) ) : __( 'No payment method enabled', 'cartiva-commerce' ),
+			'payment',
+		);
+		$cd      = Cartiva_Commerce_Countdown::settings( $post->ID );
+		$items[] = array( ! empty( $cd['enabled'] ) ? 'ok' : 'off', ! empty( $cd['enabled'] ) ? __( 'Countdown on', 'cartiva-commerce' ) : __( 'No countdown', 'cartiva-commerce' ), 'countdown' );
+		$bumps   = is_array( $config['bumps'] ) ? count( $config['bumps'] ) : 0;
+		/* translators: %d: number of order bumps. */
+		$items[] = array( $bumps ? 'ok' : 'off', $bumps ? sprintf( _n( '%d order bump', '%d order bumps', $bumps, 'cartiva-commerce' ), $bumps ) : __( 'No order bump', 'cartiva-commerce' ), 'extras' );
+		if ( $funnel ) {
+			/* translators: %s: funnel name. */
+			$items[] = array( 'ok', sprintf( __( 'Step of %s', 'cartiva-commerce' ), get_the_title( $funnel ) ), '' );
+		}
+		$live = 'publish' === $post->post_status;
+		echo '<div class="cartiva-summary">';
+		echo '<span class="cartiva-summary__state cartiva-summary__state--' . ( $live && $has ? 'live' : 'draft' ) . '">' . esc_html( $live ? ( $has ? __( 'Live', 'cartiva-commerce' ) : __( 'Live, but no product', 'cartiva-commerce' ) ) : __( 'Not published yet', 'cartiva-commerce' ) ) . '</span>';
+		echo '<ul class="cartiva-summary__list">';
+		foreach ( $items as $item ) {
+			$label = esc_html( $item[1] );
+			if ( '' !== $item[2] ) {
+				$label = '<button type="button" class="button-link" data-cartiva-go-tab="' . esc_attr( $item[2] ) . '">' . $label . '</button>';
+			}
+			echo '<li class="is-' . esc_attr( $item[0] ) . '">' . $label . '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above.
+		}
+		echo '</ul>';
+		if ( $live ) {
+			echo '<a class="button" href="' . esc_url( (string) get_permalink( $post ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'View page', 'cartiva-commerce' ) . '</a>';
+		}
+		echo '</div>';
+	}
+
+	/**
 	 * Render the settings box.
 	 *
 	 * @param WP_Post $post Landing page.
@@ -349,6 +414,7 @@ class Cartiva_Commerce_Landing {
 		);
 		?>
 		<div class="cartiva-landing-box">
+			<?php self::render_status( $post, $config, $offers ); ?>
 			<div class="cartiva-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Landing page settings', 'cartiva-commerce' ); ?>">
 				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-products" aria-controls="cartiva-panel-products" data-tab="products"><?php esc_html_e( 'Products', 'cartiva-commerce' ); ?></button>
 				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-countdown" aria-controls="cartiva-panel-countdown" data-tab="countdown"><?php esc_html_e( 'Countdown', 'cartiva-commerce' ); ?></button>
@@ -586,6 +652,27 @@ class Cartiva_Commerce_Landing {
 					</td>
 				</tr>
 				<tr>
+					<th scope="row"><?php esc_html_e( 'Delivery charge', 'cartiva-commerce' ); ?></th>
+					<td class="cartiva-delivery-admin">
+						<?php $delivery = Cartiva_Commerce_COD::delivery( $post->ID ); ?>
+						<?php $delivery_rows = $delivery['options'] ? $delivery['options'] : Cartiva_Commerce_COD::default_options(); ?>
+						<label><input type="checkbox" name="cartiva_landing[delivery][enabled]" value="1" <?php checked( $delivery['enabled'] ); ?> /> <?php esc_html_e( 'Let shoppers pick their delivery area on the form', 'cartiva-commerce' ); ?></label>
+						<table class="cartiva-mini-table">
+							<thead><tr><th><?php esc_html_e( 'Area', 'cartiva-commerce' ); ?></th><th><?php esc_html_e( 'Charge', 'cartiva-commerce' ); ?></th></tr></thead>
+							<tbody>
+							<?php for ( $i = 0; $i < max( 3, count( $delivery_rows ) + 1 ); $i++ ) : ?>
+								<?php $row = isset( $delivery_rows[ $i ] ) ? $delivery_rows[ $i ] : array( 'label' => '', 'amount' => '' ); ?>
+								<tr>
+									<td><input type="text" name="cartiva_landing[delivery][options][<?php echo esc_attr( (string) $i ); ?>][label]" value="<?php echo esc_attr( $row['label'] ); ?>" placeholder="<?php esc_attr_e( 'For example Inside Dhaka', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'Area', 'cartiva-commerce' ); ?>" /></td>
+									<td><input type="number" min="0" step="any" class="small-text" name="cartiva_landing[delivery][options][<?php echo esc_attr( (string) $i ); ?>][amount]" value="<?php echo esc_attr( '' === $row['amount'] ? '' : (string) (float) $row['amount'] ); ?>" aria-label="<?php esc_attr_e( 'Charge', 'cartiva-commerce' ); ?>" /></td>
+								</tr>
+							<?php endfor; ?>
+							</tbody>
+						</table>
+						<p class="description"><?php esc_html_e( 'The chosen charge is added to the order total. Leave an area empty to remove it; 0 means free delivery. When this is on, WooCommerce shipping methods are not used on this page.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
 					<th scope="row"><?php esc_html_e( 'Coupons', 'cartiva-commerce' ); ?></th>
 					<td><label><input type="checkbox" name="cartiva_landing[show_coupon]" value="1" <?php checked( ! empty( $config['show_coupon'] ) ); ?> /> <?php esc_html_e( 'Show the coupon field', 'cartiva-commerce' ); ?></label></td>
 				</tr>
@@ -738,6 +825,7 @@ class Cartiva_Commerce_Landing {
 			'layout'       => in_array( $layout, array( 'one', 'two', 'steps' ), true ) ? $layout : 'one',
 			'offer'        => $offer,
 			'countdown'    => Cartiva_Commerce_Countdown::sanitize( isset( $raw['countdown'] ) ? $raw['countdown'] : array() ),
+			'delivery'     => Cartiva_Commerce_COD::sanitize( isset( $raw['delivery'] ) ? $raw['delivery'] : array() ),
 			'gateways'     => array_values( array_intersect( $gateways, $enabled ) ),
 			'preset'       => isset( $presets[ $preset ] ) ? $preset : 'bd_cod',
 			'fields'       => Cartiva_Commerce_Fields::sanitize_config( isset( $raw['fields'] ) ? $raw['fields'] : array() ),

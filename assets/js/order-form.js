@@ -35,6 +35,15 @@
 			} );
 	}
 
+	/* Delivery area */
+
+	$( document ).on( 'change', '.cartiva-delivery input[type="radio"]', function () {
+		var box = $( this ).closest( '.cartiva-delivery' );
+		box.find( '.cartiva-delivery__option' ).removeClass( 'is-selected' );
+		$( this ).closest( '.cartiva-delivery__option' ).addClass( 'is-selected' );
+		post( settings.delivery, { landing: box.data( 'landing' ), choice: this.value }, box );
+	} );
+
 	/* Quantity changer (one-product pages) */
 
 	function clamp( box, value ) {

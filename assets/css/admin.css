@@ -85,3 +85,126 @@
 .cartiva-mode-card__title { font-weight: 600; color: #1d2327; }
 .cartiva-mode-card__text { color: #50575e; font-size: 12px; }
 .cartiva-cd-presets { display: inline-flex; gap: 4px; margin-right: 8px; }
+
+/* ---------- 1.8: screens for store owners ---------- */
+.cartiva-commerce-admin { max-width: 1180px; }
+.cartiva-admin-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin: 12px 0 16px; padding: 16px 20px; border: 1px solid #dcdcde; border-radius: 12px; background: #fff; }
+.cartiva-admin-header__brand { display: flex; align-items: center; gap: 12px; }
+.cartiva-admin-header__logo { width: 40px; height: 40px; border-radius: 10px; background: #2271b1; color: #fff; font-size: 22px; line-height: 40px; text-align: center; }
+.cartiva-admin-header h1 { margin: 0; padding: 0; font-size: 22px; line-height: 1.2; }
+.cartiva-admin-header p { margin: 2px 0 0; color: #646970; font-size: 12px; }
+.cartiva-admin-header__links { display: flex; flex-wrap: wrap; gap: 4px; }
+.cartiva-admin-header__links a { padding: 6px 10px; border-radius: 6px; color: #1d2327; text-decoration: none; font-weight: 500; }
+.cartiva-admin-header__links a:hover, .cartiva-admin-header__links a:focus { background: #f0f6fc; color: #135e96; }
+
+.cartiva-settings-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; margin: 0 0 16px; }
+.cartiva-settings-nav__item { display: grid; grid-template-columns: 24px 1fr; gap: 0 8px; align-items: center; padding: 10px 12px; border: 1px solid #dcdcde; border-radius: 10px; background: #fff; color: #1d2327; text-decoration: none; }
+.cartiva-settings-nav__item .dashicons { grid-row: span 2; color: #646970; }
+.cartiva-settings-nav__item small { color: #646970; font-size: 12px; line-height: 1.3; }
+.cartiva-settings-nav__item:hover { border-color: #2271b1; color: #1d2327; }
+.cartiva-settings-nav__item.is-active { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; background: #f0f6fc; }
+.cartiva-settings-nav__item.is-active .dashicons { color: #2271b1; }
+
+.cartiva-card, .cartiva-settings-form { margin: 0 0 16px; padding: 4px 24px 16px; border: 1px solid #dcdcde; border-radius: 12px; background: #fff; }
+.cartiva-settings-form .cartiva-card { margin: 0; padding: 0; border: 0; }
+.cartiva-card > h2, .cartiva-settings-form > h2, .cartiva-settings-form h2 { margin: 18px 0 8px; font-size: 16px; }
+.cartiva-card--hint { margin-top: 16px; padding: 4px 20px 8px; border-color: #c5d9ed; background: #f6fafe; }
+.cartiva-settings-form .form-table th { padding-top: 18px; }
+.cartiva-save-bar { position: sticky; bottom: 0; z-index: 2; margin: 16px -24px -16px; padding: 12px 24px; border-top: 1px solid #dcdcde; border-radius: 0 0 12px 12px; background: rgba(255, 255, 255, .96); }
+
+/* Toggle switches */
+.cartiva-settings-form .form-table input[type="checkbox"],
+.cartiva-setup input[type="checkbox"],
+.cartiva-switch input[type="checkbox"] { position: relative; width: 36px; height: 20px; margin: 0 8px 0 0; border: 0; border-radius: 999px; background: #8c8f94; box-shadow: none; vertical-align: middle; cursor: pointer; transition: background .15s; -webkit-appearance: none; appearance: none; }
+.cartiva-settings-form .form-table input[type="checkbox"]::before,
+.cartiva-setup input[type="checkbox"]::before,
+.cartiva-switch input[type="checkbox"]::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; margin: 0; border-radius: 50%; background: #fff; transition: transform .15s; }
+.cartiva-settings-form .form-table input[type="checkbox"]:checked,
+.cartiva-setup input[type="checkbox"]:checked,
+.cartiva-switch input[type="checkbox"]:checked { background: #2271b1; }
+.cartiva-settings-form .form-table input[type="checkbox"]:checked::before,
+.cartiva-setup input[type="checkbox"]:checked::before,
+.cartiva-switch input[type="checkbox"]:checked::before { transform: translateX(16px); }
+.cartiva-settings-form .form-table input[type="checkbox"]:focus-visible,
+.cartiva-setup input[type="checkbox"]:focus-visible,
+.cartiva-switch input[type="checkbox"]:focus-visible { outline: 2px solid #2271b1; outline-offset: 2px; }
+.cartiva-switch { display: flex; align-items: center; margin: 0 0 10px; }
+@media (forced-colors: active) {
+	.cartiva-settings-form .form-table input[type="checkbox"], .cartiva-setup input[type="checkbox"], .cartiva-switch input[type="checkbox"] { -webkit-appearance: auto; appearance: auto; width: auto; height: auto; }
+}
+
+/* Start here */
+.cartiva-setup__grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr); gap: 16px; align-items: start; }
+.cartiva-setup__grid .cartiva-card { margin: 0 0 16px; }
+@media (max-width: 960px) { .cartiva-setup__grid { grid-template-columns: 1fr; } }
+.cartiva-step-num { display: inline-block; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: #2271b1; color: #fff; font-size: 13px; line-height: 24px; text-align: center; vertical-align: 1px; }
+.cartiva-field { margin: 0 0 18px; padding: 0; border: 0; }
+.cartiva-field__label { display: block; margin: 0 0 6px; padding: 0; color: #1d2327; font-weight: 600; }
+.cartiva-field .description { display: block; margin-top: 6px; }
+.cartiva-choice-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.cartiva-choice-card { position: relative; display: grid; gap: 4px; padding: 14px 14px 14px 44px; border: 1px solid #c3c4c7; border-radius: 10px; cursor: pointer; }
+.cartiva-choice-card input { position: absolute; top: 16px; left: 14px; margin: 0; }
+.cartiva-choice-card .dashicons { position: absolute; top: 14px; right: 14px; color: #8c8f94; }
+.cartiva-choice-card small { color: #50575e; font-size: 12px; line-height: 1.45; }
+.cartiva-choice-card:has(input:checked) { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; background: #f6fafe; }
+.cartiva-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.cartiva-pill input { position: absolute; opacity: 0; }
+.cartiva-pill span { display: inline-block; padding: 6px 14px; border: 1px solid #c3c4c7; border-radius: 999px; cursor: pointer; }
+.cartiva-pill input:checked + span { border-color: #2271b1; background: #2271b1; color: #fff; }
+.cartiva-pill input:focus-visible + span { outline: 2px solid #2271b1; outline-offset: 2px; }
+.cartiva-setup__create:has(input[name="kind"][value="landing"]:checked) .cartiva-quick-upsell { display: none; }
+.cartiva-checklist, .cartiva-extras { margin: 8px 0 0; }
+.cartiva-checklist li { position: relative; margin: 0; padding: 8px 0 8px 28px; border-bottom: 1px solid #f0f0f1; }
+.cartiva-checklist li:last-child { border-bottom: 0; }
+.cartiva-checklist li::before { position: absolute; top: 8px; left: 0; width: 18px; height: 18px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 700; line-height: 18px; text-align: center; }
+.cartiva-checklist li.is-ok::before { content: "\2713"; background: #00a32a; }
+.cartiva-checklist li.is-warn::before { content: "!"; background: #d63638; }
+.cartiva-checklist li.is-info::before { content: "i"; background: #72aee6; }
+.cartiva-checklist li a { display: inline-block; margin-left: 4px; font-weight: 600; }
+.cartiva-extras li { display: grid; grid-template-columns: 24px 1fr auto; gap: 10px; align-items: start; margin: 0; padding: 10px 0; border-bottom: 1px solid #f0f0f1; }
+.cartiva-extras li:last-child { border-bottom: 0; }
+.cartiva-extras .dashicons { color: #2271b1; }
+.cartiva-extras p { margin: 2px 0 0; color: #50575e; font-size: 12px; }
+.cartiva-recent__links { white-space: nowrap; }
+
+/* Badges */
+.cartiva-badge { display: inline-block; margin: 0 2px 2px 0; padding: 1px 8px; border-radius: 999px; background: #f0f0f1; color: #3c434a; font-size: 11px; font-weight: 600; line-height: 18px; vertical-align: middle; }
+.cartiva-badge--on { background: #e7f5ea; color: #00691c; }
+.cartiva-badge--off { background: #f0f0f1; color: #646970; }
+.cartiva-badge--warn { background: #fcf0f1; color: #8a2424; }
+
+/* Landing box summary */
+.cartiva-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 14px; padding: 10px 12px; border: 1px solid #dcdcde; border-radius: 8px; background: #f6f7f7; }
+.cartiva-summary__state { padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.cartiva-summary__state--live { background: #00a32a; color: #fff; }
+.cartiva-summary__state--draft { background: #dba617; color: #1d2327; }
+.cartiva-summary__list { display: flex; flex-wrap: wrap; gap: 6px 14px; flex: 1; margin: 0; }
+.cartiva-summary__list li { margin: 0; }
+.cartiva-summary__list li::before { margin-right: 4px; font-weight: 700; }
+.cartiva-summary__list li.is-ok::before { content: "\2713"; color: #00a32a; }
+.cartiva-summary__list li.is-todo::before { content: "!"; color: #d63638; }
+.cartiva-summary__list li.is-off::before { content: "\2013"; color: #8c8f94; }
+.cartiva-summary__list li.is-todo .button-link { color: #b32d2e; font-weight: 600; }
+.cartiva-summary__list .button-link { color: #1d2327; text-decoration: none; }
+.cartiva-summary__list .button-link:hover { color: #2271b1; text-decoration: underline; }
+.cartiva-mini-table { margin: 8px 0 4px; border-collapse: collapse; }
+.cartiva-mini-table th { padding: 0 8px 4px 0; text-align: left; font-weight: 600; }
+.cartiva-mini-table td { padding: 0 8px 6px 0; }
+
+/* Funnel steps */
+.cartiva-add-step { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; padding: 12px; border: 1px dashed #c3c4c7; border-radius: 8px; }
+.cartiva-add-step .description { flex-basis: 100%; margin: 0; }
+.cartiva-callout { margin: 0 0 12px; padding: 4px 12px; border-left: 4px solid #72aee6; background: #f0f6fc; }
+.cartiva-callout--success { border-left-color: #00a32a; background: #edfaef; }
+
+/* Orders */
+.column-cartiva_source { width: 13ch; }
+.cartiva-source { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 20px; }
+.cartiva-source--main { background: #f0f0f1; color: #3c434a; }
+.cartiva-source--landing { background: #e5f0fa; color: #135e96; }
+.cartiva-source--funnel { background: #f3ebfa; color: #5b2b8a; }
+.cartiva-source__extras { color: #646970; }
+.cartiva-order-facts { margin: 0; }
+.cartiva-order-facts li { display: flex; justify-content: space-between; gap: 8px; margin: 0; padding: 6px 0; border-bottom: 1px solid #f0f0f1; }
+.cartiva-order-facts li span:first-child { color: #646970; }
+.cartiva-order-risk { margin: 10px 0 0; padding: 8px 10px; border-left: 4px solid #d63638; background: #fcf0f1; font-weight: 600; }

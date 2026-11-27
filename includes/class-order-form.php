@@ -50,6 +50,7 @@ class Cartiva_Commerce_Order_Form {
 				'url'      => WC_AJAX::get_endpoint( 'cartiva_commerce_set_qty' ),
 				'select'   => WC_AJAX::get_endpoint( 'cartiva_commerce_select' ),
 				'bump'     => WC_AJAX::get_endpoint( 'cartiva_commerce_bump' ),
+				'delivery' => WC_AJAX::get_endpoint( 'cartiva_commerce_delivery' ),
 				'nonce'    => wp_create_nonce( 'cartiva_commerce_form' ),
 				'error'    => __( 'Could not update your order. Please try again.', 'cartiva-commerce' ),
 				'details'  => __( 'Your details', 'cartiva-commerce' ),

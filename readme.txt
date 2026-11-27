@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,7 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 
 = Abandoned checkout recovery =
 
-* When shoppers enter their phone or email on an order form but do not order, they appear under **Cartiva Funnels > Abandoned checkouts** with their cart, a **Call** button and a **WhatsApp** button with a ready message.
+* When shoppers enter their phone or email on an order form but do not order, they appear under **Cartiva Commerce > Abandoned checkouts** with their cart, a **Call** button and a **WhatsApp** button with a ready message.
 * Up to three **reminder emails** (after 1 hour, 24 hours and optionally 72 hours), with a "Finish my order" link that puts the cart back and fills in their details.
 * Optional **one-time coupon** in a reminder, locked to the shopper's email and applied automatically from the link.
 * An order from the same shopper (same session, phone or email) marks the checkout **Recovered**; see abandoned, recovered, recovery rate and recovered revenue for the last 30 days.
@@ -66,7 +66,7 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 
 = Facebook, Google Analytics 4 and TikTok tracking =
 
-* Add your Meta Pixel ID, GA4 Measurement ID and TikTok Pixel ID in **WooCommerce > Cartiva Commerce > Tracking**.
+* Add your Meta Pixel ID, GA4 Measurement ID and TikTok Pixel ID in **Cartiva Commerce > Settings > Tracking**.
 * Events: PageView, ViewContent / view_item, InitiateCheckout / begin_checkout, AddToCart when an order bump is added, and Purchase.
 * Purchase is sent once per order, at the end of the funnel, with the final value after upsells, and with an event ID so it is not counted twice.
 * Optional tracking for the rest of the store. Respects consent plugins that support the WP Consent API.
@@ -101,7 +101,7 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 = Buy now button =
 
 * Adds a Buy now button next to Add to cart on product pages. It adds the product and goes straight to checkout.
-* Turn it on or off and change its label in **WooCommerce > Cartiva Commerce**.
+* Turn it on or off and change its label in **Cartiva Commerce > Settings**.
 
 = Languages =
 
@@ -118,13 +118,13 @@ It works with any theme. With the free [Cartiva](https://wordpress.org/themes/ca
 
 1. Install and activate WooCommerce.
 2. Go to **Plugins > Add New**, search for **Cartiva Commerce**, install and activate it.
-3. Go to **Cartiva Funnels** and click **Create a funnel from the template** (or **Template with upsell and downsell**).
-4. Open the **Checkout** step, add the product in the **Landing page: product and order form** box, choose the fields and payment methods.
-5. Check the text on the three steps and publish them. Visit the first step and place a test order.
+3. You land on **Cartiva Commerce > Start here**. It checks your store (products, cash on delivery, page links) and shows what to fix.
+4. Pick a product, choose **Landing page** or **Funnel with upsell**, a countdown (3, 5 or 7 days) and click **Create it**. The page is made with the product, the order form, cash on delivery and the Inside/Outside Dhaka delivery charge already set.
+5. Check the text and pictures, publish, and place a test order.
 
-For a single page that sells on its own, go to **Cartiva Funnels > Landing pages > Add landing page** instead.
+You can also build pages by hand under **Cartiva Commerce > Landing pages** and **Funnels**.
 
-To change your main checkout fields or the Buy now button, go to **WooCommerce > Cartiva Commerce**.
+To change your main checkout fields or the Buy now button, go to **Cartiva Commerce > Settings**.
 
 == Frequently Asked Questions ==
 
@@ -158,7 +158,7 @@ They use WordPress's scheduled tasks, which run when your site has visitors. On 
 
 = My theme already has a mini cart. Will there be two? =
 
-The Cartiva Commerce drawer opens after adding to cart, or from its own floating button. It only replaces your header cart when you tick "Open it from the cart links and mini cart in your header". You can switch the drawer off in WooCommerce > Cartiva Commerce > Cart & deals.
+The Cartiva Commerce drawer opens after adding to cart, or from its own floating button. It only replaces your header cart when you tick "Open it from the cart links and mini cart in your header". You can switch the drawer off in Cartiva Commerce > Settings > Cart & deals.
 
 = Do BOGO gifts work on landing pages? =
 
@@ -208,6 +208,15 @@ Yes. Every feature is in this plugin. There is no pro version.
 8. The slide-out cart with the free shipping bar and suggestions.
 
 == Changelog ==
+
+= 1.8.0 =
+* New: Start here page. Checks your store (products, cash on delivery, page links, checkout), creates a landing page or a whole funnel with upsell for a product in one click, and shows which extras are on.
+* New: Order source in WooCommerce > Orders. A Source column shows Main site, Landing page or Funnel (with the page name and Upsell / Bump / Check flags), a filter shows only main-site orders, only landing page orders, or one funnel or page, and each order has a Cartiva Commerce box with the page, step, upsell answers and delivery area.
+* New: Delivery charge choice on landing pages, for example Inside Dhaka ৳60 / Outside Dhaka ৳120, added to the order total.
+* New: Fake order protection: repeat orders from the same phone, a daily limit per phone, and a blocked numbers list. Orders are marked "Check before shipping" or refused.
+* New: Funnels can add a new step of any type in one click, and each step shows Live/Draft and its product.
+* New: A status summary at the top of each landing page box shows what is ready and what is missing.
+* Improved: One Cartiva Commerce menu holds Start here, Funnels, Landing pages, Abandoned checkouts, Analytics and Settings. Settings has a new card design with switches.
 
 = 1.7.0 =
 * New: Countdown timers for landing pages: per visitor (3, 5, 7 days or custom) or to a fixed date, sticky bar, above the form or the Countdown block, four endings.
@@ -260,6 +269,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.8.0 =
+Adds a Start here page, order sources in the Orders list, delivery charge choice and fake order protection. Settings moved to Cartiva Commerce > Settings.
 
 = 1.7.0 =
 Adds countdown timers and a tabbed, easier landing page settings box.

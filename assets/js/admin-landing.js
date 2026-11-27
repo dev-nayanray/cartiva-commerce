@@ -68,6 +68,10 @@
 		} catch ( e ) {}
 	}
 
+	$( document ).on( 'click', '[data-cartiva-go-tab]', function () {
+		showTab( $( this ).closest( '.cartiva-landing-box' ), $( this ).data( 'cartiva-go-tab' ), true );
+	} );
+
 	$( document ).on( 'click', '.cartiva-tabs__tab', function () {
 		showTab( $( this ).closest( '.cartiva-landing-box' ), $( this ).data( 'tab' ), false );
 	} );

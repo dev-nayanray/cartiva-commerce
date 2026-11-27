@@ -64,6 +64,13 @@ function cartiva_commerce_settings() {
 		'ship_min'       => 0,
 		'cart_recs'      => true,
 		'deals'          => array(),
+		'protect'        => false,
+		'protect_main'   => false,
+		'protect_mode'   => 'flag',
+		'protect_hours'  => 24,
+		'protect_max'    => 0,
+		'protect_block'  => '',
+		'protect_message' => '',
 	);
 	$saved    = get_option( 'cartiva_commerce_settings', array() );
 	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
@@ -111,6 +118,7 @@ function cartiva_commerce_landing_config( $landing_id ) {
 		'layout'       => 'one',
 		'offer'        => array(),
 		'countdown'    => array(),
+		'delivery'     => array(),
 	);
 	$saved  = get_post_meta( (int) $landing_id, '_cartiva_landing', true );
 	$config = wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );

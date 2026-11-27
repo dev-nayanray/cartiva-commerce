@@ -1,6 +1,6 @@
 <?php
 /**
- * Settings page (WooCommerce > Cartiva Commerce) and the shared checkout
+ * Settings page (Cartiva Commerce > Settings) and the shared checkout
  * field editor used here and on each landing page.
  *
  * @package Cartiva_Commerce
@@ -56,13 +56,13 @@ class Cartiva_Commerce_Settings {
 	}
 
 	/**
-	 * Menu item under WooCommerce.
+	 * Menu item in the Cartiva Commerce menu.
 	 */
 	public static function menu() {
 		add_submenu_page(
-			'woocommerce',
-			__( 'Cartiva Commerce', 'cartiva-commerce' ),
-			__( 'Cartiva Commerce', 'cartiva-commerce' ),
+			'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL,
+			__( 'Cartiva Commerce settings', 'cartiva-commerce' ),
+			__( 'Settings', 'cartiva-commerce' ),
 			'manage_woocommerce',
 			self::PAGE,
 			array( __CLASS__, 'render' )
@@ -151,6 +151,15 @@ class Cartiva_Commerce_Settings {
 				);
 			}
 			$output['emails'] = $emails;
+		} elseif ( 'protect' === $tab ) {
+			$mode                      = isset( $input['protect_mode'] ) ? sanitize_key( $input['protect_mode'] ) : 'flag';
+			$output['protect']         = ! empty( $input['protect'] );
+			$output['protect_main']    = ! empty( $input['protect_main'] );
+			$output['protect_mode']    = 'block' === $mode ? 'block' : 'flag';
+			$output['protect_hours']   = isset( $input['protect_hours'] ) ? min( 720, absint( $input['protect_hours'] ) ) : 24;
+			$output['protect_max']     = isset( $input['protect_max'] ) ? min( 50, absint( $input['protect_max'] ) ) : 0;
+			$output['protect_block']   = isset( $input['protect_block'] ) ? sanitize_textarea_field( $input['protect_block'] ) : '';
+			$output['protect_message'] = isset( $input['protect_message'] ) ? sanitize_text_field( $input['protect_message'] ) : '';
 		} elseif ( 'tracking' === $tab ) {
 			$fb                     = isset( $input['fb_pixel'] ) ? preg_replace( '/\D/', '', (string) $input['fb_pixel'] ) : '';
 			$ga                     = isset( $input['ga4_id'] ) ? strtoupper( trim( (string) $input['ga4_id'] ) ) : '';
@@ -181,6 +190,11 @@ class Cartiva_Commerce_Settings {
 		$screen  = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 		$ours    = false !== strpos( (string) $hook, self::PAGE );
 		$landing = $screen && in_array( $screen->post_type, array( CARTIVA_COMMERCE_LANDING, CARTIVA_COMMERCE_FUNNEL ), true );
+		if ( $screen && in_array( $screen->id, array( 'woocommerce_page_wc-orders', 'edit-shop_order', 'shop_order' ), true ) ) {
+			// Orders screens: only the Source badges.
+			wp_enqueue_style( 'cartiva-commerce-admin', CARTIVA_COMMERCE_URL . 'assets/css/admin.css', array(), CARTIVA_COMMERCE_VERSION );
+			return;
+		}
 		if ( ! $ours && ! $landing ) {
 			return;
 		}
@@ -234,19 +248,22 @@ class Cartiva_Commerce_Settings {
 		}
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab switch only.
 		$tab      = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general';
-		$tab      = in_array( $tab, array( 'general', 'fields', 'cart', 'recovery', 'tracking' ), true ) ? $tab : 'general';
+		$tabs     = self::tabs();
+		$tab      = isset( $tabs[ $tab ] ) ? $tab : 'general';
 		$settings = cartiva_commerce_settings();
 		?>
 		<div class="wrap cartiva-commerce-admin">
-			<h1><?php esc_html_e( 'Cartiva Commerce', 'cartiva-commerce' ); ?></h1>
-			<nav class="nav-tab-wrapper">
-				<a href="<?php echo esc_url( self::url( 'general' ) ); ?>" class="nav-tab<?php echo 'general' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'General', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( self::url( 'fields' ) ); ?>" class="nav-tab<?php echo 'fields' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main checkout fields', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( self::url( 'cart' ) ); ?>" class="nav-tab<?php echo 'cart' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Cart & deals', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( self::url( 'recovery' ) ); ?>" class="nav-tab<?php echo 'recovery' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Recovery', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( self::url( 'tracking' ) ); ?>" class="nav-tab<?php echo 'tracking' === $tab ? ' nav-tab-active' : ''; ?>"><?php esc_html_e( 'Tracking', 'cartiva-commerce' ); ?></a>
-				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>" class="nav-tab"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
+			<?php self::header( __( 'Settings', 'cartiva-commerce' ) ); ?>
+			<nav class="cartiva-settings-nav" aria-label="<?php esc_attr_e( 'Settings sections', 'cartiva-commerce' ); ?>">
+				<?php foreach ( $tabs as $key => $info ) : ?>
+					<a href="<?php echo esc_url( self::url( $key ) ); ?>" class="cartiva-settings-nav__item<?php echo $key === $tab ? ' is-active' : ''; ?>"<?php echo $key === $tab ? ' aria-current="page"' : ''; ?>>
+						<span class="dashicons <?php echo esc_attr( $info[2] ); ?>" aria-hidden="true"></span>
+						<strong><?php echo esc_html( $info[0] ); ?></strong>
+						<small><?php echo esc_html( $info[1] ); ?></small>
+					</a>
+				<?php endforeach; ?>
 			</nav>
+			<hr class="wp-header-end" />
 			<?php settings_errors(); ?>
 			<?php
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display only.
@@ -254,12 +271,14 @@ class Cartiva_Commerce_Settings {
 				?>
 				<div class="notice notice-success"><p><?php esc_html_e( 'Your checkout page now uses the classic checkout. The previous version is saved as a page revision.', 'cartiva-commerce' ); ?></p></div>
 			<?php endif; ?>
-			<form method="post" action="options.php">
+			<form method="post" action="options.php" class="cartiva-settings-form">
 				<?php settings_fields( 'cartiva_commerce' ); ?>
 				<input type="hidden" name="cartiva_commerce_settings[_tab]" value="<?php echo esc_attr( $tab ); ?>" />
 				<?php
 				if ( 'fields' === $tab ) {
 					self::render_fields_tab( $settings );
+				} elseif ( 'protect' === $tab ) {
+					self::render_protect_tab( $settings );
 				} elseif ( 'cart' === $tab ) {
 			$output['side_cart']      = ! empty( $input['side_cart'] );
 			$output['side_cart_open'] = ! empty( $input['side_cart_open'] );
@@ -314,9 +333,121 @@ class Cartiva_Commerce_Settings {
 				} else {
 					self::render_general_tab( $settings );
 				}
-				submit_button();
 				?>
+				<div class="cartiva-save-bar"><?php submit_button( __( 'Save changes', 'cartiva-commerce' ), 'primary large', 'submit', false ); ?></div>
 			</form>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Settings sections: key => label, short description, icon.
+	 *
+	 * @return array
+	 */
+	public static function tabs() {
+		return array(
+			'general'  => array( __( 'General', 'cartiva-commerce' ), __( 'Buy now button', 'cartiva-commerce' ), 'dashicons-admin-generic' ),
+			'fields'   => array( __( 'Checkout form', 'cartiva-commerce' ), __( 'Fields of the main checkout', 'cartiva-commerce' ), 'dashicons-feedback' ),
+			'protect'  => array( __( 'Fake order protection', 'cartiva-commerce' ), __( 'Repeat orders, blocked numbers', 'cartiva-commerce' ), 'dashicons-shield' ),
+			'cart'     => array( __( 'Cart & deals', 'cartiva-commerce' ), __( 'Slide-out cart, free shipping, gifts', 'cartiva-commerce' ), 'dashicons-cart' ),
+			'recovery' => array( __( 'Recovery', 'cartiva-commerce' ), __( 'Win back unfinished orders', 'cartiva-commerce' ), 'dashicons-backup' ),
+			'tracking' => array( __( 'Tracking', 'cartiva-commerce' ), __( 'Facebook, Google, TikTok', 'cartiva-commerce' ), 'dashicons-chart-line' ),
+		);
+	}
+
+	/**
+	 * Page header shared by the plugin screens.
+	 *
+	 * @param string $title Screen title.
+	 */
+	public static function header( $title ) {
+		?>
+		<div class="cartiva-admin-header">
+			<div class="cartiva-admin-header__brand">
+				<span class="cartiva-admin-header__logo dashicons dashicons-filter" aria-hidden="true"></span>
+				<div>
+					<h1><?php echo esc_html( $title ); ?></h1>
+					<p><?php /* translators: %s: version number. */ echo esc_html( sprintf( __( 'Cartiva Commerce %s', 'cartiva-commerce' ), CARTIVA_COMMERCE_VERSION ) ); ?></p>
+				</div>
+			</div>
+			<nav class="cartiva-admin-header__links" aria-label="<?php esc_attr_e( 'Cartiva Commerce', 'cartiva-commerce' ); ?>">
+				<a href="<?php echo esc_url( Cartiva_Commerce_Setup::url() ); ?>"><?php esc_html_e( 'Start here', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Landing pages', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=' . CARTIVA_COMMERCE_FUNNEL ) ); ?>"><?php esc_html_e( 'Funnels', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( Cartiva_Commerce_Orders::list_url( 'cartiva' ) ); ?>"><?php esc_html_e( 'Orders', 'cartiva-commerce' ); ?></a>
+				<a href="<?php echo esc_url( self::url() ); ?>"><?php esc_html_e( 'Settings', 'cartiva-commerce' ); ?></a>
+			</nav>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Fake order protection tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_protect_tab( $settings ) {
+		?>
+		<div class="cartiva-card">
+			<h2><?php esc_html_e( 'Stop fake and repeat cash on delivery orders', 'cartiva-commerce' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Checks the phone number of each new order. Orders that look like repeats are either marked "Check before shipping" for you to call, or refused with a message.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Protection', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[protect]" value="1" <?php checked( ! empty( $settings['protect'] ) ); ?> /> <span><?php esc_html_e( 'Check orders from landing pages and funnels', 'cartiva-commerce' ); ?></span></label>
+						<label class="cartiva-switch"><input type="checkbox" name="cartiva_commerce_settings[protect_main]" value="1" <?php checked( ! empty( $settings['protect_main'] ) ); ?> /> <span><?php esc_html_e( 'Also check orders from the main checkout', 'cartiva-commerce' ); ?></span></label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-protect-hours"><?php esc_html_e( 'Repeat orders', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<?php
+						printf(
+							/* translators: %s: number field. */
+							esc_html__( 'Same phone number ordered in the last %s hours', 'cartiva-commerce' ),
+							'<input id="cartiva-protect-hours" type="number" min="0" max="720" class="small-text" name="cartiva_commerce_settings[protect_hours]" value="' . esc_attr( (string) (int) $settings['protect_hours'] ) . '" />'
+						);
+						?>
+						<p class="description"><?php esc_html_e( '0 turns this check off.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-protect-max"><?php esc_html_e( 'Daily limit', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<?php
+						printf(
+							/* translators: %s: number field. */
+							esc_html__( 'At most %s orders per phone number in 24 hours', 'cartiva-commerce' ),
+							'<input id="cartiva-protect-max" type="number" min="0" max="50" class="small-text" name="cartiva_commerce_settings[protect_max]" value="' . esc_attr( (string) (int) $settings['protect_max'] ) . '" />'
+						);
+						?>
+						<p class="description"><?php esc_html_e( '0 means no limit.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'When an order looks like a repeat', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-block-label"><input type="radio" name="cartiva_commerce_settings[protect_mode]" value="flag" <?php checked( $settings['protect_mode'], 'flag' ); ?> /> <?php esc_html_e( 'Accept it, but mark it "Check before shipping" (recommended)', 'cartiva-commerce' ); ?></label>
+						<label class="cartiva-block-label"><input type="radio" name="cartiva_commerce_settings[protect_mode]" value="block" <?php checked( $settings['protect_mode'], 'block' ); ?> /> <?php esc_html_e( 'Refuse it and show the message below', 'cartiva-commerce' ); ?></label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-protect-block"><?php esc_html_e( 'Blocked numbers', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<textarea id="cartiva-protect-block" class="large-text code" rows="4" name="cartiva_commerce_settings[protect_block]" placeholder="01XXXXXXXXX"><?php echo esc_textarea( (string) $settings['protect_block'] ); ?></textarea>
+						<p class="description"><?php esc_html_e( 'One phone number per line. Orders from these numbers are always refused, for example customers who refused parcels before.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-protect-message"><?php esc_html_e( 'Message to the shopper', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-protect-message" type="text" class="large-text" name="cartiva_commerce_settings[protect_message]" value="<?php echo esc_attr( (string) $settings['protect_message'] ); ?>" placeholder="<?php esc_attr_e( 'We already have an order from this phone number. We will call you to confirm it. To change your order, please call us.', 'cartiva-commerce' ); ?>" />
+					</td>
+				</tr>
+			</table>
+			<p class="description"><?php esc_html_e( 'Flagged orders show "Check" in the Source column of the Orders list and a note on the order.', 'cartiva-commerce' ); ?></p>
 		</div>
 		<?php
 	}
@@ -343,12 +474,11 @@ class Cartiva_Commerce_Settings {
 				</td>
 			</tr>
 		</table>
-		<h2><?php esc_html_e( 'Funnels and landing pages', 'cartiva-commerce' ); ?></h2>
-		<p><?php esc_html_e( 'A funnel leads shoppers through steps: a sales page, a checkout and a thank-you page. A single landing page can also sell on its own, with the order form on the same page.', 'cartiva-commerce' ); ?></p>
-		<p>
-			<a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Funnels::template_url() ); ?>"><?php esc_html_e( 'Create a funnel from the template', 'cartiva-commerce' ); ?></a>
-			<a class="button" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . CARTIVA_COMMERCE_LANDING ) ); ?>"><?php esc_html_e( 'Add a landing page', 'cartiva-commerce' ); ?></a>
-		</p>
+		<div class="cartiva-card cartiva-card--hint">
+			<h2><?php esc_html_e( 'Funnels and landing pages', 'cartiva-commerce' ); ?></h2>
+			<p><?php esc_html_e( 'A landing page sells one product with the order form on the same page. A funnel leads shoppers through steps: a sales page, a checkout, an optional upsell and a thank-you page.', 'cartiva-commerce' ); ?></p>
+			<p><a class="button button-primary" href="<?php echo esc_url( Cartiva_Commerce_Setup::url() ); ?>"><?php esc_html_e( 'Create one in the Start here page', 'cartiva-commerce' ); ?></a></p>
+		</div>
 		<?php
 	}
 
@@ -484,7 +614,7 @@ class Cartiva_Commerce_Settings {
 	private static function render_recovery_tab( $settings ) {
 		$emails = Cartiva_Commerce_Recovery::emails();
 		?>
-		<p class="description"><?php esc_html_e( 'When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Funnels > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back.', 'cartiva-commerce' ); ?></p>
+		<p class="description"><?php esc_html_e( 'When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Commerce > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back.', 'cartiva-commerce' ); ?></p>
 		<table class="form-table" role="presentation">
 			<tr>
 				<th scope="row"><?php esc_html_e( 'Save abandoned checkouts', 'cartiva-commerce' ); ?></th>

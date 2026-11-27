@@ -3,7 +3,7 @@
  * Plugin Name:       Cartiva Commerce
  * Plugin URI:        https://godevs.net/plugins/cartiva-commerce/
  * Description:       Sales funnels and single product landing pages with a one-page checkout, product options, order bumps, one-click upsells and downsells, A/B tests, analytics, pixel tracking, abandoned checkout recovery, a slide-out cart, BOGO deals, auto-apply coupons, checkout field editor (per landing page and for the main checkout), and a Buy now button for WooCommerce. Free, fast and theme-independent; designed to match the Cartiva theme.
- * Version:           1.7.0
+ * Version:           1.8.0
  * Requires at least: 6.9
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CARTIVA_COMMERCE_VERSION', '1.7.0' );
+define( 'CARTIVA_COMMERCE_VERSION', '1.8.0' );
 define( 'CARTIVA_COMMERCE_FILE', __FILE__ );
 define( 'CARTIVA_COMMERCE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CARTIVA_COMMERCE_URL', plugin_dir_url( __FILE__ ) );
@@ -66,6 +66,9 @@ function cartiva_commerce_init() {
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-cart.php';
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-deals.php';
 	require_once CARTIVA_COMMERCE_DIR . 'includes/class-countdown.php';
+	require_once CARTIVA_COMMERCE_DIR . 'includes/class-orders.php';
+	require_once CARTIVA_COMMERCE_DIR . 'includes/class-cod.php';
+	require_once CARTIVA_COMMERCE_DIR . 'includes/class-setup.php';
 
 	add_action( 'init', 'cartiva_commerce_load_textdomain', 0 );
 	Cartiva_Commerce_Settings::init();
@@ -85,6 +88,9 @@ function cartiva_commerce_init() {
 	Cartiva_Commerce_Cart::init();
 	Cartiva_Commerce_Deals::init();
 	Cartiva_Commerce_Countdown::init();
+	Cartiva_Commerce_Orders::init();
+	Cartiva_Commerce_COD::init();
+	Cartiva_Commerce_Setup::init();
 }
 add_action( 'plugins_loaded', 'cartiva_commerce_init', 20 );
 
@@ -103,6 +109,9 @@ function cartiva_commerce_missing_wc_notice() {
  */
 function cartiva_commerce_activate() {
 	update_option( 'cartiva_commerce_flush_rewrite', 1, false );
+	if ( ! get_option( 'cartiva_commerce_settings' ) ) {
+		update_option( 'cartiva_commerce_show_setup', 1, false );
+	}
 }
 register_activation_hook( __FILE__, 'cartiva_commerce_activate' );
 

@@ -1,8 +1,8 @@
-# Bengali (Bangladesh) translation of Cartiva Commerce 1.7.0.
+# Bengali (Bangladesh) translation of Cartiva Commerce 1.8.0.
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cartiva Commerce 1.7.0\n"
+"Project-Id-Version: Cartiva Commerce 1.8.0\n"
 "Language: bn_BD\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10,27 +10,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: cartiva-commerce\n"
 
-#: cartiva-commerce.php:98
+#: cartiva-commerce.php:104
 msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
 msgstr "Cartiva Commerce চালাতে WooCommerce লাগবে। অনুগ্রহ করে WooCommerce ইনস্টল ও চালু করুন।"
 
-#: includes/class-stats.php:37 includes/class-landing.php:313 includes/class-landing.php:521
+#: includes/class-stats.php:37 includes/class-landing.php:313 includes/class-landing.php:587
 msgid "Product"
 msgstr "পণ্য"
 
-#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:265 includes/class-funnels.php:555
+#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:279 includes/class-funnels.php:648
 msgid "Visits"
 msgstr "ভিজিট"
 
-#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:266 includes/class-funnels.php:556
+#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-settings.php:378 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:280 includes/class-funnels.php:649 includes/class-setup.php:321
 msgid "Orders"
 msgstr "অর্ডার"
 
-#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:267 includes/class-funnels.php:557
+#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:281 includes/class-funnels.php:650
 msgid "Revenue"
 msgstr "আয়"
 
-#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:268 includes/class-funnels.php:558
+#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:282 includes/class-funnels.php:651
 msgid "Conversion"
 msgstr "কনভার্সন"
 
@@ -38,11 +38,11 @@ msgstr "কনভার্সন"
 msgid "No product chosen"
 msgstr "কোনো পণ্য বাছাই করা হয়নি"
 
-#: includes/class-ab-test.php:152 includes/class-funnels.php:159
+#: includes/class-ab-test.php:152 includes/class-funnels.php:160 includes/class-setup.php:313
 msgid "(no title)"
 msgstr "(শিরোনাম নেই)"
 
-#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-landing.php:945 includes/class-settings.php:212 includes/class-funnels.php:446
+#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-landing.php:1033 includes/class-settings.php:226 includes/class-funnels.php:509 includes/class-funnels.php:539 includes/class-setup.php:394
 msgid "You are not allowed to do this."
 msgstr "আপনার এটি করার অনুমতি নেই।"
 
@@ -51,7 +51,7 @@ msgstr "আপনার এটি করার অনুমতি নেই।"
 msgid "%s (variant B)"
 msgstr "%s (ভেরিয়েন্ট B)"
 
-#: includes/class-ab-test.php:356 includes/class-ab-test.php:368 includes/class-landing.php:359
+#: includes/class-ab-test.php:356 includes/class-ab-test.php:368 includes/class-landing.php:425
 msgid "A/B test"
 msgstr "A/B টেস্ট"
 
@@ -168,7 +168,7 @@ msgstr "এখনো কোনো অসম্পূর্ণ চেকআউট
 msgid "Every 15 minutes"
 msgstr "প্রতি ১৫ মিনিটে"
 
-#: includes/class-recovery.php:210 includes/class-settings.php:507
+#: includes/class-recovery.php:210 includes/class-settings.php:637
 msgid "We save the details you enter here so we can help you if your order is not finished."
 msgstr "আপনার দেওয়া তথ্য আমরা সংরক্ষণ করি, যাতে অর্ডার শেষ না হলে আপনাকে সাহায্য করতে পারি।"
 
@@ -206,64 +206,64 @@ msgstr "এই রিমাইন্ডার বন্ধ করুন"
 msgid "Cartiva Commerce abandoned checkouts"
 msgstr "Cartiva Commerce অসম্পূর্ণ চেকআউট"
 
-#: includes/class-recovery.php:867 includes/class-landing.php:353 includes/class-landing.php:363
+#: includes/class-recovery.php:867 includes/class-landing.php:419 includes/class-landing.php:429
 msgid "Products"
 msgstr "পণ্যসমূহ"
 
-#: includes/class-order-form.php:54
+#: includes/class-order-form.php:55
 msgid "Could not update your order. Please try again."
 msgstr "আপনার অর্ডার আপডেট করা যায়নি। আবার চেষ্টা করুন।"
 
-#: includes/class-order-form.php:55
+#: includes/class-order-form.php:56
 msgid "Your details"
 msgstr "আপনার তথ্য"
 
-#: includes/class-order-form.php:56 includes/class-landing.php:566 includes/class-upsells.php:395
+#: includes/class-order-form.php:57 includes/class-landing.php:632 includes/class-upsells.php:395
 msgid "Payment"
 msgstr "পেমেন্ট"
 
-#: includes/class-order-form.php:57
+#: includes/class-order-form.php:58
 msgid "Continue"
 msgstr "এগিয়ে যান"
 
-#: includes/class-order-form.php:58
+#: includes/class-order-form.php:59
 msgid "Back to your details"
 msgstr "আপনার তথ্যে ফিরে যান"
 
-#: includes/class-order-form.php:59
+#: includes/class-order-form.php:60
 msgid "Please fill in the highlighted fields."
 msgstr "চিহ্নিত ঘরগুলো পূরণ করুন।"
 
-#: includes/class-order-form.php:94
+#: includes/class-order-form.php:95
 msgid "Add the product to sell in the \"Landing page: product and order form\" box when editing this page."
 msgstr "এই পেজ এডিট করার সময় \"Landing page: product and order form\" বক্সে বিক্রির পণ্যটি যোগ করুন।"
 
-#: includes/class-order-form.php:99
+#: includes/class-order-form.php:100
 msgid "Sorry, this product is out of stock right now."
 msgstr "দুঃখিত, এই পণ্যটি এখন স্টকে নেই।"
 
-#: includes/class-order-form.php:145
+#: includes/class-order-form.php:146
 msgid "Decrease quantity"
 msgstr "পরিমাণ কমান"
 
-#: includes/class-order-form.php:146 includes/class-landing.php:283
+#: includes/class-order-form.php:147 includes/class-landing.php:283
 msgid "Quantity"
 msgstr "পরিমাণ"
 
-#: includes/class-order-form.php:147
+#: includes/class-order-form.php:148
 msgid "Increase quantity"
 msgstr "পরিমাণ বাড়ান"
 
-#: includes/class-order-form.php:188
+#: includes/class-order-form.php:189
 msgid "Choose your products"
 msgstr "আপনার পণ্য বাছাই করুন"
 
-#: includes/class-order-form.php:188
+#: includes/class-order-form.php:189
 msgid "Choose your package"
 msgstr "আপনার প্যাকেজ বাছাই করুন"
 
 #. translators: %s: discount percentage.
-#: includes/class-order-form.php:206
+#: includes/class-order-form.php:207
 msgid "Save %s%%"
 msgstr "%s%% সাশ্রয়"
 
@@ -433,7 +433,7 @@ msgstr "কুপন: %s"
 msgid "Subtotal"
 msgstr "সাবটোটাল"
 
-#: includes/class-cart.php:304 includes/class-funnels.php:44 includes/class-funnels.php:462
+#: includes/class-cart.php:304 includes/class-funnels.php:45 includes/class-funnels.php:555
 msgid "Checkout"
 msgstr "চেকআউট"
 
@@ -453,15 +453,15 @@ msgstr "কার্ট বন্ধ করুন"
 msgid "Open cart"
 msgstr "কার্ট খুলুন"
 
-#: includes/class-buy-now.php:48 includes/class-settings.php:341
+#: includes/class-buy-now.php:48 includes/class-settings.php:472
 msgid "Buy now"
 msgstr "এখনই কিনুন"
 
-#: includes/class-landing.php:41 includes/class-landing.php:51 includes/class-landing.php:52 includes/class-landing.php:885
+#: includes/class-landing.php:41 includes/class-landing.php:51 includes/class-landing.php:52 includes/class-landing.php:973 includes/class-settings.php:376
 msgid "Landing pages"
 msgstr "ল্যান্ডিং পেজ"
 
-#: includes/class-landing.php:42 includes/class-analytics.php:419 includes/class-funnels.php:190 includes/class-funnels.php:234 includes/class-checkout.php:255
+#: includes/class-landing.php:42 includes/class-orders.php:117 includes/class-analytics.php:419 includes/class-funnels.php:191 includes/class-funnels.php:240 includes/class-setup.php:200 includes/class-setup.php:314 includes/class-checkout.php:255
 msgid "Landing page"
 msgstr "ল্যান্ডিং পেজ"
 
@@ -493,11 +493,11 @@ msgstr "এখনো কোনো ল্যান্ডিং পেজ নে�
 msgid "No landing pages in the trash."
 msgstr "ট্র্যাশে কোনো ল্যান্ডিং পেজ নেই।"
 
-#: includes/class-landing.php:104 includes/class-funnels.php:417
+#: includes/class-landing.php:104 includes/class-funnels.php:431
 msgid "Your product headline"
 msgstr "আপনার পণ্যের শিরোনাম"
 
-#: includes/class-landing.php:107 includes/class-funnels.php:418
+#: includes/class-landing.php:107 includes/class-funnels.php:432
 msgid "Say in one or two sentences what the product does and why it is worth buying."
 msgstr "পণ্যটি কী কাজ করে এবং কেন কেনার মতো, তা এক-দুই বাক্যে বলুন।"
 
@@ -526,7 +526,7 @@ msgstr "পণ্য বা ভেরিয়েশন খুঁজুন"
 msgid "%s — all variations"
 msgstr "%s — সব ভেরিয়েশন"
 
-#: includes/class-landing.php:282 includes/class-landing.php:389
+#: includes/class-landing.php:282 includes/class-landing.php:455
 msgid "Product or variation"
 msgstr "পণ্য বা ভেরিয়েশন"
 
@@ -534,11 +534,11 @@ msgstr "পণ্য বা ভেরিয়েশন"
 msgid "Product name"
 msgstr "পণ্যের নাম"
 
-#: includes/class-landing.php:284 includes/class-landing.php:391 includes/class-settings.php:674
+#: includes/class-landing.php:284 includes/class-landing.php:457 includes/class-settings.php:804
 msgid "Label"
 msgstr "লেবেল"
 
-#: includes/class-landing.php:285 includes/class-landing.php:318 includes/class-landing.php:392 includes/class-landing.php:523 includes/class-landing.php:553
+#: includes/class-landing.php:285 includes/class-landing.php:318 includes/class-landing.php:458 includes/class-landing.php:589 includes/class-landing.php:619
 msgid "Discount %"
 msgstr "ছাড় %"
 
@@ -546,19 +546,19 @@ msgstr "ছাড় %"
 msgid "Best value"
 msgstr "সবচেয়ে সাশ্রয়ী"
 
-#: includes/class-landing.php:286 includes/class-landing.php:393
+#: includes/class-landing.php:286 includes/class-landing.php:459
 msgid "Badge"
 msgstr "ব্যাজ"
 
-#: includes/class-landing.php:287 includes/class-landing.php:394
+#: includes/class-landing.php:287 includes/class-landing.php:460
 msgid "Selected first"
 msgstr "শুরুতে বাছাই করা"
 
-#: includes/class-landing.php:288 includes/class-landing.php:326 includes/class-landing.php:395 includes/class-landing.php:526 includes/class-settings.php:399 includes/class-settings.php:459 includes/class-funnels.php:213
+#: includes/class-landing.php:288 includes/class-landing.php:326 includes/class-landing.php:461 includes/class-landing.php:592 includes/class-settings.php:529 includes/class-settings.php:589 includes/class-funnels.php:215
 msgid "Remove"
 msgstr "সরান"
 
-#: includes/class-landing.php:315 includes/class-landing.php:559 includes/class-upsells.php:349
+#: includes/class-landing.php:315 includes/class-landing.php:625 includes/class-upsells.php:349
 msgid "Yes, add it to my order"
 msgstr "হ্যাঁ, আমার অর্ডারে যোগ করুন"
 
@@ -574,11 +574,11 @@ msgstr "কেন যোগ করার মতো, এক লাইনে"
 msgid "Description"
 msgstr "বিবরণ"
 
-#: includes/class-landing.php:319 includes/class-landing.php:524
+#: includes/class-landing.php:319 includes/class-landing.php:590
 msgid "Show when the order is at least"
 msgstr "অর্ডার অন্তত এত হলে দেখান"
 
-#: includes/class-landing.php:321 includes/class-landing.php:525
+#: includes/class-landing.php:321 includes/class-landing.php:591
 msgid "Position"
 msgstr "অবস্থান"
 
@@ -590,763 +590,989 @@ msgstr "পেমেন্টের উপরে"
 msgid "Below the address"
 msgstr "ঠিকানার নিচে"
 
-#: includes/class-landing.php:341
+#: includes/class-landing.php:348
+msgid "Offer product set"
+msgstr "অফারের পণ্য দেওয়া আছে"
+
+#: includes/class-landing.php:348
+msgid "No offer product yet: pick one in the Upsell offer tab"
+msgstr "এখনো অফারের পণ্য নেই: আপসেল অফার ট্যাবে একটি বেছে নিন"
+
+#: includes/class-landing.php:350
+msgid "No order form here: the checkout step takes the order"
+msgstr "এখানে অর্ডার ফর্ম নেই: চেকআউট ধাপে অর্ডার নেওয়া হয়"
+
+#. translators: %d: number of product options.
+#: includes/class-landing.php:357
+msgid "%d product option"
+msgid_plural "%d product options"
+msgstr[0] "%dটি পণ্যের অপশন"
+msgstr[1] "%dটি পণ্যের অপশন"
+
+#: includes/class-landing.php:358
+msgid "No product yet: pick one in the Products tab"
+msgstr "এখনো পণ্য নেই: পণ্য ট্যাবে একটি বেছে নিন"
+
+#: includes/class-landing.php:366
+msgid "All payment methods"
+msgstr "সব পেমেন্ট পদ্ধতি"
+
+#: includes/class-landing.php:366
+msgid "No payment method enabled"
+msgstr "কোনো পেমেন্ট পদ্ধতি চালু নেই"
+
+#: includes/class-landing.php:370
+msgid "Countdown on"
+msgstr "কাউন্টডাউন চালু"
+
+#: includes/class-landing.php:370
+msgid "No countdown"
+msgstr "কাউন্টডাউন নেই"
+
+#. translators: %d: number of order bumps.
+#: includes/class-landing.php:373
+msgid "%d order bump"
+msgid_plural "%d order bumps"
+msgstr[0] "%dটি অর্ডার বাম্প"
+msgstr[1] "%dটি অর্ডার বাম্প"
+
+#: includes/class-landing.php:373
+msgid "No order bump"
+msgstr "অর্ডার বাম্প নেই"
+
+#. translators: %s: funnel name.
+#: includes/class-landing.php:376
+msgid "Step of %s"
+msgstr "%s-এর ধাপ"
+
+#: includes/class-landing.php:380 includes/class-funnels.php:463 includes/class-setup.php:315
+msgid "Live"
+msgstr "চালু"
+
+#: includes/class-landing.php:380
+msgid "Live, but no product"
+msgstr "চালু, কিন্তু পণ্য নেই"
+
+#: includes/class-landing.php:380
+msgid "Not published yet"
+msgstr "এখনো প্রকাশ হয়নি"
+
+#: includes/class-landing.php:391
+msgid "View page"
+msgstr "পেজ দেখুন"
+
+#: includes/class-landing.php:406
 msgid "One product (shoppers can change the quantity)"
 msgstr "একটি পণ্য (ক্রেতা পরিমাণ বদলাতে পারবেন)"
 
-#: includes/class-landing.php:342
+#: includes/class-landing.php:407
 msgid "Shoppers pick one option, for example 1, 2 or 3 pieces"
 msgstr "ক্রেতা একটি অপশন বাছাই করবেন, যেমন ১, ২ বা ৩ পিস"
 
-#: includes/class-landing.php:343
+#: includes/class-landing.php:408
 msgid "Shoppers pick one or more products"
 msgstr "ক্রেতা এক বা একাধিক পণ্য বাছাই করবেন"
 
-#: includes/class-landing.php:346
+#: includes/class-landing.php:411
 msgid "One column"
 msgstr "এক কলাম"
 
-#: includes/class-landing.php:347
+#: includes/class-landing.php:412
 msgid "Two columns (details left, order summary right)"
 msgstr "দুই কলাম (বাঁয়ে তথ্য, ডানে অর্ডারের সারাংশ)"
 
-#: includes/class-landing.php:348
+#: includes/class-landing.php:413
 msgid "Two steps (details, then payment)"
 msgstr "দুই ধাপ (প্রথমে তথ্য, তারপর পেমেন্ট)"
 
-#: includes/class-landing.php:352
+#: includes/class-landing.php:418
 msgid "Landing page settings"
 msgstr "ল্যান্ডিং পেজের সেটিংস"
 
-#: includes/class-landing.php:354 includes/class-landing.php:414 includes/class-landing.php:419
+#: includes/class-landing.php:420 includes/class-landing.php:480 includes/class-landing.php:485
 msgid "Countdown"
 msgstr "কাউন্টডাউন"
 
-#: includes/class-landing.php:355
+#: includes/class-landing.php:421
 msgid "Order form"
 msgstr "অর্ডার ফর্ম"
 
-#: includes/class-landing.php:356 includes/class-landing.php:516
+#: includes/class-landing.php:422 includes/class-landing.php:582
 msgid "Order bumps"
 msgstr "অর্ডার বাম্প"
 
-#: includes/class-landing.php:357
+#: includes/class-landing.php:423
 msgid "Upsell offer"
 msgstr "আপসেল অফার"
 
-#: includes/class-landing.php:358
+#: includes/class-landing.php:424
 msgid "Payment & thank you"
 msgstr "পেমেন্ট ও ধন্যবাদ"
 
-#: includes/class-landing.php:362
+#: includes/class-landing.php:428
 msgid "Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step."
 msgstr "যে ধাপ শুধু তথ্য দেয়, যেমন চেকআউট ধাপে নিয়ে যাওয়া সেলস পেজ বা ধন্যবাদ ধাপ, সেখানে পণ্য খালি রাখুন।"
 
-#: includes/class-landing.php:365
+#: includes/class-landing.php:431
 msgid "This page has an order form but no product yet. Choose the product below, then update the page."
 msgstr "এই পেজে অর্ডার ফর্ম আছে, কিন্তু এখনো কোনো পণ্য নেই। নিচে পণ্যটি বাছাই করুন, তারপর পেজটি আপডেট করুন।"
 
-#: includes/class-landing.php:368
+#: includes/class-landing.php:434
 msgid "How shoppers choose"
 msgstr "ক্রেতা কীভাবে বাছাই করবেন"
 
-#: includes/class-landing.php:371
+#: includes/class-landing.php:437
 msgid "One product"
 msgstr "একটি পণ্য"
 
-#: includes/class-landing.php:371
+#: includes/class-landing.php:437
 msgid "Sell one product. Shoppers can change the quantity."
 msgstr "একটি পণ্য বিক্রি করুন। ক্রেতা পরিমাণ বদলাতে পারবেন।"
 
-#: includes/class-landing.php:372
+#: includes/class-landing.php:438
 msgid "Multiple products: shopper picks one"
 msgstr "একাধিক পণ্য: ক্রেতা একটি বাছাই করবেন"
 
-#: includes/class-landing.php:372
+#: includes/class-landing.php:438
 msgid "Packages (1, 2 or 3 pieces), sizes or colors. The shopper chooses one."
 msgstr "প্যাকেজ (১, ২ বা ৩ পিস), সাইজ বা রং। ক্রেতা একটি বাছাই করেন।"
 
-#: includes/class-landing.php:373
+#: includes/class-landing.php:439
 msgid "Multiple products: shopper picks several"
 msgstr "একাধিক পণ্য: ক্রেতা কয়েকটি বাছাই করবেন"
 
-#: includes/class-landing.php:373
+#: includes/class-landing.php:439
 msgid "A shirt, a cap and socks. The shopper ticks the ones they want."
 msgstr "একটি শার্ট, একটি ক্যাপ ও মোজা। ক্রেতা যেগুলো চান সেগুলোতে টিক দেন।"
 
-#: includes/class-landing.php:384
+#: includes/class-landing.php:450
 msgid "Show a quantity changer (+ / −) on the order form"
 msgstr "অর্ডার ফর্মে পরিমাণ বদলানোর বাটন (+ / −) দেখান"
 
-#: includes/class-landing.php:385
+#: includes/class-landing.php:451
 msgid "With \"One product\", only the first row below is sold. Choose a \"Multiple products\" option to sell more."
 msgstr "\"একটি পণ্য\" বাছাই করলে নিচের শুধু প্রথম সারির পণ্যটি বিক্রি হয়। আরও বিক্রি করতে \"একাধিক পণ্য\" অপশন বাছাই করুন।"
 
-#: includes/class-landing.php:390
+#: includes/class-landing.php:456
 msgid "Qty"
 msgstr "পরিমাণ"
 
-#: includes/class-landing.php:409
+#: includes/class-landing.php:475
 msgid "Add product option"
 msgstr "পণ্যের অপশন যোগ করুন"
 
-#: includes/class-landing.php:410
+#: includes/class-landing.php:476
 msgid "Opening the page puts the options marked \"Selected first\" in the cart. Example packs: 1 piece; 2 pieces with 10% off and the badge \"Most popular\"; 3 pieces with 15% off."
 msgstr "পেজ খুললেই \"শুরুতে বাছাই করা\" চিহ্নিত অপশনগুলো কার্টে চলে যায়। প্যাকের উদাহরণ: ১ পিস; ১০% ছাড়ে ২ পিস, \"সবচেয়ে জনপ্রিয়\" ব্যাজসহ; ১৫% ছাড়ে ৩ পিস।"
 
-#: includes/class-landing.php:416
+#: includes/class-landing.php:482
 msgid "A timer that shows how long the offer lasts. Each visitor gets their own time from their first visit, or everyone counts down to one date."
 msgstr "অফারটি কতক্ষণ চলবে তা দেখানোর টাইমার। প্রত্যেক ভিজিটর প্রথম ভিজিট থেকে নিজের সময় পান, অথবা সবার জন্য একটি তারিখ পর্যন্ত গোনা হয়।"
 
-#: includes/class-landing.php:420
+#: includes/class-landing.php:486
 msgid "Show a countdown on this page"
 msgstr "এই পেজে কাউন্টডাউন দেখান"
 
-#: includes/class-landing.php:423
+#: includes/class-landing.php:489
 msgid "Timer type"
 msgstr "টাইমারের ধরন"
 
-#: includes/class-landing.php:425
+#: includes/class-landing.php:491
 msgid "For each visitor, from their first visit (recommended)"
 msgstr "প্রত্যেক ভিজিটরের জন্য, তাদের প্রথম ভিজিট থেকে (প্রস্তাবিত)"
 
-#: includes/class-landing.php:426
+#: includes/class-landing.php:492
 msgid "To a fixed date and time for everyone"
 msgstr "সবার জন্য একটি নির্দিষ্ট তারিখ ও সময় পর্যন্ত"
 
-#: includes/class-landing.php:430
+#: includes/class-landing.php:496
 msgid "Length"
 msgstr "সময়কাল"
 
 #. translators: %d: number of days.
-#: includes/class-landing.php:442 includes/class-settings.php:502 includes/class-settings.php:541
+#: includes/class-landing.php:503 includes/class-setup.php:225 includes/class-setup.php:227 includes/class-setup.php:229
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d দিন"
+msgstr[1] "%d দিন"
+
+#: includes/class-landing.php:508 includes/class-settings.php:632 includes/class-settings.php:671
 msgid "days"
 msgstr "দিন পর"
 
-#: includes/class-landing.php:443 includes/class-settings.php:527
+#: includes/class-landing.php:509 includes/class-settings.php:657
 msgid "hours"
 msgstr "ঘণ্টা পর"
 
-#: includes/class-landing.php:444
+#: includes/class-landing.php:510
 msgid "Counted from each visitor's first visit to this page, in their browser."
 msgstr "প্রত্যেক ভিজিটরের এই পেজে প্রথম ভিজিট থেকে, তাদের ব্রাউজারে গোনা হয়।"
 
-#: includes/class-landing.php:448
+#: includes/class-landing.php:514
 msgid "Ends on"
 msgstr "শেষ হবে"
 
 #. translators: %s: time zone, for example Asia/Dhaka.
-#: includes/class-landing.php:454
+#: includes/class-landing.php:520
 msgid "In your site's time zone (%s)."
 msgstr "আপনার সাইটের টাইম জোনে (%s)।"
 
-#: includes/class-landing.php:460
+#: includes/class-landing.php:526
 msgid "When time runs out"
 msgstr "সময় শেষ হলে"
 
-#: includes/class-landing.php:464
+#: includes/class-landing.php:530
 msgid "Start again for that visitor (keeps the urgency; for-each-visitor timers only)"
 msgstr "ওই ভিজিটরের জন্য আবার শুরু করুন (জরুরি ভাব থাকে; শুধু প্রত্যেক ভিজিটরের টাইমারে)"
 
-#: includes/class-landing.php:465
+#: includes/class-landing.php:531
 msgid "Hide the timer, keep the offer"
 msgstr "টাইমার লুকান, অফার থাকুক"
 
-#: includes/class-landing.php:466
+#: includes/class-landing.php:532
 msgid "End the discounts: prices go back to normal"
 msgstr "ছাড় শেষ করুন: দাম আগের মতো হবে"
 
-#: includes/class-landing.php:467
+#: includes/class-landing.php:533
 msgid "Close the offer: the order form is replaced by a message"
 msgstr "অফার বন্ধ করুন: অর্ডার ফর্মের জায়গায় একটি বার্তা দেখাবে"
 
-#: includes/class-landing.php:473 includes/class-countdown.php:298
+#: includes/class-landing.php:539 includes/class-countdown.php:298
 msgid "Sorry, this offer has ended."
 msgstr "দুঃখিত, এই অফারটি শেষ হয়ে গেছে।"
 
-#: includes/class-landing.php:473
+#: includes/class-landing.php:539
 msgid "Message when the offer is closed"
 msgstr "অফার বন্ধ হলে যে বার্তা দেখাবে"
 
-#: includes/class-landing.php:477
+#: includes/class-landing.php:543
 msgid "Where to show it"
 msgstr "কোথায় দেখাবেন"
 
-#: includes/class-landing.php:479
+#: includes/class-landing.php:545
 msgid "Sticky bar at the top of the page, with an Order now button"
 msgstr "পেজের উপরে স্টিকি বার, \"এখনই অর্ডার করুন\" বাটনসহ"
 
-#: includes/class-landing.php:480
+#: includes/class-landing.php:546
 msgid "Above the order form"
 msgstr "অর্ডার ফর্মের উপরে"
 
-#: includes/class-landing.php:481
+#: includes/class-landing.php:547
 msgid "To place it anywhere else, add the Countdown block in the editor."
 msgstr "অন্য কোথাও দেখাতে এডিটরে Countdown ব্লক যোগ করুন।"
 
-#: includes/class-landing.php:485
+#: includes/class-landing.php:551
 msgid "Texts and look"
 msgstr "লেখা ও ডিজাইন"
 
-#: includes/class-landing.php:487 includes/class-countdown.php:326
+#: includes/class-landing.php:553 includes/class-countdown.php:326
 msgid "Offer ends in"
 msgstr "অফার শেষ হবে"
 
-#: includes/class-landing.php:487
+#: includes/class-landing.php:553
 msgid "Timer title"
 msgstr "টাইমারের শিরোনাম"
 
-#: includes/class-landing.php:488 includes/class-countdown.php:360
+#: includes/class-landing.php:554 includes/class-countdown.php:360
 msgid "Special price for a short time"
 msgstr "অল্প সময়ের জন্য বিশেষ দাম"
 
-#: includes/class-landing.php:488
+#: includes/class-landing.php:554
 msgid "Bar text"
 msgstr "বারের লেখা"
 
-#: includes/class-landing.php:490
+#: includes/class-landing.php:556
 msgid "Big number boxes"
 msgstr "বড় সংখ্যার বক্স"
 
-#: includes/class-landing.php:491
+#: includes/class-landing.php:557
 msgid "Compact line"
 msgstr "ছোট এক লাইন"
 
-#: includes/class-landing.php:498
+#: includes/class-landing.php:564
 msgid "Order form layout"
 msgstr "অর্ডার ফর্মের লেআউট"
 
-#: includes/class-landing.php:501
+#: includes/class-landing.php:567
 msgid "Layout"
 msgstr "লেআউট"
 
-#: includes/class-landing.php:510
+#: includes/class-landing.php:576
 msgid "Order form fields"
 msgstr "অর্ডার ফর্মের ঘর"
 
-#: includes/class-landing.php:511
+#: includes/class-landing.php:577
 msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
 msgstr "এই ঘরগুলো শুধু এই ল্যান্ডিং পেজে প্রযোজ্য। আপনার মূল চেকআউটের ঘর আলাদা থাকে।"
 
-#: includes/class-landing.php:513 includes/class-settings.php:607
+#: includes/class-landing.php:579 includes/class-settings.php:737
 msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
 msgstr "ফোন নম্বরটি সঠিক বাংলাদেশি মোবাইল নম্বর কিনা যাচাই করুন (01XXXXXXXXX)"
 
-#: includes/class-landing.php:517
+#: includes/class-landing.php:583
 msgid "A tick box on the order form that adds an extra product, often at a special price."
 msgstr "অর্ডার ফর্মে একটি টিক বক্স, যা অতিরিক্ত একটি পণ্য যোগ করে, প্রায়ই বিশেষ দামে।"
 
-#: includes/class-landing.php:522
+#: includes/class-landing.php:588
 msgid "Tick box text and description"
 msgstr "টিক বক্সের লেখা ও বিবরণ"
 
-#: includes/class-landing.php:537
+#: includes/class-landing.php:603
 msgid "Add order bump"
 msgstr "অর্ডার বাম্প যোগ করুন"
 
-#: includes/class-landing.php:541
+#: includes/class-landing.php:607
 msgid "Upsell or downsell offer"
 msgstr "আপসেল বা ডাউনসেল অফার"
 
-#: includes/class-landing.php:542
+#: includes/class-landing.php:608
 msgid "Only for pages used as an Upsell or Downsell step in a funnel. Buyers see the offer right after their order, and one click adds it to the same order. Works with Cash on delivery, bank transfer and check payments; orders paid another way skip the offer."
 msgstr "শুধু ফানেলে আপসেল বা ডাউনসেল ধাপ হিসেবে ব্যবহৃত পেজের জন্য। অর্ডারের ঠিক পরেই ক্রেতা অফারটি দেখেন, এক ক্লিকে তা একই অর্ডারে যোগ হয়। ক্যাশ অন ডেলিভারি, ব্যাংক ট্রান্সফার ও চেক পেমেন্টে কাজ করে; অন্যভাবে পেমেন্ট হলে অফারটি দেখানো হয় না।"
 
-#: includes/class-landing.php:546 includes/class-landing.php:547
+#: includes/class-landing.php:612 includes/class-landing.php:613
 msgid "Offer product"
 msgstr "অফারের পণ্য"
 
-#: includes/class-landing.php:550
+#: includes/class-landing.php:616
 msgid "Quantity and discount"
 msgstr "পরিমাণ ও ছাড়"
 
-#: includes/class-landing.php:557
+#: includes/class-landing.php:623
 msgid "Button texts"
 msgstr "বাটনের লেখা"
 
-#: includes/class-landing.php:559
+#: includes/class-landing.php:625
 msgid "Yes button"
 msgstr "\"হ্যাঁ\" বাটন"
 
-#: includes/class-landing.php:560 includes/class-upsells.php:350
+#: includes/class-landing.php:626 includes/class-upsells.php:350
 msgid "No thanks, I don't want this offer"
 msgstr "না ধন্যবাদ, আমি এই অফার চাই না"
 
-#: includes/class-landing.php:560
+#: includes/class-landing.php:626
 msgid "No button"
 msgstr "\"না\" বাটন"
 
-#: includes/class-landing.php:569
+#: includes/class-landing.php:635
 msgid "Payment methods"
 msgstr "পেমেন্ট পদ্ধতি"
 
-#: includes/class-landing.php:575
+#: includes/class-landing.php:641
 msgid "No payment methods are enabled yet. Enable them in WooCommerce > Settings > Payments."
 msgstr "এখনো কোনো পেমেন্ট পদ্ধতি চালু নেই। WooCommerce > Settings > Payments-এ গিয়ে চালু করুন।"
 
-#: includes/class-landing.php:584
+#: includes/class-landing.php:650
 msgid "Tick the methods to offer on this page, for example only Cash on delivery. Leave all unticked to offer every enabled method."
 msgstr "এই পেজে কোন পদ্ধতিগুলো দেবেন টিক দিন, যেমন শুধু ক্যাশ অন ডেলিভারি। সব চালু পদ্ধতি দিতে কোনোটিতেই টিক দেবেন না।"
 
-#: includes/class-landing.php:589
+#: includes/class-landing.php:655
+msgid "Delivery charge"
+msgstr "ডেলিভারি চার্জ"
+
+#: includes/class-landing.php:659
+msgid "Let shoppers pick their delivery area on the form"
+msgstr "ক্রেতারা ফর্মে নিজের ডেলিভারি এলাকা বেছে নেবেন"
+
+#: includes/class-landing.php:661 includes/class-landing.php:666
+msgid "Area"
+msgstr "এলাকা"
+
+#: includes/class-landing.php:661 includes/class-landing.php:667
+msgid "Charge"
+msgstr "চার্জ"
+
+#: includes/class-landing.php:666
+msgid "For example Inside Dhaka"
+msgstr "যেমন ঢাকার ভিতরে"
+
+#: includes/class-landing.php:672
+msgid "The chosen charge is added to the order total. Leave an area empty to remove it; 0 means free delivery. When this is on, WooCommerce shipping methods are not used on this page."
+msgstr "বেছে নেওয়া চার্জ অর্ডারের মোটের সাথে যোগ হয়। কোনো এলাকা সরাতে ঘরটি খালি রাখুন; 0 মানে ফ্রি ডেলিভারি। এটি চালু থাকলে এই পেজে WooCommerce-এর শিপিং পদ্ধতি ব্যবহার হয় না।"
+
+#: includes/class-landing.php:676
 msgid "Coupons"
 msgstr "কুপন"
 
-#: includes/class-landing.php:590
+#: includes/class-landing.php:677
 msgid "Show the coupon field"
 msgstr "কুপনের ঘর দেখান"
 
-#: includes/class-landing.php:593
+#: includes/class-landing.php:680
 msgid "Thank-you page"
 msgstr "ধন্যবাদ পেজ"
 
-#: includes/class-landing.php:601
+#: includes/class-landing.php:688
 msgid "WooCommerce order received page"
 msgstr "WooCommerce-এর অর্ডার পাওয়া গেছে পেজ"
 
-#: includes/class-landing.php:606
+#: includes/class-landing.php:693
 msgid "Optional. The order summary is shown at the top of the page you pick."
 msgstr "ঐচ্ছিক। আপনি যে পেজ বাছাই করবেন তার উপরে অর্ডারের সারাংশ দেখানো হবে।"
 
-#: includes/class-landing.php:669
+#: includes/class-landing.php:756
 msgid "The variable product you chose has no variation that can be bought (check prices and stock), so it was not added."
 msgstr "আপনার বাছাই করা ভেরিয়েবল পণ্যটির কেনার মতো কোনো ভেরিয়েশন নেই (দাম ও স্টক দেখুন), তাই এটি যোগ করা হয়নি।"
 
 #. translators: %d: number of variations.
-#: includes/class-landing.php:827
+#: includes/class-landing.php:773
+msgid "The variable product was added as %d choice. Shoppers pick it on the order form."
+msgid_plural "The variable product was added as %d choices (one per variation). Shoppers pick theirs on the order form; you can remove the ones you do not want to sell here."
+msgstr[0] "ভ্যারিয়েবল পণ্যটি %dটি অপশন হিসেবে যোগ হয়েছে। ক্রেতারা অর্ডার ফর্মে এটি বেছে নেবেন।"
+msgstr[1] "ভ্যারিয়েবল পণ্যটি %dটি অপশন হিসেবে যোগ হয়েছে (প্রতিটি ভ্যারিয়েশন একটি)। ক্রেতারা অর্ডার ফর্মে নিজেরটি বেছে নেবেন; এখানে যেগুলো বিক্রি করতে চান না সেগুলো মুছে দিতে পারেন।"
+
+#: includes/class-landing.php:915
 msgid "A variable product you chose has no variation that can be bought, so it was not added."
 msgstr "আপনার বাছাই করা একটি ভেরিয়েবল পণ্যের কেনার মতো কোনো ভেরিয়েশন নেই, তাই এটি যোগ করা হয়নি।"
 
 #. translators: %s: variation, for example Size: L.
-#: includes/class-landing.php:831
+#: includes/class-landing.php:919
 msgid "Order bumps and upsell offers add one exact item, so the variation \"%s\" was used. Choose another variation in the list if you prefer."
 msgstr "অর্ডার বাম্প ও আপসেল অফারে একটি নির্দিষ্ট আইটেম যোগ হয়, তাই \"%s\" ভেরিয়েশনটি ব্যবহার করা হয়েছে। চাইলে তালিকা থেকে অন্য ভেরিয়েশন বাছাই করুন।"
 
-#: includes/class-landing.php:866 includes/class-landing.php:933
+#: includes/class-landing.php:954 includes/class-landing.php:1021
 msgid "Create landing page"
 msgstr "ল্যান্ডিং পেজ তৈরি করুন"
 
-#: includes/class-landing.php:925
+#: includes/class-landing.php:1013
 msgid "draft"
 msgstr "খসড়া"
 
-#: includes/class-landing.php:930
+#: includes/class-landing.php:1018
 msgid "Save the product first, then create a landing page for it here."
 msgstr "আগে পণ্যটি সংরক্ষণ করুন, তারপর এখান থেকে এর ল্যান্ডিং পেজ তৈরি করুন।"
 
-#: includes/class-landing.php:934
+#: includes/class-landing.php:1022
 msgid "Creates a draft sales page with this product and its order form already set up."
 msgstr "এই পণ্য ও অর্ডার ফর্ম আগে থেকেই সাজানো একটি খসড়া সেলস পেজ তৈরি করে।"
 
-#: includes/class-settings.php:38
+#: includes/class-settings.php:38 includes/class-settings.php:65 includes/class-settings.php:256 includes/class-settings.php:379 includes/class-setup.php:286
 msgid "Settings"
 msgstr "সেটিংস"
 
-#: includes/class-settings.php:64 includes/class-settings.php:65 includes/class-settings.php:241
-msgid "Cartiva Commerce"
-msgstr "Cartiva Commerce"
+#: includes/class-settings.php:64
+msgid "Cartiva Commerce settings"
+msgstr "Cartiva Commerce সেটিংস"
 
 #. translators: %s: field name such as Facebook Pixel ID.
-#: includes/class-settings.php:165
+#: includes/class-settings.php:174
 msgid "The %s does not look right, so it was not saved."
 msgstr "%s ঠিক মনে হচ্ছে না, তাই এটি সংরক্ষণ করা হয়নি।"
 
-#: includes/class-settings.php:243
-msgid "General"
-msgstr "সাধারণ"
+#: includes/class-settings.php:257
+msgid "Settings sections"
+msgstr "সেটিংসের অংশ"
 
-#: includes/class-settings.php:244
-msgid "Main checkout fields"
-msgstr "মূল চেকআউটের ঘর"
-
-#: includes/class-settings.php:245
-msgid "Cart & deals"
-msgstr "কার্ট ও ডিল"
-
-#: includes/class-settings.php:246
-msgid "Recovery"
-msgstr "রিকভারি"
-
-#: includes/class-settings.php:247
-msgid "Tracking"
-msgstr "ট্র্যাকিং"
-
-#: includes/class-settings.php:248 includes/class-funnels.php:59 includes/class-funnels.php:68
-msgid "Funnels"
-msgstr "ফানেল"
-
-#: includes/class-settings.php:255
+#: includes/class-settings.php:272
 msgid "Your checkout page now uses the classic checkout. The previous version is saved as a page revision."
 msgstr "আপনার চেকআউট পেজ এখন ক্লাসিক চেকআউট ব্যবহার করছে। আগের সংস্করণটি পেজ রিভিশন হিসেবে সংরক্ষিত আছে।"
 
-#: includes/class-settings.php:333
+#: includes/class-settings.php:337
+msgid "Save changes"
+msgstr "পরিবর্তন সেভ করুন"
+
+#: includes/class-settings.php:350
+msgid "General"
+msgstr "সাধারণ"
+
+#: includes/class-settings.php:350 includes/class-settings.php:464
 msgid "Buy now button"
 msgstr "\"এখনই কিনুন\" বাটন"
 
-#: includes/class-settings.php:335
+#: includes/class-settings.php:351
+msgid "Checkout form"
+msgstr "চেকআউট ফর্ম"
+
+#: includes/class-settings.php:351
+msgid "Fields of the main checkout"
+msgstr "মূল চেকআউটের ঘরগুলো"
+
+#: includes/class-settings.php:352 includes/class-setup.php:129
+msgid "Fake order protection"
+msgstr "ভুয়া অর্ডার সুরক্ষা"
+
+#: includes/class-settings.php:352
+msgid "Repeat orders, blocked numbers"
+msgstr "বারবার অর্ডার, ব্লক করা নম্বর"
+
+#: includes/class-settings.php:353
+msgid "Cart & deals"
+msgstr "কার্ট ও ডিল"
+
+#: includes/class-settings.php:353
+msgid "Slide-out cart, free shipping, gifts"
+msgstr "স্লাইড-আউট কার্ট, ফ্রি শিপিং, উপহার"
+
+#: includes/class-settings.php:354
+msgid "Recovery"
+msgstr "রিকভারি"
+
+#: includes/class-settings.php:354
+msgid "Win back unfinished orders"
+msgstr "অসমাপ্ত অর্ডার ফিরিয়ে আনুন"
+
+#: includes/class-settings.php:355
+msgid "Tracking"
+msgstr "ট্র্যাকিং"
+
+#: includes/class-settings.php:355
+msgid "Facebook, Google, TikTok"
+msgstr "ফেসবুক, গুগল, টিকটক"
+
+#. translators: %s: version number.
+#: includes/class-settings.php:371
+msgid "Cartiva Commerce %s"
+msgstr "Cartiva Commerce %s"
+
+#: includes/class-settings.php:374 includes/class-orders.php:321 includes/class-funnels.php:70
+msgid "Cartiva Commerce"
+msgstr "Cartiva Commerce"
+
+#: includes/class-settings.php:375 includes/class-setup.php:46 includes/class-setup.php:47 includes/class-setup.php:175
+msgid "Start here"
+msgstr "এখান থেকে শুরু"
+
+#: includes/class-settings.php:377 includes/class-funnels.php:60 includes/class-funnels.php:69
+msgid "Funnels"
+msgstr "ফানেল"
+
+#: includes/class-settings.php:393
+msgid "Stop fake and repeat cash on delivery orders"
+msgstr "ভুয়া ও বারবার আসা ক্যাশ অন ডেলিভারি অর্ডার থামান"
+
+#: includes/class-settings.php:394
+msgid "Checks the phone number of each new order. Orders that look like repeats are either marked \"Check before shipping\" for you to call, or refused with a message."
+msgstr "প্রতিটি নতুন অর্ডারের ফোন নম্বর যাচাই করে। বারবার আসা মনে হলে অর্ডারটি হয় \"পাঠানোর আগে যাচাই করুন\" চিহ্নিত হয় যাতে আপনি কল করতে পারেন, নয়তো একটি বার্তা দেখিয়ে ফিরিয়ে দেওয়া হয়।"
+
+#: includes/class-settings.php:397
+msgid "Protection"
+msgstr "সুরক্ষা"
+
+#: includes/class-settings.php:399
+msgid "Check orders from landing pages and funnels"
+msgstr "ল্যান্ডিং পেজ ও ফানেলের অর্ডার যাচাই করুন"
+
+#: includes/class-settings.php:400
+msgid "Also check orders from the main checkout"
+msgstr "মূল চেকআউটের অর্ডারও যাচাই করুন"
+
+#: includes/class-settings.php:404
+msgid "Repeat orders"
+msgstr "বারবার অর্ডার"
+
+#. translators: %s: number field.
+#: includes/class-settings.php:409
+msgid "Same phone number ordered in the last %s hours"
+msgstr "একই ফোন নম্বর থেকে গত %s ঘণ্টায় অর্ডার এসেছে"
+
+#: includes/class-settings.php:413
+msgid "0 turns this check off."
+msgstr "0 দিলে এই যাচাই বন্ধ থাকে।"
+
+#: includes/class-settings.php:417
+msgid "Daily limit"
+msgstr "দৈনিক সীমা"
+
+#. translators: %s: number field.
+#: includes/class-settings.php:422
+msgid "At most %s orders per phone number in 24 hours"
+msgstr "২৪ ঘণ্টায় প্রতি ফোন নম্বর থেকে সর্বোচ্চ %sটি অর্ডার"
+
+#: includes/class-settings.php:426
+msgid "0 means no limit."
+msgstr "0 মানে কোনো সীমা নেই।"
+
+#: includes/class-settings.php:430
+msgid "When an order looks like a repeat"
+msgstr "অর্ডার বারবার আসা মনে হলে"
+
+#: includes/class-settings.php:432
+msgid "Accept it, but mark it \"Check before shipping\" (recommended)"
+msgstr "অর্ডার নিন, কিন্তু \"পাঠানোর আগে যাচাই করুন\" চিহ্ন দিন (প্রস্তাবিত)"
+
+#: includes/class-settings.php:433
+msgid "Refuse it and show the message below"
+msgstr "ফিরিয়ে দিন এবং নিচের বার্তা দেখান"
+
+#: includes/class-settings.php:437
+msgid "Blocked numbers"
+msgstr "ব্লক করা নম্বর"
+
+#: includes/class-settings.php:440
+msgid "One phone number per line. Orders from these numbers are always refused, for example customers who refused parcels before."
+msgstr "প্রতি লাইনে একটি ফোন নম্বর। এই নম্বরগুলোর অর্ডার সবসময় ফিরিয়ে দেওয়া হয়, যেমন যারা আগে পার্সেল নেয়নি।"
+
+#: includes/class-settings.php:444
+msgid "Message to the shopper"
+msgstr "ক্রেতার জন্য বার্তা"
+
+#: includes/class-settings.php:446 includes/class-cod.php:283
+msgid "We already have an order from this phone number. We will call you to confirm it. To change your order, please call us."
+msgstr "এই ফোন নম্বর থেকে আমরা আগেই একটি অর্ডার পেয়েছি। অর্ডার নিশ্চিত করতে আমরা আপনাকে কল করব। অর্ডার বদলাতে আমাদের কল করুন।"
+
+#: includes/class-settings.php:450
+msgid "Flagged orders show \"Check\" in the Source column of the Orders list and a note on the order."
+msgstr "চিহ্নিত অর্ডার Orders তালিকার সোর্স কলামে \"যাচাই\" দেখায় এবং অর্ডারে একটি নোট থাকে।"
+
+#: includes/class-settings.php:466
 msgid "Show a Buy now button under Add to cart that goes straight to checkout"
 msgstr "\"কার্টে যোগ করুন\"-এর নিচে একটি \"এখনই কিনুন\" বাটন দেখান, যা সরাসরি চেকআউটে নিয়ে যায়"
 
-#: includes/class-settings.php:339
+#: includes/class-settings.php:470
 msgid "Buy now label"
 msgstr "\"এখনই কিনুন\" বাটনের লেখা"
 
-#: includes/class-settings.php:342
+#: includes/class-settings.php:473
 msgid "For example: Order now. Leave empty for \"Buy now\"."
 msgstr "যেমন: এখনই অর্ডার করুন। \"এখনই কিনুন\" রাখতে খালি রাখুন।"
 
-#: includes/class-settings.php:346 includes/class-analytics.php:396
+#: includes/class-settings.php:478 includes/class-analytics.php:396
 msgid "Funnels and landing pages"
 msgstr "ফানেল ও ল্যান্ডিং পেজ"
 
-#: includes/class-settings.php:347
-msgid "A funnel leads shoppers through steps: a sales page, a checkout and a thank-you page. A single landing page can also sell on its own, with the order form on the same page."
-msgstr "ফানেল ক্রেতাকে কয়েকটি ধাপে নিয়ে যায়: সেলস পেজ, চেকআউট ও ধন্যবাদ পেজ। একটি ল্যান্ডিং পেজও একাই বিক্রি করতে পারে, একই পেজে অর্ডার ফর্মসহ।"
+#: includes/class-settings.php:479
+msgid "A landing page sells one product with the order form on the same page. A funnel leads shoppers through steps: a sales page, a checkout, an optional upsell and a thank-you page."
+msgstr "ল্যান্ডিং পেজ একই পেজে অর্ডার ফর্মসহ একটি পণ্য বিক্রি করে। ফানেল ক্রেতাদের ধাপে ধাপে নিয়ে যায়: সেলস পেজ, চেকআউট, ঐচ্ছিক আপসেল এবং ধন্যবাদ পেজ।"
 
-#: includes/class-settings.php:349 includes/class-funnels.php:127
-msgid "Create a funnel from the template"
-msgstr "টেমপ্লেট থেকে ফানেল তৈরি করুন"
+#: includes/class-settings.php:480
+msgid "Create one in the Start here page"
+msgstr "\"এখান থেকে শুরু\" পেজে একটি তৈরি করুন"
 
-#: includes/class-settings.php:350
-msgid "Add a landing page"
-msgstr "ল্যান্ডিং পেজ যোগ করুন"
-
-#: includes/class-settings.php:379
+#: includes/class-settings.php:509
 msgid "Active"
 msgstr "চালু"
 
-#: includes/class-settings.php:381
+#: includes/class-settings.php:511
 msgid "Buy quantity"
 msgstr "কেনার পরিমাণ"
 
-#: includes/class-settings.php:382
+#: includes/class-settings.php:512
 msgid "Product to buy"
 msgstr "যে পণ্য কিনতে হবে"
 
-#: includes/class-settings.php:385
+#: includes/class-settings.php:515
 msgid "Gift quantity"
 msgstr "উপহারের পরিমাণ"
 
-#: includes/class-settings.php:393
+#: includes/class-settings.php:523
 msgid "Gift product"
 msgstr "উপহারের পণ্য"
 
-#: includes/class-settings.php:397
+#: includes/class-settings.php:527
 msgid "Gift discount %"
 msgstr "উপহারে ছাড় %"
 
-#: includes/class-settings.php:398
+#: includes/class-settings.php:528
 msgid "Repeat for every set"
 msgstr "প্রতিটি সেটের জন্য আবার দিন"
 
-#: includes/class-settings.php:411
+#: includes/class-settings.php:541
 msgid "Slide-out cart"
 msgstr "স্লাইড-আউট কার্ট"
 
-#: includes/class-settings.php:414
+#: includes/class-settings.php:544
 msgid "Cart drawer"
 msgstr "কার্ট ড্রয়ার"
 
-#: includes/class-settings.php:416
+#: includes/class-settings.php:546
 msgid "Use the slide-out cart"
 msgstr "স্লাইড-আউট কার্ট ব্যবহার করুন"
 
-#: includes/class-settings.php:417
+#: includes/class-settings.php:547
 msgid "Open it when a product is added to the cart"
 msgstr "কার্টে পণ্য যোগ হলে এটি খুলুন"
 
-#: includes/class-settings.php:418
+#: includes/class-settings.php:548
 msgid "Show a floating cart button in the corner"
 msgstr "কোণায় ভাসমান কার্ট বাটন দেখান"
 
-#: includes/class-settings.php:419
+#: includes/class-settings.php:549
 msgid "Open it from the cart links and mini cart in your header"
 msgstr "হেডারের কার্ট লিংক ও মিনি কার্ট থেকে এটি খুলুন"
 
-#: includes/class-settings.php:420
+#: includes/class-settings.php:550
 msgid "Shoppers change quantities, remove products and see suggestions without leaving the page. The drawer is not shown on the cart, checkout and landing pages."
 msgstr "ক্রেতা পেজ না ছেড়েই পরিমাণ বদলাতে, পণ্য সরাতে ও পরামর্শ দেখতে পারেন। কার্ট, চেকআউট ও ল্যান্ডিং পেজে ড্রয়ারটি দেখানো হয় না।"
 
-#: includes/class-settings.php:424
+#: includes/class-settings.php:554
 msgid "Suggestions"
 msgstr "পরামর্শ"
 
-#: includes/class-settings.php:426
+#: includes/class-settings.php:556
 msgid "Show \"You may also like\" in the drawer"
 msgstr "ড্রয়ারে \"আপনার পছন্দ হতে পারে\" দেখান"
 
-#: includes/class-settings.php:427
+#: includes/class-settings.php:557
 msgid "Uses the Cross-sells you set on each product (Product data > Linked Products)."
 msgstr "প্রতিটি পণ্যে আপনার দেওয়া Cross-sells ব্যবহার করে (Product data > Linked Products)।"
 
-#: includes/class-settings.php:432
+#: includes/class-settings.php:562
 msgid "Free shipping bar"
 msgstr "ফ্রি ডেলিভারি বার"
 
-#: includes/class-settings.php:435
+#: includes/class-settings.php:565
 msgid "Progress bar"
 msgstr "অগ্রগতি বার"
 
-#: includes/class-settings.php:437
+#: includes/class-settings.php:567
 msgid "Show \"Add X more for free shipping\" in the drawer and on the cart and checkout pages"
 msgstr "ড্রয়ারে এবং কার্ট ও চেকআউট পেজে \"ফ্রি ডেলিভারির জন্য আর X যোগ করুন\" দেখান"
 
-#: includes/class-settings.php:441
+#: includes/class-settings.php:571
 msgid "Free shipping from"
 msgstr "যত টাকা থেকে ফ্রি ডেলিভারি"
 
-#: includes/class-settings.php:444
+#: includes/class-settings.php:574
 msgid "Leave 0 to use the minimum order amount of the Free shipping method in the shopper's shipping zone (WooCommerce > Settings > Shipping). If you enter an amount, make sure a Free shipping method with the same minimum exists, so the promise matches the checkout."
 msgstr "ক্রেতার শিপিং জোনে Free shipping পদ্ধতির ন্যূনতম অর্ডারের পরিমাণ ব্যবহার করতে 0 রাখুন (WooCommerce > Settings > Shipping)। নিজে পরিমাণ লিখলে একই ন্যূনতম পরিমাণসহ একটি Free shipping পদ্ধতি আছে কিনা নিশ্চিত করুন, যাতে প্রতিশ্রুতি চেকআউটের সাথে মেলে।"
 
-#: includes/class-settings.php:449
+#: includes/class-settings.php:579
 msgid "Buy X, get Y deals"
 msgstr "X কিনলে Y ফ্রি ডিল"
 
-#: includes/class-settings.php:450
+#: includes/class-settings.php:580
 msgid "When the cart has enough of a product, the gift product is added by itself at the discount you set (100% = free), and removed again if the shopper buys less. For \"Buy 1, get 1 free\" pick the same product on both sides. With \"Repeat\", every full set earns a gift (buy 2 get 1: 4 bought = 2 gifts)."
 msgstr "কার্টে কোনো পণ্য যথেষ্ট পরিমাণে থাকলে উপহারের পণ্যটি আপনার ঠিক করা ছাড়ে নিজে থেকেই যোগ হয় (100% = ফ্রি), আর ক্রেতা কম কিনলে আবার সরে যায়। \"১টি কিনলে ১টি ফ্রি\"-এর জন্য দুই পাশেই একই পণ্য দিন। \"আবার দিন\" চালু থাকলে প্রতিটি পূর্ণ সেটে একটি উপহার (২টি কিনলে ১টি: ৪টি কিনলে ২টি উপহার)।"
 
-#: includes/class-settings.php:454
+#: includes/class-settings.php:584 includes/class-setup.php:283
 msgid "On"
 msgstr "চালু"
 
-#: includes/class-settings.php:455
+#: includes/class-settings.php:585
 msgid "Buy"
 msgstr "কিনুন"
 
-#: includes/class-settings.php:456
+#: includes/class-settings.php:586
 msgid "Get"
 msgstr "পান"
 
-#: includes/class-settings.php:457
+#: includes/class-settings.php:587
 msgid "Gift discount"
 msgstr "উপহারে ছাড়"
 
-#: includes/class-settings.php:458
+#: includes/class-settings.php:588
 msgid "Repeat"
 msgstr "আবার দিন"
 
-#: includes/class-settings.php:470
+#: includes/class-settings.php:600
 msgid "Add deal"
 msgstr "ডিল যোগ করুন"
 
-#: includes/class-settings.php:473
+#: includes/class-settings.php:603
 msgid "Coupons that apply themselves"
 msgstr "যে কুপন নিজে থেকেই প্রয়োগ হয়"
 
-#: includes/class-settings.php:474
+#: includes/class-settings.php:604
 msgid "Open a coupon under Marketing > Coupons and tick \"Apply automatically\". It is then added to the cart as soon as the cart meets the coupon's usage restrictions, for example \"10% off orders over 2000\" with a minimum spend. Shoppers who remove it do not get it again in that visit."
 msgstr "Marketing > Coupons-এ একটি কুপন খুলে \"Apply automatically\"-তে টিক দিন। কার্ট কুপনের শর্ত পূরণ করামাত্র এটি যোগ হয়ে যাবে, যেমন ন্যূনতম কেনাকাটার শর্তসহ \"২০০০ টাকার বেশি অর্ডারে ১০% ছাড়\"। যে ক্রেতা এটি সরিয়ে দেন, ওই ভিজিটে তিনি আর এটি পান না।"
 
-#: includes/class-settings.php:475
+#: includes/class-settings.php:605
 msgid "Go to coupons"
 msgstr "কুপনে যান"
 
-#: includes/class-settings.php:487
-msgid "When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Funnels > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back."
-msgstr "ক্রেতা অর্ডার ফর্মে ফোন বা ইমেইল দিয়ে অর্ডার না করলে Cartiva Funnels > Abandoned checkouts-এ তাদের দেখতে পাবেন, কল ও হোয়াটসঅ্যাপ বাটনসহ। তাদের কার্ট ফিরিয়ে আনার লিংকসহ রিমাইন্ডার ইমেইলও যায়।"
+#: includes/class-settings.php:617
+msgid "When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Commerce > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back."
+msgstr "ক্রেতা অর্ডার ফর্মে ফোন বা ইমেইল দিয়ে অর্ডার না করলে Cartiva Commerce > Abandoned checkouts-এ তাদের দেখতে পাবেন, কল ও হোয়াটসঅ্যাপ বাটনসহ। তাদের কার্ট ফিরিয়ে আনার লিংকসহ রিমাইন্ডার ইমেইলও যায়।"
 
-#: includes/class-settings.php:490
+#: includes/class-settings.php:620
 msgid "Save abandoned checkouts"
 msgstr "অসম্পূর্ণ চেকআউট সংরক্ষণ করুন"
 
-#: includes/class-settings.php:492
+#: includes/class-settings.php:622
 msgid "On landing page order forms"
 msgstr "ল্যান্ডিং পেজের অর্ডার ফর্মে"
 
-#: includes/class-settings.php:493
+#: includes/class-settings.php:623
 msgid "Also on the main checkout (classic checkout only)"
 msgstr "মূল চেকআউটেও (শুধু ক্লাসিক চেকআউটে)"
 
-#: includes/class-settings.php:497
+#: includes/class-settings.php:627
 msgid "Abandoned after"
 msgstr "অসম্পূর্ণ ধরা হবে"
 
-#: includes/class-settings.php:498
+#: includes/class-settings.php:628
 msgid "minutes without an order"
 msgstr "মিনিট অর্ডার না হলে"
 
-#: includes/class-settings.php:501
+#: includes/class-settings.php:631
 msgid "Delete entries after"
 msgstr "এন্ট্রি মুছে ফেলুন"
 
-#: includes/class-settings.php:505
+#: includes/class-settings.php:635
 msgid "Notice on the form"
 msgstr "ফর্মে নোটিশ"
 
-#: includes/class-settings.php:508
+#: includes/class-settings.php:638
 msgid "Shown under the details, so shoppers know their details are saved. Mention it in your privacy policy too."
 msgstr "তথ্যের ঘরের নিচে দেখানো হয়, যাতে ক্রেতা জানেন তাদের তথ্য সংরক্ষণ হচ্ছে। প্রাইভেসি পলিসিতেও এটি উল্লেখ করুন।"
 
-#: includes/class-settings.php:513
+#: includes/class-settings.php:643
 msgid "Reminder emails"
 msgstr "রিমাইন্ডার ইমেইল"
 
-#: includes/class-settings.php:514
+#: includes/class-settings.php:644
 msgid "Sent to shoppers who entered an email, in this order, counted from when the checkout became abandoned. They stop as soon as the shopper orders or clicks \"Stop these reminders\". Placeholders: {name} {products} {total} {button} {link} {coupon} {discount} {expires} {site}"
 msgstr "যে ক্রেতারা ইমেইল দিয়েছেন তাদের এই ক্রমে পাঠানো হয়, চেকআউট অসম্পূর্ণ হওয়ার সময় থেকে গুনে। ক্রেতা অর্ডার করলে বা \"এই রিমাইন্ডার বন্ধ করুন\"-এ ক্লিক করলে বন্ধ হয়। প্লেসহোল্ডার: {name} {products} {total} {button} {link} {coupon} {discount} {expires} {site}"
 
 #. translators: %d: email number.
-#: includes/class-settings.php:522
+#: includes/class-settings.php:652
 msgid "Email %d"
 msgstr "ইমেইল %d"
 
-#: includes/class-settings.php:527
+#: includes/class-settings.php:657
 msgid "Send after"
 msgstr "পাঠান"
 
-#: includes/class-settings.php:528
+#: includes/class-settings.php:658
 msgid "Include a one-time coupon"
 msgstr "এককালীন কুপন যোগ করুন"
 
-#: includes/class-settings.php:530
+#: includes/class-settings.php:660
 msgid "Subject"
 msgstr "বিষয়"
 
-#: includes/class-settings.php:531
+#: includes/class-settings.php:661
 msgid "Message"
 msgstr "বার্তা"
 
-#: includes/class-settings.php:535
+#: includes/class-settings.php:665
 msgid "Coupon"
 msgstr "কুপন"
 
-#: includes/class-settings.php:538
+#: includes/class-settings.php:668
 msgid "Discount"
 msgstr "ছাড়"
 
-#: includes/class-settings.php:541
+#: includes/class-settings.php:671
 msgid "valid for"
 msgstr "মেয়াদ"
 
-#: includes/class-settings.php:542
+#: includes/class-settings.php:672
 msgid "Each shopper gets their own code, usable once, only with their email address. It is also applied automatically when they open the reminder link."
 msgstr "প্রত্যেক ক্রেতা নিজের কোড পান, যা একবারই এবং শুধু তাদের ইমেইল দিয়ে ব্যবহার করা যায়। রিমাইন্ডার লিংক খুললে এটি নিজে থেকেই প্রয়োগ হয়।"
 
-#: includes/class-settings.php:547 includes/class-settings.php:548
+#: includes/class-settings.php:677 includes/class-settings.php:678
 msgid "WhatsApp message"
 msgstr "হোয়াটসঅ্যাপ বার্তা"
 
-#: includes/class-settings.php:549
+#: includes/class-settings.php:679
 msgid "Filled in when you click WhatsApp in the list, ready to send from your phone or WhatsApp Web. Placeholders: {name} {products} {total} {link} {site}"
 msgstr "তালিকায় হোয়াটসঅ্যাপে ক্লিক করলে পূরণ হয়ে যায়, ফোন বা WhatsApp Web থেকে পাঠানোর জন্য প্রস্তুত। প্লেসহোল্ডার: {name} {products} {total} {link} {site}"
 
-#: includes/class-settings.php:560
+#: includes/class-settings.php:690
 msgid "Facebook (Meta) Pixel ID"
 msgstr "Facebook (Meta) Pixel ID"
 
-#: includes/class-settings.php:560
+#: includes/class-settings.php:690
 msgid "Events Manager > Data sources > your pixel. Numbers only."
 msgstr "Events Manager > Data sources > আপনার পিক্সেল। শুধু সংখ্যা।"
 
-#: includes/class-settings.php:561
+#: includes/class-settings.php:691
 msgid "Google Analytics 4 Measurement ID"
 msgstr "Google Analytics 4 Measurement ID"
 
-#: includes/class-settings.php:561
+#: includes/class-settings.php:691
 msgid "Admin > Data streams > your web stream."
 msgstr "Admin > Data streams > আপনার ওয়েব স্ট্রিম।"
 
-#: includes/class-settings.php:562
+#: includes/class-settings.php:692
 msgid "TikTok Pixel ID"
 msgstr "TikTok Pixel ID"
 
-#: includes/class-settings.php:562
+#: includes/class-settings.php:692
 msgid "TikTok Ads Manager > Assets > Events > Web events."
 msgstr "TikTok Ads Manager > Assets > Events > Web events।"
 
-#: includes/class-settings.php:565
+#: includes/class-settings.php:695
 msgid "Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off."
 msgstr "ফানেলের ইভেন্ট আপনার বিজ্ঞাপন ও অ্যানালিটিক্স অ্যাকাউন্টে পাঠান: পেজ ভিউ, পণ্য দেখা (ViewContent / view_item), চেকআউট শুরু, অর্ডার বাম্প যোগ (AddToCart) এবং আপসেলের পরের চূড়ান্ত অর্ডার মূল্যসহ Purchase। প্রতি অর্ডারে Purchase একবারই পাঠানো হয়। কোনো সেবা বন্ধ রাখতে ঘরটি খালি রাখুন।"
 
-#: includes/class-settings.php:577
+#: includes/class-settings.php:707
 msgid "Where"
 msgstr "কোথায়"
 
-#: includes/class-settings.php:579
+#: includes/class-settings.php:709
 msgid "Also track the rest of the store (product pages, main checkout and order received page)"
 msgstr "স্টোরের বাকি অংশও ট্র্যাক করুন (পণ্যের পেজ, মূল চেকআউট ও অর্ডার পাওয়া গেছে পেজ)"
 
-#: includes/class-settings.php:580
+#: includes/class-settings.php:710
 msgid "Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked."
 msgstr "অন্য কোনো প্লাগইন যদি আগে থেকেই এই পিক্সেলগুলো যোগ করে, তাহলে এটি বন্ধ রাখুন, যাতে ইভেন্ট দুবার গোনা না হয়। ফানেল ও ল্যান্ডিং পেজ সবসময় ট্র্যাক করা হয়।"
 
-#: includes/class-settings.php:584
+#: includes/class-settings.php:714
 msgid "Privacy: the pixels load services from Meta, Google and TikTok in your visitors' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies."
 msgstr "প্রাইভেসি: পিক্সেলগুলো আপনার ভিজিটরদের ব্রাউজারে Meta, Google ও TikTok-এর সেবা লোড করে। প্রাইভেসি পলিসিতে এগুলো উল্লেখ করুন। WP Consent API সমর্থন করে এমন কনসেন্ট প্লাগইন থাকলে ভিজিটর মার্কেটিং কুকি গ্রহণ করার পরেই পিক্সেল লোড হয়।"
 
-#: includes/class-settings.php:597
+#: includes/class-settings.php:727
 msgid "Your checkout page uses the WooCommerce Checkout block."
 msgstr "আপনার চেকআউট পেজ WooCommerce Checkout ব্লক ব্যবহার করে।"
 
-#: includes/class-settings.php:598
+#: includes/class-settings.php:728
 msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
 msgstr "Checkout ব্লকে এর নিজস্ব ঘরগুলো বদলানো বা সরানো যায় না, তাই এই সেটিংস শুধু ক্লাসিক চেকআউটে কাজ করে। ল্যান্ডিং পেজের ফর্মে সবসময় কাজ করে। নিচে আপনার মূল চেকআউট পেজকে ক্লাসিক চেকআউটে বদলাতে পারেন; বর্তমান সংস্করণটি পেজ রিভিশন হিসেবে রাখা হবে।"
 
-#: includes/class-settings.php:599
+#: includes/class-settings.php:729
 msgid "Use the classic checkout"
 msgstr "ক্লাসিক চেকআউট ব্যবহার করুন"
 
-#: includes/class-settings.php:604
+#: includes/class-settings.php:734
 msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
 msgstr "এই ঘরগুলো শুধু আপনার মূল চেকআউট পেজে প্রযোজ্য। ল্যান্ডিং পেজের ঘর আলাদা, তাই এখানকার পরিবর্তন সেগুলোতে প্রভাব ফেলে না, উল্টোটাও না।"
 
-#: includes/class-settings.php:611
+#: includes/class-settings.php:741
 msgid "Show the \"Have a coupon?\" link on the main checkout"
 msgstr "মূল চেকআউটে \"কুপন আছে?\" লিংক দেখান"
 
-#: includes/class-settings.php:652
+#: includes/class-settings.php:782
 msgid "Full width"
 msgstr "পুরো প্রস্থ"
 
-#: includes/class-settings.php:653
+#: includes/class-settings.php:783
 msgid "Left half"
 msgstr "বাঁ অর্ধেক"
 
-#: includes/class-settings.php:654
+#: includes/class-settings.php:784
 msgid "Right half"
 msgstr "ডান অর্ধেক"
 
-#: includes/class-settings.php:659
+#: includes/class-settings.php:789
 msgid "Form fields"
 msgstr "ফর্মের ঘর"
 
-#: includes/class-settings.php:667
+#: includes/class-settings.php:797
 msgid "Pick a preset, or change any field below to make it your own. Full name replaces First and Last name. Hidden fields are filled in automatically where needed (for example, the country is your store country)."
 msgstr "একটি প্রিসেট বাছাই করুন, অথবা নিচের যেকোনো ঘর নিজের মতো বদলে নিন। পুরো নাম প্রথম ও শেষ নামের জায়গা নেয়। লুকানো ঘরগুলো প্রয়োজনমতো নিজে থেকেই পূরণ হয় (যেমন দেশ হবে আপনার স্টোরের দেশ)।"
 
-#: includes/class-settings.php:671
+#: includes/class-settings.php:801
 msgid "Field"
 msgstr "ঘর"
 
-#: includes/class-settings.php:672 includes/class-analytics.php:381
+#: includes/class-settings.php:802 includes/class-analytics.php:381
 msgid "Show"
 msgstr "দেখান"
 
-#: includes/class-settings.php:673
+#: includes/class-settings.php:803
 msgid "Required"
 msgstr "আবশ্যক"
 
-#: includes/class-settings.php:675
+#: includes/class-settings.php:805
 msgid "Placeholder"
 msgstr "প্লেসহোল্ডার"
 
-#: includes/class-settings.php:676
+#: includes/class-settings.php:806
 msgid "Width"
 msgstr "প্রস্থ"
 
-#: includes/class-settings.php:677 includes/class-funnels.php:237
+#: includes/class-settings.php:807 includes/class-funnels.php:243
 msgid "Order"
 msgstr "ক্রম"
 
 #. translators: %s: field name.
-#: includes/class-settings.php:688
+#: includes/class-settings.php:818
 msgid "Show %s"
 msgstr "%s দেখান"
 
 #. translators: %s: field name.
-#: includes/class-settings.php:689
+#: includes/class-settings.php:819
 msgid "%s is required"
 msgstr "%s দেওয়া আবশ্যক"
 
@@ -1382,7 +1608,7 @@ msgstr "কার্ট"
 msgid "Form"
 msgstr "ফর্ম"
 
-#: includes/class-recovery-admin.php:59 includes/class-recovery-admin.php:308
+#: includes/class-recovery-admin.php:59 includes/class-recovery-admin.php:308 includes/class-setup.php:302
 msgid "Status"
 msgstr "অবস্থা"
 
@@ -1447,7 +1673,7 @@ msgstr "রিকভারি সেটিংস"
 msgid "A checkout counts as abandoned when no order follows within the time set in the recovery settings. Call or message the shopper, or let the reminder emails do it. Entries are deleted automatically after the keep period."
 msgstr "রিকভারি সেটিংসে ঠিক করা সময়ের মধ্যে অর্ডার না হলে চেকআউটটি অসম্পূর্ণ ধরা হয়। ক্রেতাকে কল বা মেসেজ করুন, অথবা রিমাইন্ডার ইমেইলকে কাজটি করতে দিন। সংরক্ষণের মেয়াদ শেষে এন্ট্রিগুলো নিজে থেকেই মুছে যায়।"
 
-#: includes/class-recovery-admin.php:296 includes/class-analytics.php:403
+#: includes/class-recovery-admin.php:296 includes/class-analytics.php:403 includes/class-setup.php:300
 msgid "Name"
 msgstr "নাম"
 
@@ -1520,7 +1746,7 @@ msgstr "মিনিট"
 msgid "Seconds"
 msgstr "সেকেন্ড"
 
-#: includes/class-countdown.php:364 includes/class-funnels.php:419
+#: includes/class-countdown.php:364 includes/class-funnels.php:433
 msgid "Order now"
 msgstr "এখনই অর্ডার করুন"
 
@@ -1528,7 +1754,7 @@ msgstr "এখনই অর্ডার করুন"
 msgid "Turn the countdown on in the Countdown tab of the landing page settings."
 msgstr "ল্যান্ডিং পেজের সেটিংসের Countdown ট্যাবে কাউন্টডাউন চালু করুন।"
 
-#: includes/class-deals.php:260
+#: includes/class-deals.php:260 includes/class-orders.php:357
 msgid "Gift"
 msgstr "উপহার"
 
@@ -1544,6 +1770,80 @@ msgstr "নিজে থেকে প্রয়োগ করুন"
 #: includes/class-deals.php:393
 msgid "Add this coupon to the cart by itself as soon as the cart meets its usage restrictions (for example a minimum spend or certain products). Shoppers can still remove it."
 msgstr "কার্ট এর ব্যবহারের শর্ত পূরণ করামাত্র (যেমন ন্যূনতম কেনাকাটা বা নির্দিষ্ট পণ্য) কুপনটি নিজে থেকেই কার্টে যোগ করুন। ক্রেতা তবুও এটি সরাতে পারবেন।"
+
+#: includes/class-orders.php:97 includes/class-orders.php:101
+msgid "Source"
+msgstr "সোর্স"
+
+#: includes/class-orders.php:115
+msgid "Main site"
+msgstr "মূল সাইট"
+
+#: includes/class-orders.php:117 includes/class-orders.php:343 includes/class-analytics.php:419 includes/class-funnels.php:61 includes/class-setup.php:314
+msgid "Funnel"
+msgstr "ফানেল"
+
+#: includes/class-orders.php:125 includes/class-funnels.php:46 includes/class-funnels.php:559
+msgid "Upsell"
+msgstr "আপসেল"
+
+#: includes/class-orders.php:129
+msgid "Bump"
+msgstr "বাম্প"
+
+#: includes/class-orders.php:134
+msgid "Check"
+msgstr "যাচাই"
+
+#: includes/class-orders.php:177
+msgid "All sources"
+msgstr "সব সোর্স"
+
+#: includes/class-orders.php:178
+msgid "Main site only"
+msgstr "শুধু মূল সাইট"
+
+#: includes/class-orders.php:179
+msgid "Landing pages and funnels"
+msgstr "ল্যান্ডিং পেজ ও ফানেল"
+
+#. translators: %s: funnel name.
+#: includes/class-orders.php:192
+msgid "Funnel: %s"
+msgstr "ফানেল: %s"
+
+#. translators: %s: landing page name.
+#: includes/class-orders.php:206
+msgid "Landing page: %s"
+msgstr "ল্যান্ডিং পেজ: %s"
+
+#: includes/class-orders.php:227
+msgid "Filter by source"
+msgstr "সোর্স অনুযায়ী ফিল্টার"
+
+#: includes/class-orders.php:338
+msgid "Placed through the main shop and checkout."
+msgstr "মূল শপ ও চেকআউট থেকে করা অর্ডার।"
+
+#: includes/class-orders.php:345
+msgid "Page"
+msgstr "পেজ"
+
+#: includes/class-orders.php:349
+msgid "accepted"
+msgstr "নিয়েছেন"
+
+#: includes/class-orders.php:349
+msgid "declined"
+msgstr "নেননি"
+
+#: includes/class-orders.php:354
+msgid "Order bump"
+msgstr "অর্ডার বাম্প"
+
+#: includes/class-orders.php:362
+msgid "Delivery"
+msgstr "ডেলিভারি"
 
 #: includes/class-analytics.php:33 includes/class-analytics.php:371
 msgid "Funnel analytics"
@@ -1613,171 +1913,471 @@ msgstr "বাম্প থেকে আয়"
 msgid "Upsell revenue"
 msgstr "আপসেল থেকে আয়"
 
-#: includes/class-analytics.php:419 includes/class-funnels.php:60
-msgid "Funnel"
-msgstr "ফানেল"
-
 #: includes/class-analytics.php:436
 msgid "Visits count the first step of each funnel, without bots and your own visits while logged in. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes. Daily visits are recorded from version 1.3 on."
 msgstr "প্রতিটি ফানেলের প্রথম ধাপের ভিজিট গোনা হয়, বট এবং লগইন অবস্থায় আপনার নিজের ভিজিট বাদে। প্রসেসিং, কমপ্লিটেড ও অন-হোল্ড অর্ডার গোনা হয়। সংখ্যাগুলো প্রতি ১০ মিনিটে হালনাগাদ হয়। দৈনিক ভিজিট সংস্করণ 1.3 থেকে রেকর্ড হয়।"
 
-#: includes/class-funnels.php:43 includes/class-funnels.php:461
+#: includes/class-funnels.php:44 includes/class-funnels.php:554
 msgid "Sales page"
 msgstr "সেলস পেজ"
 
-#: includes/class-funnels.php:45 includes/class-funnels.php:466
-msgid "Upsell"
-msgstr "আপসেল"
-
-#: includes/class-funnels.php:46 includes/class-funnels.php:467
+#: includes/class-funnels.php:47 includes/class-funnels.php:560
 msgid "Downsell"
 msgstr "ডাউনসেল"
 
-#: includes/class-funnels.php:47 includes/class-funnels.php:469
+#: includes/class-funnels.php:48 includes/class-funnels.php:562
 msgid "Thank you"
 msgstr "ধন্যবাদ"
 
-#: includes/class-funnels.php:61
+#: includes/class-funnels.php:62
 msgid "Add empty funnel"
 msgstr "খালি ফানেল যোগ করুন"
 
-#: includes/class-funnels.php:62
+#: includes/class-funnels.php:63
 msgid "Add funnel"
 msgstr "ফানেল যোগ করুন"
 
-#: includes/class-funnels.php:63
+#: includes/class-funnels.php:64
 msgid "Edit funnel"
 msgstr "ফানেল এডিট করুন"
 
-#: includes/class-funnels.php:64 includes/class-funnels.php:453
+#: includes/class-funnels.php:65 includes/class-funnels.php:546
 msgid "New funnel"
 msgstr "নতুন ফানেল"
 
-#: includes/class-funnels.php:65
+#: includes/class-funnels.php:66
 msgid "Search funnels"
 msgstr "ফানেল খুঁজুন"
 
-#: includes/class-funnels.php:66
+#: includes/class-funnels.php:67
 msgid "No funnels yet."
 msgstr "এখনো কোনো ফানেল নেই।"
 
-#: includes/class-funnels.php:67
+#: includes/class-funnels.php:68
 msgid "No funnels in the trash."
 msgstr "ট্র্যাশে কোনো ফানেল নেই।"
 
-#: includes/class-funnels.php:69
-msgid "Cartiva Funnels"
-msgstr "Cartiva ফানেল"
-
-#: includes/class-funnels.php:124
+#: includes/class-funnels.php:125
 msgid "Start with the ready-made funnel"
 msgstr "তৈরি ফানেল দিয়ে শুরু করুন"
 
-#: includes/class-funnels.php:125
+#: includes/class-funnels.php:126
 msgid "It adds three draft steps: a sales page, a checkout with the order form, and a thank-you page. Pick the product on the checkout step, check the text, then publish the steps."
 msgstr "এটি তিনটি খসড়া ধাপ যোগ করে: একটি সেলস পেজ, অর্ডার ফর্মসহ চেকআউট এবং একটি ধন্যবাদ পেজ। চেকআউট ধাপে পণ্য বাছাই করুন, লেখা দেখে নিন, তারপর ধাপগুলো প্রকাশ করুন।"
 
 #: includes/class-funnels.php:128
+msgid "Create a funnel from the template"
+msgstr "টেমপ্লেট থেকে ফানেল তৈরি করুন"
+
+#: includes/class-funnels.php:129
 msgid "Template with upsell and downsell"
 msgstr "আপসেল ও ডাউনসেলসহ টেমপ্লেট"
 
-#: includes/class-funnels.php:138 includes/class-funnels.php:554
+#: includes/class-funnels.php:139 includes/class-funnels.php:647
 msgid "Steps"
 msgstr "ধাপ"
 
-#: includes/class-funnels.php:139
+#: includes/class-funnels.php:140
 msgid "Results"
 msgstr "ফলাফল"
 
 #. translators: 1: page title, 2: status such as Draft.
-#: includes/class-funnels.php:162
+#: includes/class-funnels.php:163
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: includes/class-funnels.php:191
+#: includes/class-funnels.php:192
 msgid "Choose a landing page"
 msgstr "একটি ল্যান্ডিং পেজ বাছাই করুন"
 
-#: includes/class-funnels.php:198 includes/class-funnels.php:235
+#: includes/class-funnels.php:199 includes/class-funnels.php:241
 msgid "Step type"
 msgstr "ধাপের ধরন"
 
-#: includes/class-funnels.php:206
+#: includes/class-funnels.php:208 includes/class-setup.php:317
 msgid "Edit"
 msgstr "এডিট"
 
-#: includes/class-funnels.php:207
+#: includes/class-funnels.php:209 includes/class-setup.php:319
 msgid "View"
 msgstr "দেখুন"
 
-#: includes/class-funnels.php:211
+#: includes/class-funnels.php:213
 msgid "Move up"
 msgstr "উপরে নিন"
 
-#: includes/class-funnels.php:212
+#: includes/class-funnels.php:214
 msgid "Move down"
 msgstr "নিচে নিন"
 
-#: includes/class-funnels.php:229
+#: includes/class-funnels.php:232
+msgid "Your funnel is ready."
+msgstr "আপনার ফানেল তৈরি।"
+
+#: includes/class-funnels.php:232
+msgid "Open each step to check its text and pictures. Steps marked Draft must be published before shoppers can see them."
+msgstr "প্রতিটি ধাপ খুলে লেখা ও ছবি দেখে নিন। খসড়া চিহ্নিত ধাপগুলো প্রকাশ না করলে ক্রেতারা দেখতে পাবেন না।"
+
+#: includes/class-funnels.php:235
 msgid "Shoppers go through the steps from top to bottom. On a sales page, buttons that link to #order (or #cartiva-next) open the next step. After an order, buyers see the Upsell steps that follow the checkout: \"Yes\" moves on to the next upsell, \"No\" shows the Downsell placed right after it. The flow ends on the Thank you step with the order details."
 msgstr "ক্রেতা উপর থেকে নিচে ধাপগুলো পার হন। সেলস পেজে #order (বা #cartiva-next)-এ লিংক করা বাটনগুলো পরের ধাপ খোলে। অর্ডারের পর ক্রেতা চেকআউটের পরের আপসেল ধাপগুলো দেখেন: \"হ্যাঁ\" দিলে পরের আপসেলে যায়, \"না\" দিলে ঠিক তার পরের ডাউনসেল দেখায়। অর্ডারের বিস্তারিতসহ ধন্যবাদ ধাপে প্রক্রিয়া শেষ হয়।"
 
-#: includes/class-funnels.php:236
+#: includes/class-funnels.php:242 includes/class-setup.php:303
 msgid "Links"
 msgstr "লিংক"
 
-#: includes/class-funnels.php:249
-msgid "Add step"
-msgstr "ধাপ যোগ করুন"
+#: includes/class-funnels.php:255
+msgid "Add an existing page as a step"
+msgstr "আগের একটি পেজকে ধাপ হিসেবে যোগ করুন"
 
-#: includes/class-funnels.php:250
-msgid "Create a new landing page"
-msgstr "নতুন ল্যান্ডিং পেজ তৈরি করুন"
+#: includes/class-funnels.php:259
+msgid "Add a new step:"
+msgstr "নতুন ধাপ যোগ করুন:"
 
-#: includes/class-funnels.php:270
+#: includes/class-funnels.php:263
+msgid "Creates a draft page with ready-made content and adds it at the end. Save your changes above first."
+msgstr "তৈরি কনটেন্টসহ একটি খসড়া পেজ বানিয়ে শেষে যোগ করে। আগে উপরের পরিবর্তনগুলো সেভ করুন।"
+
+#: includes/class-funnels.php:284
 msgid "Visits count the first step. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes."
 msgstr "প্রথম ধাপের ভিজিট গোনা হয়। প্রসেসিং, কমপ্লিটেড ও অন-হোল্ড অর্ডার গোনা হয়। সংখ্যাগুলো প্রতি ১০ মিনিটে হালনাগাদ হয়।"
 
-#: includes/class-funnels.php:422
+#: includes/class-funnels.php:436
 msgid "Complete your order"
 msgstr "আপনার অর্ডার সম্পন্ন করুন"
 
-#: includes/class-funnels.php:423
+#: includes/class-funnels.php:437
 msgid "Fill in your details. Pay when the parcel arrives."
 msgstr "আপনার তথ্য দিন। পার্সেল হাতে পেয়ে টাকা দিন।"
 
-#: includes/class-funnels.php:426
+#: includes/class-funnels.php:440
 msgid "Wait! Your order is not complete yet"
 msgstr "একটু দাঁড়ান! আপনার অর্ডার এখনো শেষ হয়নি"
 
-#: includes/class-funnels.php:427
+#: includes/class-funnels.php:441
 msgid "Add this to your order now at a special price. This offer is only on this page."
 msgstr "বিশেষ দামে এখনই এটি আপনার অর্ডারে যোগ করুন। এই অফার শুধু এই পেজে।"
 
-#: includes/class-funnels.php:430
+#: includes/class-funnels.php:444
 msgid "How about this instead?"
 msgstr "এটা কেমন হয়?"
 
-#: includes/class-funnels.php:431
+#: includes/class-funnels.php:445
 msgid "A smaller offer at an even better price, added to the same order."
 msgstr "আরও ভালো দামে ছোট একটি অফার, একই অর্ডারে যোগ হবে।"
 
-#: includes/class-funnels.php:434
+#: includes/class-funnels.php:448
 msgid "Thank you for your order!"
 msgstr "আপনার অর্ডারের জন্য ধন্যবাদ!"
 
-#: includes/class-funnels.php:435
+#: includes/class-funnels.php:449
 msgid "We will call you soon to confirm your order."
 msgstr "অর্ডার নিশ্চিত করতে আমরা শিগগিরই আপনাকে কল করব।"
 
+#: includes/class-funnels.php:463 includes/class-setup.php:315
+msgid "Draft"
+msgstr "খসড়া"
+
+#: includes/class-funnels.php:471
+msgid "No product"
+msgstr "পণ্য নেই"
+
+#: includes/class-funnels.php:474
+msgid "No offer product"
+msgstr "অফারের পণ্য নেই"
+
+#. translators: 1: funnel name, 2: step type.
+#: includes/class-funnels.php:516
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
 #. translators: %s: step type such as Checkout.
-#: includes/class-funnels.php:577
+#: includes/class-funnels.php:670
 msgid "%s (draft)"
 msgstr "%s (খসড়া)"
 
-#: includes/class-funnels.php:612
+#: includes/class-funnels.php:705
 msgid "View first step"
 msgstr "প্রথম ধাপ দেখুন"
+
+#. translators: %d: number of products.
+#: includes/class-setup.php:94
+msgid "You have %d published product."
+msgid_plural "You have %d published products."
+msgstr[0] "আপনার %dটি প্রকাশিত পণ্য আছে।"
+msgstr[1] "আপনার %dটি প্রকাশিত পণ্য আছে।"
+
+#: includes/class-setup.php:95
+msgid "Add a product first. Landing pages sell your WooCommerce products."
+msgstr "আগে একটি পণ্য যোগ করুন। ল্যান্ডিং পেজ আপনার WooCommerce পণ্য বিক্রি করে।"
+
+#: includes/class-setup.php:95
+msgid "Add a product"
+msgstr "পণ্য যোগ করুন"
+
+#: includes/class-setup.php:100
+msgid "Cash on delivery is on."
+msgstr "ক্যাশ অন ডেলিভারি চালু আছে।"
+
+#: includes/class-setup.php:101
+msgid "Cash on delivery is off. Most shoppers in Bangladesh pay on delivery."
+msgstr "ক্যাশ অন ডেলিভারি বন্ধ। বাংলাদেশের বেশিরভাগ ক্রেতা পণ্য হাতে পেয়ে টাকা দেন।"
+
+#: includes/class-setup.php:101
+msgid "Turn it on"
+msgstr "চালু করুন"
+
+#: includes/class-setup.php:104
+msgid "Page links are readable (pretty permalinks)."
+msgstr "পেজের লিংক পড়ার মতো (প্রিটি পার্মালিংক)।"
+
+#: includes/class-setup.php:105
+msgid "Page links use ?p=123. Choose \"Post name\" so landing page links look clean."
+msgstr "পেজের লিংকে ?p=123 ব্যবহার হচ্ছে। ল্যান্ডিং পেজের লিংক পরিষ্কার দেখাতে \"Post name\" বেছে নিন।"
+
+#: includes/class-setup.php:105
+msgid "Change it"
+msgstr "বদলান"
+
+#: includes/class-setup.php:108
+msgid "The Cartiva theme is active, so new pages get ready-made designs."
+msgstr "Cartiva থিম চালু আছে, তাই নতুন পেজে তৈরি ডিজাইন পাবেন।"
+
+#: includes/class-setup.php:109
+msgid "Works with any theme. The free Cartiva theme adds ready-made landing page designs."
+msgstr "যেকোনো থিমে কাজ করে। ফ্রি Cartiva থিম তৈরি ল্যান্ডিং পেজ ডিজাইন যোগ করে।"
+
+#: includes/class-setup.php:109
+msgid "See the theme"
+msgstr "থিমটি দেখুন"
+
+#: includes/class-setup.php:112
+msgid "Your main checkout uses the Checkout block. Landing pages work fully; the extra checkout fields and recovery on the main checkout need the classic checkout."
+msgstr "আপনার মূল চেকআউটে Checkout ব্লক ব্যবহার হচ্ছে। ল্যান্ডিং পেজ পুরোপুরি কাজ করে; মূল চেকআউটের বাড়তি ঘর ও রিকভারির জন্য ক্লাসিক চেকআউট লাগে।"
+
+#: includes/class-setup.php:112
+msgid "Learn more"
+msgstr "আরও জানুন"
+
+#: includes/class-setup.php:113
+msgid "Your main checkout works with every feature."
+msgstr "আপনার মূল চেকআউট সব ফিচারের সাথে কাজ করে।"
+
+#: includes/class-setup.php:116
+msgid "WordPress scheduled tasks run from your server (DISABLE_WP_CRON). Make sure the server job runs every few minutes, or recovery emails are late."
+msgstr "WordPress-এর নির্ধারিত কাজ আপনার সার্ভার থেকে চলে (DISABLE_WP_CRON)। সার্ভারের কাজটি কয়েক মিনিট পরপর চলছে কিনা দেখে নিন, নইলে রিকভারি ইমেইল দেরিতে যাবে।"
+
+#: includes/class-setup.php:129
+msgid "Spot repeat orders from the same phone and block numbers that refused parcels."
+msgstr "একই ফোন থেকে বারবার আসা অর্ডার ধরুন এবং যারা পার্সেল নেয়নি তাদের নম্বর ব্লক করুন।"
+
+#: includes/class-setup.php:130
+msgid "Abandoned order recovery"
+msgstr "অসমাপ্ত অর্ডার রিকভারি"
+
+#: includes/class-setup.php:130
+msgid "See who left the form without ordering, call them or send a reminder with a coupon."
+msgstr "কে অর্ডার না করে ফর্ম ছেড়ে গেছে দেখুন, কল করুন বা কুপনসহ রিমাইন্ডার পাঠান।"
+
+#: includes/class-setup.php:131
+msgid "Facebook, Google and TikTok tracking"
+msgstr "ফেসবুক, গুগল ও টিকটক ট্র্যাকিং"
+
+#: includes/class-setup.php:131
+msgid "Measure your ads: page views, checkouts and purchases."
+msgstr "আপনার বিজ্ঞাপন মাপুন: পেজ ভিউ, চেকআউট ও কেনাকাটা।"
+
+#: includes/class-setup.php:132
+msgid "Slide-out cart and free shipping bar"
+msgstr "স্লাইড-আউট কার্ট ও ফ্রি শিপিং বার"
+
+#: includes/class-setup.php:132
+msgid "A cart that opens on the side, with a bar that shows how much more to spend."
+msgstr "পাশে খোলে এমন কার্ট, সাথে একটি বার যা দেখায় আর কত টাকার কেনাকাটা বাকি।"
+
+#: includes/class-setup.php:183
+msgid "Create a page that sells"
+msgstr "বিক্রির পেজ তৈরি করুন"
+
+#: includes/class-setup.php:184
+msgid "Pick a product and how you want to sell it. Everything is set up for cash on delivery; you can change the text and design afterwards."
+msgstr "একটি পণ্য আর কীভাবে বিক্রি করবেন বেছে নিন। সব কিছু ক্যাশ অন ডেলিভারির জন্য সেট করা থাকে; লেখা ও ডিজাইন পরে বদলাতে পারবেন।"
+
+#: includes/class-setup.php:190 includes/class-setup.php:191
+msgid "Product to sell"
+msgstr "যে পণ্য বিক্রি করবেন"
+
+#: includes/class-setup.php:195
+msgid "What to create"
+msgstr "কী তৈরি করবেন"
+
+#: includes/class-setup.php:201
+msgid "One page: product details and the order form together. Best for Facebook ads."
+msgstr "একটি পেজ: পণ্যের বিবরণ ও অর্ডার ফর্ম একসাথে। ফেসবুক বিজ্ঞাপনের জন্য সেরা।"
+
+#: includes/class-setup.php:206
+msgid "Funnel with upsell"
+msgstr "আপসেলসহ ফানেল"
+
+#: includes/class-setup.php:207
+msgid "Sales page, then checkout, then a one-click extra offer, then thank you."
+msgstr "সেলস পেজ, তারপর চেকআউট, তারপর এক ক্লিকে বাড়তি অফার, তারপর ধন্যবাদ।"
+
+#: includes/class-setup.php:213
+msgid "Extra product to offer after the order (optional)"
+msgstr "অর্ডারের পর অফার করার বাড়তি পণ্য (ঐচ্ছিক)"
+
+#: includes/class-setup.php:214
+msgid "Extra product to offer after the order"
+msgstr "অর্ডারের পর অফার করার বাড়তি পণ্য"
+
+#: includes/class-setup.php:215
+msgid "Used by the funnel. Buyers add it to their order with one click."
+msgstr "ফানেলে ব্যবহার হয়। ক্রেতারা এক ক্লিকে এটি অর্ডারে যোগ করেন।"
+
+#: includes/class-setup.php:219
+msgid "Countdown timer"
+msgstr "কাউন্টডাউন টাইমার"
+
+#: includes/class-setup.php:223
+msgid "None"
+msgstr "নেই"
+
+#: includes/class-setup.php:236
+msgid "Each visitor gets their own timer from their first visit."
+msgstr "প্রত্যেক ভিজিটর প্রথম ভিজিট থেকে নিজের টাইমার পান।"
+
+#: includes/class-setup.php:240
+msgid "Options"
+msgstr "অপশন"
+
+#: includes/class-setup.php:241
+msgid "Delivery charge choice: Inside Dhaka / Outside Dhaka"
+msgstr "ডেলিভারি চার্জ বাছাই: ঢাকার ভিতরে / ঢাকার বাইরে"
+
+#: includes/class-setup.php:242
+msgid "Cash on delivery only on this page"
+msgstr "এই পেজে শুধু ক্যাশ অন ডেলিভারি"
+
+#: includes/class-setup.php:243
+msgid "Publish right away (otherwise it is saved as a draft to check first)"
+msgstr "এখনই প্রকাশ করুন (নইলে আগে দেখে নেওয়ার জন্য খসড়া হিসেবে সেভ হবে)"
+
+#: includes/class-setup.php:246
+msgid "Create it"
+msgstr "তৈরি করুন"
+
+#: includes/class-setup.php:252
+msgid "Store check"
+msgstr "স্টোর যাচাই"
+
+#. translators: %d: number of things to fix.
+#: includes/class-setup.php:258
+msgid "%d thing to fix before you start selling."
+msgid_plural "%d things to fix before you start selling."
+msgstr[0] "বিক্রি শুরুর আগে %dটি জিনিস ঠিক করতে হবে।"
+msgstr[1] "বিক্রি শুরুর আগে %dটি জিনিস ঠিক করতে হবে।"
+
+#: includes/class-setup.php:259
+msgid "All set. Your store is ready."
+msgstr "সব ঠিক আছে। আপনার স্টোর তৈরি।"
+
+#: includes/class-setup.php:276
+msgid "Sell more"
+msgstr "আরও বিক্রি করুন"
+
+#: includes/class-setup.php:283
+msgid "Off"
+msgstr "বন্ধ"
+
+#: includes/class-setup.php:286
+msgid "Set up"
+msgstr "সেট আপ"
+
+#: includes/class-setup.php:297
+msgid "Your pages and funnels"
+msgstr "আপনার পেজ ও ফানেল"
+
+#: includes/class-setup.php:301
+msgid "Type"
+msgstr "ধরন"
+
+#: includes/class-setup.php:314
+msgid "Funnel step"
+msgstr "ফানেলের ধাপ"
+
+#: includes/class-setup.php:409
+msgid "Please choose the product to sell."
+msgstr "বিক্রির পণ্যটি বেছে নিন।"
+
+#. translators: %s: product name.
+#: includes/class-setup.php:426
+msgid "%s funnel"
+msgstr "%s ফানেল"
+
+#. translators: %s: product name.
+#: includes/class-setup.php:436
+msgid "%s: sales page"
+msgstr "%s: সেলস পেজ"
+
+#. translators: %s: product name.
+#: includes/class-setup.php:438
+msgid "%s: checkout"
+msgstr "%s: চেকআউট"
+
+#. translators: %s: product name.
+#: includes/class-setup.php:443
+msgid "%s: special offer"
+msgstr "%s: বিশেষ অফার"
+
+#. translators: %s: product name.
+#: includes/class-setup.php:458
+msgid "%s: thank you"
+msgstr "%s: ধন্যবাদ"
+
+#: includes/class-cod.php:39
+msgid "Inside Dhaka"
+msgstr "ঢাকার ভিতরে"
+
+#: includes/class-cod.php:43
+msgid "Outside Dhaka"
+msgstr "ঢাকার বাইরে"
+
+#: includes/class-cod.php:127
+msgid "Delivery area"
+msgstr "ডেলিভারি এলাকা"
+
+#: includes/class-cod.php:129
+msgid "Free"
+msgstr "ফ্রি"
+
+#. translators: %s: delivery option, for example Inside Dhaka.
+#: includes/class-cod.php:165
+msgid "Delivery: %s"
+msgstr "ডেলিভারি: %s"
+
+#: includes/class-cod.php:232
+msgid "This phone number is on the blocked list."
+msgstr "এই ফোন নম্বরটি ব্লক তালিকায় আছে।"
+
+#. translators: %d: hours.
+#: includes/class-cod.php:241
+msgid "The same phone number ordered in the last %d hour."
+msgid_plural "The same phone number ordered in the last %d hours."
+msgstr[0] "একই ফোন নম্বর থেকে গত %d ঘণ্টায় অর্ডার এসেছে।"
+msgstr[1] "একই ফোন নম্বর থেকে গত %d ঘণ্টায় অর্ডার এসেছে।"
+
+#. translators: %d: number of orders.
+#: includes/class-cod.php:249
+msgid "The same phone number already placed %d order today."
+msgid_plural "The same phone number already placed %d orders today."
+msgstr[0] "একই ফোন নম্বর থেকে আজ আগেই %dটি অর্ডার এসেছে।"
+msgstr[1] "একই ফোন নম্বর থেকে আজ আগেই %dটি অর্ডার এসেছে।"
+
+#. translators: %s: reason.
+#: includes/class-cod.php:308
+msgid "Check before shipping: %s"
+msgstr "পাঠানোর আগে যাচাই করুন: %s"
 
 #: includes/class-checkout.php:87
 msgid "Please enter a valid 11-digit mobile number, for example 01712345678."
