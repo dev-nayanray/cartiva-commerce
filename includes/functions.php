@@ -110,9 +110,17 @@ function cartiva_commerce_landing_config( $landing_id ) {
 		'bumps'        => array(),
 		'layout'       => 'one',
 		'offer'        => array(),
+		'countdown'    => array(),
 	);
-	$saved    = get_post_meta( (int) $landing_id, '_cartiva_landing', true );
-	return wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
+	$saved  = get_post_meta( (int) $landing_id, '_cartiva_landing', true );
+	$config = wp_parse_args( is_array( $saved ) ? $saved : array(), $defaults );
+	/**
+	 * Filters a landing page's settings as the shop uses them.
+	 *
+	 * @param array $config     Settings.
+	 * @param int   $landing_id Landing page ID.
+	 */
+	return apply_filters( 'cartiva_commerce_landing_config', $config, (int) $landing_id );
 }
 
 /**

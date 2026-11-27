@@ -349,24 +349,40 @@ class Cartiva_Commerce_Landing {
 		);
 		?>
 		<div class="cartiva-landing-box">
+			<div class="cartiva-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Landing page settings', 'cartiva-commerce' ); ?>">
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-products" aria-controls="cartiva-panel-products" data-tab="products"><?php esc_html_e( 'Products', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-countdown" aria-controls="cartiva-panel-countdown" data-tab="countdown"><?php esc_html_e( 'Countdown', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-form" aria-controls="cartiva-panel-form" data-tab="form"><?php esc_html_e( 'Order form', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-extras" aria-controls="cartiva-panel-extras" data-tab="extras"><?php esc_html_e( 'Order bumps', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-upsell" aria-controls="cartiva-panel-upsell" data-tab="upsell"><?php esc_html_e( 'Upsell offer', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-payment" aria-controls="cartiva-panel-payment" data-tab="payment"><?php esc_html_e( 'Payment & thank you', 'cartiva-commerce' ); ?></button>
+				<button type="button" class="cartiva-tabs__tab" role="tab" id="cartiva-tab-abtest" aria-controls="cartiva-panel-abtest" data-tab="abtest"><?php esc_html_e( 'A/B test', 'cartiva-commerce' ); ?></button>
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-products" aria-labelledby="cartiva-tab-products" data-tab="products">
 			<p class="description"><?php esc_html_e( 'Leave the products empty for a step that only informs, such as a sales page that links to a checkout step, or a thank-you step.', 'cartiva-commerce' ); ?></p>
 			<h3><?php esc_html_e( 'Products', 'cartiva-commerce' ); ?></h3>
 			<?php if ( empty( $offers ) && has_block( 'cartiva-commerce/order-form', $post ) ) : ?>
 				<div class="notice notice-warning inline"><p><?php esc_html_e( 'This page has an order form but no product yet. Choose the product below, then update the page.', 'cartiva-commerce' ); ?></p></div>
 			<?php endif; ?>
-			<table class="form-table" role="presentation">
-				<tr>
-					<th scope="row"><label for="cartiva-landing-mode"><?php esc_html_e( 'How shoppers choose', 'cartiva-commerce' ); ?></label></th>
-					<td>
-						<select id="cartiva-landing-mode" name="cartiva_landing[offer_mode]">
-							<?php foreach ( $modes as $value => $label ) : ?>
-								<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $config['offer_mode'], $value ); ?>><?php echo esc_html( $label ); ?></option>
-							<?php endforeach; ?>
-						</select>
-						<label class="cartiva-inline"><input type="checkbox" name="cartiva_landing[qty_editable]" value="1" <?php checked( ! empty( $config['qty_editable'] ) ); ?> /> <?php esc_html_e( 'Show a quantity changer (one product only)', 'cartiva-commerce' ); ?></label>
-					</td>
-				</tr>
-			</table>
+			<fieldset class="cartiva-mode-cards">
+				<legend class="screen-reader-text"><?php esc_html_e( 'How shoppers choose', 'cartiva-commerce' ); ?></legend>
+				<?php
+				$mode_cards = array(
+					'single' => array( __( 'One product', 'cartiva-commerce' ), __( 'Sell one product. Shoppers can change the quantity.', 'cartiva-commerce' ) ),
+					'one'    => array( __( 'Multiple products: shopper picks one', 'cartiva-commerce' ), __( 'Packages (1, 2 or 3 pieces), sizes or colors. The shopper chooses one.', 'cartiva-commerce' ) ),
+					'many'   => array( __( 'Multiple products: shopper picks several', 'cartiva-commerce' ), __( 'A shirt, a cap and socks. The shopper ticks the ones they want.', 'cartiva-commerce' ) ),
+				);
+				foreach ( $mode_cards as $value => $card ) :
+					?>
+					<label class="cartiva-mode-card">
+						<input type="radio" name="cartiva_landing[offer_mode]" value="<?php echo esc_attr( $value ); ?>" <?php checked( $config['offer_mode'], $value ); ?> />
+						<span class="cartiva-mode-card__title"><?php echo esc_html( $card[0] ); ?></span>
+						<span class="cartiva-mode-card__text"><?php echo esc_html( $card[1] ); ?></span>
+					</label>
+				<?php endforeach; ?>
+			</fieldset>
+			<p class="cartiva-mode-single-only"><label><input type="checkbox" name="cartiva_landing[qty_editable]" value="1" <?php checked( ! empty( $config['qty_editable'] ) ); ?> /> <?php esc_html_e( 'Show a quantity changer (+ / −) on the order form', 'cartiva-commerce' ); ?></label></p>
+			<p class="description cartiva-mode-single-only"><?php esc_html_e( 'With "One product", only the first row below is sold. Choose a "Multiple products" option to sell more.', 'cartiva-commerce' ); ?></p>
 			<div class="cartiva-repeater" data-cartiva-repeater="offers">
 				<table class="widefat cartiva-rows">
 					<thead><tr>
@@ -393,7 +409,110 @@ class Cartiva_Commerce_Landing {
 				<p><button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add product option', 'cartiva-commerce' ); ?></button></p>
 				<p class="description"><?php esc_html_e( 'Opening the page puts the options marked "Selected first" in the cart. Example packs: 1 piece; 2 pieces with 10% off and the badge "Most popular"; 3 pieces with 15% off.', 'cartiva-commerce' ); ?></p>
 			</div>
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-countdown" aria-labelledby="cartiva-tab-countdown" data-tab="countdown">
+			<h3><?php esc_html_e( 'Countdown', 'cartiva-commerce' ); ?></h3>
+			<?php $cd = Cartiva_Commerce_Countdown::settings( $post->ID ); ?>
+			<p class="description"><?php esc_html_e( 'A timer that shows how long the offer lasts. Each visitor gets their own time from their first visit, or everyone counts down to one date.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Countdown', 'cartiva-commerce' ); ?></th>
+					<td><label><input type="checkbox" name="cartiva_landing[countdown][enabled]" value="1" <?php checked( ! empty( $cd['enabled'] ) ); ?> /> <?php esc_html_e( 'Show a countdown on this page', 'cartiva-commerce' ); ?></label></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Timer type', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-block-label"><input type="radio" name="cartiva_landing[countdown][mode]" value="evergreen" <?php checked( $cd['mode'], 'evergreen' ); ?> /> <?php esc_html_e( 'For each visitor, from their first visit (recommended)', 'cartiva-commerce' ); ?></label>
+						<label class="cartiva-block-label"><input type="radio" name="cartiva_landing[countdown][mode]" value="fixed" <?php checked( $cd['mode'], 'fixed' ); ?> /> <?php esc_html_e( 'To a fixed date and time for everyone', 'cartiva-commerce' ); ?></label>
+					</td>
+				</tr>
+				<tr class="cartiva-cd-evergreen">
+					<th scope="row"><?php esc_html_e( 'Length', 'cartiva-commerce' ); ?></th>
+					<td>
+						<span class="cartiva-cd-presets">
+							<?php foreach ( array( 3, 5, 7 ) as $preset_days ) : ?>
+								<button type="button" class="button cartiva-cd-preset" data-days="<?php echo esc_attr( (string) $preset_days ); ?>">
+									<?php
+									/* translators: %d: number of days. */
+									echo esc_html( sprintf( _n( '%d day', '%d days', $preset_days, 'cartiva-commerce' ), $preset_days ) );
+									?>
+								</button>
+							<?php endforeach; ?>
+						</span>
+						<label class="cartiva-inline"><input type="number" min="0" max="60" class="small-text cartiva-cd-days" name="cartiva_landing[countdown][days]" value="<?php echo esc_attr( (string) $cd['days'] ); ?>" /> <?php esc_html_e( 'days', 'cartiva-commerce' ); ?></label>
+						<label class="cartiva-inline"><input type="number" min="0" max="23" class="small-text" name="cartiva_landing[countdown][hours]" value="<?php echo esc_attr( (string) $cd['hours'] ); ?>" /> <?php esc_html_e( 'hours', 'cartiva-commerce' ); ?></label>
+						<p class="description"><?php esc_html_e( 'Counted from each visitor\'s first visit to this page, in their browser.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr class="cartiva-cd-fixed">
+					<th scope="row"><label for="cartiva-cd-date"><?php esc_html_e( 'Ends on', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-cd-date" type="datetime-local" name="cartiva_landing[countdown][date]" value="<?php echo esc_attr( $cd['date'] ); ?>" />
+						<p class="description">
+							<?php
+							/* translators: %s: time zone, for example Asia/Dhaka. */
+							echo esc_html( sprintf( __( 'In your site\'s time zone (%s).', 'cartiva-commerce' ), wp_timezone_string() ) );
+							?>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'When time runs out', 'cartiva-commerce' ); ?></th>
+					<td>
+						<?php
+						$endings = array(
+							'restart' => __( 'Start again for that visitor (keeps the urgency; for-each-visitor timers only)', 'cartiva-commerce' ),
+							'hide'    => __( 'Hide the timer, keep the offer', 'cartiva-commerce' ),
+							'price'   => __( 'End the discounts: prices go back to normal', 'cartiva-commerce' ),
+							'close'   => __( 'Close the offer: the order form is replaced by a message', 'cartiva-commerce' ),
+						);
+						foreach ( $endings as $value => $text ) :
+							?>
+							<label class="cartiva-block-label"><input type="radio" name="cartiva_landing[countdown][ended]" value="<?php echo esc_attr( $value ); ?>" <?php checked( $cd['ended'], $value ); ?> /> <?php echo esc_html( $text ); ?></label>
+						<?php endforeach; ?>
+						<input type="text" class="regular-text" name="cartiva_landing[countdown][message]" value="<?php echo esc_attr( $cd['message'] ); ?>" placeholder="<?php esc_attr_e( 'Sorry, this offer has ended.', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'Message when the offer is closed', 'cartiva-commerce' ); ?>" />
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Where to show it', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-block-label"><input type="checkbox" name="cartiva_landing[countdown][bar]" value="1" <?php checked( ! empty( $cd['bar'] ) ); ?> /> <?php esc_html_e( 'Sticky bar at the top of the page, with an Order now button', 'cartiva-commerce' ); ?></label>
+						<label class="cartiva-block-label"><input type="checkbox" name="cartiva_landing[countdown][form]" value="1" <?php checked( ! empty( $cd['form'] ) ); ?> /> <?php esc_html_e( 'Above the order form', 'cartiva-commerce' ); ?></label>
+						<p class="description"><?php esc_html_e( 'To place it anywhere else, add the Countdown block in the editor.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Texts and look', 'cartiva-commerce' ); ?></th>
+					<td>
+						<input type="text" class="regular-text" name="cartiva_landing[countdown][label]" value="<?php echo esc_attr( $cd['label'] ); ?>" placeholder="<?php esc_attr_e( 'Offer ends in', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'Timer title', 'cartiva-commerce' ); ?>" />
+						<input type="text" class="regular-text" name="cartiva_landing[countdown][bar_text]" value="<?php echo esc_attr( $cd['bar_text'] ); ?>" placeholder="<?php esc_attr_e( 'Special price for a short time', 'cartiva-commerce' ); ?>" aria-label="<?php esc_attr_e( 'Bar text', 'cartiva-commerce' ); ?>" />
+						<p>
+							<label class="cartiva-inline" style="margin-left:0"><input type="radio" name="cartiva_landing[countdown][style]" value="boxes" <?php checked( $cd['style'], 'boxes' ); ?> /> <?php esc_html_e( 'Big number boxes', 'cartiva-commerce' ); ?></label>
+							<label class="cartiva-inline"><input type="radio" name="cartiva_landing[countdown][style]" value="inline" <?php checked( $cd['style'], 'inline' ); ?> /> <?php esc_html_e( 'Compact line', 'cartiva-commerce' ); ?></label>
+						</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-form" aria-labelledby="cartiva-tab-form" data-tab="form">
+			<h3><?php esc_html_e( 'Order form layout', 'cartiva-commerce' ); ?></h3>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Layout', 'cartiva-commerce' ); ?></th>
+					<td>
+						<?php foreach ( $layouts as $value => $label ) : ?>
+							<label class="cartiva-block-label"><input type="radio" name="cartiva_landing[layout]" value="<?php echo esc_attr( $value ); ?>" <?php checked( $config['layout'], $value ); ?> /> <?php echo esc_html( $label ); ?></label>
+						<?php endforeach; ?>
+					</td>
+				</tr>
+			</table>
 
+			<h3><?php esc_html_e( 'Order form fields', 'cartiva-commerce' ); ?></h3>
+			<p class="description"><?php esc_html_e( 'These fields apply to this landing page only. Your main checkout keeps its own fields.', 'cartiva-commerce' ); ?></p>
+			<?php Cartiva_Commerce_Settings::fields_editor( 'cartiva_landing', (string) $config['preset'], (array) $config['fields'], Cartiva_Commerce_Fields::presets() ); ?>
+			<p><label><input type="checkbox" name="cartiva_landing[bd_phone]" value="1" <?php checked( ! empty( $config['bd_phone'] ) ); ?> /> <?php esc_html_e( 'Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)', 'cartiva-commerce' ); ?></label></p>
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-extras" aria-labelledby="cartiva-tab-extras" data-tab="extras">
 			<h3><?php esc_html_e( 'Order bumps', 'cartiva-commerce' ); ?></h3>
 			<p class="description"><?php esc_html_e( 'A tick box on the order form that adds an extra product, often at a special price.', 'cartiva-commerce' ); ?></p>
 			<div class="cartiva-repeater" data-cartiva-repeater="bumps">
@@ -417,19 +536,8 @@ class Cartiva_Commerce_Landing {
 				<template><?php self::bump_row( '__i__', array() ); ?></template>
 				<p><button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add order bump', 'cartiva-commerce' ); ?></button></p>
 			</div>
-
-			<h3><?php esc_html_e( 'Order form layout', 'cartiva-commerce' ); ?></h3>
-			<table class="form-table" role="presentation">
-				<tr>
-					<th scope="row"><?php esc_html_e( 'Layout', 'cartiva-commerce' ); ?></th>
-					<td>
-						<?php foreach ( $layouts as $value => $label ) : ?>
-							<label class="cartiva-block-label"><input type="radio" name="cartiva_landing[layout]" value="<?php echo esc_attr( $value ); ?>" <?php checked( $config['layout'], $value ); ?> /> <?php echo esc_html( $label ); ?></label>
-						<?php endforeach; ?>
-					</td>
-				</tr>
-			</table>
-
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-upsell" aria-labelledby="cartiva-tab-upsell" data-tab="upsell">
 			<h3><?php esc_html_e( 'Upsell or downsell offer', 'cartiva-commerce' ); ?></h3>
 			<p class="description"><?php esc_html_e( 'Only for pages used as an Upsell or Downsell step in a funnel. Buyers see the offer right after their order, and one click adds it to the same order. Works with Cash on delivery, bank transfer and check payments; orders paid another way skip the offer.', 'cartiva-commerce' ); ?></p>
 			<?php $offer = Cartiva_Commerce_Upsells::offer( $post->ID ); ?>
@@ -453,7 +561,8 @@ class Cartiva_Commerce_Landing {
 					</td>
 				</tr>
 			</table>
-
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-payment" aria-labelledby="cartiva-tab-payment" data-tab="payment">
 			<h3><?php esc_html_e( 'Payment', 'cartiva-commerce' ); ?></h3>
 			<table class="form-table" role="presentation">
 				<tr>
@@ -498,12 +607,10 @@ class Cartiva_Commerce_Landing {
 					</td>
 				</tr>
 			</table>
-
-			<h3><?php esc_html_e( 'Order form fields', 'cartiva-commerce' ); ?></h3>
-			<p class="description"><?php esc_html_e( 'These fields apply to this landing page only. Your main checkout keeps its own fields.', 'cartiva-commerce' ); ?></p>
-			<?php Cartiva_Commerce_Settings::fields_editor( 'cartiva_landing', (string) $config['preset'], (array) $config['fields'], Cartiva_Commerce_Fields::presets() ); ?>
-			<p><label><input type="checkbox" name="cartiva_landing[bd_phone]" value="1" <?php checked( ! empty( $config['bd_phone'] ) ); ?> /> <?php esc_html_e( 'Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)', 'cartiva-commerce' ); ?></label></p>
+			</div>
+			<div class="cartiva-tabs__panel" role="tabpanel" id="cartiva-panel-abtest" aria-labelledby="cartiva-tab-abtest" data-tab="abtest">
 			<?php Cartiva_Commerce_AB_Test::render_section( $post ); ?>
+			</div>
 		</div>
 		<?php
 	}
@@ -630,6 +737,7 @@ class Cartiva_Commerce_Landing {
 			'bumps'        => $bumps,
 			'layout'       => in_array( $layout, array( 'one', 'two', 'steps' ), true ) ? $layout : 'one',
 			'offer'        => $offer,
+			'countdown'    => Cartiva_Commerce_Countdown::sanitize( isset( $raw['countdown'] ) ? $raw['countdown'] : array() ),
 			'gateways'     => array_values( array_intersect( $gateways, $enabled ) ),
 			'preset'       => isset( $presets[ $preset ] ) ? $preset : 'bd_cod',
 			'fields'       => Cartiva_Commerce_Fields::sanitize_config( isset( $raw['fields'] ) ? $raw['fields'] : array() ),

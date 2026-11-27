@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cartiva-commerce/countdown",
+	"version": "1.2.0",
+	"title": "Countdown",
+	"category": "woocommerce",
+	"icon": "clock",
+	"description": "The landing page countdown timer. Set its length and what happens at the end in the Countdown tab of the landing page settings.",
+	"keywords": [
+		"countdown",
+		"timer",
+		"deadline",
+		"urgency"
+	],
+	"textdomain": "cartiva-commerce",
+	"supports": {
+		"html": false,
+		"multiple": true,
+		"reusable": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css"
+}

@@ -349,3 +349,52 @@
 
 /* Notice that details are saved */
 .cartiva-capture-note { margin: .25rem 0 1rem; color: var(--cof-muted, #6b6b6b); font-size: .82rem; }
+
+/* Countdown */
+.cartiva-countdown {
+	--ccd-text: var(--wp--preset--color--contrast, #111);
+	--ccd-accent: var(--wp--preset--color--accent, #de291b);
+	--ccd-surface: var(--wp--preset--color--surface, #f6f6f4);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: .5rem;
+	margin: 0 0 1.25rem;
+	text-align: center;
+}
+.cartiva-countdown[hidden] { display: none; }
+.cartiva-countdown__label { font-weight: 800; color: var(--ccd-accent); }
+.cartiva-countdown__units { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.cartiva-countdown__unit { display: grid; justify-items: center; min-width: 4rem; padding: .55rem .5rem; border-radius: 10px; background: var(--ccd-text); color: var(--wp--preset--color--base, #fff); }
+.cartiva-countdown__num { font-size: 1.6rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.cartiva-countdown__name { font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; opacity: .8; }
+.cartiva-countdown--inline { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+.cartiva-countdown--inline .cartiva-countdown__units { gap: .35rem; }
+.cartiva-countdown--inline .cartiva-countdown__unit { display: inline-flex; align-items: baseline; gap: .15rem; min-width: 0; padding: .2rem .45rem; border-radius: 6px; }
+.cartiva-countdown--inline .cartiva-countdown__num { font-size: 1rem; }
+.cartiva-countdown--inline .cartiva-countdown__name { font-size: .65rem; }
+.cartiva-countdown--ended { padding: .75rem 1rem; border-radius: 10px; background: var(--ccd-surface); color: var(--ccd-text); font-weight: 700; }
+.cartiva-order-form__ended { text-align: center; font-weight: 700; }
+
+/* Sticky countdown bar at the top of landing pages */
+.cartiva-countdown-bar {
+	position: sticky;
+	top: var(--wp-admin--admin-bar--height, 0px);
+	z-index: 9990;
+	background: var(--wp--preset--color--contrast, #111);
+	color: var(--wp--preset--color--base, #fff);
+}
+.cartiva-countdown-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem 1rem; max-width: 1200px; margin-inline: auto; padding: .55rem 1rem; }
+.cartiva-countdown-bar__text { font-weight: 700; }
+.cartiva-countdown-bar .cartiva-countdown { margin: 0; }
+.cartiva-countdown-bar .cartiva-countdown__label { display: none; }
+.cartiva-countdown-bar .cartiva-countdown__unit { background: rgb(255 255 255 / .14); color: inherit; }
+.cartiva-countdown-bar__button { padding: .4rem .9rem; border-radius: 999px; background: var(--wp--preset--color--accent, #de291b); color: #fff; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.cartiva-countdown-bar__button:hover { color: #fff; filter: brightness(1.1); }
+@media (max-width: 480px) {
+	.cartiva-countdown__units { gap: .35rem; }
+	.cartiva-countdown__unit { min-width: 3.1rem; padding: .45rem .3rem; }
+	.cartiva-countdown__num { font-size: 1.3rem; }
+	.cartiva-countdown__name { font-size: .6rem; letter-spacing: .02em; }
+	.cartiva-countdown-bar__text { width: 100%; text-align: center; font-size: .9rem; }
+}

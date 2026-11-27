@@ -1,0 +1,12 @@
+.cartiva-order-form-placeholder__card {
+	padding: 24px;
+	border: 2px dashed #c3c4c7;
+	border-radius: 12px;
+	background: #f6f7f7;
+	font-family: system-ui, sans-serif;
+	font-size: 14px;
+}
+.cartiva-order-form-placeholder__card p { margin: 6px 0 16px; color: #50575e; }
+.cartiva-order-form-placeholder__rows { display: grid; gap: 10px; max-width: 420px; }
+.cartiva-order-form-placeholder__rows span { display: block; height: 38px; border-radius: 8px; background: #fff; border: 1px solid #dcdcde; }
+.cartiva-order-form-placeholder__rows span.is-button { background: #1e1e1e; border-color: #1e1e1e; }

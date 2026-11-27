@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.6.1
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,6 +16,12 @@ Sales funnels, one-click upsells, order bumps, abandoned checkout recovery, a sl
 Cartiva Commerce turns a single product into a focused sales page with the order form on the same page, the way funnel builders do, completely free.
 
 It works with any theme. With the free [Cartiva](https://wordpress.org/themes/cartiva/) theme, landing pages start with ready-made sections (offer bar, benefits, steps, comparison, guarantee, FAQ) and the order form picks up your theme colors.
+
+= Countdown timers =
+
+* A countdown for each visitor that starts on their first visit: 3, 5 or 7 days in one click, or any length in days and hours. Or one fixed end date for everyone.
+* Shown in a sticky bar at the top of the page with an Order now button, above the order form, or anywhere with the Countdown block.
+* When time runs out: start again for that visitor, hide the timer, end the discounts (full prices), or close the offer with a message. Endings are enforced on the order, not only on screen.
 
 = Sales funnels =
 
@@ -203,6 +209,11 @@ Yes. Every feature is in this plugin. There is no pro version.
 
 == Changelog ==
 
+= 1.7.0 =
+* New: Countdown timers for landing pages: per visitor (3, 5, 7 days or custom) or to a fixed date, sticky bar, above the form or the Countdown block, four endings.
+* New: The landing page settings box is split into tabs: Products, Countdown, Order form, Order bumps, Upsell offer, Payment & thank you, A/B test.
+* Improved: Choosing one product or multiple products is now three clear cards: One product, Multiple products (shopper picks one), Multiple products (shopper picks several).
+
 = 1.6.1 =
 * Fixed: A new landing page showed no product field until "Add product option" was clicked. It now always shows one.
 * Fixed: Choosing a variable product saved nothing. Its buyable variations now become choices on the order form (Size M, Size L…), and order bumps and upsells use one exact variation.
@@ -249,6 +260,9 @@ Yes. Every feature is in this plugin. There is no pro version.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 1.7.0 =
+Adds countdown timers and a tabbed, easier landing page settings box.
 
 = 1.6.1 =
 Fixes assigning products to landing pages, including variable products.

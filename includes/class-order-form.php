@@ -99,7 +99,14 @@ class Cartiva_Commerce_Order_Form {
 			return '<div ' . $wrapper . '><p class="cartiva-order-form__notice">' . esc_html__( 'Sorry, this product is out of stock right now.', 'cartiva-commerce' ) . '</p></div>';
 		}
 
+		if ( 'close' === Cartiva_Commerce_Countdown::ending( $landing_id ) ) {
+			return '<div ' . $wrapper . '><p class="cartiva-order-form__notice cartiva-order-form__ended">' . esc_html( Cartiva_Commerce_Countdown::ended_message( $landing_id ) ) . '</p></div>';
+		}
+
 		$html = '';
+		if ( Cartiva_Commerce_Countdown::settings( $landing_id )['form'] ) {
+			$html .= Cartiva_Commerce_Countdown::html( $landing_id, 'form' );
+		}
 		if ( ! empty( $attributes['heading'] ) ) {
 			$html .= '<h2 class="cartiva-order-form__heading">' . wp_kses_post( $attributes['heading'] ) . '</h2>';
 		}
