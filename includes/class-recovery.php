@@ -35,6 +35,8 @@ class Cartiva_Commerce_Recovery {
 		add_action( 'wc_ajax_cartiva_commerce_capture', array( __CLASS__, 'ajax_capture' ) );
 		add_action( 'woocommerce_checkout_after_customer_details', array( __CLASS__, 'notice' ), 5 );
 		add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'order_placed' ), 20, 3 );
+		add_action( 'woocommerce_store_api_checkout_order_processed', array( __CLASS__, 'block_order_placed' ), 20 );
+		add_filter( 'render_block_woocommerce/checkout', array( __CLASS__, 'block_notice' ) );
 		add_action( 'wp_loaded', array( __CLASS__, 'restore' ), 30 );
 		add_filter( 'wp_privacy_personal_data_exporters', array( __CLASS__, 'register_exporter' ) );
 		add_filter( 'wp_privacy_personal_data_erasers', array( __CLASS__, 'register_eraser' ) );
@@ -209,6 +211,32 @@ class Cartiva_Commerce_Recovery {
 		$text = (string) cartiva_commerce_setting( 'recovery_note' );
 		$text = '' !== trim( $text ) ? $text : __( 'We save the details you enter here so we can help you if your order is not finished.', 'cartiva-commerce' );
 		echo '<p class="cartiva-capture-note">' . esc_html( $text ) . '</p>';
+	}
+
+	/**
+	 * The same notice under the Checkout block.
+	 *
+	 * @param string $html Block output.
+	 * @return string
+	 */
+	public static function block_notice( $html ) {
+		if ( ! self::active_here() ) {
+			return $html;
+		}
+		ob_start();
+		self::notice();
+		return $html . ob_get_clean();
+	}
+
+	/**
+	 * An order placed through the Checkout block.
+	 *
+	 * @param WC_Order $order Order.
+	 */
+	public static function block_order_placed( $order ) {
+		if ( $order instanceof WC_Order ) {
+			self::order_placed( $order->get_id(), array(), $order );
+		}
 	}
 
 	/**

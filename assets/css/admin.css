@@ -230,3 +230,5 @@
 .cartiva-courier-card h2 .cartiva-badge { margin-left: 6px; }
 .cartiva-settings-form .cartiva-card + .cartiva-card { margin-top: 20px; padding-top: 4px; border-top: 1px solid #dcdcde; border-radius: 0; }
 .cartiva-courier-test-result { color: #646970; }
+.cartiva-main-bump-admin { margin: 0 0 12px; padding: 0 14px; border: 1px solid #dcdcde; border-radius: 8px; }
+.cartiva-main-bump-admin legend { padding: 0 6px; font-weight: 600; }

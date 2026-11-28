@@ -130,6 +130,7 @@ class Cartiva_Commerce_Settings {
 				);
 			}
 			$output['deals'] = $deals;
+			$output['main_bumps'] = Cartiva_Commerce_Main_Bumps::sanitize( isset( $input['main_bumps'] ) ? $input['main_bumps'] : array() );
 		} elseif ( 'recovery' === $tab ) {
 			$output['recovery']       = ! empty( $input['recovery'] );
 			$output['recovery_main']  = ! empty( $input['recovery_main'] );
@@ -304,55 +305,10 @@ class Cartiva_Commerce_Settings {
 				} elseif ( 'courier' === $tab ) {
 					self::render_courier_tab( $settings );
 				} elseif ( 'cart' === $tab ) {
-			$output['side_cart']      = ! empty( $input['side_cart'] );
-			$output['side_cart_open'] = ! empty( $input['side_cart_open'] );
-			$output['side_cart_btn']  = ! empty( $input['side_cart_btn'] );
-			$output['side_cart_link'] = ! empty( $input['side_cart_link'] );
-			$output['ship_bar']       = ! empty( $input['ship_bar'] );
-			$output['ship_min']       = isset( $input['ship_min'] ) ? max( 0, round( (float) $input['ship_min'], 2 ) ) : 0;
-			$output['cart_recs']      = ! empty( $input['cart_recs'] );
-			$deals                    = array();
-			foreach ( isset( $input['deals'] ) && is_array( $input['deals'] ) ? $input['deals'] : array() as $row ) {
-				$buy  = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['item'] ) ? $row['item'] : 0 ) : null;
-				$gift = is_array( $row ) ? Cartiva_Commerce_Landing::resolve_item( isset( $row['gift'] ) ? $row['gift'] : 0 ) : null;
-				if ( ! $buy || ! $gift || count( $deals ) >= 20 ) {
-					continue;
-				}
-				$deals[] = array(
-					'active'            => ! empty( $row['active'] ),
-					'product_id'        => $buy['product_id'],
-					'variation_id'      => $buy['variation_id'],
-					'buy_qty'           => isset( $row['buy_qty'] ) ? max( 1, min( 99, absint( $row['buy_qty'] ) ) ) : 1,
-					'gift_product_id'   => $gift['product_id'],
-					'gift_variation_id' => $gift['variation_id'],
-					'gift_qty'          => isset( $row['gift_qty'] ) ? max( 1, min( 99, absint( $row['gift_qty'] ) ) ) : 1,
-					'discount'          => isset( $row['discount'] ) ? (float) max( 1, min( 100, round( (float) $row['discount'], 1 ) ) ) : 100.0,
-					'repeat'            => ! empty( $row['repeat'] ),
-				);
-			}
-			$output['deals'] = $deals;
-		} elseif ( 'recovery' === $tab ) {
-			$output['recovery']       = ! empty( $input['recovery'] );
-			$output['recovery_main']  = ! empty( $input['recovery_main'] );
-			$output['recovery_after'] = isset( $input['recovery_after'] ) ? max( 10, min( 1440, absint( $input['recovery_after'] ) ) ) : 30;
-			$output['recovery_keep']  = isset( $input['recovery_keep'] ) ? max( 1, min( 365, absint( $input['recovery_keep'] ) ) ) : 30;
-			$output['recovery_note']  = isset( $input['recovery_note'] ) ? sanitize_text_field( $input['recovery_note'] ) : '';
-			$output['coupon_percent'] = isset( $input['coupon_percent'] ) ? max( 1, min( 90, absint( $input['coupon_percent'] ) ) ) : 10;
-			$output['coupon_days']    = isset( $input['coupon_days'] ) ? max( 1, min( 60, absint( $input['coupon_days'] ) ) ) : 3;
-			$output['whatsapp_text']  = isset( $input['whatsapp_text'] ) ? sanitize_textarea_field( $input['whatsapp_text'] ) : '';
-			$emails                   = array();
-			foreach ( Cartiva_Commerce_Recovery::default_emails() as $i => $default ) {
-				$row          = isset( $input['emails'][ $i ] ) && is_array( $input['emails'][ $i ] ) ? $input['emails'][ $i ] : array();
-				$emails[ $i ] = array(
-					'enabled' => ! empty( $row['enabled'] ),
-					'hours'   => isset( $row['hours'] ) ? max( 0.5, min( 720, round( (float) $row['hours'], 1 ) ) ) : $default['hours'],
-					'subject' => isset( $row['subject'] ) && '' !== trim( $row['subject'] ) ? sanitize_text_field( $row['subject'] ) : $default['subject'],
-					'body'    => isset( $row['body'] ) && '' !== trim( $row['body'] ) ? sanitize_textarea_field( $row['body'] ) : $default['body'],
-					'coupon'  => ! empty( $row['coupon'] ),
-				);
-			}
-			$output['emails'] = $emails;
-		} elseif ( 'tracking' === $tab ) {
+					self::render_cart_tab( $settings );
+				} elseif ( 'recovery' === $tab ) {
+					self::render_recovery_tab( $settings );
+				} elseif ( 'tracking' === $tab ) {
 					self::render_tracking_tab( $settings );
 				} else {
 					self::render_general_tab( $settings );
@@ -756,6 +712,69 @@ class Cartiva_Commerce_Settings {
 			<p><button type="button" class="button cartiva-add-row"><?php esc_html_e( 'Add deal', 'cartiva-commerce' ); ?></button></p>
 		</div>
 
+		<h2><?php esc_html_e( 'Order bumps on the main checkout', 'cartiva-commerce' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'Up to three "Yes, add this to my order" boxes above the payment methods of your normal checkout page. Landing pages have their own bumps in the Extras tab.', 'cartiva-commerce' ); ?></p>
+		<?php if ( self::main_checkout_is_block() ) : ?>
+			<p class="cartiva-callout"><?php esc_html_e( 'Your checkout page uses the Checkout block, which does not show these boxes. Switch to the classic checkout in the Checkout form tab to use them.', 'cartiva-commerce' ); ?></p>
+		<?php endif; ?>
+		<?php
+		$bumps = Cartiva_Commerce_Main_Bumps::rows();
+		for ( $i = 0; $i < Cartiva_Commerce_Main_Bumps::MAX; $i++ ) :
+			$bump = wp_parse_args(
+				isset( $bumps[ $i ] ) ? $bumps[ $i ] : array(),
+				array(
+					'active'       => false,
+					'product_id'   => 0,
+					'variation_id' => 0,
+					'discount'     => 10,
+					'title'        => '',
+					'text'         => '',
+					'min_total'    => 0,
+					'when_id'      => 0,
+				)
+			);
+			$base = 'cartiva_commerce_settings[main_bumps][' . $i . ']';
+			/* translators: %d: bump number. */
+			$label = sprintf( __( 'Bump %d', 'cartiva-commerce' ), $i + 1 );
+			?>
+			<fieldset class="cartiva-main-bump-admin">
+				<legend><?php echo esc_html( $label ); ?></legend>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Show it', 'cartiva-commerce' ); ?></th>
+						<td><label class="cartiva-switch"><input type="checkbox" name="<?php echo esc_attr( $base . '[active]' ); ?>" value="1" <?php checked( ! empty( $bump['active'] ) ); ?> /> <span><?php esc_html_e( 'On', 'cartiva-commerce' ); ?></span></label></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Product to offer', 'cartiva-commerce' ); ?></th>
+						<td><?php Cartiva_Commerce_Landing::product_select( $base . '[item]', $bump, __( 'Product to offer', 'cartiva-commerce' ) ); ?></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( 'cartiva-mb-discount-' . $i ); ?>"><?php esc_html_e( 'Discount', 'cartiva-commerce' ); ?></label></th>
+						<td><input id="<?php echo esc_attr( 'cartiva-mb-discount-' . $i ); ?>" type="number" min="0" max="90" step="0.5" class="small-text" name="<?php echo esc_attr( $base . '[discount]' ); ?>" value="<?php echo esc_attr( (string) $bump['discount'] ); ?>" /> %</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( 'cartiva-mb-title-' . $i ); ?>"><?php esc_html_e( 'Headline', 'cartiva-commerce' ); ?></label></th>
+						<td><input id="<?php echo esc_attr( 'cartiva-mb-title-' . $i ); ?>" type="text" class="regular-text" name="<?php echo esc_attr( $base . '[title]' ); ?>" value="<?php echo esc_attr( $bump['title'] ); ?>" placeholder="<?php esc_attr_e( 'Yes, add this to my order', 'cartiva-commerce' ); ?>" /></td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( 'cartiva-mb-text-' . $i ); ?>"><?php esc_html_e( 'Short text', 'cartiva-commerce' ); ?></label></th>
+						<td><textarea id="<?php echo esc_attr( 'cartiva-mb-text-' . $i ); ?>" class="large-text" rows="2" name="<?php echo esc_attr( $base . '[text]' ); ?>"><?php echo esc_textarea( $bump['text'] ); ?></textarea></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Only when the cart has', 'cartiva-commerce' ); ?></th>
+						<td>
+							<?php Cartiva_Commerce_Landing::product_select( $base . '[when]', array( 'product_id' => $bump['when_id'] ), __( 'Only when the cart has', 'cartiva-commerce' ) ); ?>
+							<p class="description"><?php esc_html_e( 'Leave empty to show it with any cart.', 'cartiva-commerce' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( 'cartiva-mb-min-' . $i ); ?>"><?php esc_html_e( 'Minimum cart total', 'cartiva-commerce' ); ?></label></th>
+						<td><input id="<?php echo esc_attr( 'cartiva-mb-min-' . $i ); ?>" type="number" min="0" step="any" class="small-text" name="<?php echo esc_attr( $base . '[min_total]' ); ?>" value="<?php echo esc_attr( $bump['min_total'] ? (string) $bump['min_total'] : '' ); ?>" /> <?php echo esc_html( get_woocommerce_currency_symbol() ); ?></td>
+					</tr>
+				</table>
+			</fieldset>
+		<?php endfor; ?>
+
 		<h2><?php esc_html_e( 'Coupons that apply themselves', 'cartiva-commerce' ); ?></h2>
 		<p><?php esc_html_e( 'Open a coupon under Marketing > Coupons and tick "Apply automatically". It is then added to the cart as soon as the cart meets the coupon\'s usage restrictions, for example "10% off orders over 2000" with a minimum spend. Shoppers who remove it do not get it again in that visit.', 'cartiva-commerce' ); ?></p>
 		<p><a class="button" href="<?php echo esc_url( admin_url( 'edit.php?post_type=shop_coupon' ) ); ?>"><?php esc_html_e( 'Go to coupons', 'cartiva-commerce' ); ?></a></p>
@@ -776,7 +795,7 @@ class Cartiva_Commerce_Settings {
 				<th scope="row"><?php esc_html_e( 'Save abandoned checkouts', 'cartiva-commerce' ); ?></th>
 				<td>
 					<label><input type="checkbox" name="cartiva_commerce_settings[recovery]" value="1" <?php checked( ! empty( $settings['recovery'] ) ); ?> /> <?php esc_html_e( 'On landing page order forms', 'cartiva-commerce' ); ?></label><br>
-					<label><input type="checkbox" name="cartiva_commerce_settings[recovery_main]" value="1" <?php checked( ! empty( $settings['recovery_main'] ) ); ?> /> <?php esc_html_e( 'Also on the main checkout (classic checkout only)', 'cartiva-commerce' ); ?></label>
+					<label><input type="checkbox" name="cartiva_commerce_settings[recovery_main]" value="1" <?php checked( ! empty( $settings['recovery_main'] ) ); ?> /> <?php esc_html_e( 'Also on the main checkout', 'cartiva-commerce' ); ?></label>
 				</td>
 			</tr>
 			<tr>

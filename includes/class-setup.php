@@ -109,7 +109,7 @@ class Cartiva_Commerce_Setup {
 			: array( 'info', __( 'Works with any theme. The free Cartiva theme adds ready-made landing page designs.', 'cartiva-commerce' ), admin_url( 'theme-install.php?search=cartiva' ), __( 'See the theme', 'cartiva-commerce' ) );
 
 		$checks[] = Cartiva_Commerce_Settings::main_checkout_is_block()
-			? array( 'info', __( 'Your main checkout uses the Checkout block. Landing pages work fully; the extra checkout fields and recovery on the main checkout need the classic checkout.', 'cartiva-commerce' ), Cartiva_Commerce_Settings::url( 'fields' ), __( 'Learn more', 'cartiva-commerce' ) )
+			? array( 'info', __( 'Your main checkout uses the Checkout block. Landing pages work fully; the extra checkout fields and order bumps on the main checkout need the classic checkout.', 'cartiva-commerce' ), Cartiva_Commerce_Settings::url( 'fields' ), __( 'Learn more', 'cartiva-commerce' ) )
 			: array( 'ok', __( 'Your main checkout works with every feature.', 'cartiva-commerce' ), '', '' );
 
 		if ( defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {

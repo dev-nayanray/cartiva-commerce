@@ -70,6 +70,22 @@ class Cartiva_Commerce_Analytics {
 	}
 
 	/**
+	 * Report numbers for landing pages: from the order ledger when it is
+	 * complete, otherwise by reading the orders.
+	 *
+	 * @param int[] $landing_ids Landing page IDs.
+	 * @param int   $from        Start timestamp (0 = all time).
+	 * @param int   $to          End timestamp (0 = now).
+	 * @return array See summarize().
+	 */
+	public static function numbers( $landing_ids, $from = 0, $to = 0 ) {
+		if ( Cartiva_Commerce_Ledger::ready() ) {
+			return Cartiva_Commerce_Ledger::summary( $landing_ids, $from, $to );
+		}
+		return self::summarize( self::orders_for( $landing_ids, $from, $to ) );
+	}
+
+	/**
 	 * Numbers for a set of orders.
 	 *
 	 * @param WC_Order[] $orders Orders.
@@ -220,7 +236,7 @@ class Cartiva_Commerce_Analytics {
 					'kind'   => 'funnel',
 					'visits' => $visit,
 				),
-				self::summarize( self::orders_for( $pages['all'], $from_ts ) )
+				self::numbers( $pages['all'], $from_ts )
 			);
 		}
 
@@ -252,7 +268,7 @@ class Cartiva_Commerce_Analytics {
 					'kind'   => 'landing',
 					'visits' => $visit,
 				),
-				self::summarize( self::orders_for( $ids, $from_ts ) )
+				self::numbers( $ids, $from_ts )
 			);
 		}
 

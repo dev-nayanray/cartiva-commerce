@@ -55,6 +55,13 @@ class Cartiva_Commerce_Stats {
 	 */
 	public static function totals( $landing_id ) {
 		$key    = 'cartiva_landing_stats_' . (int) $landing_id;
+		if ( Cartiva_Commerce_Ledger::ready() ) {
+			$sum = Cartiva_Commerce_Ledger::summary( array( $landing_id ) );
+			return array(
+				'orders'  => $sum['orders'],
+				'revenue' => $sum['revenue'],
+			);
+		}
 		$cached = get_transient( $key );
 		if ( is_array( $cached ) ) {
 			return $cached;

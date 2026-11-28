@@ -71,6 +71,7 @@ function cartiva_commerce_settings() {
 		'protect_max'    => 0,
 		'protect_block'  => '',
 		'protect_message' => '',
+		'main_bumps'      => array(),
 		'courier_default' => '',
 		'courier_weight'  => 0.5,
 		'courier_note'    => '',

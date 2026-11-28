@@ -9,7 +9,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: cartiva-commerce\n"
 
-#: cartiva-commerce.php:106
+#: cartiva-commerce.php:110
 msgid "Cartiva Commerce needs WooCommerce. Please install and activate WooCommerce."
 msgstr ""
 
@@ -17,23 +17,23 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:404 includes/class-funnels.php:279 includes/class-funnels.php:648
+#: includes/class-stats.php:38 includes/class-ab-test.php:409 includes/class-analytics.php:420 includes/class-funnels.php:279 includes/class-funnels.php:648
 msgid "Visits"
 msgstr ""
 
-#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-settings.php:403 includes/class-analytics.php:363 includes/class-analytics.php:405 includes/class-funnels.php:280 includes/class-funnels.php:649 includes/class-setup.php:322
+#: includes/class-stats.php:39 includes/class-ab-test.php:410 includes/class-settings.php:359 includes/class-analytics.php:379 includes/class-analytics.php:421 includes/class-funnels.php:280 includes/class-funnels.php:649 includes/class-setup.php:322
 msgid "Orders"
 msgstr ""
 
-#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:341 includes/class-analytics.php:362 includes/class-analytics.php:407 includes/class-funnels.php:281 includes/class-funnels.php:650
+#: includes/class-stats.php:40 includes/class-ab-test.php:412 includes/class-analytics.php:357 includes/class-analytics.php:378 includes/class-analytics.php:423 includes/class-funnels.php:281 includes/class-funnels.php:650
 msgid "Revenue"
 msgstr ""
 
-#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:365 includes/class-analytics.php:406 includes/class-funnels.php:282 includes/class-funnels.php:651
+#: includes/class-stats.php:41 includes/class-ab-test.php:411 includes/class-analytics.php:381 includes/class-analytics.php:422 includes/class-funnels.php:282 includes/class-funnels.php:651
 msgid "Conversion"
 msgstr ""
 
-#: includes/class-stats.php:102
+#: includes/class-stats.php:109
 msgid "No product chosen"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr ""
 msgid "(no title)"
 msgstr ""
 
-#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-landing.php:1033 includes/class-settings.php:248 includes/class-courier.php:1289 includes/class-courier.php:1396 includes/class-funnels.php:509 includes/class-funnels.php:539 includes/class-setup.php:395
+#: includes/class-ab-test.php:268 includes/class-ab-test.php:315 includes/class-landing.php:1033 includes/class-settings.php:249 includes/class-courier.php:1289 includes/class-courier.php:1396 includes/class-funnels.php:509 includes/class-funnels.php:539 includes/class-setup.php:395
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -119,93 +119,93 @@ msgstr ""
 msgid "Wait for enough orders before choosing: with fewer than about 30 orders per version, differences are often luck. When B wins, its content and settings move to this page, so the address, funnel position and history stay. The old version is kept as a revision."
 msgstr ""
 
-#: includes/class-recovery.php:65
+#: includes/class-recovery.php:67
 msgid "You left something in your cart"
 msgstr ""
 
-#: includes/class-recovery.php:66
+#: includes/class-recovery.php:68
 msgid "Hi {name},\n\nYou were about to order {products}. Your order is not finished yet, and we saved it for you.\n\n{button}\n\nIf you have a question, just reply to this email.\n\n{site}"
 msgstr ""
 
-#: includes/class-recovery.php:72
+#: includes/class-recovery.php:74
 msgid "Your order is still waiting"
 msgstr ""
 
-#: includes/class-recovery.php:73
+#: includes/class-recovery.php:75
 msgid "Hi {name},\n\nYour cart with {products} ({total}) is still saved. Finish your order in one click:\n\n{button}\n\n{site}"
 msgstr ""
 
-#: includes/class-recovery.php:79
+#: includes/class-recovery.php:81
 msgid "A little gift to finish your order"
 msgstr ""
 
-#: includes/class-recovery.php:80
+#: includes/class-recovery.php:82
 msgid "Hi {name},\n\nHere is {discount} off your order with the code {coupon}. It is valid until {expires}.\n\n{button}\n\n{site}"
 msgstr ""
 
-#: includes/class-recovery.php:106
+#: includes/class-recovery.php:108
 msgid "Hello {name}, this is {site}. We saw your order for {products} was not finished. Can we help you complete it? {link}"
 msgstr ""
 
-#: includes/class-recovery.php:117 includes/class-recovery.php:119 includes/class-recovery.php:120 includes/class-recovery.php:872
+#: includes/class-recovery.php:119 includes/class-recovery.php:121 includes/class-recovery.php:122 includes/class-recovery.php:900
 msgid "Abandoned checkouts"
 msgstr ""
 
-#: includes/class-recovery.php:118 includes/class-recovery.php:121
+#: includes/class-recovery.php:120 includes/class-recovery.php:123
 msgid "Abandoned checkout"
 msgstr ""
 
-#: includes/class-recovery.php:122
+#: includes/class-recovery.php:124
 msgid "Search abandoned checkouts"
 msgstr ""
 
-#: includes/class-recovery.php:123
+#: includes/class-recovery.php:125
 msgid "No abandoned checkouts yet."
 msgstr ""
 
-#: includes/class-recovery.php:155
+#: includes/class-recovery.php:157
 msgid "Every 15 minutes"
 msgstr ""
 
-#: includes/class-recovery.php:210 includes/class-settings.php:793
+#: includes/class-recovery.php:212 includes/class-settings.php:812
 msgid "We save the details you enter here so we can help you if your order is not finished."
 msgstr ""
 
 #. translators: %d: abandoned checkout ID.
-#: includes/class-recovery.php:438
+#: includes/class-recovery.php:466
 msgid "Recovered abandoned checkout #%d."
 msgstr ""
 
-#: includes/class-recovery.php:511
+#: includes/class-recovery.php:539
 msgid "You will not get more reminders about this order."
 msgstr ""
 
 #. translators: %d: abandoned checkout ID.
-#: includes/class-recovery.php:701
+#: includes/class-recovery.php:729
 msgid "Cartiva Commerce: reminder coupon for abandoned checkout #%d"
 msgstr ""
 
-#: includes/class-recovery.php:722
+#: includes/class-recovery.php:750
 msgid "there"
 msgstr ""
 
-#: includes/class-recovery.php:725
+#: includes/class-recovery.php:753
 msgid "your items"
 msgstr ""
 
-#: includes/class-recovery.php:758
+#: includes/class-recovery.php:786
 msgid "Finish my order"
 msgstr ""
 
-#: includes/class-recovery.php:765
+#: includes/class-recovery.php:793
 msgid "Stop these reminders"
 msgstr ""
 
-#: includes/class-recovery.php:804 includes/class-recovery.php:818
+#: includes/class-recovery.php:832 includes/class-recovery.php:846
 msgid "Cartiva Commerce abandoned checkouts"
 msgstr ""
 
-#: includes/class-recovery.php:867 includes/class-landing.php:419 includes/class-landing.php:429
+#: includes/class-recovery.php:895 includes/class-landing.php:419 includes/class-landing.php:429
 msgid "Products"
 msgstr ""
 
@@ -355,7 +355,7 @@ msgid "House, road, area, district"
 msgstr ""
 
 #. translators: %s: product name.
-#: includes/class-offers.php:334
+#: includes/class-offers.php:334 includes/class-main-bumps.php:169
 msgid "Yes, add %s to my order"
 msgstr ""
 
@@ -452,15 +452,15 @@ msgstr ""
 msgid "Open cart"
 msgstr ""
 
-#: includes/class-buy-now.php:48 includes/class-settings.php:628
+#: includes/class-buy-now.php:48 includes/class-settings.php:584
 msgid "Buy now"
 msgstr ""
 
-#: includes/class-landing.php:41 includes/class-landing.php:51 includes/class-landing.php:52 includes/class-landing.php:973 includes/class-settings.php:401
+#: includes/class-landing.php:41 includes/class-landing.php:51 includes/class-landing.php:52 includes/class-landing.php:973 includes/class-settings.php:357
 msgid "Landing pages"
 msgstr ""
 
-#: includes/class-landing.php:42 includes/class-orders.php:117 includes/class-analytics.php:419 includes/class-funnels.php:191 includes/class-funnels.php:240 includes/class-setup.php:201 includes/class-setup.php:315 includes/class-checkout.php:255
+#: includes/class-landing.php:42 includes/class-orders.php:117 includes/class-analytics.php:435 includes/class-funnels.php:191 includes/class-funnels.php:240 includes/class-setup.php:201 includes/class-setup.php:315 includes/class-checkout.php:255
 msgid "Landing page"
 msgstr ""
 
@@ -533,7 +533,7 @@ msgstr ""
 msgid "Product name"
 msgstr ""
 
-#: includes/class-landing.php:284 includes/class-landing.php:457 includes/class-settings.php:960
+#: includes/class-landing.php:284 includes/class-landing.php:457 includes/class-settings.php:979
 msgid "Label"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgstr ""
 msgid "Selected first"
 msgstr ""
 
-#: includes/class-landing.php:288 includes/class-landing.php:326 includes/class-landing.php:461 includes/class-landing.php:592 includes/class-settings.php:685 includes/class-settings.php:745 includes/class-funnels.php:215
+#: includes/class-landing.php:288 includes/class-landing.php:326 includes/class-landing.php:461 includes/class-landing.php:592 includes/class-settings.php:641 includes/class-settings.php:701 includes/class-funnels.php:215
 msgid "Remove"
 msgstr ""
 
@@ -795,11 +795,11 @@ msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-landing.php:508 includes/class-settings.php:788 includes/class-settings.php:827
+#: includes/class-landing.php:508 includes/class-settings.php:807 includes/class-settings.php:846
 msgid "days"
 msgstr ""
 
-#: includes/class-landing.php:509 includes/class-settings.php:813
+#: includes/class-landing.php:509 includes/class-settings.php:832
 msgid "hours"
 msgstr ""
 
@@ -904,7 +904,7 @@ msgstr ""
 msgid "These fields apply to this landing page only. Your main checkout keeps its own fields."
 msgstr ""
 
-#: includes/class-landing.php:579 includes/class-settings.php:893
+#: includes/class-landing.php:579 includes/class-settings.php:912
 msgid "Check that the phone is a valid Bangladeshi mobile number (01XXXXXXXXX)"
 msgstr ""
 
@@ -1044,7 +1044,7 @@ msgstr ""
 msgid "Creates a draft sales page with this product and its order form already set up."
 msgstr ""
 
-#: includes/class-settings.php:38 includes/class-settings.php:65 includes/class-settings.php:278 includes/class-settings.php:404 includes/class-setup.php:287
+#: includes/class-settings.php:38 includes/class-settings.php:65 includes/class-settings.php:279 includes/class-settings.php:360 includes/class-setup.php:287
 msgid "Settings"
 msgstr ""
 
@@ -1053,689 +1053,738 @@ msgid "Cartiva Commerce settings"
 msgstr ""
 
 #. translators: %s: field name such as Facebook Pixel ID.
-#: includes/class-settings.php:196
+#: includes/class-settings.php:197
 msgid "The %s does not look right, so it was not saved."
 msgstr ""
 
-#: includes/class-settings.php:279
+#: includes/class-settings.php:280
 msgid "Settings sections"
 msgstr ""
 
-#: includes/class-settings.php:294
+#: includes/class-settings.php:295
 msgid "Your checkout page now uses the classic checkout. The previous version is saved as a page revision."
 msgstr ""
 
-#: includes/class-settings.php:361
+#: includes/class-settings.php:317
 msgid "Save changes"
 msgstr ""
 
-#: includes/class-settings.php:374
+#: includes/class-settings.php:330
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:374 includes/class-settings.php:620
+#: includes/class-settings.php:330 includes/class-settings.php:576
 msgid "Buy now button"
 msgstr ""
 
-#: includes/class-settings.php:375
+#: includes/class-settings.php:331
 msgid "Checkout form"
 msgstr ""
 
-#: includes/class-settings.php:375
+#: includes/class-settings.php:331
 msgid "Fields of the main checkout"
 msgstr ""
 
-#: includes/class-settings.php:376 includes/class-setup.php:130
+#: includes/class-settings.php:332 includes/class-setup.php:130
 msgid "Fake order protection"
 msgstr ""
 
-#: includes/class-settings.php:376
+#: includes/class-settings.php:332
 msgid "Repeat orders, blocked numbers"
 msgstr ""
 
-#: includes/class-settings.php:377 includes/class-courier.php:1007 includes/class-courier.php:1011 includes/class-courier.php:1170 includes/class-courier.php:1210
+#: includes/class-settings.php:333 includes/class-courier.php:1007 includes/class-courier.php:1011 includes/class-courier.php:1170 includes/class-courier.php:1210
 msgid "Courier"
 msgstr ""
 
-#: includes/class-settings.php:377
+#: includes/class-settings.php:333
 msgid "Steadfast, Pathao, RedX"
 msgstr ""
 
-#: includes/class-settings.php:378
+#: includes/class-settings.php:334
 msgid "Cart & deals"
 msgstr ""
 
-#: includes/class-settings.php:378
+#: includes/class-settings.php:334
 msgid "Slide-out cart, free shipping, gifts"
 msgstr ""
 
-#: includes/class-settings.php:379
+#: includes/class-settings.php:335
 msgid "Recovery"
 msgstr ""
 
-#: includes/class-settings.php:379
+#: includes/class-settings.php:335
 msgid "Win back unfinished orders"
 msgstr ""
 
-#: includes/class-settings.php:380
+#: includes/class-settings.php:336
 msgid "Tracking"
 msgstr ""
 
-#: includes/class-settings.php:380
+#: includes/class-settings.php:336
 msgid "Facebook, Google, TikTok"
 msgstr ""
 
 #. translators: %s: version number.
-#: includes/class-settings.php:396
+#: includes/class-settings.php:352
 msgid "Cartiva Commerce %s"
 msgstr ""
 
-#: includes/class-settings.php:399 includes/class-orders.php:321 includes/class-funnels.php:70
+#: includes/class-settings.php:355 includes/class-orders.php:321 includes/class-funnels.php:70
 msgid "Cartiva Commerce"
 msgstr ""
 
-#: includes/class-settings.php:400 includes/class-setup.php:46 includes/class-setup.php:47 includes/class-setup.php:176
+#: includes/class-settings.php:356 includes/class-setup.php:46 includes/class-setup.php:47 includes/class-setup.php:176
 msgid "Start here"
 msgstr ""
 
-#: includes/class-settings.php:402 includes/class-funnels.php:60 includes/class-funnels.php:69
+#: includes/class-settings.php:358 includes/class-funnels.php:60 includes/class-funnels.php:69
 msgid "Funnels"
 msgstr ""
 
-#: includes/class-settings.php:438
+#: includes/class-settings.php:394
 msgid "Send orders to your courier"
 msgstr ""
 
-#: includes/class-settings.php:439
+#: includes/class-settings.php:395
 msgid "Connect the courier you use. Then send an order from its order screen, or tick many orders in WooCommerce > Orders and choose \"Send to ...\" from Bulk actions. The parcel number, status and a tracking link are saved on the order and shown to the customer."
 msgstr ""
 
-#: includes/class-settings.php:442
+#: includes/class-settings.php:398
 msgid "Main courier"
 msgstr ""
 
-#: includes/class-settings.php:446
+#: includes/class-settings.php:402
 msgid "not connected"
 msgstr ""
 
-#: includes/class-settings.php:449
+#: includes/class-settings.php:405
 msgid "Chosen first on the order screen."
 msgstr ""
 
-#: includes/class-settings.php:453
+#: includes/class-settings.php:409
 msgid "Usual parcel weight (kg)"
 msgstr ""
 
-#: includes/class-settings.php:457
+#: includes/class-settings.php:413
 msgid "Note for every parcel"
 msgstr ""
 
-#: includes/class-settings.php:458
+#: includes/class-settings.php:414
 msgid "For example: Call before delivery"
 msgstr ""
 
-#: includes/class-settings.php:461
+#: includes/class-settings.php:417
 msgid "Order status"
 msgstr ""
 
-#: includes/class-settings.php:463
+#: includes/class-settings.php:419
 msgid "Mark the order Completed when the courier delivers it"
 msgstr ""
 
-#: includes/class-settings.php:464
+#: includes/class-settings.php:420
 msgid "Mark the order Cancelled when the parcel is returned"
 msgstr ""
 
-#: includes/class-settings.php:465
+#: includes/class-settings.php:421
 msgid "Parcel status is checked every hour."
 msgstr ""
 
-#: includes/class-settings.php:473
+#: includes/class-settings.php:429
 msgid "Find the API key and secret in the Steadfast merchant panel under API. Steadfast also powers the customer delivery history check (received and refused parcels) on the order screen."
 msgstr ""
 
-#: includes/class-settings.php:476
+#: includes/class-settings.php:432
 msgid "API key"
 msgstr ""
 
-#: includes/class-settings.php:477
+#: includes/class-settings.php:433
 msgid "Secret key"
 msgstr ""
 
-#: includes/class-settings.php:481
+#: includes/class-settings.php:437
 msgid "Instant status updates (optional)"
 msgstr ""
 
-#: includes/class-settings.php:483
+#: includes/class-settings.php:439
 msgid "In the Steadfast panel, add this webhook so status changes arrive at once instead of hourly:"
 msgstr ""
 
-#: includes/class-settings.php:484
+#: includes/class-settings.php:440
 msgid "Callback URL"
 msgstr ""
 
-#: includes/class-settings.php:485
+#: includes/class-settings.php:441
 msgid "Auth token (Bearer)"
 msgstr ""
 
-#: includes/class-settings.php:490 includes/class-settings.php:509 includes/class-settings.php:527
+#: includes/class-settings.php:446 includes/class-settings.php:465 includes/class-settings.php:483
 msgid "Test connection"
 msgstr ""
 
-#: includes/class-settings.php:490 includes/class-settings.php:509 includes/class-settings.php:527
+#: includes/class-settings.php:446 includes/class-settings.php:465 includes/class-settings.php:483
 msgid "Save your changes first; the test uses the saved details."
 msgstr ""
 
-#: includes/class-settings.php:495
+#: includes/class-settings.php:451
 msgid "In the Pathao merchant panel open Developer API to get the client ID and secret. Use the email and password you log in with. Save, click Test connection, and copy your store ID from the answer."
 msgstr ""
 
-#: includes/class-settings.php:498
+#: includes/class-settings.php:454
 msgid "Client ID"
 msgstr ""
 
-#: includes/class-settings.php:499
+#: includes/class-settings.php:455
 msgid "Client secret"
 msgstr ""
 
-#: includes/class-settings.php:500
+#: includes/class-settings.php:456
 msgid "Login email"
 msgstr ""
 
-#: includes/class-settings.php:501
+#: includes/class-settings.php:457
 msgid "Login password"
 msgstr ""
 
-#: includes/class-settings.php:502
+#: includes/class-settings.php:458
 msgid "Store ID"
 msgstr ""
 
-#: includes/class-settings.php:502
+#: includes/class-settings.php:458
 msgid "The pickup store parcels are collected from."
 msgstr ""
 
-#: includes/class-settings.php:505 includes/class-settings.php:523
+#: includes/class-settings.php:461 includes/class-settings.php:479
 msgid "Test mode"
 msgstr ""
 
-#: includes/class-settings.php:506
+#: includes/class-settings.php:462
 msgid "Use the Pathao sandbox (no real parcels)"
 msgstr ""
 
-#: includes/class-settings.php:514
+#: includes/class-settings.php:470
 msgid "Get the API access token from the RedX merchant panel (Developer API). RedX needs a delivery area for every parcel; it is guessed from the address and can be changed on the order screen."
 msgstr ""
 
-#: includes/class-settings.php:517
+#: includes/class-settings.php:473
 msgid "API access token"
 msgstr ""
 
-#: includes/class-settings.php:518
+#: includes/class-settings.php:474
 msgid "Pickup store ID (optional)"
 msgstr ""
 
-#: includes/class-settings.php:519
+#: includes/class-settings.php:475
 msgid "Default area ID (optional)"
 msgstr ""
 
-#: includes/class-settings.php:519
+#: includes/class-settings.php:475
 msgid "Used when the area cannot be guessed."
 msgstr ""
 
-#: includes/class-settings.php:520
+#: includes/class-settings.php:476
 msgid "Default area name (optional)"
 msgstr ""
 
-#: includes/class-settings.php:524
+#: includes/class-settings.php:480
 msgid "Use the RedX sandbox (no real parcels)"
 msgstr ""
 
-#: includes/class-settings.php:538
+#: includes/class-settings.php:494
 msgid "Connected"
 msgstr ""
 
-#: includes/class-settings.php:538
+#: includes/class-settings.php:494
 msgid "Not connected"
 msgstr ""
 
-#: includes/class-settings.php:549
+#: includes/class-settings.php:505
 msgid "Stop fake and repeat cash on delivery orders"
 msgstr ""
 
-#: includes/class-settings.php:550
+#: includes/class-settings.php:506
 msgid "Checks the phone number of each new order. Orders that look like repeats are either marked \"Check before shipping\" for you to call, or refused with a message."
 msgstr ""
 
-#: includes/class-settings.php:553
+#: includes/class-settings.php:509
 msgid "Protection"
 msgstr ""
 
-#: includes/class-settings.php:555
+#: includes/class-settings.php:511
 msgid "Check orders from landing pages and funnels"
 msgstr ""
 
-#: includes/class-settings.php:556
+#: includes/class-settings.php:512
 msgid "Also check orders from the main checkout"
 msgstr ""
 
-#: includes/class-settings.php:560
+#: includes/class-settings.php:516
 msgid "Repeat orders"
 msgstr ""
 
 #. translators: %s: number field.
-#: includes/class-settings.php:565
+#: includes/class-settings.php:521
 msgid "Same phone number ordered in the last %s hours"
 msgstr ""
 
-#: includes/class-settings.php:569
+#: includes/class-settings.php:525
 msgid "0 turns this check off."
 msgstr ""
 
-#: includes/class-settings.php:573
+#: includes/class-settings.php:529
 msgid "Daily limit"
 msgstr ""
 
 #. translators: %s: number field.
-#: includes/class-settings.php:578
+#: includes/class-settings.php:534
 msgid "At most %s orders per phone number in 24 hours"
 msgstr ""
 
-#: includes/class-settings.php:582
+#: includes/class-settings.php:538
 msgid "0 means no limit."
 msgstr ""
 
-#: includes/class-settings.php:586
+#: includes/class-settings.php:542
 msgid "When an order looks like a repeat"
 msgstr ""
 
-#: includes/class-settings.php:588
+#: includes/class-settings.php:544
 msgid "Accept it, but mark it \"Check before shipping\" (recommended)"
 msgstr ""
 
-#: includes/class-settings.php:589
+#: includes/class-settings.php:545
 msgid "Refuse it and show the message below"
 msgstr ""
 
-#: includes/class-settings.php:593
+#: includes/class-settings.php:549
 msgid "Blocked numbers"
 msgstr ""
 
-#: includes/class-settings.php:596
+#: includes/class-settings.php:552
 msgid "One phone number per line. Orders from these numbers are always refused, for example customers who refused parcels before."
 msgstr ""
 
-#: includes/class-settings.php:600
+#: includes/class-settings.php:556
 msgid "Message to the shopper"
 msgstr ""
 
-#: includes/class-settings.php:602 includes/class-cod.php:283
+#: includes/class-settings.php:558 includes/class-cod.php:283
 msgid "We already have an order from this phone number. We will call you to confirm it. To change your order, please call us."
 msgstr ""
 
-#: includes/class-settings.php:606
+#: includes/class-settings.php:562
 msgid "Flagged orders show \"Check\" in the Source column of the Orders list and a note on the order."
 msgstr ""
 
-#: includes/class-settings.php:622
+#: includes/class-settings.php:578
 msgid "Show a Buy now button under Add to cart that goes straight to checkout"
 msgstr ""
 
-#: includes/class-settings.php:626
+#: includes/class-settings.php:582
 msgid "Buy now label"
 msgstr ""
 
-#: includes/class-settings.php:629
+#: includes/class-settings.php:585
 msgid "For example: Order now. Leave empty for \"Buy now\"."
 msgstr ""
 
-#: includes/class-settings.php:634 includes/class-analytics.php:396
+#: includes/class-settings.php:590 includes/class-analytics.php:412
 msgid "Funnels and landing pages"
 msgstr ""
 
-#: includes/class-settings.php:635
+#: includes/class-settings.php:591
 msgid "A landing page sells one product with the order form on the same page. A funnel leads shoppers through steps: a sales page, a checkout, an optional upsell and a thank-you page."
 msgstr ""
 
-#: includes/class-settings.php:636
+#: includes/class-settings.php:592
 msgid "Create one in the Start here page"
 msgstr ""
 
-#: includes/class-settings.php:665
+#: includes/class-settings.php:621
 msgid "Active"
 msgstr ""
 
-#: includes/class-settings.php:667
+#: includes/class-settings.php:623
 msgid "Buy quantity"
 msgstr ""
 
-#: includes/class-settings.php:668
+#: includes/class-settings.php:624
 msgid "Product to buy"
 msgstr ""
 
-#: includes/class-settings.php:671
+#: includes/class-settings.php:627
 msgid "Gift quantity"
 msgstr ""
 
-#: includes/class-settings.php:679
+#: includes/class-settings.php:635
 msgid "Gift product"
 msgstr ""
 
-#: includes/class-settings.php:683
+#: includes/class-settings.php:639
 msgid "Gift discount %"
 msgstr ""
 
-#: includes/class-settings.php:684
+#: includes/class-settings.php:640
 msgid "Repeat for every set"
 msgstr ""
 
-#: includes/class-settings.php:697
+#: includes/class-settings.php:653
 msgid "Slide-out cart"
 msgstr ""
 
-#: includes/class-settings.php:700
+#: includes/class-settings.php:656
 msgid "Cart drawer"
 msgstr ""
 
-#: includes/class-settings.php:702
+#: includes/class-settings.php:658
 msgid "Use the slide-out cart"
 msgstr ""
 
-#: includes/class-settings.php:703
+#: includes/class-settings.php:659
 msgid "Open it when a product is added to the cart"
 msgstr ""
 
-#: includes/class-settings.php:704
+#: includes/class-settings.php:660
 msgid "Show a floating cart button in the corner"
 msgstr ""
 
-#: includes/class-settings.php:705
+#: includes/class-settings.php:661
 msgid "Open it from the cart links and mini cart in your header"
 msgstr ""
 
-#: includes/class-settings.php:706
+#: includes/class-settings.php:662
 msgid "Shoppers change quantities, remove products and see suggestions without leaving the page. The drawer is not shown on the cart, checkout and landing pages."
 msgstr ""
 
-#: includes/class-settings.php:710
+#: includes/class-settings.php:666
 msgid "Suggestions"
 msgstr ""
 
-#: includes/class-settings.php:712
+#: includes/class-settings.php:668
 msgid "Show \"You may also like\" in the drawer"
 msgstr ""
 
-#: includes/class-settings.php:713
+#: includes/class-settings.php:669
 msgid "Uses the Cross-sells you set on each product (Product data > Linked Products)."
 msgstr ""
 
-#: includes/class-settings.php:718
+#: includes/class-settings.php:674
 msgid "Free shipping bar"
 msgstr ""
 
-#: includes/class-settings.php:721
+#: includes/class-settings.php:677
 msgid "Progress bar"
 msgstr ""
 
-#: includes/class-settings.php:723
+#: includes/class-settings.php:679
 msgid "Show \"Add X more for free shipping\" in the drawer and on the cart and checkout pages"
 msgstr ""
 
-#: includes/class-settings.php:727
+#: includes/class-settings.php:683
 msgid "Free shipping from"
 msgstr ""
 
-#: includes/class-settings.php:730
+#: includes/class-settings.php:686
 msgid "Leave 0 to use the minimum order amount of the Free shipping method in the shopper's shipping zone (WooCommerce > Settings > Shipping). If you enter an amount, make sure a Free shipping method with the same minimum exists, so the promise matches the checkout."
 msgstr ""
 
-#: includes/class-settings.php:735
+#: includes/class-settings.php:691
 msgid "Buy X, get Y deals"
 msgstr ""
 
-#: includes/class-settings.php:736
+#: includes/class-settings.php:692
 msgid "When the cart has enough of a product, the gift product is added by itself at the discount you set (100% = free), and removed again if the shopper buys less. For \"Buy 1, get 1 free\" pick the same product on both sides. With \"Repeat\", every full set earns a gift (buy 2 get 1: 4 bought = 2 gifts)."
 msgstr ""
 
-#: includes/class-settings.php:740 includes/class-setup.php:284
+#: includes/class-settings.php:696 includes/class-settings.php:745 includes/class-setup.php:284
 msgid "On"
 msgstr ""
 
-#: includes/class-settings.php:741
+#: includes/class-settings.php:697
 msgid "Buy"
 msgstr ""
 
-#: includes/class-settings.php:742
+#: includes/class-settings.php:698
 msgid "Get"
 msgstr ""
 
-#: includes/class-settings.php:743
+#: includes/class-settings.php:699
 msgid "Gift discount"
 msgstr ""
 
-#: includes/class-settings.php:744
+#: includes/class-settings.php:700
 msgid "Repeat"
 msgstr ""
 
-#: includes/class-settings.php:756
+#: includes/class-settings.php:712
 msgid "Add deal"
 msgstr ""
 
-#: includes/class-settings.php:759
-msgid "Coupons that apply themselves"
+#: includes/class-settings.php:715
+msgid "Order bumps on the main checkout"
+msgstr ""
+
+#: includes/class-settings.php:716
+msgid "Up to three \"Yes, add this to my order\" boxes above the payment methods of your normal checkout page. Landing pages have their own bumps in the Extras tab."
+msgstr ""
+
+#: includes/class-settings.php:718
+msgid "Your checkout page uses the Checkout block, which does not show these boxes. Switch to the classic checkout in the Checkout form tab to use them."
+msgstr ""
+
+#. translators: %d: bump number.
+#: includes/class-settings.php:738
+msgid "Bump %d"
+msgstr ""
+
+#: includes/class-settings.php:744
+msgid "Show it"
+msgstr ""
+
+#: includes/class-settings.php:748 includes/class-settings.php:749
+msgid "Product to offer"
+msgstr ""
+
+#: includes/class-settings.php:752 includes/class-settings.php:843
+msgid "Discount"
+msgstr ""
+
+#: includes/class-settings.php:756
+msgid "Headline"
+msgstr ""
+
+#: includes/class-settings.php:757
+msgid "Yes, add this to my order"
 msgstr ""
 
 #: includes/class-settings.php:760
-msgid "Open a coupon under Marketing > Coupons and tick \"Apply automatically\". It is then added to the cart as soon as the cart meets the coupon's usage restrictions, for example \"10% off orders over 2000\" with a minimum spend. Shoppers who remove it do not get it again in that visit."
+msgid "Short text"
 msgstr ""
 
-#: includes/class-settings.php:761
-msgid "Go to coupons"
+#: includes/class-settings.php:764 includes/class-settings.php:766
+msgid "Only when the cart has"
 msgstr ""
 
-#: includes/class-settings.php:773
-msgid "When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Commerce > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back."
+#: includes/class-settings.php:767
+msgid "Leave empty to show it with any cart."
 msgstr ""
 
-#: includes/class-settings.php:776
-msgid "Save abandoned checkouts"
+#: includes/class-settings.php:771
+msgid "Minimum cart total"
 msgstr ""
 
 #: includes/class-settings.php:778
-msgid "On landing page order forms"
+msgid "Coupons that apply themselves"
 msgstr ""
 
 #: includes/class-settings.php:779
-msgid "Also on the main checkout (classic checkout only)"
+msgid "Open a coupon under Marketing > Coupons and tick \"Apply automatically\". It is then added to the cart as soon as the cart meets the coupon's usage restrictions, for example \"10% off orders over 2000\" with a minimum spend. Shoppers who remove it do not get it again in that visit."
 msgstr ""
 
-#: includes/class-settings.php:783
+#: includes/class-settings.php:780
+msgid "Go to coupons"
+msgstr ""
+
+#: includes/class-settings.php:792
+msgid "When shoppers enter their phone or email on an order form but do not order, you see them under Cartiva Commerce > Abandoned checkouts, with Call and WhatsApp buttons, and reminder emails go out with a link that puts their cart back."
+msgstr ""
+
+#: includes/class-settings.php:795
+msgid "Save abandoned checkouts"
+msgstr ""
+
+#: includes/class-settings.php:797
+msgid "On landing page order forms"
+msgstr ""
+
+#: includes/class-settings.php:798
+msgid "Also on the main checkout"
+msgstr ""
+
+#: includes/class-settings.php:802
 msgid "Abandoned after"
 msgstr ""
 
-#: includes/class-settings.php:784
+#: includes/class-settings.php:803
 msgid "minutes without an order"
 msgstr ""
 
-#: includes/class-settings.php:787
+#: includes/class-settings.php:806
 msgid "Delete entries after"
 msgstr ""
 
-#: includes/class-settings.php:791
+#: includes/class-settings.php:810
 msgid "Notice on the form"
 msgstr ""
 
-#: includes/class-settings.php:794
+#: includes/class-settings.php:813
 msgid "Shown under the details, so shoppers know their details are saved. Mention it in your privacy policy too."
 msgstr ""
 
-#: includes/class-settings.php:799
+#: includes/class-settings.php:818
 msgid "Reminder emails"
 msgstr ""
 
-#: includes/class-settings.php:800
+#: includes/class-settings.php:819
 msgid "Sent to shoppers who entered an email, in this order, counted from when the checkout became abandoned. They stop as soon as the shopper orders or clicks \"Stop these reminders\". Placeholders: {name} {products} {total} {button} {link} {coupon} {discount} {expires} {site}"
 msgstr ""
 
 #. translators: %d: email number.
-#: includes/class-settings.php:808
+#: includes/class-settings.php:827
 msgid "Email %d"
 msgstr ""
 
-#: includes/class-settings.php:813
+#: includes/class-settings.php:832
 msgid "Send after"
 msgstr ""
 
-#: includes/class-settings.php:814
+#: includes/class-settings.php:833
 msgid "Include a one-time coupon"
 msgstr ""
 
-#: includes/class-settings.php:816
+#: includes/class-settings.php:835
 msgid "Subject"
 msgstr ""
 
-#: includes/class-settings.php:817
+#: includes/class-settings.php:836
 msgid "Message"
 msgstr ""
 
-#: includes/class-settings.php:821
+#: includes/class-settings.php:840
 msgid "Coupon"
 msgstr ""
 
-#: includes/class-settings.php:824
-msgid "Discount"
-msgstr ""
-
-#: includes/class-settings.php:827
+#: includes/class-settings.php:846
 msgid "valid for"
 msgstr ""
 
-#: includes/class-settings.php:828
+#: includes/class-settings.php:847
 msgid "Each shopper gets their own code, usable once, only with their email address. It is also applied automatically when they open the reminder link."
 msgstr ""
 
-#: includes/class-settings.php:833 includes/class-settings.php:834
+#: includes/class-settings.php:852 includes/class-settings.php:853
 msgid "WhatsApp message"
 msgstr ""
 
-#: includes/class-settings.php:835
+#: includes/class-settings.php:854
 msgid "Filled in when you click WhatsApp in the list, ready to send from your phone or WhatsApp Web. Placeholders: {name} {products} {total} {link} {site}"
 msgstr ""
 
-#: includes/class-settings.php:846
+#: includes/class-settings.php:865
 msgid "Facebook (Meta) Pixel ID"
 msgstr ""
 
-#: includes/class-settings.php:846
+#: includes/class-settings.php:865
 msgid "Events Manager > Data sources > your pixel. Numbers only."
 msgstr ""
 
-#: includes/class-settings.php:847
+#: includes/class-settings.php:866
 msgid "Google Analytics 4 Measurement ID"
 msgstr ""
 
-#: includes/class-settings.php:847
+#: includes/class-settings.php:866
 msgid "Admin > Data streams > your web stream."
 msgstr ""
 
-#: includes/class-settings.php:848
+#: includes/class-settings.php:867
 msgid "TikTok Pixel ID"
 msgstr ""
 
-#: includes/class-settings.php:848
+#: includes/class-settings.php:867
 msgid "TikTok Ads Manager > Assets > Events > Web events."
 msgstr ""
 
-#: includes/class-settings.php:851
+#: includes/class-settings.php:870
 msgid "Send funnel events to your ad and analytics accounts: page view, product view (ViewContent / view_item), checkout start, order bump added (AddToCart) and Purchase with the final order value after upsells. Purchase is sent once per order. Leave a field empty to turn that service off."
 msgstr ""
 
-#: includes/class-settings.php:863
+#: includes/class-settings.php:882
 msgid "Where"
 msgstr ""
 
-#: includes/class-settings.php:865
+#: includes/class-settings.php:884
 msgid "Also track the rest of the store (product pages, main checkout and order received page)"
 msgstr ""
 
-#: includes/class-settings.php:866
+#: includes/class-settings.php:885
 msgid "Leave this off if another plugin already adds these pixels to your store, so events are not counted twice. Funnel and landing pages are always tracked."
 msgstr ""
 
-#: includes/class-settings.php:870
+#: includes/class-settings.php:889
 msgid "Privacy: the pixels load services from Meta, Google and TikTok in your visitors' browsers. Mention them in your privacy policy. With a consent plugin that supports the WP Consent API, pixels load only after visitors accept marketing cookies."
 msgstr ""
 
-#: includes/class-settings.php:883
+#: includes/class-settings.php:902
 msgid "Your checkout page uses the WooCommerce Checkout block."
 msgstr ""
 
-#: includes/class-settings.php:884
+#: includes/class-settings.php:903
 msgid "The Checkout block does not allow changing or removing its built-in fields, so these settings only apply to the classic checkout. Landing page forms always support them. You can switch your main checkout page to the classic checkout below; the current version is kept as a page revision."
 msgstr ""
 
-#: includes/class-settings.php:885
+#: includes/class-settings.php:904
 msgid "Use the classic checkout"
 msgstr ""
 
-#: includes/class-settings.php:890
+#: includes/class-settings.php:909
 msgid "These fields apply to your main checkout page only. Landing pages have their own fields, so changes here never affect them, and the other way around."
 msgstr ""
 
-#: includes/class-settings.php:897
+#: includes/class-settings.php:916
 msgid "Show the \"Have a coupon?\" link on the main checkout"
 msgstr ""
 
-#: includes/class-settings.php:938
+#: includes/class-settings.php:957
 msgid "Full width"
 msgstr ""
 
-#: includes/class-settings.php:939
+#: includes/class-settings.php:958
 msgid "Left half"
 msgstr ""
 
-#: includes/class-settings.php:940
+#: includes/class-settings.php:959
 msgid "Right half"
 msgstr ""
 
-#: includes/class-settings.php:945
+#: includes/class-settings.php:964
 msgid "Form fields"
 msgstr ""
 
-#: includes/class-settings.php:953
+#: includes/class-settings.php:972
 msgid "Pick a preset, or change any field below to make it your own. Full name replaces First and Last name. Hidden fields are filled in automatically where needed (for example, the country is your store country)."
 msgstr ""
 
-#: includes/class-settings.php:957
+#: includes/class-settings.php:976
 msgid "Field"
 msgstr ""
 
-#: includes/class-settings.php:958 includes/class-analytics.php:381
+#: includes/class-settings.php:977 includes/class-analytics.php:397
 msgid "Show"
 msgstr ""
 
-#: includes/class-settings.php:959
+#: includes/class-settings.php:978
 msgid "Required"
 msgstr ""
 
-#: includes/class-settings.php:961
+#: includes/class-settings.php:980
 msgid "Placeholder"
 msgstr ""
 
-#: includes/class-settings.php:962
+#: includes/class-settings.php:981
 msgid "Width"
 msgstr ""
 
-#: includes/class-settings.php:963 includes/class-funnels.php:243
+#: includes/class-settings.php:982 includes/class-funnels.php:243
 msgid "Order"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:974
+#: includes/class-settings.php:993
 msgid "Show %s"
 msgstr ""
 
 #. translators: %s: field name.
-#: includes/class-settings.php:975
+#: includes/class-settings.php:994
 msgid "%s is required"
 msgstr ""
 
@@ -1836,7 +1885,7 @@ msgstr ""
 msgid "A checkout counts as abandoned when no order follows within the time set in the recovery settings. Call or message the shopper, or let the reminder emails do it. Entries are deleted automatically after the keep period."
 msgstr ""
 
-#: includes/class-recovery-admin.php:296 includes/class-analytics.php:403 includes/class-setup.php:301
+#: includes/class-recovery-admin.php:296 includes/class-analytics.php:419 includes/class-setup.php:301
 msgid "Name"
 msgstr ""
 
@@ -1942,7 +1991,7 @@ msgstr ""
 msgid "Main site"
 msgstr ""
 
-#: includes/class-orders.php:117 includes/class-orders.php:343 includes/class-analytics.php:419 includes/class-funnels.php:61 includes/class-setup.php:315
+#: includes/class-orders.php:117 includes/class-orders.php:343 includes/class-analytics.php:435 includes/class-funnels.php:61 includes/class-setup.php:315
 msgid "Funnel"
 msgstr ""
 
@@ -2008,7 +2057,7 @@ msgstr ""
 msgid "Delivery"
 msgstr ""
 
-#: includes/class-analytics.php:33 includes/class-analytics.php:371
+#: includes/class-analytics.php:33 includes/class-analytics.php:387
 msgid "Funnel analytics"
 msgstr ""
 
@@ -2016,67 +2065,67 @@ msgstr ""
 msgid "Analytics"
 msgstr ""
 
-#: includes/class-analytics.php:149
+#: includes/class-analytics.php:165
 msgid "Last 7 days"
 msgstr ""
 
-#: includes/class-analytics.php:150
+#: includes/class-analytics.php:166
 msgid "Last 30 days"
 msgstr ""
 
-#: includes/class-analytics.php:151
+#: includes/class-analytics.php:167
 msgid "Last 90 days"
 msgstr ""
 
-#: includes/class-analytics.php:152
+#: includes/class-analytics.php:168
 msgid "Last 12 months"
 msgstr ""
 
-#: includes/class-analytics.php:312 includes/class-analytics.php:391
+#: includes/class-analytics.php:328 includes/class-analytics.php:407
 msgid "Revenue per day"
 msgstr ""
 
-#: includes/class-analytics.php:341
+#: includes/class-analytics.php:357
 msgid "Show as a table"
 msgstr ""
 
-#: includes/class-analytics.php:341
+#: includes/class-analytics.php:357
 msgid "Day"
 msgstr ""
 
-#: includes/class-analytics.php:364 includes/class-analytics.php:408
+#: includes/class-analytics.php:380 includes/class-analytics.php:424
 msgid "Average order"
 msgstr ""
 
-#: includes/class-analytics.php:366
+#: includes/class-analytics.php:382
 msgid "Order bump taken"
 msgstr ""
 
-#: includes/class-analytics.php:367 includes/class-analytics.php:411
+#: includes/class-analytics.php:383 includes/class-analytics.php:427
 msgid "Upsells accepted"
 msgstr ""
 
-#: includes/class-analytics.php:375
+#: includes/class-analytics.php:391
 msgid "Date range"
 msgstr ""
 
-#: includes/class-analytics.php:398
+#: includes/class-analytics.php:414
 msgid "No published funnels or landing pages yet."
 msgstr ""
 
-#: includes/class-analytics.php:409
+#: includes/class-analytics.php:425
 msgid "Bump taken"
 msgstr ""
 
-#: includes/class-analytics.php:410
+#: includes/class-analytics.php:426
 msgid "Bump revenue"
 msgstr ""
 
-#: includes/class-analytics.php:412
+#: includes/class-analytics.php:428
 msgid "Upsell revenue"
 msgstr ""
 
-#: includes/class-analytics.php:436
+#: includes/class-analytics.php:452
 msgid "Visits count the first step of each funnel, without bots and your own visits while logged in. Orders count processing, completed and on-hold orders. Numbers refresh every 10 minutes. Daily visits are recorded from version 1.3 on."
 msgstr ""
 
@@ -2564,7 +2613,7 @@ msgid "See the theme"
 msgstr ""
 
 #: includes/class-setup.php:112
-msgid "Your main checkout uses the Checkout block. Landing pages work fully; the extra checkout fields and recovery on the main checkout need the classic checkout."
+msgid "Your main checkout uses the Checkout block. Landing pages work fully; the extra checkout fields and order bumps on the main checkout need the classic checkout."
 msgstr ""
 
 #: includes/class-setup.php:112

@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 1.9.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -223,6 +223,13 @@ Customers' tracking links open the courier's own tracking page.
 
 == Changelog ==
 
+= 2.0.0 =
+* Fixed: the Cart & deals and Recovery settings tabs showed no settings (since 1.4/1.5), so the slide-out cart, free shipping bar, deals and recovery emails could not be changed from the dashboard. Both tabs work again.
+* Faster reports: landing page and funnel numbers are now added up from a small report table instead of loading every order, so Analytics, A/B tests and the landing page list stay quick with thousands of orders. Older orders are added in the background after updating.
+* New: Order bumps on the main checkout. Up to three "Yes, add this to my order" boxes with a discount, shown only when the cart has a chosen product or reaches a minimum total (Settings > Cart & deals).
+* Improved: Abandoned checkout recovery now also works with the WooCommerce Checkout block.
+* Developers: tests are in the repository (php tests/run-all.php) and run on GitHub with PHP lint, JavaScript checks and WordPress Plugin Check.
+
 = 1.9.0 =
 * New: Courier booking for Steadfast, Pathao and RedX. Send one order from its order screen or many from Bulk actions in WooCommerce > Orders. Cash to collect, weight, note and the RedX area (guessed from the address) are filled in for you.
 * New: Courier column in the Orders list (Not sent, Waiting for pickup, On the way, Delivered, Returned) and an hourly status check. Optional instant updates through the Steadfast webhook.
@@ -291,6 +298,9 @@ Customers' tracking links open the courier's own tracking page.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 2.0.0 =
+Fixes the empty Cart & deals and Recovery settings tabs, makes reports fast for big stores, and adds order bumps on the main checkout.
 
 = 1.9.0 =
 Adds Steadfast, Pathao and RedX courier booking with parcel tracking and customer delivery history.

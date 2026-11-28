@@ -245,7 +245,7 @@ class Cartiva_Commerce_AB_Test {
 		);
 		$out    = array();
 		foreach ( $groups as $group => $id ) {
-			$sum           = $id ? Cartiva_Commerce_Analytics::summarize( Cartiva_Commerce_Analytics::orders_for( array( $id ), $from ) ) : Cartiva_Commerce_Analytics::summarize( array() );
+			$sum           = $id ? Cartiva_Commerce_Analytics::numbers( array( $id ), $from ) : Cartiva_Commerce_Analytics::summarize( array() );
 			$visits        = $id ? cartiva_commerce_visits_between( $id, $day ) : 0;
 			$out[ $group ] = array(
 				'visits'     => $visits,

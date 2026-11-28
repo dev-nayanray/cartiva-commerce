@@ -1,0 +1,32 @@
+/* Cartiva Commerce: order bumps on the main checkout. */
+.cartiva-bumps--main {
+	--cof-accent: var(--wp--preset--color--accent, var(--wp--preset--color--primary, #d9480f));
+	--cof-muted: var(--wp--preset--color--contrast-2, #6b6b6b);
+	display: grid;
+	gap: .75rem;
+	margin: 1rem 0;
+}
+.cartiva-bumps--main .cartiva-bump {
+	overflow: hidden;
+	border: 2px dashed var(--cof-accent);
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--cof-accent) 6%, var(--wp--preset--color--base, #fff));
+}
+.cartiva-bumps--main .cartiva-bump.is-added { border-style: solid; }
+.cartiva-bumps--main .cartiva-bump.is-loading { opacity: .6; pointer-events: none; }
+.cartiva-bumps--main .cartiva-bump__head {
+	display: flex;
+	gap: .6rem;
+	align-items: center;
+	margin: 0;
+	padding: .7rem .9rem;
+	background: color-mix(in srgb, var(--cof-accent) 14%, transparent);
+	font-weight: 800;
+	cursor: pointer;
+}
+.cartiva-bumps--main .cartiva-main-bump__check { width: 1.2rem; height: 1.2rem; margin: 0; accent-color: var(--cof-accent); }
+.cartiva-bumps--main .cartiva-bump__body { display: flex; gap: .75rem; align-items: flex-start; padding: .75rem .9rem; }
+.cartiva-bumps--main .cartiva-bump__image img { display: block; width: 3.5rem; height: 3.5rem; border-radius: 8px; object-fit: cover; }
+.cartiva-bumps--main .cartiva-bump__body p { margin: 0 0 .3rem; font-size: .92rem; }
+.cartiva-bumps--main .cartiva-bump__price { font-weight: 800; }
+.cartiva-bumps--main .cartiva-bump__price del { margin-inline-end: .3rem; color: var(--cof-muted); font-weight: 400; }

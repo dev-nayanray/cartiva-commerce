@@ -11,7 +11,31 @@
 	var timer = null;
 	var last = '';
 
+	// The Checkout block names its fields by id: email, billing-phone, shipping-first_name ...
+	var blockParts = [ 'first_name', 'last_name', 'phone', 'address_1', 'address_2', 'city', 'state', 'postcode', 'country' ];
+	var blockForm = '.wc-block-checkout';
+
+	function collectBlock( form ) {
+		var data = {};
+		var email = form.find( '#email' ).val();
+		if ( email ) {
+			data.billing_email = String( email ).slice( 0, 200 );
+		}
+		blockParts.forEach( function ( part ) {
+			[ 'billing', 'shipping' ].forEach( function ( group ) {
+				var value = form.find( '#' + group + '-' + part ).val();
+				if ( value && ! data[ 'billing_' + part ] ) {
+					data[ 'billing_' + part ] = String( value ).slice( 0, 200 );
+				}
+			} );
+		} );
+		return data;
+	}
+
 	function collect( form ) {
+		if ( form.is( blockForm ) ) {
+			return collectBlock( form );
+		}
 		var data = {};
 		fields.forEach( function ( name ) {
 			var field = form.find( '[name="' + name + '"]' );
@@ -41,8 +65,8 @@
 		} );
 	}
 
-	$( document ).on( 'change input', 'form.checkout input, form.checkout select, form.checkout textarea', function () {
-		var form = $( this ).closest( 'form.checkout' );
+	$( document ).on( 'change input', 'form.checkout input, form.checkout select, form.checkout textarea, ' + blockForm + ' input, ' + blockForm + ' select', function () {
+		var form = $( this ).closest( 'form.checkout, ' + blockForm );
 		window.clearTimeout( timer );
 		timer = window.setTimeout( function () {
 			send( form );
@@ -51,7 +75,7 @@
 
 	// Save right away when the shopper leaves the page.
 	$( window ).on( 'pagehide', function () {
-		var form = $( 'form.checkout' ).first();
+		var form = $( 'form.checkout, ' + blockForm ).first();
 		if ( ! form.length || ! navigator.sendBeacon ) {
 			return;
 		}

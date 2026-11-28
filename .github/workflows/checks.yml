@@ -1,0 +1,70 @@
+name: Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  php-lint:
+    name: PHP syntax (${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '7.4', '8.0', '8.3' ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Lint plugin files
+        run: |
+          status=0
+          for f in $(find . -name '*.php' -not -path './tests/*' -not -path './vendor/*'); do
+            php -l "$f" > /dev/null || status=1
+          done
+          exit $status
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_sqlite
+          coverage: none
+      - name: Run tests
+        run: php tests/run-all.php
+
+  javascript:
+    name: JavaScript syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check scripts
+        run: for f in assets/js/*.js; do node --check "$f"; done
+
+  plugin-check:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+    # Reports what WordPress.org reviewers look for. Kept advisory until the
+    # first clean run on GitHub.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the release folder
+        run: |
+          mkdir -p build
+          git archive --format=tar --prefix=cartiva-commerce/ HEAD | tar -x -C build
+      - uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: './build/cartiva-commerce'
