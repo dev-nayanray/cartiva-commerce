@@ -5,7 +5,7 @@ Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,7 +221,20 @@ The courier features connect to courier companies only after you add their API d
 
 Customers' tracking links open the courier's own tracking page.
 
+SMS features connect to the SMS company you choose in Settings > SMS, only after you add its details, and only to send a message you turned on (order messages, the new-order alert, phone codes, reminders) or a test. The phone number and the message text are sent.
+
+* BulkSMSBD (bulksmsbd.net). Service terms and privacy policy: https://bulksmsbd.net
+* Alpha SMS (api.sms.net.bd). Service terms and privacy policy: https://sms.net.bd
+* SSL Wireless ISMS Plus (smsplus.sslwireless.com). Service terms and privacy policy: https://sslwireless.com
+* Other gateway: the address you enter yourself.
+
 == Changelog ==
+
+= 2.1.0 =
+* New: SMS with BulkSMSBD, Alpha SMS, SSL Wireless or any gateway with a send link (Settings > SMS), with a Send test button.
+* New: Order SMS to customers when an order is placed, sent to the courier (with the tracking link) and delivered, plus a new-order alert to your own phone. All texts can be written in Bangla.
+* New: Phone codes. Before a cash on delivery order is accepted, the shopper confirms the phone number with a 4-digit SMS code (landing pages, and optionally the classic main checkout). Confirmed numbers are remembered for 30 days; codes expire after 10 minutes and are limited per number.
+* New: SMS reminder for unfinished checkouts, with the link that brings the cart back.
 
 = 2.0.0 =
 * Fixed: the Cart & deals and Recovery settings tabs showed no settings (since 1.4/1.5), so the slide-out cart, free shipping bar, deals and recovery emails could not be changed from the dashboard. Both tabs work again.
@@ -298,6 +311,9 @@ Customers' tracking links open the courier's own tracking page.
 * First release: landing pages with an order form block, per-form checkout fields, main checkout field editor, payment methods per landing page, thank-you page, Buy now button, and landing page results.
 
 == Upgrade Notice ==
+
+= 2.1.0 =
+Adds SMS: order messages, new-order alerts, phone codes against fake orders and unfinished checkout reminders.
 
 = 2.0.0 =
 Fixes the empty Cart & deals and Recovery settings tabs, makes reports fast for big stores, and adds order bumps on the main checkout.

@@ -152,6 +152,26 @@ class Cartiva_Commerce_Settings {
 				);
 			}
 			$output['emails'] = $emails;
+		} elseif ( 'sms' === $tab ) {
+			$gateway                = isset( $input['sms_gateway'] ) ? sanitize_key( $input['sms_gateway'] ) : '';
+			$output['sms_gateway']  = isset( Cartiva_Commerce_SMS::gateways()[ $gateway ] ) ? $gateway : '';
+			foreach ( array( 'sms_key', 'sms_sender', 'sms_ssl_sid', 'sms_shop_phone' ) as $key ) {
+				$output[ $key ] = isset( $input[ $key ] ) ? trim( sanitize_text_field( $input[ $key ] ) ) : '';
+			}
+			$output['sms_custom_url'] = isset( $input['sms_custom_url'] ) ? esc_url_raw( trim( (string) $input['sms_custom_url'] ), array( 'https', 'http' ) ) : '';
+			// esc_url_raw() encodes the braces of {phone} and {message}; put them back.
+			$output['sms_custom_url'] = str_replace( array( '%7Bphone%7D', '%7Bmessage%7D' ), array( '{phone}', '{message}' ), $output['sms_custom_url'] );
+			foreach ( array( 'order', 'courier', 'delivered', 'admin', 'recovery' ) as $key ) {
+				$output[ 'sms_on_' . $key ] = ! empty( $input[ 'sms_on_' . $key ] );
+			}
+			foreach ( array_keys( Cartiva_Commerce_SMS::default_texts() ) as $key ) {
+				$output[ 'sms_tpl_' . $key ] = isset( $input[ 'sms_tpl_' . $key ] ) ? sanitize_textarea_field( $input[ 'sms_tpl_' . $key ] ) : '';
+			}
+			$output['sms_recovery_after'] = isset( $input['sms_recovery_after'] ) ? min( 10080, absint( $input['sms_recovery_after'] ) ) : 30;
+			$output['otp_landing']        = ! empty( $input['otp_landing'] );
+			$output['otp_main']           = ! empty( $input['otp_main'] );
+			$output['otp_all_methods']    = ! empty( $input['otp_all_methods'] );
+			$output['otp_remember']       = isset( $input['otp_remember'] ) ? min( 365, absint( $input['otp_remember'] ) ) : 30;
 		} elseif ( 'courier' === $tab ) {
 			$text = function ( $key ) use ( $input ) {
 				return isset( $input[ $key ] ) ? trim( sanitize_text_field( $input[ $key ] ) ) : '';
@@ -304,6 +324,8 @@ class Cartiva_Commerce_Settings {
 					self::render_protect_tab( $settings );
 				} elseif ( 'courier' === $tab ) {
 					self::render_courier_tab( $settings );
+				} elseif ( 'sms' === $tab ) {
+					self::render_sms_tab( $settings );
 				} elseif ( 'cart' === $tab ) {
 					self::render_cart_tab( $settings );
 				} elseif ( 'recovery' === $tab ) {
@@ -330,6 +352,7 @@ class Cartiva_Commerce_Settings {
 			'general'  => array( __( 'General', 'cartiva-commerce' ), __( 'Buy now button', 'cartiva-commerce' ), 'dashicons-admin-generic' ),
 			'fields'   => array( __( 'Checkout form', 'cartiva-commerce' ), __( 'Fields of the main checkout', 'cartiva-commerce' ), 'dashicons-feedback' ),
 			'protect'  => array( __( 'Fake order protection', 'cartiva-commerce' ), __( 'Repeat orders, blocked numbers', 'cartiva-commerce' ), 'dashicons-shield' ),
+			'sms'      => array( __( 'SMS', 'cartiva-commerce' ), __( 'Order messages, phone codes', 'cartiva-commerce' ), 'dashicons-smartphone' ),
 			'courier'  => array( __( 'Courier', 'cartiva-commerce' ), __( 'Steadfast, Pathao, RedX', 'cartiva-commerce' ), 'dashicons-car' ),
 			'cart'     => array( __( 'Cart & deals', 'cartiva-commerce' ), __( 'Slide-out cart, free shipping, gifts', 'cartiva-commerce' ), 'dashicons-cart' ),
 			'recovery' => array( __( 'Recovery', 'cartiva-commerce' ), __( 'Win back unfinished orders', 'cartiva-commerce' ), 'dashicons-backup' ),
@@ -359,6 +382,100 @@ class Cartiva_Commerce_Settings {
 				<a href="<?php echo esc_url( Cartiva_Commerce_Orders::list_url( 'cartiva' ) ); ?>"><?php esc_html_e( 'Orders', 'cartiva-commerce' ); ?></a>
 				<a href="<?php echo esc_url( self::url() ); ?>"><?php esc_html_e( 'Settings', 'cartiva-commerce' ); ?></a>
 			</nav>
+		</div>
+		<?php
+	}
+
+	/**
+	 * SMS tab.
+	 *
+	 * @param array $settings Settings.
+	 */
+	private static function render_sms_tab( $settings ) {
+		$ready  = Cartiva_Commerce_SMS::ready();
+		$labels = Cartiva_Commerce_SMS::labels();
+		$texts  = Cartiva_Commerce_SMS::default_texts();
+		$name   = function ( $key ) {
+			return 'cartiva_commerce_settings[' . $key . ']';
+		};
+		?>
+		<div class="cartiva-card">
+			<h2><?php esc_html_e( 'SMS gateway', 'cartiva-commerce' ); ?> <?php self::courier_badge( $ready ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Choose the company you buy SMS from and paste the details from its panel. Messages are sent only when you turn them on below.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><label for="cartiva-sms-gateway"><?php esc_html_e( 'Gateway', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<select id="cartiva-sms-gateway" name="<?php echo esc_attr( $name( 'sms_gateway' ) ); ?>">
+							<option value=""><?php esc_html_e( 'None', 'cartiva-commerce' ); ?></option>
+							<?php foreach ( Cartiva_Commerce_SMS::gateways() as $key => $label ) : ?>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $settings['sms_gateway'], $key ); ?>><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
+				<?php
+				self::courier_field( $settings, 'sms_key', __( 'API key / token', 'cartiva-commerce' ), 'password', __( 'BulkSMSBD and Alpha SMS: API key. SSL Wireless: API token.', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'sms_sender', __( 'Sender ID', 'cartiva-commerce' ), 'text', __( 'Your approved sender ID or masking name. Needed for BulkSMSBD; optional for Alpha SMS.', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'sms_ssl_sid', __( 'SSL Wireless SID', 'cartiva-commerce' ) );
+				self::courier_field( $settings, 'sms_custom_url', __( 'Send link (other gateway)', 'cartiva-commerce' ), 'url', __( 'For any other gateway: its send address with {phone} and {message} where the number and text go, for example https://example.com/send?key=ABC&to={phone}&text={message}', 'cartiva-commerce' ) );
+				?>
+				<tr>
+					<th scope="row"><label for="cartiva-sms-test"><?php esc_html_e( 'Send a test SMS', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-sms-test" type="tel" class="regular-text" placeholder="01XXXXXXXXX" />
+						<button type="button" class="button" data-cartiva-sms-test="1"><?php esc_html_e( 'Send test', 'cartiva-commerce' ); ?></button>
+						<span class="cartiva-courier-test-result" role="status"><?php esc_html_e( 'Save your changes first; the test uses the saved details.', 'cartiva-commerce' ); ?></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="cartiva-card">
+			<h2><?php esc_html_e( 'Confirm phone numbers with a code', 'cartiva-commerce' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'Before a cash on delivery order is accepted, the shopper gets a 4-digit code by SMS and types it on the form. This stops most fake orders and wrong numbers. Each code costs one SMS.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Ask for a code', 'cartiva-commerce' ); ?></th>
+					<td>
+						<label class="cartiva-switch"><input type="checkbox" name="<?php echo esc_attr( $name( 'otp_landing' ) ); ?>" value="1" <?php checked( ! empty( $settings['otp_landing'] ) ); ?> /> <span><?php esc_html_e( 'On landing page and funnel forms', 'cartiva-commerce' ); ?></span></label>
+						<label class="cartiva-switch"><input type="checkbox" name="<?php echo esc_attr( $name( 'otp_main' ) ); ?>" value="1" <?php checked( ! empty( $settings['otp_main'] ) ); ?> /> <span><?php esc_html_e( 'On the main checkout (classic checkout)', 'cartiva-commerce' ); ?></span></label>
+						<label class="cartiva-switch"><input type="checkbox" name="<?php echo esc_attr( $name( 'otp_all_methods' ) ); ?>" value="1" <?php checked( ! empty( $settings['otp_all_methods'] ) ); ?> /> <span><?php esc_html_e( 'For every payment method, not only cash on delivery', 'cartiva-commerce' ); ?></span></label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="cartiva-otp-remember"><?php esc_html_e( 'Remember confirmed numbers', 'cartiva-commerce' ); ?></label></th>
+					<td>
+						<input id="cartiva-otp-remember" type="number" min="0" max="365" class="small-text" name="<?php echo esc_attr( $name( 'otp_remember' ) ); ?>" value="<?php echo esc_attr( (string) (int) $settings['otp_remember'] ); ?>" /> <?php esc_html_e( 'days', 'cartiva-commerce' ); ?>
+						<p class="description"><?php esc_html_e( 'Returning customers are not asked again during this time. 0 asks every time.', 'cartiva-commerce' ); ?></p>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="cartiva-card">
+			<h2><?php esc_html_e( 'Messages', 'cartiva-commerce' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'You can write in Bangla or English. Words in curly brackets are filled in: {name} {order} {total} {phone} {site} {courier} {tracking}; the code message uses {code} and the reminder uses {link}. Leave a text empty to use the default.', 'cartiva-commerce' ); ?></p>
+			<table class="form-table" role="presentation">
+				<?php foreach ( $texts as $key => $default ) : ?>
+					<tr>
+						<th scope="row"><label for="<?php echo esc_attr( 'cartiva-sms-' . $key ); ?>"><?php echo esc_html( $labels[ $key ] ); ?></label></th>
+						<td>
+							<?php if ( 'otp' !== $key ) : ?>
+								<label class="cartiva-switch"><input type="checkbox" name="<?php echo esc_attr( $name( 'sms_on_' . $key ) ); ?>" value="1" <?php checked( ! empty( $settings[ 'sms_on_' . $key ] ) ); ?> /> <span><?php esc_html_e( 'Send this SMS', 'cartiva-commerce' ); ?></span></label>
+							<?php endif; ?>
+							<textarea id="<?php echo esc_attr( 'cartiva-sms-' . $key ); ?>" class="large-text" rows="2" name="<?php echo esc_attr( $name( 'sms_tpl_' . $key ) ); ?>" placeholder="<?php echo esc_attr( $default ); ?>"><?php echo esc_textarea( (string) $settings[ 'sms_tpl_' . $key ] ); ?></textarea>
+							<?php if ( 'admin' === $key ) : ?>
+								<p><label for="cartiva-sms-shop-phone"><?php esc_html_e( 'Your phone number', 'cartiva-commerce' ); ?></label> <input id="cartiva-sms-shop-phone" type="tel" class="regular-text" name="<?php echo esc_attr( $name( 'sms_shop_phone' ) ); ?>" value="<?php echo esc_attr( (string) $settings['sms_shop_phone'] ); ?>" placeholder="01XXXXXXXXX" /></p>
+							<?php elseif ( 'recovery' === $key ) : ?>
+								<p><?php esc_html_e( 'Send it', 'cartiva-commerce' ); ?> <input type="number" min="0" max="10080" class="small-text" name="<?php echo esc_attr( $name( 'sms_recovery_after' ) ); ?>" value="<?php echo esc_attr( (string) (int) $settings['sms_recovery_after'] ); ?>" aria-label="<?php esc_attr_e( 'Minutes', 'cartiva-commerce' ); ?>" /> <?php esc_html_e( 'minutes after the checkout counts as unfinished (needs Recovery turned on).', 'cartiva-commerce' ); ?></p>
+							<?php elseif ( 'courier' === $key ) : ?>
+								<p class="description"><?php esc_html_e( 'Sent when you send the order to Steadfast, Pathao or RedX.', 'cartiva-commerce' ); ?></p>
+							<?php endif; ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</table>
 		</div>
 		<?php
 	}

@@ -1,0 +1,17 @@
+/* Cartiva Commerce: SMS code box on order forms. */
+.cartiva-otp {
+	margin: 0 0 1em;
+	padding: .75em 1em;
+	border: 2px solid currentColor;
+	border-radius: 10px;
+}
+.cartiva-otp[hidden] { display: none; }
+.cartiva-otp input[name="cartiva_otp"] {
+	max-width: 10em;
+	font-size: 1.4em;
+	letter-spacing: .3em;
+	text-align: center;
+}
+.cartiva-otp__help { margin: 0; font-size: .9em; }
+.cartiva-otp__resend { margin-inline-start: .25em; text-decoration: underline; cursor: pointer; }
+.cartiva-otp__msg:empty { display: none; }

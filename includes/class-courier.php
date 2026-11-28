@@ -503,6 +503,12 @@ class Cartiva_Commerce_Courier {
 		/* translators: 1: courier, 2: parcel number. */
 		$order->add_order_note( sprintf( __( 'Sent to %1$s. Parcel %2$s.', 'cartiva-commerce' ), self::providers()[ $provider ], $ids['tracking'] ) );
 		$order->save();
+		/**
+		 * Fires after a parcel is booked for an order.
+		 *
+		 * @param WC_Order $order Order.
+		 */
+		do_action( 'cartiva_commerce_parcel_sent', $order );
 		return array(
 			'ok'      => true,
 			/* translators: 1: courier, 2: parcel number. */
@@ -615,6 +621,15 @@ class Cartiva_Commerce_Courier {
 		}
 		if ( $save ) {
 			$order->save();
+		}
+		if ( '' !== (string) $order->get_meta( '_cartiva_courier_sent' ) ) {
+			/**
+			 * Fires when a parcel's status changes.
+			 *
+			 * @param WC_Order $order Order.
+			 * @param string   $plain pending, transit, delivered, partial or returned.
+			 */
+			do_action( 'cartiva_commerce_parcel_status', $order, $plain );
 		}
 		return true;
 	}

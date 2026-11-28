@@ -640,6 +640,15 @@ class Cartiva_Commerce_Recovery {
 				 */
 				do_action( 'cartiva_commerce_checkout_abandoned', $id );
 			}
+			if ( 'abandoned' === $status ) {
+				/**
+				 * Runs for each unfinished checkout on every check (SMS reminders).
+				 *
+				 * @param int $id  Abandoned checkout ID.
+				 * @param int $now Time.
+				 */
+				do_action( 'cartiva_commerce_recovery_tick', $id, $now );
+			}
 			if ( 'abandoned' === $status && $sent < 50 && self::due_email( $id, $now ) !== null ) {
 				if ( self::send( $id, (int) self::due_email( $id, $now ) ) ) {
 					++$sent;

@@ -1,6 +1,6 @@
 <?php
 define('ABSPATH','/'); define('CARTIVA_COMMERCE_DIR',dirname(__DIR__).'/'); define('DAY_IN_SECONDS',86400); define('HOUR_IN_SECONDS',3600); define('MINUTE_IN_SECONDS',60); define('WEEK_IN_SECONDS',604800);
-function add_filter(){} function add_action(){} function apply_filters($h,$v){return $v;} function __($s){return $s;} function esc_html__($s){return $s;} function _n($a,$b,$n){return $n==1?$a:$b;}
+function add_filter(){} function add_action(){} $ACTIONS=[]; function do_action($h,...$a){global $ACTIONS;$ACTIONS[]=$h;} function apply_filters($h,$v){return $v;} function __($s){return $s;} function esc_html__($s){return $s;} function _n($a,$b,$n){return $n==1?$a:$b;}
 function esc_html($s){return htmlspecialchars((string)$s);} function esc_attr($s){return htmlspecialchars((string)$s);} function esc_url($s){return htmlspecialchars((string)$s);} function selected($a,$b,$e=true){return $a==$b?' selected':'';}
 function wp_parse_args($a,$d){return array_merge($d,(array)$a);} function wp_strip_all_tags($s){return strip_tags($s);} function wp_json_encode($d){return json_encode($d);} function sanitize_key($s){return strtolower(preg_replace('/[^a-z0-9_\-]/i','',$s));}
 function is_wp_error($x){return $x instanceof WP_Error;} class WP_Error{public $m; function __construct($c,$m){$this->m=$m;} function get_error_message(){return $this->m;}}
@@ -83,11 +83,13 @@ $TR=[]; $CALLS=[]; $REPLY=['issue-token'=>['code'=>401,'body'=>json_encode(['mes
 $CALLS=[]; $REPLY=['/parcel'=>['code'=>201,'body'=>json_encode(['tracking_id'=>'21A427TU4BN3R'])]]; $x1=new WC_Order(['id'=>63]);
 $r=$C::send($x1,'redx',['area_id'=>3,'area_name'=>'Mirpur 10']); ok($r['ok'] && $x1->meta['_cartiva_tracking']==='21A427TU4BN3R' && $CALLS[0][1]['headers']['API-ACCESS-TOKEN']==='Bearer tok','RedX booking; Bearer not doubled');
 
+ok(in_array('cartiva_commerce_parcel_sent',$ACTIONS,true),'booking tells the SMS feature');
 // Status normalize and refresh
 ok($C::normalize('in_review')==='pending' && $C::normalize('Pickup_Requested')==='pending' && $C::normalize('In_Transit')==='transit' && $C::normalize('delivery-in-progress')==='transit' && $C::normalize('Delivered')==='delivered' && $C::normalize('partial_delivered')==='partial' && $C::normalize('Partial_Delivery')==='partial' && $C::normalize('cancelled')==='returned' && $C::normalize('Return')==='returned' && $C::normalize('agent-returning')==='returned','courier statuses in plain words');
 $REPLY=['status_by_cid/1424107'=>['code'=>200,'body'=>json_encode(['status'=>200,'delivery_status'=>'delivered'])]]; $SET['courier_complete']=true; $o->saved=0;
 $r=$C::refresh($o); ok($r['ok'] && $o->meta['_cartiva_courier_state']==='delivered' && $o->status==='completed' && $o->saved===1,'delivered: order completed when turned on');
 ok($C::finished($o),'delivered parcel is finished');
+ok(in_array('cartiva_commerce_parcel_status',$ACTIONS,true),'status change tells the SMS feature');
 $REPLY=['issue-token'=>['code'=>200,'body'=>json_encode(['access_token'=>'AT3','expires_in'=>9000])],'/orders/DL121224VS8TTJ/info'=>['code'=>200,'body'=>json_encode(['code'=>200,'type'=>'success','data'=>['consignment_id'=>'DL121224VS8TTJ','order_status'=>'Return','order_status_slug'=>'Return']])]]; $SET['courier_cancel']=false;
 $C::refresh($p1); ok($p1->meta['_cartiva_courier_state']==='returned' && $p1->status==='processing','returned: order left alone unless turned on');
 $REPLY=['/parcel/info/21A427TU4BN3R'=>['code'=>200,'body'=>json_encode(['parcel'=>['tracking_id'=>'21A427TU4BN3R','status'=>'returned']])]]; $SET['courier_cancel']=true;

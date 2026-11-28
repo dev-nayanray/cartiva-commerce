@@ -97,4 +97,25 @@
 				button.prop( 'disabled', false );
 			} );
 	} );
+
+	/* Settings: test SMS */
+	$( document ).on( 'click', '[data-cartiva-sms-test]', function ( event ) {
+		event.preventDefault();
+		var button = $( this );
+		var out = button.siblings( '.cartiva-courier-test-result' );
+		button.prop( 'disabled', true );
+		out.text( cfg.working ).removeClass( 'is-ok is-error' );
+		post( { action: 'cartiva_sms_test', phone: $( '#cartiva-sms-test' ).val() || '' } )
+			.done( function ( res ) {
+				out.text( res && res.data && res.data.message ? res.data.message : cfg.failed )
+					.addClass( res && res.success ? 'is-ok' : 'is-error' );
+			} )
+			.fail( function ( xhr ) {
+				var res = xhr && xhr.responseJSON;
+				out.text( res && res.data && res.data.message ? res.data.message : cfg.failed ).addClass( 'is-error' );
+			} )
+			.always( function () {
+				button.prop( 'disabled', false );
+			} );
+	} );
 }( jQuery ) );
