@@ -25,7 +25,7 @@ function wc_get_product_types(){return ['simple'=>1,'variable'=>1];} function wc
 class Cartiva_Commerce_Fields{ static function presets(){return ['bd_cod'=>1];} static function sanitize_config($c){return [];} }
 class Cartiva_Commerce_AB_Test{ static function test($id){return ['variant'=>0];} }
 class Cartiva_Commerce_Settings{ const PAGE='cartiva-commerce'; static function url($t='general'){return "settings&tab=$t";} static function main_checkout_is_block(){return false;} static function header($t){echo "<header>$t</header>";} }
-require CARTIVA_COMMERCE_DIR.'includes/functions.php'; foreach(['class-countdown','class-cod','class-landing','class-funnels','class-orders','class-courier','class-setup'] as $c) require CARTIVA_COMMERCE_DIR."includes/$c.php";
+require CARTIVA_COMMERCE_DIR.'includes/functions.php'; foreach(['class-countdown','class-cod','class-landing','class-funnels','class-orders','class-courier','class-sms','class-setup'] as $c) require CARTIVA_COMMERCE_DIR."includes/$c.php";
 $pass=0;$fail=0; function ok($c,$m){global $pass,$fail; if($c)$pass++; else {$fail++; echo "FAIL: $m\n";}}
 $S='Cartiva_Commerce_Setup';
 
